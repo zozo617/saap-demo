@@ -109,7 +109,7 @@
         .section-header h2 { font-size: 2.2rem; color: var(--primary-color); position: relative; display: inline-block; transition: color 0.4s; }
         .section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 2px; }
 
-        /* --- Features Cards --- */
+        /* --- Features Cards (NOW WITH 6 CARDS) --- */
         .features-section { padding: 2rem 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
         .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s; border-bottom: 4px solid var(--accent-yellow); display: flex; flex-direction: column; }
@@ -491,14 +491,14 @@
             <div class="login-logo"><i class="fa-solid fa-user-graduate"></i></div>
             <h2 id="modal-title">Student Portal</h2>
             
-            <form id="login-form" onsubmit="event.preventDefault(); alert('Login connected successfully!');">
+            <form id="login-form" onsubmit="handleLogin(event)">
                 <div class="input-group">
                     <label>Email or Student ID</label>
-                    <input type="text" placeholder="e.g. 2026-0001 or mail@saap.edu" required>
+                    <input type="text" id="login-id" placeholder="e.g. demo@saap.edu.ph" required>
                 </div>
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
+                    <input type="password" id="login-pass" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="login-submit">Secure Login</button>
                 <div class="auth-switch">
@@ -529,7 +529,21 @@
     </div>
 
     <script>
-        // --- NEW: Dual Auth Modal Logic ---
+        // --- THIS IS THE NEW CODE TO REDIRECT THE LOGIN TO THE STUDENT HUB ---
+        function handleLogin(event) {
+            event.preventDefault();
+            const idInput = document.getElementById('login-id').value;
+            const passInput = document.getElementById('login-pass').value;
+
+            // Checks for the demo account
+            if ((idInput === 'demo@saap.edu.ph' || idInput === '2026-0001') && passInput === 'demo123') {
+                window.location.href = 'student-hub.html';
+            } else {
+                alert('Invalid credentials. For this demo, use Email: demo@saap.edu.ph and Password: demo123');
+            }
+        }
+
+        // --- Dual Auth Modal Logic ---
         function openLoginModal(mode = 'login') {
             switchAuthMode(mode);
             const modal = document.getElementById('login-modal');
