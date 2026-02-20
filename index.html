@@ -92,7 +92,7 @@
         .section-header h2 { font-size: 2.2rem; color: var(--primary-color); position: relative; display: inline-block; transition: color 0.4s; }
         .section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 2px; }
 
-        /* --- Features Cards --- */
+        /* --- Features Cards (NOW WITH 6 CARDS) --- */
         .features-section { padding: 2rem 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
         .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s; border-bottom: 4px solid var(--accent-yellow); display: flex; flex-direction: column; }
@@ -112,23 +112,14 @@
         .stat-number { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
         .stat-text { font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
-        /* --- NEW: Parallax Banner --- */
-        .parallax-section {
-            /* We use a placeholder architecture image for the background */
-            background: linear-gradient(rgba(0, 95, 105, 0.85), rgba(0, 95, 105, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center;
-            background-attachment: fixed; /* This creates the 3D parallax effect */
-            background-size: cover;
-            padding: 100px 5%;
-            text-align: center;
-            color: white;
-            margin-bottom: 5rem;
-        }
+        /* --- Parallax 3D Scrolling Banner --- */
+        .parallax-section { background: linear-gradient(rgba(0, 95, 105, 0.85), rgba(0, 95, 105, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center; background-attachment: fixed; background-size: cover; padding: 100px 5%; text-align: center; color: white; margin-bottom: 5rem; }
         .parallax-content h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; }
         .parallax-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.9; }
         .parallax-btn { background-color: var(--accent-yellow); color: #333; padding: 15px 40px; font-weight: bold; border-radius: 30px; text-decoration: none; font-size: 1.1rem; transition: background-color 0.3s; }
         .parallax-btn:hover { background-color: #ffd75e; }
 
-        /* --- NEW: Testimonials Section --- */
+        /* --- Student Testimonials Section --- */
         .testimonials-section { padding: 0 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .testimonial-card { background-color: var(--card-bg); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; transition: background-color 0.4s; }
@@ -172,26 +163,8 @@
         .contact-info i { color: var(--accent-yellow); margin-right: 10px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #95a5a6; }
 
-        /* --- NEW: Floating Chat Widget --- */
-        .floating-chat {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--accent-yellow);
-            color: #333;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 9999;
-            transition: transform 0.3s, background-color 0.3s;
-            animation: float 3s ease-in-out infinite;
-        }
+        /* --- Floating Chat Widget --- */
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #333; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #ffd75e; animation: none; }
 
         /* --- Mobile Responsiveness --- */
@@ -211,7 +184,7 @@
             .action-button { font-size: 1rem; padding: 12px 30px; bottom: -22px; }
             .section-header h2 { font-size: 1.8rem; }
             .stat-number { font-size: 2.2rem; }
-            .parallax-section { background-attachment: scroll; /* Disables parallax on mobile to save battery */ padding: 60px 5%; }
+            .parallax-section { background-attachment: scroll; padding: 60px 5%; }
             .parallax-content h2 { font-size: 2rem; }
             .event-card { flex-direction: column; text-align: center; border-left: none; border-top: 5px solid var(--top-bar-bg); }
             .event-date { margin-right: 0; margin-bottom: 10px; }
@@ -280,6 +253,7 @@
             <h2 data-key="features-title">Explore Our Programs</h2>
         </div>
         <div class="features-grid">
+            
             <div class="card">
                 <div class="card-img-wrapper"><img src="https://picsum.photos/id/20/800/600" alt="Academic" class="card-img"></div>
                 <div class="card-content">
@@ -287,6 +261,7 @@
                     <p data-key="card1-desc">Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential and prepare for higher education.</p>
                 </div>
             </div>
+            
             <div class="card">
                 <div class="card-img-wrapper"><img src="https://picsum.photos/id/3/800/600" alt="Future" class="card-img"></div>
                 <div class="card-content">
@@ -294,6 +269,7 @@
                     <p data-key="card2-desc">We equip students with modern skills, strong moral character, and the critical thinking necessary to succeed in a rapidly changing world.</p>
                 </div>
             </div>
+            
             <div class="card">
                 <div class="card-img-wrapper"><img src="https://picsum.photos/id/336/800/600" alt="Community" class="card-img"></div>
                 <div class="card-content">
@@ -301,6 +277,31 @@
                     <p data-key="card3-desc">A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://picsum.photos/id/119/800/600" alt="Technology" class="card-img"></div>
+                <div class="card-content">
+                    <h3 data-key="card4-title"><i class="fa-solid fa-laptop-code"></i> Technology & Innovation</h3>
+                    <p data-key="card4-desc">State-of-the-art computer labs and coding programs designed to prepare students for the digital careers of tomorrow.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://picsum.photos/id/73/800/600" alt="Athletics" class="card-img"></div>
+                <div class="card-content">
+                    <h3 data-key="card5-title"><i class="fa-solid fa-volleyball"></i> Athletics & Sports</h3>
+                    <p data-key="card5-desc">Develop teamwork and physical fitness through our award-winning varsity programs and intramural sports leagues.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://picsum.photos/id/103/800/600" alt="Arts" class="card-img"></div>
+                <div class="card-content">
+                    <h3 data-key="card6-title"><i class="fa-solid fa-palette"></i> Arts & Culture</h3>
+                    <p data-key="card6-desc">Express creativity through our comprehensive fine arts, theater, and music programs, showcasing student talent year-round.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -520,7 +521,7 @@
             }
         });
 
-        // 6. Language Dictionary (Updated with new sections)
+        // 6. Language Dictionary (Fully supports all 6 cards)
         const translations = {
             en: {
                 "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
@@ -529,6 +530,9 @@
                 "card1-title": "Academic Excellence", "card1-desc": "Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential.",
                 "card2-title": "Future Ready", "card2-desc": "We equip students with modern skills, strong moral character, and critical thinking.",
                 "card3-title": "Vibrant Community", "card3-desc": "A supportive, inclusive environment where every student is valued.",
+                "card4-title": "Technology & Innovation", "card4-desc": "State-of-the-art computer labs and coding programs designed to prepare students.",
+                "card5-title": "Athletics & Sports", "card5-desc": "Develop teamwork and physical fitness through our award-winning varsity programs.",
+                "card6-title": "Arts & Culture", "card6-desc": "Express creativity through our comprehensive fine arts, theater, and music programs.",
                 "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success.", "parallax-btn": "Start Your Application",
                 "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
                 "testi-title": "What Our Students Say",
@@ -546,6 +550,9 @@
                 "card1-title": "Kahusayan sa Akademya", "card1-desc": "Ang aming mahigpit na kurikulum ay nagbibigay inspirasyon.",
                 "card2-title": "Handa sa Kinabukasan", "card2-desc": "Hinuhubog namin ang mga mag-aaral gamit ang makabagong kasanayan.",
                 "card3-title": "Masiglang Komunidad", "card3-desc": "Isang mapang-unawang kapaligiran kung saan pinahahalagahan ang bawat isa.",
+                "card4-title": "Teknolohiya", "card4-desc": "Mga makabagong computer lab na idinisenyo upang ihanda ang mga mag-aaral.",
+                "card5-title": "Palakasan", "card5-desc": "Paunlarin ang pagkakaisa at kalusugan sa pamamagitan ng aming isports.",
+                "card6-title": "Sining at Kultura", "card6-desc": "Ipamalas ang pagkamalikhain sa pamamagitan ng sining, teatro, at musika.",
                 "parallax-title": "Sumali sa Pamilya ng SAAP", "parallax-desc": "Damhin ang isang edukasyong naghahanda sa iyo para sa tagumpay.", "parallax-btn": "Simulan ang Aplikasyon",
                 "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral",
                 "testi-title": "Sabi ng Aming Mag-aaral",
@@ -563,6 +570,9 @@
                 "card1-title": "Excelencia Académica", "card1-desc": "Nuestro riguroso plan de estudios inspira a los estudiantes.",
                 "card2-title": "Listos para el Futuro", "card2-desc": "Preparamos a los estudiantes con habilidades y carácter moral.",
                 "card3-title": "Comunidad Vibrante", "card3-desc": "Un entorno de apoyo donde cada estudiante es valorado.",
+                "card4-title": "Tecnología", "card4-desc": "Laboratorios de computación de última generación diseñados para el futuro.",
+                "card5-title": "Deportes", "card5-desc": "Desarrolla el trabajo en equipo a través de nuestros programas universitarios.",
+                "card6-title": "Arte y Cultura", "card6-desc": "Expresa la creatividad a través de nuestros programas de bellas artes y música.",
                 "parallax-title": "Únete a la Familia SAAP", "parallax-desc": "Experimenta una educación que te prepara para el éxito.", "parallax-btn": "Inicia tu Aplicación",
                 "stat1": "Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes",
                 "testi-title": "Lo que Dicen los Estudiantes",
