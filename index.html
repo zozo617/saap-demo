@@ -6,7 +6,7 @@
     <title>St. Augustine Academy of Pampanga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- CSS Variables for Light & Dark Mode --- */
+        /* --- CSS Variables --- */
         :root {
             --top-bar-bg: #005f69; 
             --gray-bar-bg: #4a4a4a; 
@@ -40,6 +40,12 @@
             100% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0); }
         }
 
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -59,26 +65,22 @@
         .gray-bar-right i:hover { color: white; transform: scale(1.2); }
         #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 10px; }
 
-        /* --- Main Header & Mobile Menu --- */
+        /* --- Header --- */
         header { background-color: var(--header-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; transition: background-color 0.4s; flex-wrap: wrap; }
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--top-bar-bg); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; }
         .logo-icon { background-color: var(--top-bar-bg); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; }
         .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: color 0.4s;}
         .logo-subtext { font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; color: #888; text-transform: uppercase; }
-        
-        /* Mobile Hamburger Icon (Hidden on Desktop) */
         .menu-toggle { display: none; font-size: 1.8rem; color: var(--top-bar-bg); cursor: pointer; transition: color 0.3s; }
-        
         nav ul { list-style: none; display: flex; gap: 25px; transition: all 0.3s ease; }
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease; }
         nav a:hover { color: var(--top-bar-bg); }
 
         /* --- Hero Section --- */
-        .hero-image-container { width: 100%; height: 500px; position: relative; background-color: var(--banner-bg); }
+        .hero-image-container { width: 100%; height: 550px; position: relative; background-color: var(--banner-bg); }
         .hero-image-container img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
         .hero-image-container::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to bottom, rgba(34, 98, 138, 0) 0%, rgba(34, 98, 138, 1) 100%); }
 
-        /* --- Blue Banner --- */
         .blue-banner { background-color: var(--banner-bg); color: #fff; text-align: center; padding: 0 20px 80px 20px; position: relative; margin-top: -2px; }
         .blue-banner h1 { font-size: 2.4rem; font-weight: 700; max-width: 950px; margin: 0 auto; line-height: 1.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
         .action-button { position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); background-color: var(--accent-yellow); color: #333; text-decoration: none; padding: 16px 50px; font-size: 1.15rem; font-weight: 800; border-radius: 35px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s ease, background-color 0.3s ease; white-space: nowrap; animation: pulse 2s infinite; }
@@ -90,7 +92,7 @@
         .section-header h2 { font-size: 2.2rem; color: var(--primary-color); position: relative; display: inline-block; transition: color 0.4s; }
         .section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 2px; }
 
-        /* --- Features Cards Section --- */
+        /* --- Features Cards --- */
         .features-section { padding: 2rem 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
         .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s; border-bottom: 4px solid var(--accent-yellow); display: flex; flex-direction: column; }
@@ -103,14 +105,41 @@
         .card h3 i { color: var(--accent-yellow); font-size: 1.2rem; }
         .card p { color: var(--text-dark); opacity: 0.8; font-size: 1rem; line-height: 1.7; transition: color 0.4s;}
 
-        /* --- Animated Stats Section --- */
+        /* --- Animated Stats --- */
         .stats-section { background-color: var(--top-bar-bg); color: white; padding: 4rem 5%; text-align: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .stat-item i { font-size: 2.5rem; color: var(--accent-yellow); margin-bottom: 1rem; }
+        .stat-item i { font-size: 2.5rem; color: var(--accent-yellow); margin-bottom: 1rem; animation: float 4s ease-in-out infinite; }
         .stat-number { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
         .stat-text { font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
-        /* --- Upcoming Events --- */
+        /* --- NEW: Parallax Banner --- */
+        .parallax-section {
+            /* We use a placeholder architecture image for the background */
+            background: linear-gradient(rgba(0, 95, 105, 0.85), rgba(0, 95, 105, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center;
+            background-attachment: fixed; /* This creates the 3D parallax effect */
+            background-size: cover;
+            padding: 100px 5%;
+            text-align: center;
+            color: white;
+            margin-bottom: 5rem;
+        }
+        .parallax-content h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; }
+        .parallax-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.9; }
+        .parallax-btn { background-color: var(--accent-yellow); color: #333; padding: 15px 40px; font-weight: bold; border-radius: 30px; text-decoration: none; font-size: 1.1rem; transition: background-color 0.3s; }
+        .parallax-btn:hover { background-color: #ffd75e; }
+
+        /* --- NEW: Testimonials Section --- */
+        .testimonials-section { padding: 0 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .testimonial-card { background-color: var(--card-bg); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; transition: background-color 0.4s; }
+        .testimonial-card i.fa-quote-left { font-size: 3rem; color: var(--accent-yellow); opacity: 0.3; position: absolute; top: 20px; left: 20px; }
+        .testimonial-text { font-size: 1.05rem; font-style: italic; color: var(--text-dark); opacity: 0.8; margin-bottom: 20px; position: relative; z-index: 1; transition: color 0.4s;}
+        .testimonial-author { display: flex; align-items: center; gap: 15px; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background-color: var(--top-bar-bg); color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; }
+        .author-info h4 { color: var(--primary-color); margin: 0; transition: color 0.4s;}
+        .author-info p { color: #888; font-size: 0.85rem; margin: 0; }
+
+        /* --- Events --- */
         .events-section { padding: 4rem 5%; background-color: var(--card-bg); max-width: 1400px; margin: 0 auto 5rem auto; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: background-color 0.4s; }
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .event-card { display: flex; align-items: center; background: var(--bg-color); padding: 1.5rem; border-radius: 10px; transition: background 0.3s; border-left: 5px solid var(--top-bar-bg); }
@@ -143,52 +172,58 @@
         .contact-info i { color: var(--accent-yellow); margin-right: 10px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #95a5a6; }
 
-        /* =========================================
-           MOBILE RESPONSIVENESS UPGRADES
-        ========================================= */
+        /* --- NEW: Floating Chat Widget --- */
+        .floating-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-yellow);
+            color: #333;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 9999;
+            transition: transform 0.3s, background-color 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+        .floating-chat:hover { transform: scale(1.1); background-color: #ffd75e; animation: none; }
+
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; }
-            .gray-bar-left { display: none; } /* Hides secondary links to save phone space */
-            
+            .gray-bar-left { display: none; } 
             header { padding: 15px 5%; }
             .logo-text span { font-size: 1.1rem; }
             .logo-subtext { font-size: 0.6rem; }
-            
-            /* Enable Hamburger Menu */
             .menu-toggle { display: block; }
             nav { width: 100%; }
-            nav ul { 
-                display: none; 
-                flex-direction: column; 
-                width: 100%; 
-                text-align: center; 
-                padding-top: 20px; 
-                gap: 15px; 
-            }
+            nav ul { display: none; flex-direction: column; width: 100%; text-align: center; padding-top: 20px; gap: 15px; }
             nav ul.active { display: flex; }
-            
-            /* Resize Hero Banner for Phones */
             .hero-image-container { height: 350px; }
             .blue-banner { padding: 0 15px 60px 15px; }
             .blue-banner h1 { font-size: 1.5rem; }
             .action-button { font-size: 1rem; padding: 12px 30px; bottom: -22px; }
-            
-            /* Adjust Content Alignment */
             .section-header h2 { font-size: 1.8rem; }
             .stat-number { font-size: 2.2rem; }
-            
-            /* Stack Event Cards */
-            .event-card { 
-                flex-direction: column; 
-                text-align: center; 
-                border-left: none; 
-                border-top: 5px solid var(--top-bar-bg); 
-            }
+            .parallax-section { background-attachment: scroll; /* Disables parallax on mobile to save battery */ padding: 60px 5%; }
+            .parallax-content h2 { font-size: 2rem; }
+            .event-card { flex-direction: column; text-align: center; border-left: none; border-top: 5px solid var(--top-bar-bg); }
             .event-date { margin-right: 0; margin-bottom: 10px; }
+            .floating-chat { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
+
+    <div class="floating-chat" title="Chat with Admissions">
+        <i class="fa-solid fa-message"></i>
+    </div>
 
     <div class="top-bar">
         <span class="lang-btn active" onclick="changeLanguage('en')">English</span> | 
@@ -266,27 +301,14 @@
                     <p data-key="card3-desc">A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/119/800/600" alt="Technology" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card4-title"><i class="fa-solid fa-laptop-code"></i> Technology & Innovation</h3>
-                    <p data-key="card4-desc">State-of-the-art computer labs and coding programs designed to prepare students for the digital careers of tomorrow.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/73/800/600" alt="Athletics" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card5-title"><i class="fa-solid fa-volleyball"></i> Athletics & Sports</h3>
-                    <p data-key="card5-desc">Develop teamwork and physical fitness through our award-winning varsity programs and intramural sports leagues.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/103/800/600" alt="Arts" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card6-title"><i class="fa-solid fa-palette"></i> Arts & Culture</h3>
-                    <p data-key="card6-desc">Express creativity through our comprehensive fine arts, theater, and music programs, showcasing student talent year-round.</p>
-                </div>
-            </div>
+        </div>
+    </section>
+
+    <section class="parallax-section reveal">
+        <div class="parallax-content">
+            <h2 data-key="parallax-title">Join the SAAP Family Today</h2>
+            <p data-key="parallax-desc">Experience a transformative education that prepares you for success in college and beyond.</p>
+            <a href="#" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
         </div>
     </section>
 
@@ -307,15 +329,51 @@
                 <div class="stat-number"><span class="counter" data-target="30">0</span>+</div>
                 <div class="stat-text" data-key="stat3">Student Clubs</div>
             </div>
-            <div class="stat-item">
-                <i class="fa-solid fa-shield-halved"></i>
-                <div class="stat-number">24/7</div>
-                <div class="stat-text" data-key="stat4">Campus Security</div>
-            </div>
         </div>
     </section>
 
     <div class="spacer"></div>
+
+    <section class="testimonials-section reveal">
+        <div class="section-header">
+            <h2 data-key="testi-title">What Our Students Say</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="testimonial-text" data-key="testi-1">"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h4>Maria Santos</h4>
+                        <p>Grade 12, STEM Track</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="testimonial-text" data-key="testi-2">"The facilities are amazing, and the sense of community makes every day enjoyable. I made friends for life here."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">J</div>
+                    <div class="author-info">
+                        <h4>Juan Dela Cruz</h4>
+                        <p>Grade 11, HUMSS Track</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="testimonial-text" data-key="testi-3">"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">L</div>
+                    <div class="author-info">
+                        <h4>Liza Reyes</h4>
+                        <p>Grade 12, ICT Track</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="events-section reveal">
         <div class="section-header">
@@ -336,13 +394,6 @@
                     <p><i class="fa-regular fa-clock"></i> 10:00 AM - Main Auditorium</p>
                 </div>
             </div>
-            <div class="event-card">
-                <div class="event-date"><div class="month">Apr</div><div class="day">18</div></div>
-                <div class="event-details">
-                    <h4>Science & Tech Fair</h4>
-                    <p><i class="fa-regular fa-clock"></i> 9:00 AM - SAAP Gymnasium</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -350,18 +401,13 @@
         <div class="section-header">
             <h2 data-key="faq-title">Frequently Asked Questions</h2>
         </div>
-        
         <div class="faq-item">
             <button class="faq-question" data-key="faq1-q">When does the enrollment period start? <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-answer"><p data-key="faq1-a">Enrollment for the upcoming school year begins on March 15th. You can apply online through our Student Portal or visit the Registration Office in person.</p></div>
+            <div class="faq-answer"><p data-key="faq1-a">Enrollment for the upcoming school year begins on March 15th. You can apply online through our Student Portal.</p></div>
         </div>
         <div class="faq-item">
             <button class="faq-question" data-key="faq2-q">Are scholarships available? <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-answer"><p data-key="faq2-a">Yes! St. Augustine Academy offers academic, athletic, and needs-based scholarships. Please check the Admissions page for requirements and deadlines.</p></div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question" data-key="faq3-q">What are the school hours? <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-answer"><p data-key="faq3-a">Regular classes run from 7:30 AM to 3:00 PM, Monday through Friday. Extracurricular clubs and varsity practices take place from 3:30 PM to 5:30 PM.</p></div>
+            <div class="faq-answer"><p data-key="faq2-a">Yes! St. Augustine Academy offers academic, athletic, and needs-based scholarships.</p></div>
         </div>
     </section>
 
@@ -377,15 +423,13 @@
                     <li><a href="#">Admissions Process</a></li>
                     <li><a href="#">Tuition & Scholarships</a></li>
                     <li><a href="#">Student Handbook</a></li>
-                    <li><a href="#">Alumni Network</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Contact Us</h3>
                 <div class="contact-info">
-                    <p><i class="fa-solid fa-location-dot"></i> St. Augustine Academy, Pampanga, Philippines</p>
+                    <p><i class="fa-solid fa-location-dot"></i> St. Augustine Academy, Pampanga</p>
                     <p><i class="fa-solid fa-phone"></i> +63 (123) 456-7890</p>
-                    <p><i class="fa-solid fa-envelope"></i> admissions@saap.edu.ph</p>
                 </div>
             </div>
         </div>
@@ -395,10 +439,9 @@
     </footer>
 
     <script>
-        // 1. Mobile Menu Toggle Logic
+        // 1. Mobile Menu Toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const navMenu = document.querySelector('nav ul');
-        
         mobileBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             if(navMenu.classList.contains('active')) {
@@ -427,7 +470,6 @@
             const body = document.body;
             const icon = document.getElementById('theme-toggle');
             body.classList.toggle('dark-mode');
-            
             if(body.classList.contains('dark-mode')) {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
@@ -454,23 +496,18 @@
         // 5. Number Counter Animation
         const counters = document.querySelectorAll('.counter');
         let hasCounted = false;
-
         window.addEventListener('scroll', () => {
             const statsSection = document.querySelector('.stats-section');
             if (!statsSection) return;
-            
             const sectionPos = statsSection.getBoundingClientRect().top;
             const screenPos = window.innerHeight;
-
             if(sectionPos < screenPos && !hasCounted) {
                 hasCounted = true;
                 counters.forEach(counter => {
                     const updateCount = () => {
                         const target = +counter.getAttribute('data-target');
                         const count = +counter.innerText;
-                        const speed = 40; 
-                        const inc = target / speed;
-
+                        const inc = target / 40;
                         if (count < target) {
                             counter.innerText = Math.ceil(count + inc);
                             setTimeout(updateCount, 40);
@@ -483,7 +520,7 @@
             }
         });
 
-        // 6. Language Dictionary
+        // 6. Language Dictionary (Updated with new sections)
         const translations = {
             en: {
                 "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
@@ -491,54 +528,56 @@
                 "features-title": "Explore Our Programs",
                 "card1-title": "Academic Excellence", "card1-desc": "Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential.",
                 "card2-title": "Future Ready", "card2-desc": "We equip students with modern skills, strong moral character, and critical thinking.",
-                "card3-title": "Vibrant Community", "card3-desc": "A supportive, inclusive environment where every student is valued. Join our diverse clubs.",
-                "card4-title": "Technology & Innovation", "card4-desc": "State-of-the-art computer labs and coding programs designed to prepare students.",
-                "card5-title": "Athletics & Sports", "card5-desc": "Develop teamwork and physical fitness through our award-winning varsity programs.",
-                "card6-title": "Arts & Culture", "card6-desc": "Express creativity through our comprehensive fine arts, theater, and music programs.",
-                "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs", "stat4": "Campus Security",
+                "card3-title": "Vibrant Community", "card3-desc": "A supportive, inclusive environment where every student is valued.",
+                "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success.", "parallax-btn": "Start Your Application",
+                "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
+                "testi-title": "What Our Students Say",
+                "testi-1": "\"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success.\"",
+                "testi-2": "\"The facilities are amazing, and the sense of community makes every day enjoyable.\"",
+                "testi-3": "\"The robotics and technology clubs helped me discover my passion for coding.\"",
                 "events-title": "Upcoming Events", "faq-title": "Frequently Asked Questions",
-                "faq1-q": "When does the enrollment period start? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Enrollment for the upcoming school year begins on March 15th. You can apply online.",
-                "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! St. Augustine Academy offers academic, athletic, and needs-based scholarships.",
-                "faq3-q": "What are the school hours? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Regular classes run from 7:30 AM to 3:00 PM, Monday through Friday."
+                "faq1-q": "When does the enrollment period start? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Enrollment begins on March 15th.",
+                "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! We offer academic, athletic, and needs-based scholarships."
             },
-            tl: {
-                "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Buhay Kampus", "nav-about": "Tungkol sa Amin",
-                "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang lahat ng pangarap nila.", "banner-btn": "Mag-enroll para sa 2026",
+            tl: { // Tagalog
+                "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
+                "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll (2026)",
                 "features-title": "Tuklasin ang Aming Programa",
-                "card1-title": "Kahusayan sa Akademya", "card1-desc": "Ang aming mahigpit na kurikulum ay nagbibigay inspirasyon sa mga mag-aaral.",
-                "card2-title": "Handa sa Kinabukasan", "card2-desc": "Hinuhubog namin ang mga mag-aaral gamit ang makabagong kasanayan at moralidad.",
-                "card3-title": "Masiglang Komunidad", "card3-desc": "Isang mapang-unawang kapaligiran kung saan pinahahalagahan ang bawat mag-aaral.",
-                "card4-title": "Teknolohiya", "card4-desc": "Mga makabagong computer lab na idinisenyo upang ihanda ang mga mag-aaral.",
-                "card5-title": "Palakasan", "card5-desc": "Paunlarin ang pagkakaisa at kalusugan sa pamamagitan ng aming isports.",
-                "card6-title": "Sining at Kultura", "card6-desc": "Ipamalas ang pagkamalikhain sa pamamagitan ng sining, teatro, at musika.",
-                "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral", "stat4": "Seguridad",
-                "events-title": "Mga Paparating na Kaganapan", "faq-title": "Mga Madalas Itanong",
-                "faq1-q": "Kailan magsisimula ang enrollment? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Magsisimula ito sa Marso 15. Maaari kang mag-apply online.",
-                "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng academic, athletic, at needs-based scholarships.",
-                "faq3-q": "Ano ang oras ng pasok? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Mula 7:30 AM hanggang 3:00 PM, Lunes hanggang Biyernes."
+                "card1-title": "Kahusayan sa Akademya", "card1-desc": "Ang aming mahigpit na kurikulum ay nagbibigay inspirasyon.",
+                "card2-title": "Handa sa Kinabukasan", "card2-desc": "Hinuhubog namin ang mga mag-aaral gamit ang makabagong kasanayan.",
+                "card3-title": "Masiglang Komunidad", "card3-desc": "Isang mapang-unawang kapaligiran kung saan pinahahalagahan ang bawat isa.",
+                "parallax-title": "Sumali sa Pamilya ng SAAP", "parallax-desc": "Damhin ang isang edukasyong naghahanda sa iyo para sa tagumpay.", "parallax-btn": "Simulan ang Aplikasyon",
+                "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral",
+                "testi-title": "Sabi ng Aming Mag-aaral",
+                "testi-1": "\"Binigyan ako ng lakas ng loob na abutin ang aking mga pangarap. Totoong nagmamalasakit ang mga guro.\"",
+                "testi-2": "\"Napakaganda ng mga pasilidad at masaya ang komunidad.\"",
+                "testi-3": "\"Nakatulong ang mga club na matuklasan ko ang hilig ko sa pag-code.\"",
+                "events-title": "Paparating na Kaganapan", "faq-title": "Mga Madalas Itanong",
+                "faq1-q": "Kailan magsisimula ang enrollment? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Magsisimula ito sa Marso 15.",
+                "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng iba't ibang scholarships."
             },
-            es: {
+            es: { // Spanish
                 "nav-enroll": "Inscribirse", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
-                "banner-title": "St. Augustine Academy es donde los estudiantes pueden lograr todo.", "banner-btn": "Inscríbete para 2026",
-                "features-title": "Explora Nuestros Programas",
-                "card1-title": "Excelencia Académica", "card1-desc": "Nuestro riguroso plan de estudios inspira a los estudiantes a alcanzar su potencial.",
-                "card2-title": "Listos para el Futuro", "card2-desc": "Preparamos a los estudiantes con las habilidades y el carácter moral para tener éxito.",
-                "card3-title": "Comunidad Vibrante", "card3-desc": "Un entorno de apoyo e inclusivo donde cada estudiante es valorado.",
-                "card4-title": "Tecnología", "card4-desc": "Laboratorios de computación de última generación diseñados para el futuro.",
-                "card5-title": "Deportes", "card5-desc": "Desarrolla el trabajo en equipo a través de nuestros programas universitarios.",
-                "card6-title": "Arte y Cultura", "card6-desc": "Expresa la creatividad a través de nuestros programas de bellas artes y música.",
-                "stat1": "Tasa de Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes", "stat4": "Seguridad",
+                "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "Inscríbete (2026)",
+                "features-title": "Nuestros Programas",
+                "card1-title": "Excelencia Académica", "card1-desc": "Nuestro riguroso plan de estudios inspira a los estudiantes.",
+                "card2-title": "Listos para el Futuro", "card2-desc": "Preparamos a los estudiantes con habilidades y carácter moral.",
+                "card3-title": "Comunidad Vibrante", "card3-desc": "Un entorno de apoyo donde cada estudiante es valorado.",
+                "parallax-title": "Únete a la Familia SAAP", "parallax-desc": "Experimenta una educación que te prepara para el éxito.", "parallax-btn": "Inicia tu Aplicación",
+                "stat1": "Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes",
+                "testi-title": "Lo que Dicen los Estudiantes",
+                "testi-1": "\"Me dio la confianza para seguir mis sueños. Los profesores realmente se preocupan.\"",
+                "testi-2": "\"Las instalaciones son increíbles y la comunidad hace que cada día sea agradable.\"",
+                "testi-3": "\"Los clubes de tecnología me ayudaron a descubrir mi pasión.\"",
                 "events-title": "Próximos Eventos", "faq-title": "Preguntas Frecuentes",
-                "faq1-q": "¿Cuándo comienza la inscripción? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "La inscripción comienza el 15 de marzo. Puedes aplicar en línea.",
-                "faq2-q": "¿Hay becas disponibles? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "¡Sí! Ofrecemos becas académicas, deportivas y basadas en necesidades.",
-                "faq3-q": "¿Cuál es el horario escolar? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Las clases regulares son de 7:30 AM a 3:00 PM, de lunes a viernes."
+                "faq1-q": "¿Cuándo comienza la inscripción? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "La inscripción comienza el 15 de marzo.",
+                "faq2-q": "¿Hay becas disponibles? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "¡Sí! Ofrecemos becas académicas y deportivas."
             }
         };
 
         function changeLanguage(langCode) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
                 element.style.opacity = 0;
