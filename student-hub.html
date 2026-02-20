@@ -9,10 +9,10 @@
     <style>
         /* --- PREMIUM SAAPI COLOR PALETTE --- */
         :root {
-            --primary: #047857; /* Vibrant Emerald Green */
-            --secondary: #064e3b; /* Deep Forest Green */
-            --accent: #10b981; /* Bright Mint Accent */
-            --bg-light: #f3f4f6; /* Soft Cool Gray Background */
+            --primary: #047857; 
+            --secondary: #064e3b; 
+            --accent: #10b981; 
+            --bg-light: #f3f4f6; 
             --card-bg: #ffffff;
             --text-main: #1f2937;
             --text-muted: #6b7280;
@@ -27,9 +27,10 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* --- PREMIUM SIDEBAR --- */
-        .sidebar { width: 280px; background: linear-gradient(180deg, var(--secondary) 0%, #022c22 100%); color: white; display: flex; flex-direction: column; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 4px 0 20px rgba(0,0,0,0.15); z-index: 20; }
+        /* --- SIDEBAR --- */
+        .sidebar { width: 280px; background: linear-gradient(180deg, var(--secondary) 0%, #022c22 100%); color: white; display: flex; flex-direction: column; transition: 0.4s; box-shadow: 4px 0 20px rgba(0,0,0,0.15); z-index: 20; }
         .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .sidebar-header i { font-size: 2.8rem; color: var(--accent); margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.3));}
         .sidebar-header h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
@@ -42,7 +43,7 @@
         .sidebar-menu li.active { background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); border-left-color: var(--accent); color: white; }
         .sidebar-menu li.active i { color: var(--accent); }
 
-        /* --- GLASSMORPHISM TOP NAV --- */
+        /* --- TOP NAV --- */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; scroll-behavior: smooth; }
         .top-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         .top-nav h2 { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
@@ -52,7 +53,6 @@
         .notification-icon:hover { color: var(--primary); background: #eef2ff; }
         .notification-badge { position: absolute; top: 0px; right: 0px; background: var(--danger); color: white; font-size: 0.6rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid white; }
 
-        /* Profile Dropdown */
         .profile-container { position: relative; }
         .user-profile { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 6px 12px; border-radius: 50px; border: 1px solid var(--border-light); transition: all 0.3s ease; background: white; }
         .user-profile:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
@@ -73,7 +73,6 @@
         /* --- DASHBOARD CONTENT --- */
         .dashboard-container { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
         
-        /* Gradient Welcome Banner */
         .welcome-banner { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; box-shadow: var(--shadow-lg); display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
         .welcome-banner::after { content: '\f19d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: 5%; top: -20px; font-size: 15rem; color: rgba(255,255,255,0.05); z-index: 0; pointer-events: none; }
         .welcome-text { position: relative; z-index: 1; }
@@ -83,7 +82,6 @@
         .id-badge p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #a7f3d0; margin-bottom: 5px; font-weight: 600; }
         .id-badge h3 { font-size: 1.6rem; letter-spacing: 2px; font-family: monospace; }
 
-        /* Floating Quick Stats */
         .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 40px; }
         .stat-card { background: var(--card-bg); padding: 25px; border-radius: 16px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 20px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--border-light); }
         .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
@@ -92,7 +90,6 @@
         .stat-info h3 { font-size: 1.6rem; font-weight: 800; color: var(--text-main); display: flex; align-items: baseline; gap: 8px; }
         .stat-info h3 span { font-size: 0.8rem; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
 
-        /* Main Grid */
         .grid { display: grid; grid-template-columns: 1.7fr 1.3fr; gap: 35px; padding-bottom: 50px; }
         .card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); margin-bottom: 35px; border: 1px solid var(--border-light); }
         .card-header { border-bottom: 1px solid var(--border-light); padding-bottom: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
@@ -102,7 +99,7 @@
         .action-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm); }
         .action-btn:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-        /* Premium Schedule Viewer */
+        /* --- THE UPGRADED TIMETABLE SYSTEM --- */
         .schedule-controls select { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border-light); font-weight: 600; font-family: 'Inter'; outline: none; cursor: pointer; background: var(--bg-light); color: var(--text-main); }
         table { width: 100%; border-collapse: separate; border-spacing: 0 10px; margin-top: -10px;}
         th { padding: 0 15px 5px 15px; text-align: left; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; border-bottom: 1px solid var(--border-light); }
@@ -116,7 +113,12 @@
         .subject-text { font-weight: 700; color: var(--text-main); font-size: 1.05rem;}
         .room-badge { background: #f0fdf4; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: var(--primary); border: 1px solid #d1fae5;}
         .break-time td { background: #f9fafb !important; text-align: center; color: var(--text-muted); font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; border-left: 1px solid var(--border-light) !important; }
+        .empty-state { text-align: center; color: var(--text-muted); font-weight: 600; padding: 30px; font-style: italic; border-left: 1px solid var(--border-light) !important;}
         
+        /* The logic classes to hide/show days */
+        .day-tbody { display: none; }
+        .day-tbody.active-tbody { display: table-row-group; animation: pageFadeIn 0.3s ease-out; }
+
         .row-actions { display: flex; gap: 12px; opacity: 0; transition: opacity 0.3s; justify-content: flex-end;}
         tr:hover .row-actions { opacity: 1; }
         .edit-icon { color: var(--primary); background: #ecfdf5; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
@@ -124,7 +126,7 @@
         .edit-icon:hover { background: var(--primary); color: white; }
         .delete-icon:hover { background: var(--danger); color: white; }
 
-        /* Premium Task List */
+        /* Tasks */
         .task-list { display: flex; flex-direction: column; gap: 15px; }
         .task-item { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border: 1px solid var(--border-light); border-radius: 12px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: white; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
         .task-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateX(5px); }
@@ -140,7 +142,7 @@
         .task-item:hover .task-delete { right: 0; }
         .task-item:hover .task-due { margin-right: 50px; }
 
-        /* Premium File Upload / Reviewers */
+        /* Reviewers */
         .reviewer-list { display: flex; flex-direction: column; gap: 15px; }
         .reviewer-item { display: flex; align-items: center; gap: 18px; padding: 15px 20px; background: white; border: 1px solid var(--border-light); border-radius: 12px; transition: 0.3s; box-shadow: var(--shadow-sm); }
         .reviewer-item:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px);}
@@ -154,7 +156,7 @@
         .upload-label { cursor: pointer; margin: 0; }
         #file-upload-input { display: none; }
 
-        /* Refined Announcements */
+        /* Announcements & Jam Redirect */
         .announcement-feed { display: flex; flex-direction: column; gap: 20px; }
         .announcement { padding: 25px; border-radius: 16px; background: white; border: 1px solid var(--border-light); border-left: 5px solid var(--primary); position: relative; box-shadow: var(--shadow-sm); transition: 0.3s; }
         .announcement:hover { box-shadow: var(--shadow-md); }
@@ -185,7 +187,6 @@
         .btn-save { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
         .btn-save:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
             body { flex-direction: column; overflow-y: auto; height: auto;}
             .sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 25px; position: sticky; top: 0; box-shadow: var(--shadow-sm); }
@@ -211,8 +212,8 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <i class="fa-solid fa-school"></i>
-            <h3>SAAP PORTAL</h3>
-            <p>Grade 11 Student</p>
+            <h3>SAAPI PORTAL</h3>
+            <p>St. Augustine Academy</p>
         </div>
         <ul class="sidebar-menu">
             <li class="active"><i class="fa-solid fa-table-columns"></i> Dashboard</li>
@@ -225,18 +226,13 @@
     <div class="main-content">
         <div class="top-nav">
             <h2>Dashboard Overview</h2>
-            
             <div class="nav-right">
-                <i class="fa-solid fa-bell notification-icon">
-                    <span class="notification-badge">3</span>
-                </i>
-                
+                <i class="fa-solid fa-bell notification-icon"><span class="notification-badge">3</span></i>
                 <div class="profile-container">
                     <div class="user-profile" onclick="toggleProfileMenu()">
                         <div class="avatar">D</div>
                         <span>Demo Student <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: #9ca3af;"></i></span>
                     </div>
-                    
                     <div class="dropdown-menu" id="profileDropdown">
                         <div class="dropdown-header">
                             <h4>Demo Student</h4>
@@ -267,24 +263,15 @@
             <div class="quick-stats">
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #10b981; background: #ecfdf5;"><i class="fa-solid fa-star"></i></div>
-                    <div class="stat-info">
-                        <p>Current GPA</p>
-                        <h3>92.5 <span style="background: #ecfdf5; color: #047857;">Dean's List</span></h3>
-                    </div>
+                    <div class="stat-info"><p>Current GPA</p><h3>92.5 <span style="background: #ecfdf5; color: #047857;">Dean's List</span></h3></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #3b82f6; background: #eff6ff;"><i class="fa-solid fa-calendar-check"></i></div>
-                    <div class="stat-info">
-                        <p>Attendance Rate</p>
-                        <h3>98.2%</h3>
-                    </div>
+                    <div class="stat-info"><p>Attendance Rate</p><h3>98.2%</h3></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #f59e0b; background: #fffbeb;"><i class="fa-solid fa-book"></i></div>
-                    <div class="stat-info">
-                        <p>Active Subjects</p>
-                        <h3>8 Classes</h3>
-                    </div>
+                    <div class="stat-info"><p>Active Subjects</p><h3>8 Classes</h3></div>
                 </div>
             </div>
 
@@ -296,7 +283,13 @@
                             <h3><i class="fa-solid fa-calendar-week"></i> My Timetable</h3>
                             <div style="display: flex; gap: 12px; align-items: center;">
                                 <div class="schedule-controls">
-                                    <select><option>Monday (Today)</option><option>Tuesday</option></select>
+                                    <select id="day-selector" onchange="switchDay()">
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                    </select>
                                 </div>
                                 <button class="action-btn" onclick="openClassModal()"><i class="fa-solid fa-plus"></i> Add Class</button>
                             </div>
@@ -311,7 +304,8 @@
                                     <th style="text-align: right;">Manage</th>
                                 </tr>
                             </thead>
-                            <tbody id="schedule-tbody">
+                            
+                            <tbody id="tbody-Monday" class="day-tbody active-tbody">
                                 <tr>
                                     <td class="col-time time-text">7:30 AM - 9:00 AM</td>
                                     <td>
@@ -319,12 +313,7 @@
                                         <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Mr. D. Santos</div>
                                     </td>
                                     <td><span class="room-badge col-room">RM 204</span></td>
-                                    <td>
-                                        <div class="row-actions">
-                                            <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
-                                            <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
-                                        </div>
-                                    </td>
+                                    <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
                                 <tr>
                                     <td class="col-time time-text">9:00 AM - 10:30 AM</td>
@@ -333,16 +322,9 @@
                                         <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Ms. L. Reyes</div>
                                     </td>
                                     <td><span class="room-badge col-room">LAB 1</span></td>
-                                    <td>
-                                        <div class="row-actions">
-                                            <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
-                                            <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
-                                        </div>
-                                    </td>
+                                    <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
-                                <tr class="break-time">
-                                    <td colspan="4"><i class="fa-solid fa-mug-hot"></i> MORNING BREAK (10:30 AM - 11:00 AM)</td>
-                                </tr>
+                                <tr class="break-time"><td colspan="4"><i class="fa-solid fa-mug-hot"></i> MORNING BREAK (10:30 AM - 11:00 AM)</td></tr>
                                 <tr>
                                     <td class="col-time time-text">11:00 AM - 12:30 PM</td>
                                     <td>
@@ -350,13 +332,30 @@
                                         <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Mrs. C. Cruz</div>
                                     </td>
                                     <td><span class="room-badge col-room">RM 205</span></td>
-                                    <td>
-                                        <div class="row-actions">
-                                            <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
-                                            <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
-                                        </div>
-                                    </td>
+                                    <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
+                            </tbody>
+
+                            <tbody id="tbody-Tuesday" class="day-tbody">
+                                <tr>
+                                    <td class="col-time time-text">8:00 AM - 10:00 AM</td>
+                                    <td>
+                                        <div class="col-subject subject-text">21st Century Literature</div>
+                                        <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Ms. A. Garcia</div>
+                                    </td>
+                                    <td><span class="room-badge col-room">RM 302</span></td>
+                                    <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
+                                </tr>
+                            </tbody>
+
+                            <tbody id="tbody-Wednesday" class="day-tbody">
+                                <tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Wednesday.</td></tr>
+                            </tbody>
+                            <tbody id="tbody-Thursday" class="day-tbody">
+                                <tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Thursday.</td></tr>
+                            </tbody>
+                            <tbody id="tbody-Friday" class="day-tbody">
+                                <tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Friday.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -366,15 +365,11 @@
                             <h3><i class="fa-solid fa-list-check"></i> Assignments & Deadlines</h3>
                             <button class="action-btn" onclick="openTaskModal()"><i class="fa-solid fa-plus"></i> New Task</button>
                         </div>
-                        
                         <div class="task-list" id="task-list-container">
                             <div class="task-item">
                                 <div class="task-left">
                                     <div class="task-checkbox" onclick="toggleTask(this)"><i class="fa-solid fa-check"></i></div>
-                                    <div class="task-details">
-                                        <h4>Math Problem Set 4</h4>
-                                        <p>General Mathematics</p>
-                                    </div>
+                                    <div class="task-details"><h4>Math Problem Set 4</h4><p>General Mathematics</p></div>
                                 </div>
                                 <div class="task-due">Due Tomorrow</div>
                                 <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
@@ -382,10 +377,7 @@
                             <div class="task-item">
                                 <div class="task-left">
                                     <div class="task-checkbox" onclick="toggleTask(this)"><i class="fa-solid fa-check"></i></div>
-                                    <div class="task-details">
-                                        <h4>Ecosystems Lab Report</h4>
-                                        <p>Earth & Life Science</p>
-                                    </div>
+                                    <div class="task-details"><h4>Ecosystems Lab Report</h4><p>Earth & Life Science</p></div>
                                 </div>
                                 <div class="task-due safe">Due in 3 days</div>
                                 <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
@@ -395,31 +387,21 @@
                 </div>
 
                 <div class="right-col">
-                    
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-book-open-reader"></i> Study Materials</h3>
-                            <label class="action-btn upload-label" for="file-upload-input">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload File
-                            </label>
+                            <label class="action-btn upload-label" for="file-upload-input"><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</label>
                             <input type="file" id="file-upload-input" onchange="uploadReviewer(event)">
                         </div>
-                        
                         <div class="reviewer-list" id="reviewer-list-container">
                             <div class="reviewer-item">
                                 <i class="fa-solid fa-file-pdf reviewer-icon"></i>
-                                <div class="reviewer-info">
-                                    <h4>Gen_Math_Q1_Reviewer.pdf</h4>
-                                    <p>Uploaded 2 days ago</p>
-                                </div>
+                                <div class="reviewer-info"><h4>Gen_Math_Q1_Reviewer.pdf</h4><p>Uploaded 2 days ago</p></div>
                                 <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
                             </div>
                             <div class="reviewer-item">
                                 <i class="fa-solid fa-file-word reviewer-icon doc"></i>
-                                <div class="reviewer-info">
-                                    <h4>EarthScience_Notes.docx</h4>
-                                    <p>Uploaded last week</p>
-                                </div>
+                                <div class="reviewer-info"><h4>EarthScience_Notes.docx</h4><p>Uploaded last week</p></div>
                                 <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
                             </div>
                         </div>
@@ -464,16 +446,12 @@
             <form onsubmit="saveClass(event)">
                 <label>Subject Title</label>
                 <input type="text" id="class-subject" placeholder="e.g. Physical Education" required>
-                
                 <label>Class Schedule (Time)</label>
                 <input type="text" id="class-time" placeholder="e.g. 1:00 PM - 2:00 PM" required>
-                
                 <label>Instructor Name</label>
                 <input type="text" id="class-instructor" placeholder="e.g. Mr. Santos" required>
-                
                 <label>Room Assignment</label>
                 <input type="text" id="class-room" placeholder="e.g. Gymnasium" required>
-                
                 <div class="modal-buttons">
                     <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
                     <button type="submit" class="btn-save">Save Class</button>
@@ -488,13 +466,10 @@
             <form onsubmit="saveTask(event)">
                 <label>Assignment Title</label>
                 <input type="text" id="task-title" placeholder="e.g. Read Chapter 4" required>
-                
                 <label>Related Subject</label>
                 <input type="text" id="task-subject" placeholder="e.g. Earth Science" required>
-                
                 <label>Due Date / Urgency</label>
                 <input type="text" id="task-deadline" placeholder="e.g. Due Tomorrow" required>
-                
                 <div class="modal-buttons">
                     <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
                     <button type="submit" class="btn-save">Save Assignment</button>
@@ -504,37 +479,29 @@
     </div>
 
     <script>
-        // Smooth Dropdown
-        function toggleProfileMenu() {
-            const menu = document.getElementById('profileDropdown');
-            menu.classList.toggle('active');
-        }
-        window.onclick = function(event) {
-            if (!event.target.closest('.profile-container')) {
-                const dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    if (dropdowns[i].classList.contains('active')) {
-                        dropdowns[i].classList.remove('active');
-                    }
-                }
-            }
-        }
-
-        // Modal Utility
+        function toggleProfileMenu() { document.getElementById('profileDropdown').classList.toggle('active'); }
+        window.onclick = function(event) { if (!event.target.closest('.profile-container')) { Array.from(document.getElementsByClassName("dropdown-menu")).forEach(m => m.classList.remove('active')); } }
         function closeModals() {
             document.getElementById('class-modal').classList.remove('active');
             document.getElementById('task-modal').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('class-modal').style.display = 'none';
-                document.getElementById('task-modal').style.display = 'none';
-            }, 300);
+            setTimeout(() => { document.getElementById('class-modal').style.display = 'none'; document.getElementById('task-modal').style.display = 'none'; }, 300);
         }
 
-        // ==========================================
-        // CLASS SCHEDULE LOGIC
-        // ==========================================
-        let rowToEdit = null;
+        // --- NEW: Switch Days Logic ---
+        function switchDay() {
+            const selectedDay = document.getElementById('day-selector').value;
+            // Hide all tbodies
+            document.querySelectorAll('.day-tbody').forEach(tbody => {
+                tbody.style.display = 'none';
+                tbody.classList.remove('active-tbody');
+            });
+            // Show the selected one
+            const activeTbody = document.getElementById('tbody-' + selectedDay);
+            activeTbody.style.display = 'table-row-group';
+            activeTbody.classList.add('active-tbody');
+        }
 
+        let rowToEdit = null;
         function openClassModal(editBtn = null) {
             const modal = document.getElementById('class-modal');
             modal.style.display = 'flex';
@@ -543,7 +510,6 @@
             if (editBtn) {
                 document.getElementById('class-modal-title').innerHTML = '<i class="fa-solid fa-pen"></i> Edit Class Details';
                 rowToEdit = editBtn.closest('tr');
-                
                 document.getElementById('class-subject').value = rowToEdit.querySelector('.col-subject').innerText;
                 document.getElementById('class-time').value = rowToEdit.querySelector('.col-time').innerText;
                 document.getElementById('class-instructor').value = rowToEdit.querySelector('.col-instructor').innerText.trim();
@@ -571,9 +537,16 @@
                 rowToEdit.querySelector('.col-instructor').innerHTML = `<i class="fa-solid fa-chalkboard-user"></i> ${instructor}`;
                 rowToEdit.querySelector('.col-room').innerText = room;
             } else {
-                let tbody = document.getElementById('schedule-tbody');
+                // ADD TO THE CURRENTLY SELECTED DAY
+                let tbody = document.querySelector('.active-tbody');
+                
+                // Remove the "Empty State" message if it exists
+                if(tbody.querySelector('.empty-state')) {
+                    tbody.innerHTML = '';
+                }
+
                 let newRow = `
-                    <tr>
+                    <tr style="animation: pageFadeIn 0.3s ease-out;">
                         <td class="col-time time-text">${time}</td>
                         <td>
                             <div class="col-subject subject-text">${subject}</div>
@@ -601,9 +574,6 @@
             }
         }
 
-        // ==========================================
-        // TASK LIST LOGIC
-        // ==========================================
         function toggleTask(checkboxElement) {
             checkboxElement.classList.toggle('checked');
             checkboxElement.closest('.task-item').classList.toggle('completed-task'); 
@@ -629,22 +599,15 @@
                 <div class="task-item" style="animation: pageFadeIn 0.4s ease-out;">
                     <div class="task-left">
                         <div class="task-checkbox" onclick="toggleTask(this)"><i class="fa-solid fa-check"></i></div>
-                        <div class="task-details">
-                            <h4>${title}</h4>
-                            <p>${subject}</p>
-                        </div>
+                        <div class="task-details"><h4>${title}</h4><p>${subject}</p></div>
                     </div>
                     <div class="task-due" style="background: #eef5f6; color: var(--primary);">${deadline}</div>
                     <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
                 </div>`;
-            
             listContainer.insertAdjacentHTML('afterbegin', newTaskHTML);
             closeModals();
         }
 
-        // ==========================================
-        // FILE UPLOAD LOGIC
-        // ==========================================
         function uploadReviewer(event) {
             let file = event.target.files[0];
             if(file) {
@@ -652,10 +615,7 @@
                 let newFileHTML = `
                     <div class="reviewer-item" style="background: #f0fdf4; border-color: #10b981; animation: pageFadeIn 0.4s ease-out;">
                         <i class="fa-solid fa-file-circle-check" style="color: #10b981; font-size: 2rem;"></i>
-                        <div class="reviewer-info">
-                            <h4>${file.name}</h4>
-                            <p style="color: #047857; font-weight: 600;">Uploaded successfully!</p>
-                        </div>
+                        <div class="reviewer-info"><h4>${file.name}</h4><p style="color: #047857; font-weight: 600;">Uploaded successfully!</p></div>
                         <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
                     </div>`;
                 listContainer.insertAdjacentHTML('afterbegin', newFileHTML);
