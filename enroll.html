@@ -6,18 +6,19 @@
     <title>SAAP | Online Admission Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- CSS Variables (SAAPI GREEN & WHITE) --- */
         :root {
-            --primary: #005f69; 
-            --secondary: #1a365d;
-            --accent: #fecb2f;
-            --bg-light: #f4f7f6;
+            --primary: #006400; 
+            --secondary: #004d00;
+            --accent: #28a745;
+            --bg-light: #f4f9f5;
             --card-bg: #ffffff;
             --text-dark: #333333;
             --border-color: #e1e1e1;
         }
 
         body.dark-mode {
-            --primary: #63b3ed;
+            --primary: #4ade80;
             --secondary: #1e1e1e;
             --bg-light: #121212;
             --card-bg: #2d2d2d;
@@ -30,7 +31,6 @@
 
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Header */
         header { background-color: var(--card-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; transition: 0.3s; }
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: 0.3s; }
         .logo:hover { transform: scale(1.02); }
@@ -41,9 +41,8 @@
         .header-controls { display: flex; gap: 20px; align-items: center; }
         #theme-toggle { font-size: 1.2rem; color: var(--accent); cursor: pointer; transition: 0.3s; }
         .back-btn { text-decoration: none; color: var(--text-dark); font-weight: bold; font-size: 0.95rem; transition: 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; }
-        .back-btn:hover { color: var(--primary); background: rgba(0, 95, 105, 0.1); transform: translateX(-5px); }
+        .back-btn:hover { color: var(--primary); background: rgba(0, 100, 0, 0.1); transform: translateX(-5px); }
 
-        /* Form Container */
         .enroll-container { max-width: 900px; margin: 40px auto; padding: 0 5%; animation: pageFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .form-card { background: var(--card-bg); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; transition: 0.3s; }
         .form-header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 40px 30px; text-align: center; }
@@ -57,9 +56,8 @@
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem; }
         
         input, select { width: 100%; padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; outline: none; background: var(--bg-light); color: var(--text-dark); transition: all 0.3s ease; }
-        input:focus, select:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 10px rgba(0, 95, 105, 0.15); transform: translateY(-2px); }
+        input:focus, select:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 10px rgba(0, 100, 0, 0.15); transform: translateY(-2px); }
 
-        /* File Upload */
         .file-upload-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .file-upload-box { border: 2px dashed var(--border-color); border-radius: 10px; padding: 20px; text-align: center; background: var(--bg-light); position: relative; transition: 0.3s; cursor: pointer; }
         .file-upload-box:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
@@ -69,12 +67,10 @@
         .file-upload-box small { color: #888; font-size: 0.75rem; }
         .file-upload-box input[type="file"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 
-        /* Submit */
         .submit-container { text-align: center; margin-top: 40px; }
-        .submit-btn { background: var(--accent); color: #333; padding: 18px 60px; font-size: 1.2rem; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-transform: uppercase; transition: 0.3s; }
-        .submit-btn:hover { background: #ffd75e; transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(254, 203, 47, 0.4); }
+        .submit-btn { background: var(--accent); color: #ffffff; padding: 18px 60px; font-size: 1.2rem; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-transform: uppercase; transition: 0.3s; }
+        .submit-btn:hover { background: #218838; transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4); }
 
-        /* Success Modal */
         .success-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.4s ease; }
         .success-modal.active { opacity: 1; }
         .success-box { background: var(--card-bg); padding: 40px; border-radius: 15px; text-align: center; max-width: 450px; transform: scale(0.8); transition: 0.4s; }
@@ -129,27 +125,19 @@
                         <label>Incoming Grade Level</label>
                         <select id="grade-level" required onchange="toggleStrand()">
                             <option value="" disabled selected>Select Grade Level</option>
-                            <option value="7">Grade 7</option>
-                            <option value="8">Grade 8</option>
-                            <option value="9">Grade 9</option>
-                            <option value="10">Grade 10</option>
-                            <option value="11">Grade 11 (Senior High)</option>
-                            <option value="12">Grade 12 (Senior High)</option>
+                            <option value="7">Grade 7 to 10</option>
+                            <option value="11">Grade 11 or 12 (SHS)</option>
                         </select>
                     </div>
                     <div class="form-group" id="strand-group" style="opacity: 0; transform: translateY(-10px); transition: all 0.4s ease; height: 0; overflow: hidden; margin-bottom: 0;">
                         <label>Desired SHS Strand</label>
                         <select id="strand-select">
                             <option value="" disabled selected>Select a Strand</option>
-                            <option value="stem">STEM (Science, Tech, Engineering, Math)</option>
-                            <option value="humss">HUMSS (Humanities & Social Sciences)</option>
-                            <option value="abm">ABM (Accountancy, Business, Management)</option>
-                            <option value="ict">TVL - ICT (Info & Comm Technology)</option>
-                            <option value="arts">Arts & Design Track</option>
+                            <option value="stem">STEM</option>
+                            <option value="humss">HUMSS</option>
+                            <option value="abm">ABM</option>
                         </select>
                     </div>
-                    <div class="form-group full-width"><label>Learner Reference Number (LRN)</label><input type="text" placeholder="12-digit LRN" required></div>
-                    <div class="form-group full-width"><label>Previous School Attended</label><input type="text" placeholder="Name of Previous School" required></div>
                 </div>
 
                 <div class="form-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> Requirement Uploads</div>
