@@ -58,7 +58,7 @@
         .gray-bar { background-color: var(--gray-bar-bg); color: #d1d1d1; font-size: 0.8rem; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.4s; }
         .gray-bar-left, .gray-bar-right { display: flex; align-items: center; }
         .gray-bar-left { gap: 20px; }
-        .gray-bar-left a { color: #d1d1d1; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.3s; }
+        .gray-bar-left a { color: #d1d1d1; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.3s; cursor: pointer;}
         .gray-bar-left a:hover { color: white; }
         .gray-bar-right { gap: 18px; }
         .gray-bar-right i { cursor: pointer; transition: transform 0.3s, color 0.3s; }
@@ -164,8 +164,33 @@
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #95a5a6; }
 
         /* --- Floating Chat Widget --- */
-        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #333; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #333; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #ffd75e; animation: none; }
+
+        /* --- NEW: LOGIN MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .login-box {
+            background: var(--card-bg); padding: 40px; border-radius: 15px;
+            width: 90%; max-width: 400px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            position: relative; text-align: center; transform: translateY(-20px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .login-box { transform: translateY(0); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; transition: color 0.3s; }
+        .close-btn:hover { color: var(--accent-yellow); }
+        .login-logo i { font-size: 3rem; color: var(--top-bar-bg); margin-bottom: 10px; }
+        .login-box h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-dark); font-weight: bold; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-dark); outline: none; font-size: 1rem;}
+        .input-group input:focus { border-color: var(--top-bar-bg); }
+        .login-submit { width: 100%; padding: 12px; background: var(--accent-yellow); color: #333; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; margin-top: 10px; }
+        .login-submit:hover { background: #ffd75e; }
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
@@ -207,7 +232,7 @@
     <div class="gray-bar">
         <div class="gray-bar-left">
             <a href="#"><i class="fa-solid fa-graduation-cap"></i> SAAP Home</a>
-            <a href="#"><i class="fa-solid fa-users"></i> Student Portal</a>
+            <a href="#" onclick="openLoginModal()" style="color: var(--accent-yellow); font-weight: bold;"><i class="fa-solid fa-users"></i> Student Portal Login</a>
             <a href="#"><i class="fa-solid fa-book"></i> Library</a>
         </div>
         <div class="gray-bar-right">
@@ -229,7 +254,7 @@
         <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
         <nav>
             <ul>
-                <li><a href="#" data-key="nav-enroll">Enroll</a></li>
+                <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
                 <li><a href="#" data-key="nav-acad">Academics</a></li>
                 <li><a href="#" data-key="nav-campus">Campus Life</a></li>
                 <li><a href="#" data-key="nav-about">About Us</a></li>
@@ -243,7 +268,7 @@
 
     <section class="blue-banner">
         <h1 data-key="banner-title">St. Augustine Academy is where students can achieve everything they want to be.</h1>
-        <a href="#" class="action-button" data-key="banner-btn">Enroll for 2026</a>
+        <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll for 2026</a>
     </section>
 
     <div class="spacer"></div>
@@ -309,7 +334,7 @@
         <div class="parallax-content">
             <h2 data-key="parallax-title">Join the SAAP Family Today</h2>
             <p data-key="parallax-desc">Experience a transformative education that prepares you for success in college and beyond.</p>
-            <a href="#" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
+            <a href="enroll.html" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
         </div>
     </section>
 
@@ -421,7 +446,7 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Admissions Process</a></li>
+                    <li><a href="enroll.html">Admissions Process</a></li>
                     <li><a href="#">Tuition & Scholarships</a></li>
                     <li><a href="#">Student Handbook</a></li>
                 </ul>
@@ -439,7 +464,43 @@
         </div>
     </footer>
 
+    <div class="modal-overlay" id="login-modal">
+        <div class="login-box">
+            <i class="fa-solid fa-xmark close-btn" onclick="closeLoginModal()"></i>
+            
+            <div class="login-logo"><i class="fa-solid fa-user-graduate"></i></div>
+            <h2>Student Portal</h2>
+            
+            <form onsubmit="event.preventDefault(); alert('Login submitted! (This is where backend code connects later)');">
+                <div class="input-group">
+                    <label>Student ID Number</label>
+                    <input type="text" placeholder="e.g. 2026-0001" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login-submit">Secure Login</button>
+            </form>
+            
+            <p style="margin-top: 20px; font-size: 0.85rem; color: #888; cursor: pointer; transition: 0.3s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='#888'">Forgot Password? Contact Registrar.</p>
+        </div>
+    </div>
+
     <script>
+        // --- NEW: Login Modal Script ---
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('active');
+            setTimeout(() => { modal.style.display = 'none'; }, 300); // Waits for the animation to finish
+        }
+
         // 1. Mobile Menu Toggle
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const navMenu = document.querySelector('nav ul');
@@ -521,7 +582,7 @@
             }
         });
 
-        // 6. Language Dictionary (Fully supports all 6 cards)
+        // 6. Language Dictionary (Fully supports all cards)
         const translations = {
             en: {
                 "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
