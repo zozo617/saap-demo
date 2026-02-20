@@ -21,10 +21,9 @@
             --border-color: #e1e1e1;
         }
 
-        /* Dark Mode Override Variables */
         body.dark-mode {
             --header-bg: #1e1e1e;
-            --primary-color: #63b3ed; /* Lighter blue for dark mode visibility */
+            --primary-color: #63b3ed; 
             --text-dark: #f0f0f0;
             --bg-color: #121212;
             --card-bg: #2d2d2d;
@@ -33,16 +32,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; transition: background-color 0.4s ease, color 0.4s ease; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
-
-        /* --- Animations --- */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(254, 203, 47, 0); }
@@ -66,17 +57,19 @@
         .gray-bar-right { gap: 18px; }
         .gray-bar-right i { cursor: pointer; transition: transform 0.3s, color 0.3s; }
         .gray-bar-right i:hover { color: white; transform: scale(1.2); }
-        
-        /* Dark Mode Toggle Icon */
         #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 10px; }
 
-        /* --- Main Header --- */
-        header { background-color: var(--header-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; transition: background-color 0.4s; }
+        /* --- Main Header & Mobile Menu --- */
+        header { background-color: var(--header-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; transition: background-color 0.4s; flex-wrap: wrap; }
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--top-bar-bg); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; }
         .logo-icon { background-color: var(--top-bar-bg); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; }
         .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: color 0.4s;}
         .logo-subtext { font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; color: #888; text-transform: uppercase; }
-        nav ul { list-style: none; display: flex; gap: 25px; }
+        
+        /* Mobile Hamburger Icon (Hidden on Desktop) */
+        .menu-toggle { display: none; font-size: 1.8rem; color: var(--top-bar-bg); cursor: pointer; transition: color 0.3s; }
+        
+        nav ul { list-style: none; display: flex; gap: 25px; transition: all 0.3s ease; }
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease; }
         nav a:hover { color: var(--top-bar-bg); }
 
@@ -99,7 +92,7 @@
 
         /* --- Features Cards Section --- */
         .features-section { padding: 2rem 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
         .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s; border-bottom: 4px solid var(--accent-yellow); display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
         .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; }
@@ -110,7 +103,7 @@
         .card h3 i { color: var(--accent-yellow); font-size: 1.2rem; }
         .card p { color: var(--text-dark); opacity: 0.8; font-size: 1rem; line-height: 1.7; transition: color 0.4s;}
 
-        /* --- NEW: Animated Stats Section --- */
+        /* --- Animated Stats Section --- */
         .stats-section { background-color: var(--top-bar-bg); color: white; padding: 4rem 5%; text-align: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
         .stat-item i { font-size: 2.5rem; color: var(--accent-yellow); margin-bottom: 1rem; }
@@ -128,7 +121,7 @@
         .event-details h4 { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.3rem; transition: color 0.4s;}
         .event-details p { font-size: 0.9rem; color: var(--text-dark); opacity: 0.7; display: flex; align-items: center; gap: 5px; transition: color 0.4s;}
 
-        /* --- NEW: Interactive FAQ Accordion --- */
+        /* --- Interactive FAQ Accordion --- */
         .faq-section { padding: 0 5% 5rem 5%; max-width: 900px; margin: 0 auto; }
         .faq-item { background-color: var(--card-bg); border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; transition: background-color 0.4s; }
         .faq-question { width: 100%; text-align: left; padding: 1.5rem; background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.4s; }
@@ -149,6 +142,50 @@
         .footer-col ul li a:hover { color: white; padding-left: 5px; }
         .contact-info i { color: var(--accent-yellow); margin-right: 10px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #95a5a6; }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS UPGRADES
+        ========================================= */
+        @media (max-width: 768px) {
+            .gray-bar { flex-direction: column; gap: 10px; }
+            .gray-bar-left { display: none; } /* Hides secondary links to save phone space */
+            
+            header { padding: 15px 5%; }
+            .logo-text span { font-size: 1.1rem; }
+            .logo-subtext { font-size: 0.6rem; }
+            
+            /* Enable Hamburger Menu */
+            .menu-toggle { display: block; }
+            nav { width: 100%; }
+            nav ul { 
+                display: none; 
+                flex-direction: column; 
+                width: 100%; 
+                text-align: center; 
+                padding-top: 20px; 
+                gap: 15px; 
+            }
+            nav ul.active { display: flex; }
+            
+            /* Resize Hero Banner for Phones */
+            .hero-image-container { height: 350px; }
+            .blue-banner { padding: 0 15px 60px 15px; }
+            .blue-banner h1 { font-size: 1.5rem; }
+            .action-button { font-size: 1rem; padding: 12px 30px; bottom: -22px; }
+            
+            /* Adjust Content Alignment */
+            .section-header h2 { font-size: 1.8rem; }
+            .stat-number { font-size: 2.2rem; }
+            
+            /* Stack Event Cards */
+            .event-card { 
+                flex-direction: column; 
+                text-align: center; 
+                border-left: none; 
+                border-top: 5px solid var(--top-bar-bg); 
+            }
+            .event-date { margin-right: 0; margin-bottom: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -181,6 +218,7 @@
                 <span class="logo-subtext">OF PAMPANGA</span>
             </div>
         </a>
+        <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
         <nav>
             <ul>
                 <li><a href="#" data-key="nav-enroll">Enroll</a></li>
@@ -357,7 +395,22 @@
     </footer>
 
     <script>
-        // 1. Scroll Reveal Animation
+        // 1. Mobile Menu Toggle Logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            if(navMenu.classList.contains('active')) {
+                mobileBtn.classList.remove('fa-bars');
+                mobileBtn.classList.add('fa-xmark');
+            } else {
+                mobileBtn.classList.remove('fa-xmark');
+                mobileBtn.classList.add('fa-bars');
+            }
+        });
+
+        // 2. Scroll Reveal Animation
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -369,7 +422,7 @@
         window.addEventListener("scroll", reveal);
         reveal(); 
 
-        // 2. Dark Mode Toggle
+        // 3. Dark Mode Toggle
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('theme-toggle');
@@ -384,7 +437,7 @@
             }
         }
 
-        // 3. FAQ Accordion Logic
+        // 4. FAQ Accordion Logic
         const faqQuestions = document.querySelectorAll('.faq-question');
         faqQuestions.forEach(question => {
             question.addEventListener('click', () => {
@@ -398,7 +451,7 @@
             });
         });
 
-        // 4. Number Counter Animation (triggers when scrolled into view)
+        // 5. Number Counter Animation
         const counters = document.querySelectorAll('.counter');
         let hasCounted = false;
 
@@ -415,7 +468,7 @@
                     const updateCount = () => {
                         const target = +counter.getAttribute('data-target');
                         const count = +counter.innerText;
-                        const speed = 40; // lower is faster
+                        const speed = 40; 
                         const inc = target / speed;
 
                         if (count < target) {
@@ -430,7 +483,7 @@
             }
         });
 
-        // 5. Updated Language Dictionary
+        // 6. Language Dictionary
         const translations = {
             en: {
                 "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
@@ -448,7 +501,7 @@
                 "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! St. Augustine Academy offers academic, athletic, and needs-based scholarships.",
                 "faq3-q": "What are the school hours? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Regular classes run from 7:30 AM to 3:00 PM, Monday through Friday."
             },
-            tl: { // Tagalog
+            tl: {
                 "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Buhay Kampus", "nav-about": "Tungkol sa Amin",
                 "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang lahat ng pangarap nila.", "banner-btn": "Mag-enroll para sa 2026",
                 "features-title": "Tuklasin ang Aming Programa",
@@ -464,7 +517,7 @@
                 "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng academic, athletic, at needs-based scholarships.",
                 "faq3-q": "Ano ang oras ng pasok? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Mula 7:30 AM hanggang 3:00 PM, Lunes hanggang Biyernes."
             },
-            es: { // Spanish
+            es: {
                 "nav-enroll": "Inscribirse", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
                 "banner-title": "St. Augustine Academy es donde los estudiantes pueden lograr todo.", "banner-btn": "Inscríbete para 2026",
                 "features-title": "Explora Nuestros Programas",
