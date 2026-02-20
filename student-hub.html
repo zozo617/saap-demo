@@ -16,11 +16,13 @@
             --text-dark: #333333;
             --danger: #e63946;
             --success: #28a745;
+            --border-color: #e1e1e1;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-dark); display: flex; height: 100vh; overflow: hidden; }
 
+        /* Sidebar Navigation */
         .sidebar { width: 260px; background-color: var(--secondary); color: white; display: flex; flex-direction: column; transition: 0.3s; box-shadow: 2px 0 15px rgba(0,0,0,0.1); z-index: 10; }
         .sidebar-header { padding: 20px; text-align: center; background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .sidebar-header i { font-size: 2.5rem; color: var(--accent); margin-bottom: 10px; }
@@ -30,7 +32,8 @@
         .sidebar-menu li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; display: flex; align-items: center; gap: 15px; font-weight: 500; color: #ccc;}
         .sidebar-menu li:hover, .sidebar-menu li.active { background: rgba(255,255,255,0.1); border-left-color: var(--accent); color: white; }
 
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        /* Main Dashboard Area */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
         
         .top-nav { background: var(--card-bg); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; z-index: 100; }
         .top-nav h2 { font-size: 1.2rem; color: var(--primary); }
@@ -77,16 +80,27 @@
         .action-btn { background: var(--bg-light); color: var(--primary); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
         .action-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
+        /* Highly Editable Digital Class Schedule */
         .schedule-controls select { padding: 5px 10px; border-radius: 6px; border: 1px solid #ccc; outline: none; cursor: pointer; font-size: 0.85rem;}
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.95rem; }
         th { color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; }
+        tr { transition: 0.2s; position: relative; }
         tr:hover { background-color: #f9f9f9; }
         .room-badge { background: var(--bg-light); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; color: var(--secondary); border: 1px solid #ddd;}
-        .break-time { text-align: center; background: rgba(40, 167, 69, 0.2); color: var(--secondary); padding: 10px; border-radius: 8px; font-weight: bold; letter-spacing: 2px; font-size: 0.85rem; }
+        .break-time { text-align: center; background: rgba(40, 167, 69, 0.15); color: var(--secondary); padding: 10px; border-radius: 8px; font-weight: bold; letter-spacing: 2px; font-size: 0.85rem; }
+        
+        /* Table Action Icons */
+        .row-actions { display: flex; gap: 10px; opacity: 0; transition: opacity 0.3s; }
+        tr:hover .row-actions { opacity: 1; }
+        .edit-icon { color: var(--primary); cursor: pointer; font-size: 1.1rem; }
+        .delete-icon { color: var(--danger); cursor: pointer; font-size: 1.1rem; }
+        .edit-icon:hover { transform: scale(1.1); }
+        .delete-icon:hover { transform: scale(1.1); }
 
+        /* Interactive Task List */
         .task-list { display: flex; flex-direction: column; gap: 12px; }
-        .task-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border: 1px solid #eee; border-radius: 8px; transition: 0.3s; background: white; }
+        .task-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border: 1px solid #eee; border-radius: 8px; transition: 0.3s; background: white; position: relative; overflow: hidden; }
         .task-item:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .task-left { display: flex; align-items: center; gap: 12px; }
         .task-checkbox { width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; color: transparent; }
@@ -94,9 +108,15 @@
         .task-details h4 { font-size: 0.95rem; color: var(--text-dark); margin-bottom: 2px; transition: 0.3s; }
         .task-details p { font-size: 0.8rem; color: #888; }
         .task-item.completed-task .task-details h4 { text-decoration: line-through; color: #aaa; }
-        .task-due { font-size: 0.75rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; background: #fff0f1; color: var(--danger); }
+        .task-due { font-size: 0.75rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; background: #fff0f1; color: var(--danger); transition: 0.3s; }
         .task-due.safe { background: #eef5f6; color: var(--primary); }
+        
+        /* Task Deletion */
+        .task-delete { position: absolute; right: -40px; background: var(--danger); color: white; height: 100%; width: 40px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; top: 0; }
+        .task-item:hover .task-delete { right: 0; }
+        .task-item:hover .task-due { margin-right: 40px; }
 
+        /* Interactive Reviewers Section */
         .reviewer-list { display: flex; flex-direction: column; gap: 15px; }
         .reviewer-item { display: flex; align-items: center; gap: 15px; padding: 12px 15px; background: #fdfdfd; border: 1px solid #eee; border-radius: 8px; transition: 0.3s; }
         .reviewer-item:hover { border-color: var(--accent); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
@@ -106,10 +126,11 @@
         .reviewer-info h4 { font-size: 0.95rem; margin-bottom: 2px; color: var(--secondary); }
         .reviewer-info p { font-size: 0.8rem; color: #888; }
         .reviewer-action { color: #888; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
-        .reviewer-action:hover { color: var(--primary); transform: scale(1.1); }
+        .reviewer-action:hover { color: var(--danger); transform: scale(1.1); }
         .upload-label { cursor: pointer; margin: 0; display: flex; align-items: center; gap: 5px; }
         #file-upload-input { display: none; }
 
+        /* Announcements & Jam Redirect */
         .announcement-feed { display: flex; flex-direction: column; gap: 20px; }
         .announcement { padding: 20px; border-radius: 10px; background: var(--bg-light); border-left: 4px solid var(--accent); position: relative; }
         .announcement.urgent { border-left-color: var(--danger); background: #fff0f1; }
@@ -122,6 +143,21 @@
         .jam-redirect-btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none;}
         .jam-redirect-btn:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
+        /* --- UI MODALS FOR EDITING (Replaces Prompt) --- */
+        .custom-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(4px); }
+        .modal-box { background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: popIn 0.3s ease-out; }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-box h3 { color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--bg-light); padding-bottom: 10px; }
+        .modal-box label { display: block; font-size: 0.85rem; font-weight: bold; color: var(--text-dark); margin-bottom: 5px; }
+        .modal-box input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; outline: none; transition: 0.3s; }
+        .modal-box input:focus { border-color: var(--primary); box-shadow: 0 0 5px rgba(0,100,0,0.2); }
+        .modal-buttons { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
+        .modal-buttons button { padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+        .btn-cancel { background: #eee; color: #333; }
+        .btn-cancel:hover { background: #ddd; }
+        .btn-save { background: var(--primary); color: white; }
+        .btn-save:hover { background: var(--secondary); }
+
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
             body { flex-direction: column; overflow-y: auto; height: auto;}
@@ -130,7 +166,6 @@
             .sidebar-header h3, .sidebar-header i { display: none; } 
             .sidebar-menu { display: none; } 
             .welcome-banner { flex-direction: column; text-align: center; gap: 15px; }
-            .schedule-controls { margin-top: 10px;}
             .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
@@ -218,6 +253,7 @@
 
             <div class="grid">
                 <div class="left-col">
+                    
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-calendar-week"></i> Personalized Timetable</h3>
@@ -225,7 +261,7 @@
                                 <div class="schedule-controls">
                                     <select><option>Monday</option><option>Tuesday</option></select>
                                 </div>
-                                <button class="action-btn" onclick="addNewClass()"><i class="fa-solid fa-plus"></i> Add Class</button>
+                                <button class="action-btn" onclick="openClassModal()"><i class="fa-solid fa-plus"></i> Add Class</button>
                             </div>
                         </div>
                         
@@ -236,29 +272,48 @@
                                     <th>Subject</th>
                                     <th>Instructor</th>
                                     <th>Room</th>
+                                    <th style="width: 80px; text-align: right;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="schedule-tbody">
                                 <tr>
-                                    <td>7:30 AM - 9:00 AM</td>
-                                    <td><strong>General Mathematics</strong></td>
-                                    <td>Mr. D. Santos</td>
-                                    <td><span class="room-badge">RM 204</span></td>
+                                    <td class="col-time">7:30 AM - 9:00 AM</td>
+                                    <td class="col-subject"><strong>General Mathematics</strong></td>
+                                    <td class="col-instructor">Mr. D. Santos</td>
+                                    <td><span class="room-badge col-room">RM 204</span></td>
+                                    <td>
+                                        <div class="row-actions">
+                                            <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
+                                            <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>9:00 AM - 10:30 AM</td>
-                                    <td><strong>Earth & Life Science</strong></td>
-                                    <td>Ms. L. Reyes</td>
-                                    <td><span class="room-badge">LAB 1</span></td>
+                                    <td class="col-time">9:00 AM - 10:30 AM</td>
+                                    <td class="col-subject"><strong>Earth & Life Science</strong></td>
+                                    <td class="col-instructor">Ms. L. Reyes</td>
+                                    <td><span class="room-badge col-room">LAB 1</span></td>
+                                    <td>
+                                        <div class="row-actions">
+                                            <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
+                                            <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="text-align: center; background: #f9f9f9; color: var(--accent); font-weight: bold; letter-spacing: 2px;">RECESS (10:30 AM - 11:00 AM)</td>
+                                    <td colspan="5" class="break-time"><i class="fa-solid fa-mug-hot"></i> MORNING BREAK (10:30 AM - 11:00 AM)</td>
                                 </tr>
                                 <tr>
-                                    <td>11:00 AM - 12:30 PM</td>
-                                    <td><strong>Oral Communication</strong></td>
-                                    <td>Mrs. C. Cruz</td>
-                                    <td><span class="room-badge">RM 205</span></td>
+                                    <td class="col-time">11:00 AM - 12:30 PM</td>
+                                    <td class="col-subject"><strong>Oral Communication</strong></td>
+                                    <td class="col-instructor">Mrs. C. Cruz</td>
+                                    <td><span class="room-badge col-room">RM 205</span></td>
+                                    <td>
+                                        <div class="row-actions">
+                                            <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
+                                            <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -267,7 +322,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-list-check"></i> Activities & Deadlines</h3>
-                            <button class="action-btn" onclick="addNewTask()"><i class="fa-solid fa-plus"></i> Add Task</button>
+                            <button class="action-btn" onclick="openTaskModal()"><i class="fa-solid fa-plus"></i> Add Task</button>
                         </div>
                         
                         <div class="task-list" id="task-list-container">
@@ -280,6 +335,7 @@
                                     </div>
                                 </div>
                                 <div class="task-due">Due Tomorrow</div>
+                                <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
                             </div>
                             <div class="task-item">
                                 <div class="task-left">
@@ -290,12 +346,14 @@
                                     </div>
                                 </div>
                                 <div class="task-due safe">Due in 3 days</div>
+                                <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="right-col">
+                    
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-book-open-reader"></i> My Reviewers</h3>
@@ -312,7 +370,7 @@
                                     <h4>Gen_Math_Q1_Reviewer.pdf</h4>
                                     <p>Added 2 days ago</p>
                                 </div>
-                                <i class="fa-solid fa-download reviewer-action" title="Download"></i>
+                                <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
                             </div>
                             <div class="reviewer-item">
                                 <i class="fa-solid fa-file-word reviewer-icon doc"></i>
@@ -320,7 +378,7 @@
                                     <h4>EarthScience_Notes.docx</h4>
                                     <p>Added last week</p>
                                 </div>
-                                <i class="fa-solid fa-download reviewer-action" title="Download"></i>
+                                <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
                             </div>
                         </div>
                     </div>
@@ -357,7 +415,53 @@
         </div>
     </div>
 
+    <div class="custom-modal" id="class-modal">
+        <div class="modal-box">
+            <h3 id="class-modal-title"><i class="fa-solid fa-calendar-plus"></i> Add New Class</h3>
+            <form onsubmit="saveClass(event)">
+                <label>Subject Name</label>
+                <input type="text" id="class-subject" placeholder="e.g. Physical Education" required>
+                
+                <label>Time Slot</label>
+                <input type="text" id="class-time" placeholder="e.g. 1:00 PM - 2:00 PM" required>
+                
+                <label>Instructor Name</label>
+                <input type="text" id="class-instructor" placeholder="e.g. Mr. Santos" required>
+                
+                <label>Room / Location</label>
+                <input type="text" id="class-room" placeholder="e.g. Gymnasium" required>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
+                    <button type="submit" class="btn-save">Save Class</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="custom-modal" id="task-modal">
+        <div class="modal-box">
+            <h3><i class="fa-solid fa-list-check"></i> Add New Task</h3>
+            <form onsubmit="saveTask(event)">
+                <label>Task Title</label>
+                <input type="text" id="task-title" placeholder="e.g. Read Chapter 4" required>
+                
+                <label>Related Subject</label>
+                <input type="text" id="task-subject" placeholder="e.g. Earth Science" required>
+                
+                <label>Due Date Label</label>
+                <input type="text" id="task-deadline" placeholder="e.g. Due Tomorrow" required>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
+                    <button type="submit" class="btn-save">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // Profile Dropdown
         function toggleProfileMenu() {
             const menu = document.getElementById('profileDropdown');
             menu.classList.toggle('active');
@@ -373,48 +477,122 @@
             }
         }
 
+        // Modal Utility Functions
+        function closeModals() {
+            document.getElementById('class-modal').style.display = 'none';
+            document.getElementById('task-modal').style.display = 'none';
+        }
+
+        // ==========================================
+        // CLASS SCHEDULE LOGIC (ADD / EDIT / DELETE)
+        // ==========================================
+        let rowToEdit = null;
+
+        function openClassModal(editBtn = null) {
+            document.getElementById('class-modal').style.display = 'flex';
+            
+            if (editBtn) {
+                document.getElementById('class-modal-title').innerHTML = '<i class="fa-solid fa-pen"></i> Edit Class';
+                rowToEdit = editBtn.closest('tr'); // Finds the row we clicked
+                
+                // Pre-fill the form with existing data
+                document.getElementById('class-subject').value = rowToEdit.querySelector('.col-subject').innerText;
+                document.getElementById('class-time').value = rowToEdit.querySelector('.col-time').innerText;
+                document.getElementById('class-instructor').value = rowToEdit.querySelector('.col-instructor').innerText;
+                document.getElementById('class-room').value = rowToEdit.querySelector('.col-room').innerText;
+            } else {
+                document.getElementById('class-modal-title').innerHTML = '<i class="fa-solid fa-calendar-plus"></i> Add New Class';
+                rowToEdit = null;
+                // Clear the form
+                document.getElementById('class-subject').value = '';
+                document.getElementById('class-time').value = '';
+                document.getElementById('class-instructor').value = '';
+                document.getElementById('class-room').value = '';
+            }
+        }
+
+        function saveClass(event) {
+            event.preventDefault();
+            let subject = document.getElementById('class-subject').value;
+            let time = document.getElementById('class-time').value;
+            let instructor = document.getElementById('class-instructor').value;
+            let room = document.getElementById('class-room').value;
+
+            if (rowToEdit) {
+                // Update existing row
+                rowToEdit.querySelector('.col-subject').innerHTML = `<strong>${subject}</strong>`;
+                rowToEdit.querySelector('.col-time').innerText = time;
+                rowToEdit.querySelector('.col-instructor').innerText = instructor;
+                rowToEdit.querySelector('.col-room').innerText = room;
+            } else {
+                // Create a brand new row
+                let tbody = document.getElementById('schedule-tbody');
+                let newRow = `
+                    <tr>
+                        <td class="col-time">${time}</td>
+                        <td class="col-subject"><strong>${subject}</strong></td>
+                        <td class="col-instructor">${instructor}</td>
+                        <td><span class="room-badge col-room">${room}</span></td>
+                        <td>
+                            <div class="row-actions">
+                                <i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)" title="Edit"></i>
+                                <i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)" title="Delete"></i>
+                            </div>
+                        </td>
+                    </tr>`;
+                tbody.insertAdjacentHTML('beforeend', newRow);
+            }
+            closeModals();
+        }
+
+        function deleteClass(deleteBtn) {
+            if(confirm("Are you sure you want to remove this class from your schedule?")) {
+                deleteBtn.closest('tr').remove();
+            }
+        }
+
+        // ==========================================
+        // TASK LIST LOGIC (ADD / COMPLETE / DELETE)
+        // ==========================================
         function toggleTask(checkboxElement) {
             checkboxElement.classList.toggle('checked');
             checkboxElement.closest('.task-item').classList.toggle('completed-task'); 
         }
 
-        function addNewTask() {
-            let taskName = prompt("Enter the name of your new activity or deadline (e.g. 'Read Chapter 4'):");
-            if(taskName) {
-                let listContainer = document.getElementById('task-list-container');
-                let newTaskHTML = `
-                    <div class="task-item">
-                        <div class="task-left">
-                            <div class="task-checkbox" onclick="toggleTask(this)"><i class="fa-solid fa-check"></i></div>
-                            <div class="task-details">
-                                <h4>${taskName}</h4>
-                                <p>Added just now</p>
-                            </div>
+        function openTaskModal() {
+            document.getElementById('task-modal').style.display = 'flex';
+            document.getElementById('task-title').value = '';
+            document.getElementById('task-subject').value = '';
+            document.getElementById('task-deadline').value = '';
+        }
+
+        function saveTask(event) {
+            event.preventDefault();
+            let title = document.getElementById('task-title').value;
+            let subject = document.getElementById('task-subject').value;
+            let deadline = document.getElementById('task-deadline').value;
+
+            let listContainer = document.getElementById('task-list-container');
+            let newTaskHTML = `
+                <div class="task-item">
+                    <div class="task-left">
+                        <div class="task-checkbox" onclick="toggleTask(this)"><i class="fa-solid fa-check"></i></div>
+                        <div class="task-details">
+                            <h4>${title}</h4>
+                            <p>${subject}</p>
                         </div>
-                        <div class="task-due" style="background: #eef5f6; color: var(--primary);">Pending</div>
-                    </div>`;
-                listContainer.insertAdjacentHTML('afterbegin', newTaskHTML);
-            }
-        }
-
-        function addNewClass() {
-            let subject = prompt("Enter Subject Name (e.g. 'Physical Education'):");
-            let time = prompt("Enter Class Time (e.g. '3:00 PM - 4:00 PM'):");
-            let room = prompt("Enter Room Number (e.g. 'Gymnasium'):");
+                    </div>
+                    <div class="task-due" style="background: #eef5f6; color: var(--primary);">${deadline}</div>
+                    <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
+                </div>`;
             
-            if(subject && time && room) {
-                let tbody = document.getElementById('schedule-tbody');
-                let newRow = `
-                    <tr>
-                        <td>${time}</td>
-                        <td><strong>${subject}</strong></td>
-                        <td>TBA</td>
-                        <td><span class="room-badge">${room}</span></td>
-                    </tr>`;
-                tbody.insertAdjacentHTML('beforeend', newRow);
-            }
+            listContainer.insertAdjacentHTML('afterbegin', newTaskHTML); // Adds to top
+            closeModals();
         }
 
+        // ==========================================
+        // FILE UPLOAD LOGIC
+        // ==========================================
         function uploadReviewer(event) {
             let file = event.target.files[0];
             if(file) {
@@ -424,12 +602,12 @@
                         <i class="fa-solid fa-file-circle-check" style="color: #28a745; font-size: 1.8rem;"></i>
                         <div class="reviewer-info">
                             <h4>${file.name}</h4>
-                            <p style="color: #28a745;">Uploaded successfully!</p>
+                            <p style="color: #28a745;">Uploaded just now</p>
                         </div>
                         <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
                     </div>`;
                 listContainer.insertAdjacentHTML('afterbegin', newFileHTML);
-                event.target.value = '';
+                event.target.value = ''; // Reset input
             }
         }
     </script>
