@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Augustine Academy | Online Admission Form</title>
+    <title>St. Augustine Academy of Pampanga, Inc. | Online Admission</title>
     
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
@@ -21,22 +21,24 @@
             --border-color: #e5e7eb;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
-        }
-
-        body.dark-mode {
-            --primary: #4ade80;
-            --secondary: #1e1e1e;
-            --bg-light: #121212;
-            --card-bg: #1f2937;
-            --text-dark: #f0f0f0;
-            --text-muted: #9ca3af;
-            --border-color: #374151;
+            --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; transition: 0.3s; -webkit-font-smoothing: antialiased; overflow-x: hidden;}
+        
+        /* UPGRADED BACKGROUND: No more boring white space! Uses a premium green overlay over the campus photo */
+        body { 
+            background: linear-gradient(rgba(2, 44, 34, 0.85), rgba(4, 120, 87, 0.85)), url('campus-photo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            transition: 0.3s; 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* PERFECT LOGO - NO OUTLINE */
         .real-logo { width: 55px; height: 55px; border-radius: 50%; object-fit: contain; border: none; padding: 0; margin-right: 8px; background: transparent; }
@@ -48,11 +50,13 @@
         .logo-subtext { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;}
         
         .header-controls { display: flex; gap: 20px; align-items: center; }
-        .back-btn { text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.95rem; transition: 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border-color);}
+        .back-btn { text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.95rem; transition: 0.3s ease; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border-color); background: white;}
         .back-btn:hover { color: var(--primary); background: #ecfdf5; border-color: var(--primary); transform: translateX(-5px); }
 
-        .enroll-container { max-width: 900px; margin: 40px auto; padding: 0 5%; }
-        .form-card { background: var(--card-bg); border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); overflow: hidden; border: 1px solid var(--border-color); animation: pageFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;}
+        /* UPGRADED FORM CARD SHADOW TO POP AGAINST BACKGROUND */
+        .enroll-container { max-width: 900px; margin: 50px auto 80px auto; padding: 0 5%; }
+        .form-card { background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-lg); overflow: hidden; border: none; animation: pageFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;}
+        
         .form-header { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; padding: 40px 30px; text-align: center; }
         .form-header h2 { font-size: 2.2rem; margin-bottom: 10px; color: var(--accent); font-weight: 800; letter-spacing: -0.5px;}
         .form-body { padding: 40px 30px; position: relative;}
@@ -111,7 +115,7 @@
             .form-grid { grid-template-columns: 1fr; } 
             .form-header { padding: 30px 20px; }
             .form-body { padding: 30px 20px; }
-            .logo-text span { font-size: 1.1rem; }
+            .logo-text span { font-size: 1rem !important; }
             .btn-group { flex-direction: column-reverse; }
             .submit-btn, .btn-secondary { width: 100%; padding: 16px;}
         }
@@ -123,8 +127,8 @@
         <a href="index.html" class="logo">
             <img src="logo.jpg" alt="St. Augustine Academy Logo" class="real-logo">
             <div class="logo-text">
-                <span>ST. AUGUSTINE ACADEMY</span>
-                <span class="logo-subtext">ADMISSIONS S.Y. 2026-2027</span>
+                <span style="font-size: 1.05rem; line-height: 1.2;">ST. AUGUSTINE ACADEMY<br>OF PAMPANGA, INC.</span>
+                <span class="logo-subtext" style="margin-top: 2px;">ADMISSIONS S.Y. 2026-2027</span>
             </div>
         </a>
         <div class="header-controls">
@@ -218,7 +222,7 @@
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px; font-weight: 500;">Help us get to know you better! Please answer the following questions briefly.</p>
                     
                     <div class="form-group full-width">
-                        <label>Why do you want to apply to St. Augustine Academy of Pampanga?</label>
+                        <label>Why do you want to apply to St. Augustine Academy of Pampanga, Inc.?</label>
                         <textarea placeholder="Tell us why you chose our institution..." required></textarea>
                     </div>
                     
@@ -262,7 +266,7 @@
         <div class="success-box">
             <i class="fa-solid fa-circle-check"></i>
             <h2>Application Submitted!</h2>
-            <p style="color: var(--text-muted); font-weight: 500; margin-bottom: 10px;">Thank you for applying to St. Augustine Academy of Pampanga. Our admissions team will email you within 2-3 business days regarding your assessment.</p>
+            <p style="color: var(--text-muted); font-weight: 500; margin-bottom: 10px;">Thank you for applying to St. Augustine Academy of Pampanga, Inc. Our admissions team will email you within 2-3 business days regarding your assessment.</p>
             <a href="index.html">Return to Homepage</a>
         </div>
     </div>
