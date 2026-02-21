@@ -47,16 +47,32 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- LOGO STYLES (OUTLINES AND BACKGROUNDS REMOVED) --- */
+        /* --- LOGO STYLES --- */
         .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
         .hero-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: contain; margin-bottom: 20px; border: none; background: transparent; }
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
+        /* --- LOCATION BADGE --- */
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f4f9f5;
+            color: #022c22;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            gap: 10px;
+        }
+        .location-badge i { color: var(--primary-color); font-size: 1.1rem; }
+
         /* --- INTERACTIVE FLOATING WAYPOINT --- */
         .floating-waypoint {
             position: fixed;
-            bottom: 30px;
+            bottom: 100px; /* Stacked perfectly above the chat bubble */
             right: 30px;
             background-color: var(--primary-color);
             color: #ffffff;
@@ -71,32 +87,15 @@
             overflow: hidden;
             white-space: nowrap;
         }
-        .floating-waypoint i {
-            font-size: 1.4rem;
-            transition: transform 0.3s ease;
-        }
-        .floating-waypoint:hover { 
-            background-color: var(--secondary); 
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-        .waypoint-text {
-            max-width: 0;
-            opacity: 0;
-            margin-left: 0;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .floating-waypoint.active .waypoint-text {
-            max-width: 400px;
-            opacity: 1;
-            margin-left: 12px;
-            padding-right: 5px;
-        }
-        .floating-waypoint.active i {
-            color: var(--accent-yellow);
-        }
+        .floating-waypoint i { font-size: 1.4rem; transition: transform 0.3s ease; }
+        .floating-waypoint:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .waypoint-text { max-width: 0; opacity: 0; margin-left: 0; font-size: 0.95rem; font-weight: 600; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .floating-waypoint.active .waypoint-text { max-width: 400px; opacity: 1; margin-left: 12px; padding-right: 5px; }
+        .floating-waypoint.active i { color: var(--accent-yellow); }
+
+        /* --- Floating Chat Widget --- */
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
+        .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
 
         /* Top Bars */
         .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
@@ -143,26 +142,15 @@
 
         /* --- CAROUSEL STYLES --- */
         .features-section { padding: 2rem 0 5rem 0; width: 100%; position: relative; overflow: hidden; }
-        
         .carousel-container { position: relative; display: flex; align-items: center; width: 100%; }
-        
         .carousel-arrow { position: absolute; top: 45%; transform: translateY(-50%); background-color: var(--primary-color); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-md); z-index: 10; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
         .carousel-arrow:hover { background-color: var(--accent-yellow); transform: translateY(-50%) scale(1.1); }
         .carousel-arrow.left { left: 2%; }
         .carousel-arrow.right { right: 2%; }
 
         .features-grid { 
-            display: flex; 
-            gap: 2rem; 
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory; 
-            scrollbar-width: none; 
-            -ms-overflow-style: none; 
-            scroll-behavior: smooth;
-            padding: 20px 5% 40px 5%; 
-            width: 100%;
-            max-width: max-content; 
-            margin: 0 auto;
+            display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;
+            padding: 20px 5% 40px 5%; width: 100%; max-width: max-content; margin: 0 auto;
         }
         .features-grid::-webkit-scrollbar { display: none; } 
 
@@ -202,7 +190,7 @@
         .author-info h4 { color: var(--text-dark); margin: 0; font-weight: 700; font-size: 1.1rem;}
         .author-info p { color: var(--text-muted); font-size: 0.85rem; margin: 0; font-weight: 500;}
 
-        /* Events */
+        /* Events & FAQ */
         .events-section { padding: 5rem 5%; background-color: var(--card-bg); max-width: 1400px; margin: 0 auto 5rem; border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);}
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .event-card { display: flex; align-items: center; background: var(--bg-color); padding: 1.8rem; border-radius: 12px; transition: 0.3s; border-left: 5px solid var(--primary-color); border: 1px solid var(--border-color); border-left-width: 5px;}
@@ -213,7 +201,6 @@
         .event-details h4 { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
         .event-details p { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 8px; }
 
-        /* FAQ */
         .faq-section { padding: 0 5% 5rem; max-width: 900px; margin: 0 auto; }
         .faq-item { background-color: var(--card-bg); border-radius: 12px; margin-bottom: 1.2rem; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--border-color); transition: 0.3s; }
         .faq-question { width: 100%; text-align: left; padding: 1.5rem 2rem; background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter'; }
@@ -253,6 +240,7 @@
         .auth-switch span { color: var(--primary-color); font-weight: 800; cursor: pointer; transition: 0.3s; }
         .auth-switch span:hover { text-decoration: underline; color: var(--secondary); }
 
+        /* --- MOBILE RESPONSIVENESS UPDATES --- */
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; }
             .gray-bar-left { display: none; } 
@@ -261,8 +249,15 @@
             .logo-subtext { font-size: 0.6rem; }
             .menu-toggle { display: block; }
             nav { width: 100%; }
-            nav ul { display: none; flex-direction: column; width: 100%; text-align: center; padding-top: 20px; gap: 15px; position: absolute; top: 100%; left: 0; background: var(--header-bg); box-shadow: var(--shadow-md);}
-            nav ul.active { display: flex; }
+            /* BUTTERY SMOOTH MOBILE MENU SLIDE-DOWN */
+            nav ul { 
+                display: flex; flex-direction: column; width: 100%; text-align: center; 
+                padding: 20px; gap: 15px; position: absolute; top: 100%; left: 0; 
+                background: var(--header-bg); box-shadow: var(--shadow-md);
+                opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            nav ul.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            
             .hero-image-container { height: 450px; }
             .blue-banner h1 { font-size: 1.8rem; }
             .action-button { font-size: 1rem; padding: 14px 40px; margin-top: 20px; }
@@ -270,9 +265,12 @@
             .blue-banner { padding: 0 15px; }
             .carousel-arrow { width: 40px; height: 40px; font-size: 1rem;}
             .card { flex: 0 0 280px; }
-            .floating-waypoint { bottom: 20px; right: 20px; padding: 12px; }
+            
+            /* FIXED OVERLAP ON MOBILE */
+            .floating-waypoint { bottom: 95px; right: 20px; padding: 12px; }
             .floating-waypoint i { font-size: 1.2rem; }
             .waypoint-text { font-size: 0.85rem; }
+            .floating-chat { bottom: 20px; right: 20px; width: 55px; height: 55px; }
         }
     </style>
 </head>
@@ -300,7 +298,7 @@
 
     <header>
         <a href="#" class="logo">
-            <img src="logo.jpg" alt="SAAPI Logo" class="real-logo">
+            <img src="logo.jpg" alt="St. Augustine Academy of Pampanga Logo" class="real-logo">
             <div class="logo-text">
                 <span>ST. AUGUSTINE ACADEMY</span>
                 <span class="logo-subtext">OF PAMPANGA, INC.</span>
@@ -321,7 +319,7 @@
     <section class="hero-image-container">
         <img src="campus-photo.jpg" alt="Students walking on campus" class="bg-img">
         <div class="blue-banner">
-            <img src="logo.jpg" alt="SAAPI Logo" class="hero-logo">
+            <img src="logo.jpg" alt="St. Augustine Academy Logo" class="hero-logo">
             <h1 data-key="banner-title">St. Augustine Academy is where students can achieve everything they want to be.</h1>
             <p><strong>"Ad Astra, Per Fidem"</strong> — To the stars, through faith.<br>Guided by our core values: Faith &bull; Service &bull; Excellence.</p>
             <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll Now!</a>
@@ -445,7 +443,7 @@
             </div>
             <div class="testimonial-card">
                 <i class="fa-solid fa-quote-left"></i>
-                <p class="testimonial-text" data-key="testi-3">"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world."</p>
+                <p class="testimonial-text" data-key="testi-3">"The robotics and technology clubs helped me discover my passion for coding. St. Augustine Academy prepares you for the real world."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">L</div>
                     <div class="author-info">
@@ -496,8 +494,8 @@
     <footer class="mega-footer">
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
-                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> 
+                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.1rem; font-weight: bold; line-height: 1.2;">
+                    <img src="logo.jpg" alt="St. Augustine Academy Logo" class="footer-logo"> 
                     St. Augustine Academy<br>of Pampanga, Inc.
                 </div>
                 <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding.</p>
@@ -528,11 +526,15 @@
         <i class="fa-solid fa-location-dot"></i>
         <span class="waypoint-text">Alvendia St., Poblacion, Floridablanca, Pampanga</span>
     </div>
+    
+    <div class="floating-chat" title="Chat with Admissions">
+        <i class="fa-solid fa-message"></i>
+    </div>
 
     <div class="modal-overlay" id="login-modal">
         <div class="login-box">
             <i class="fa-solid fa-xmark close-btn" onclick="closeLoginModal()"></i>
-            <img src="logo.jpg" alt="SAAPI Logo" class="modal-real-logo">
+            <img src="logo.jpg" alt="St. Augustine Academy Logo" class="modal-real-logo">
             <h2 id="modal-title">Student Portal</h2>
             
             <form id="login-form" onsubmit="handleLogin(event)">
@@ -568,7 +570,6 @@
                     Already have an account? <span onclick="switchAuthMode('login')">Log in here</span>.
                 </div>
             </form>
-
         </div>
     </div>
 
@@ -717,7 +718,7 @@
                 "testi-title": "What Our Students Say",
                 "testi-1": "\"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success.\"",
                 "testi-2": "\"The facilities are amazing, and the sense of community makes every day enjoyable. I made friends for life here.\"",
-                "testi-3": "\"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world.\"",
+                "testi-3": "\"The robotics and technology clubs helped me discover my passion for coding. St. Augustine Academy prepares you for the real world.\"",
                 "events-title": "Upcoming Events", "faq-title": "Frequently Asked Questions",
                 "faq1-q": "When does the enrollment period start? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Enrollment begins on March 15th.",
                 "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! We offer academic, athletic, and needs-based scholarships."
