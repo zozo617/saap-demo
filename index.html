@@ -53,6 +53,22 @@
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
+        /* --- LOCATION BADGE --- */
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f4f9f5;
+            color: #022c22;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            gap: 10px;
+        }
+        .location-badge i { color: var(--primary-color); font-size: 1.1rem; }
+
         /* --- INTERACTIVE FLOATING WAYPOINT --- */
         .floating-waypoint {
             position: fixed;
@@ -169,7 +185,7 @@
         .author-info h4 { color: var(--text-dark); margin: 0; font-weight: 700; font-size: 1.1rem;}
         .author-info p { color: var(--text-muted); font-size: 0.85rem; margin: 0; font-weight: 500;}
 
-        /* Events */
+        /* Events & FAQ */
         .events-section { padding: 5rem 5%; background-color: var(--card-bg); max-width: 1400px; margin: 0 auto 5rem; border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);}
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .event-card { display: flex; align-items: center; background: var(--bg-color); padding: 1.8rem; border-radius: 12px; transition: 0.3s; border-left: 5px solid var(--primary-color); border: 1px solid var(--border-color); border-left-width: 5px;}
@@ -180,7 +196,6 @@
         .event-details h4 { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
         .event-details p { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 8px; }
 
-        /* FAQ */
         .faq-section { padding: 0 5% 5rem; max-width: 900px; margin: 0 auto; }
         .faq-item { background-color: var(--card-bg); border-radius: 12px; margin-bottom: 1.2rem; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--border-color); transition: 0.3s; }
         .faq-question { width: 100%; text-align: left; padding: 1.5rem 2rem; background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter'; }
@@ -231,9 +246,12 @@
             .logo { gap: 8px; }
             .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; }
             .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
-            .menu-toggle { display: block; font-size: 1.5rem; }
             
-            nav { width: 100%; }
+            /* PIN HAMBURGER TO THE FAR RIGHT */
+            .menu-toggle { display: block; font-size: 1.5rem; margin-left: auto; }
+            
+            /* FIXED FLEX SQUISH ISSUE */
+            nav { width: 0; } 
             nav ul { 
                 display: flex; flex-direction: column; width: 100%; text-align: center; 
                 padding: 20px; gap: 15px; position: absolute; top: 100%; left: 0; 
@@ -242,7 +260,6 @@
             }
             nav ul.active { opacity: 1; visibility: visible; transform: translateY(0); }
             
-            /* FIXED HERO OVERLAP & SIZING */
             .hero-image-container { height: 100vh; min-height: 550px; } 
             .blue-banner { padding: 0 15px; width: 95%; }
             .hero-logo { width: 75px; height: 75px; margin-bottom: 10px; }
@@ -315,6 +332,8 @@
             <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll Now!</a>
         </div>
     </section>
+
+    <div class="spacer"></div>
 
     <section id="prospectus" class="features-section reveal">
         <div class="section-header">
