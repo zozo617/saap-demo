@@ -51,12 +51,6 @@
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
-        .location-badge {
-            display: inline-flex; align-items: center; background-color: #f4f9f5; color: #022c22; padding: 12px 24px; border-radius: 8px; border-left: 5px solid var(--primary-color);
-            font-size: 0.95rem; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); gap: 10px;
-        }
-        .location-badge i { color: var(--primary-color); font-size: 1.1rem; }
-
         .floating-waypoint {
             position: fixed; bottom: 100px; right: 30px; background-color: var(--primary-color); color: #ffffff; border-radius: 50px; display: flex; align-items: center;
             padding: 15px 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; white-space: nowrap;
@@ -103,7 +97,6 @@
         
         .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
         .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
-        .spacer { height: 60px; }
 
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
@@ -198,7 +191,6 @@
         .auth-switch span { color: var(--primary-color); font-weight: 800; cursor: pointer; transition: 0.3s; }
         .auth-switch span:hover { text-decoration: underline; color: var(--secondary); }
 
-        /* --- MOBILE RESPONSIVENESS UPDATES --- */
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; }
             .gray-bar-left { display: none; } 
@@ -209,7 +201,7 @@
             .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; }
             .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
             
-            /* PIN HAMBURGER TO THE FAR RIGHT CORNER (FIX) */
+            /* HAMBURGER PERFECTLY PINNED TO RIGHT CORNER */
             .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
             
             nav { width: 0; } 
@@ -229,7 +221,6 @@
             .action-button { font-size: 1rem; padding: 14px 40px; margin-top: 20px; }
             
             .section-header h2 { font-size: 1.8rem; }
-            
             .carousel-arrow { width: 35px; height: 35px; font-size: 1rem;}
             .card { flex: 0 0 280px; }
             
@@ -542,7 +533,6 @@
     </div>
 
     <script>
-        // JAVASCRIPT FOR THE ONE-LINE CAROUSEL
         function scrollCarousel(direction) {
             const grid = document.getElementById('features-grid');
             const scrollAmount = window.innerWidth > 768 ? 380 : 310;
@@ -553,7 +543,7 @@
             }
         }
 
-        // --- UPDATED LOGIN LOGIC TO SUPPORT TEMPORARY APPLICANT ID ---
+        // --- UPDATED LOGIN LOGIC FOR TEMP ID ---
         function handleLogin(event) {
             event.preventDefault();
             const idInput = document.getElementById('login-id').value.trim();
@@ -561,11 +551,9 @@
 
             if (passInput === 'demo123') {
                 if (idInput === 'demo@saap.edu.ph' || idInput === '2026-0001') {
-                    // Normal Student Login
                     localStorage.setItem('userRole', 'student');
                     window.location.href = 'student-hub.html';
                 } else if (idInput === 'TEMP-2026-089') {
-                    // New Applicant Login
                     localStorage.setItem('userRole', 'applicant');
                     window.location.href = 'student-hub.html';
                 } else {
