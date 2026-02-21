@@ -5,161 +5,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St. Augustine Academy of Pampanga, Inc.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- PREMIUM SAAPI COLOR PALETTE --- */
+        /* --- CSS Variables (SAAPI GREEN & WHITE) --- */
         :root {
-            --primary-color: #047857; /* Emerald Green */
-            --secondary: #022c22; /* Deep Forest Green */
-            --accent-yellow: #fecb2f; /* SAAPI Yellow */
-            --text-dark: #1f2937;
-            --text-muted: #6b7280;
-            --bg-light: #f9fafb; 
+            --top-bar-bg: #004d00; 
+            --gray-bar-bg: #003300; 
+            --header-bg: #ffffff;
+            --banner-bg: #004d00; 
+            --accent-yellow: #28a745; /* Bright Green Accent */
+            --primary-color: #006400; /* Dark Green Primary */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-color: #f4f9f5; /* Minty White */
             --card-bg: #ffffff;
-            --border-color: #e5e7eb;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --border-color: #e1e1e1;
+            --action-red: #28a745; /* Changed to Green for theme consistency */
         }
 
-        /* FIX: Standard scrolling body for the homepage */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        body.dark-mode {
+            --header-bg: #1e1e1e;
+            --primary-color: #4ade80; 
+            --text-dark: #f0f0f0;
+            --bg-color: #121212;
+            --card-bg: #2d2d2d;
+            --border-color: #444;
+            --gray-bar-bg: #001a00;
+        }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(254, 203, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0); } }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; transition: background-color 0.4s ease, color 0.4s ease; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- PERFECTLY OUTLINED LOGOS --- */
-        .real-logo { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: none; padding: 0; margin-right: 8px; box-shadow: var(--shadow-sm); background: white;}
-        .hero-logo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; padding: 0; border: 3px solid rgba(255,255,255,0.9); box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 25px; background: white;}
-        .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; background: white; padding: 0; box-shadow: var(--shadow-sm); margin-bottom: 15px; border: 2px solid var(--border-color);}
-        .footer-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; background: white; padding: 0; vertical-align: middle; margin-right: 12px;}
+        .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; background: white; padding: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: none; }
+        .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; background: white; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; border: 2px solid var(--border-color); }
+        .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; background: white; padding: 2px; vertical-align: middle; margin-right: 10px; border: none; }
 
-        /* Top Bar */
-        .top-bar { background-color: var(--secondary); color: #ccc; font-size: 0.8rem; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; }
-        .top-bar-left { display: flex; gap: 20px; }
-        .top-bar-left a { color: #ccc; text-decoration: none; font-weight: 500; transition: 0.3s; }
-        .top-bar-left a:hover { color: white; }
-        .lang-btn { cursor: pointer; transition: 0.3s; }
-        .lang-btn:hover, .lang-btn.active { color: var(--accent-yellow); font-weight: bold; }
+        /* --- Top Bars --- */
+        .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; justify-content: flex-start; gap: 15px; }
+        .lang-btn { cursor: pointer; opacity: 0.7; transition: all 0.3s; font-weight: 400; }
+        .lang-btn:hover { opacity: 1; }
+        .lang-btn.active { opacity: 1; font-weight: bold; text-decoration: underline; color: var(--accent-yellow); }
 
-        /* Premium Header */
-        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);}
-        .logo { display: flex; align-items: center; text-decoration: none; transition: transform 0.3s; }
-        .logo:hover { transform: scale(1.02); }
-        .logo-text { display: flex; flex-direction: column; color: var(--secondary); }
-        .logo-text span:first-child { font-size: 1.3rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;}
-        .logo-subtext { font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: var(--primary-color); text-transform: uppercase; }
+        .gray-bar { background-color: var(--gray-bar-bg); color: #d1d1d1; font-size: 0.8rem; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.4s; }
+        .gray-bar-left, .gray-bar-right { display: flex; align-items: center; }
+        .gray-bar-left { gap: 20px; }
+        .gray-bar-left a { color: #d1d1d1; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.3s; cursor: pointer; }
+        .gray-bar-left a:hover { color: white; }
+        .gray-bar-right { gap: 18px; }
+        .gray-bar-right i { cursor: pointer; transition: transform 0.3s, color 0.3s; }
+        .gray-bar-right i:hover { color: white; transform: scale(1.2); }
+        #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 10px; }
+
+        /* --- Header --- */
+        header { background-color: var(--header-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; transition: background-color 0.4s; flex-wrap: wrap; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--top-bar-bg); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; }
+        .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: color 0.4s;}
+        .logo-subtext { font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; color: #888; text-transform: uppercase; }
+        .menu-toggle { display: none; font-size: 1.8rem; color: var(--top-bar-bg); cursor: pointer; transition: color 0.3s; }
         
-        nav ul { list-style: none; display: flex; align-items: center; gap: 25px; }
-        nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { color: var(--primary-color); }
-        .nav-login-btn { background: var(--accent-yellow) !important; color: #111 !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(254, 203, 47, 0.3); transition: 0.3s !important;}
-        .nav-login-btn:hover { background-color: #e5b62b !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(254, 203, 47, 0.5); }
-        .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
-
-        /* --- NEW HERO SECTION (Matched to Reference Image) --- */
-        .hero-section { width: 100%; height: 90vh; position: relative; display: flex; justify-content: center; align-items: center; text-align: center; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(4, 120, 87, 0.85), rgba(2, 44, 34, 0.95)); z-index: 2; }
+        nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: all 0.3s ease; }
+        nav a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease; }
+        nav a:hover { color: var(--top-bar-bg); }
         
-        .hero-content { position: relative; z-index: 3; color: white; padding: 0 20px; max-width: 900px; display: flex; flex-direction: column; align-items: center; animation: pageFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.3); letter-spacing: -1px;}
-        .hero-content h1 span { color: var(--accent-yellow); display: block; }
-        .hero-content p { font-size: 1.15rem; font-weight: 400; margin-bottom: 35px; opacity: 0.9; max-width: 700px; }
-        
-        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;}
-        .btn-primary { background: var(--accent-yellow); color: #111; padding: 16px 40px; border-radius: 50px; font-weight: 800; font-size: 1.1rem; text-decoration: none; transition: 0.3s; box-shadow: 0 10px 20px rgba(254, 203, 47, 0.3); animation: pulse 2s infinite;}
-        .btn-primary:hover { background: #e5b62b; transform: translateY(-3px); animation: none;}
-        .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.6); padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: 0.3s; }
-        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
+        .nav-login-btn { 
+            background-color: var(--action-red) !important; 
+            color: white !important; 
+            padding: 10px 22px !important; 
+            border-radius: 25px; 
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+            display: inline-block;
+        }
+        .nav-login-btn:hover { 
+            background-color: #218838 !important; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4); 
+        }
 
-        /* Section Headers */
-        .section-header { text-align: center; margin: 5rem 0 3rem; }
-        .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
-        .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
+        /* --- THE ORIGINAL HERO SECTION LAYOUT --- */
+        .hero-image-container { width: 100%; height: 550px; position: relative; background-color: var(--banner-bg); }
+        .hero-image-container img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+        .hero-image-container::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to bottom, rgba(0, 77, 0, 0) 0%, rgba(0, 77, 0, 1) 100%); }
 
-        /* Features Cards */
-        .features-section { padding: 0 5% 5rem; max-width: 1400px; margin: 0 auto; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .card { background-color: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: 0.4s; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        .card-img-wrapper { width: 100%; height: 240px; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
+        .blue-banner { background-color: var(--banner-bg); color: #fff; text-align: center; padding: 0 20px 80px 20px; position: relative; margin-top: -2px; }
+        .blue-banner h1 { font-size: 2.4rem; font-weight: 700; max-width: 950px; margin: 0 auto; line-height: 1.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .action-button { position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 16px 50px; font-size: 1.15rem; font-weight: 800; border-radius: 35px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s ease, background-color 0.3s ease; white-space: nowrap; animation: pulse 2s infinite; }
+        .action-button:hover { background-color: #218838; transform: translate(-50%, -5px); animation: none; }
+        .spacer { height: 80px; }
+
+        /* --- Section Headers --- */
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.2rem; color: var(--primary-color); position: relative; display: inline-block; transition: color 0.4s; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 2px; }
+
+        /* --- Features Cards --- */
+        .features-section { padding: 2rem 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s; border-bottom: 4px solid var(--accent-yellow); display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         .card:hover .card-img { transform: scale(1.08); }
-        .card-content { padding: 2.5rem; flex-grow: 1; border-top: 4px solid var(--primary-color);}
-        .card h3 { color: var(--secondary); margin-bottom: 12px; font-size: 1.3rem; font-weight: 800; display: flex; align-items: center; gap: 12px;}
-        .card h3 i { color: var(--primary-color); background: #ecfdf5; padding: 10px; border-radius: 10px;}
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;}
+        .card-content { padding: 2rem; flex-grow: 1; }
+        .card h3 { color: var(--primary-color); margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 10px; transition: color 0.4s;}
+        .card h3 i { color: var(--accent-yellow); font-size: 1.2rem; }
+        .card p { color: var(--text-dark); opacity: 0.8; font-size: 1rem; line-height: 1.7; transition: color 0.4s;}
 
-        /* Stats & Testimonials */
-        .stats-section { background: linear-gradient(135deg, var(--secondary), var(--primary-color)); color: white; padding: 5rem 5%; text-align: center; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
-        .stat-item i { font-size: 2.8rem; color: var(--accent-yellow); margin-bottom: 1.5rem; }
-        .stat-number { font-size: 3.5rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; font-family: monospace;}
-        .stat-text { font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #d1fae5; }
+        /* --- Animated Stats --- */
+        .stats-section { background-color: var(--top-bar-bg); color: white; padding: 4rem 5%; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .stat-item i { font-size: 2.5rem; color: var(--accent-yellow); margin-bottom: 1rem; animation: float 4s ease-in-out infinite; }
+        .stat-number { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-text { font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
-        .testimonials-section { padding: 0 5% 5rem; max-width: 1400px; margin: 0 auto; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .testimonial-card { background-color: var(--card-bg); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-sm); position: relative; border: 1px solid var(--border-color); transition: 0.3s;}
-        .testimonial-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .testimonial-card i.fa-quote-left { font-size: 3.5rem; color: #ecfdf5; position: absolute; top: 20px; left: 20px; z-index: 0; }
-        .testimonial-text { font-size: 1.05rem; font-weight: 500; color: var(--text-dark); margin-bottom: 25px; position: relative; z-index: 1; font-style: italic;}
-        .testimonial-author { display: flex; align-items: center; gap: 15px; position: relative; z-index: 1;}
-        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 1.2rem;}
-        .author-info h4 { color: var(--secondary); margin: 0; font-weight: 700;}
-        .author-info p { color: var(--text-muted); font-size: 0.85rem; margin: 0;}
+        /* --- Parallax Banner --- */
+        .parallax-section { background: linear-gradient(rgba(0, 77, 0, 0.85), rgba(0, 77, 0, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center; background-attachment: fixed; background-size: cover; padding: 100px 5%; text-align: center; color: white; margin-bottom: 5rem; }
+        .parallax-content h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; }
+        .parallax-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.9; }
+        .parallax-btn { background-color: var(--accent-yellow); color: #ffffff; padding: 15px 40px; font-weight: bold; border-radius: 30px; text-decoration: none; font-size: 1.1rem; transition: background-color 0.3s; }
+        .parallax-btn:hover { background-color: #218838; }
 
-        /* Footer */
-        .mega-footer { background-color: var(--secondary); color: #ecf0f1; padding: 5rem 5% 2rem; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
-        .footer-col h3 { color: var(--accent-yellow); font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase;}
-        .footer-col p { font-size: 0.95rem; margin-bottom: 1rem; color: #9ca3af; line-height: 1.6;}
+        /* --- Testimonials --- */
+        .testimonials-section { padding: 0 5% 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .testimonial-card { background-color: var(--card-bg); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; transition: background-color 0.4s; }
+        .testimonial-card i.fa-quote-left { font-size: 3rem; color: var(--accent-yellow); opacity: 0.3; position: absolute; top: 20px; left: 20px; }
+        .testimonial-text { font-size: 1.05rem; font-style: italic; color: var(--text-dark); opacity: 0.8; margin-bottom: 20px; position: relative; z-index: 1; transition: color 0.4s;}
+        .testimonial-author { display: flex; align-items: center; gap: 15px; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background-color: var(--top-bar-bg); color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; }
+        .author-info h4 { color: var(--primary-color); margin: 0; transition: color 0.4s;}
+        .author-info p { color: #888; font-size: 0.85rem; margin: 0; }
+
+        /* --- Events --- */
+        .events-section { padding: 4rem 5%; background-color: var(--card-bg); max-width: 1400px; margin: 0 auto 5rem auto; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: background-color 0.4s; }
+        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .event-card { display: flex; align-items: center; background: var(--bg-color); padding: 1.5rem; border-radius: 10px; transition: background 0.3s; border-left: 5px solid var(--top-bar-bg); }
+        .event-card:hover { transform: translateX(5px); }
+        .event-date { text-align: center; min-width: 80px; margin-right: 1.5rem; }
+        .event-date .month { font-size: 1.1rem; font-weight: 700; color: var(--top-bar-bg); text-transform: uppercase; }
+        .event-date .day { font-size: 2rem; font-weight: 800; color: var(--text-dark); line-height: 1; transition: color 0.4s;}
+        .event-details h4 { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.3rem; transition: color 0.4s;}
+        .event-details p { font-size: 0.9rem; color: var(--text-dark); opacity: 0.7; display: flex; align-items: center; gap: 5px; transition: color 0.4s;}
+
+        /* --- FAQ --- */
+        .faq-section { padding: 0 5% 5rem 5%; max-width: 900px; margin: 0 auto; }
+        .faq-item { background-color: var(--card-bg); border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; transition: background-color 0.4s; }
+        .faq-question { width: 100%; text-align: left; padding: 1.5rem; background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.4s; }
+        .faq-question:focus { outline: none; }
+        .faq-question i { color: var(--accent-yellow); transition: transform 0.3s; }
+        .faq-question.active i { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--card-bg); }
+        .faq-answer p { padding: 0 1.5rem 1.5rem 1.5rem; color: var(--text-dark); opacity: 0.8; transition: color 0.4s; }
+
+        /* --- Footer --- */
+        .mega-footer { background-color: #003300; color: #ecf0f1; padding: 4rem 5% 1rem 5%; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .footer-col h3 { color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 1.5rem; position: relative; }
+        .footer-col p { font-size: 0.95rem; margin-bottom: 1rem; color: #bdc3c7; }
         .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 1rem; }
-        .footer-col ul li a { color: #d1fae5; text-decoration: none; transition: 0.3s; font-weight: 500;}
-        .footer-col ul li a:hover { color: var(--accent-yellow); padding-left: 5px; }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #9ca3af; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: color 0.3s, padding-left 0.3s; }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+        .contact-info i { color: var(--accent-yellow); margin-right: 10px; width: 15px;}
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #95a5a6; }
 
-        /* Login Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 44, 34, 0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: 0.3s ease; }
+        /* --- Floating Chat Widget --- */
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
+        .floating-chat:hover { transform: scale(1.1); background-color: #218838; animation: none; }
+
+        /* --- Login Modal --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
         .modal-overlay.active { display: flex; opacity: 1; }
-        .login-box { background: var(--card-bg); padding: 45px 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); position: relative; text-align: center; transform: scale(0.95); transition: 0.3s; }
-        .modal-overlay.active .login-box { transform: scale(1); }
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; color: #9ca3af; transition: 0.3s; }
-        .close-btn:hover { color: #ef4444; }
-        .login-box h2 { color: var(--secondary); margin-bottom: 25px; font-size: 1.6rem; font-weight: 800;}
-        .input-group { margin-bottom: 18px; text-align: left; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;}
-        .input-group input { width: 100%; padding: 14px 16px; border: 2px solid var(--border-color); border-radius: 10px; background: #f9fafb; outline: none; font-size: 1rem; transition: 0.3s;}
-        .input-group input:focus { border-color: var(--primary-color); background: white; box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1);}
-        .login-submit { width: 100%; padding: 14px; background: var(--primary-color); color: #ffffff; font-weight: 800; border: none; border-radius: 10px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; }
-        .login-submit:hover { background: var(--secondary); transform: translateY(-2px); }
-        .auth-switch { margin-top: 20px; font-size: 0.9rem; color: var(--text-muted); }
-        .auth-switch span { color: var(--primary-color); font-weight: 800; cursor: pointer; text-decoration: underline;}
+        .login-box {
+            background: var(--card-bg); padding: 40px; border-radius: 15px;
+            width: 90%; max-width: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            position: relative; text-align: center; transform: translateY(-20px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .login-box { transform: translateY(0); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; transition: color 0.3s; }
+        .close-btn:hover { color: var(--action-red); }
+        .login-box h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-dark); font-weight: bold; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-dark); outline: none; font-size: 1rem;}
+        .input-group input:focus { border-color: var(--top-bar-bg); }
+        .login-submit { width: 100%; padding: 12px; background: var(--accent-yellow); color: #ffffff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; transition: background 0.3s; margin-top: 10px; }
+        .login-submit:hover { background: #218838; }
+        .auth-switch { margin-top: 20px; font-size: 0.9rem; color: #888; }
+        .auth-switch span { color: var(--top-bar-bg); font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .auth-switch span:hover { text-decoration: underline; color: var(--action-red); }
 
         @media (max-width: 768px) {
-            .top-bar { display: none; }
-            .logo-text span:first-child { font-size: 1.1rem; }
+            .gray-bar { flex-direction: column; gap: 10px; }
+            .gray-bar-left { display: none; } 
+            header { padding: 15px 5%; }
+            .logo-text span { font-size: 1.1rem; }
             .logo-subtext { font-size: 0.6rem; }
             .menu-toggle { display: block; }
-            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: white; padding: 20px; box-shadow: var(--shadow-md); }
+            nav { width: 100%; }
+            nav ul { display: none; flex-direction: column; width: 100%; text-align: center; padding-top: 20px; gap: 15px; }
             nav ul.active { display: flex; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-image-container { height: 350px; }
+            .blue-banner { padding: 0 15px 60px 15px; }
+            .blue-banner h1 { font-size: 1.5rem; }
+            .action-button { font-size: 1rem; padding: 12px 30px; bottom: -22px; }
+            .section-header h2 { font-size: 1.8rem; }
+            .stat-number { font-size: 2.2rem; }
+            .parallax-section { background-attachment: scroll; padding: 60px 5%; }
+            .parallax-content h2 { font-size: 2rem; }
+            .event-card { flex-direction: column; text-align: center; border-left: none; border-top: 5px solid var(--top-bar-bg); }
+            .event-date { margin-right: 0; margin-bottom: 10px; }
+            .floating-chat { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="floating-chat" title="Chat with Admissions">
+        <i class="fa-solid fa-message"></i>
+    </div>
+
     <div class="top-bar">
-        <div class="top-bar-left">
-            <span><i class="fa-solid fa-phone"></i> +63 (123) 456-7890</span>
-            <span><i class="fa-solid fa-envelope"></i> info@saapi.edu.ph</span>
+        <span class="lang-btn active" onclick="changeLanguage('en')">English</span> | 
+        <span class="lang-btn" onclick="changeLanguage('tl')">Tagalog</span> | 
+        <span class="lang-btn" onclick="changeLanguage('es')">Español</span>
+    </div>
+
+    <div class="gray-bar">
+        <div class="gray-bar-left">
+            <a href="#"><i class="fa-solid fa-graduation-cap"></i> SAAP Home</a>
+            <a href="#" onclick="openLoginModal('login')" style="color: var(--accent-yellow); font-weight: bold;"><i class="fa-solid fa-users"></i> Student Portal Login</a>
+            <a href="#"><i class="fa-solid fa-book"></i> Library</a>
         </div>
-        <div class="top-bar-right">
-            <span class="lang-btn active" onclick="changeLanguage('en')">English</span> | 
-            <span class="lang-btn" onclick="changeLanguage('tl')">Tagalog</span>
+        <div class="gray-bar-right">
+            <i class="fa-brands fa-youtube"></i> <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook-f"></i>
+            &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-moon" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode"></i>
         </div>
     </div>
 
@@ -175,54 +276,87 @@
         <nav>
             <ul>
                 <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
-                <li><a href="#prospectus">Academics</a></li>
-                <li><a href="#">Campus Life</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#" class="nav-login-btn" onclick="openLoginModal('login')">Login / Sign Up</a></li>
+                <li><a href="#" data-key="nav-acad">Academics</a></li>
+                <li><a href="#" data-key="nav-campus">Campus Life</a></li>
+                <li><a href="#" data-key="nav-about">About Us</a></li>
+                <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">Login / Sign Up</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero-section">
-        <img src="campus-photo.jpg" alt="Campus Background" class="hero-bg">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <img src="logo.jpg" alt="SAAPI Logo" class="hero-logo">
-            <h1>Empowering Minds<br><span data-key="banner-title">Since 1946</span></h1>
-            <p>Providing Accessible, Secure, and Efficient Student Services for the Augustinian Community. Guided by our core values of Faith, Service, and Excellence.</p>
-            <div class="hero-buttons">
-                <a href="#" onclick="openLoginModal('login')" class="btn-primary" data-key="banner-btn">Access Student Portal <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
-                <a href="#prospectus" class="btn-outline">Explore Programs</a>
-            </div>
-        </div>
+    <section class="hero-image-container">
+        <img src="campus-photo.jpg" alt="Students walking on campus">
     </section>
 
-    <section id="prospectus" class="features-section reveal">
+    <section class="blue-banner">
+        <h1 data-key="banner-title">St. Augustine Academy is where students can achieve everything they want to be.</h1>
+        <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll Now!</a>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section class="features-section reveal">
         <div class="section-header">
-            <h2>Explore Our Programs</h2>
+            <h2 data-key="features-title">Explore Our Programs</h2>
         </div>
         <div class="features-grid">
+            
             <div class="card">
                 <div class="card-img-wrapper"><img src="https://picsum.photos/id/20/800/600" alt="Academic" class="card-img"></div>
                 <div class="card-content">
-                    <h3><i class="fa-solid fa-book-open"></i> Academic Excellence</h3>
-                    <p>Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential and prepare for higher education.</p>
+                    <h3 data-key="card1-title"><i class="fa-solid fa-book-open"></i> Academic Excellence</h3>
+                    <p data-key="card1-desc">Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential and prepare for higher education.</p>
                 </div>
             </div>
+            
             <div class="card">
                 <div class="card-img-wrapper"><img src="https://picsum.photos/id/3/800/600" alt="Future" class="card-img"></div>
                 <div class="card-content">
-                    <h3><i class="fa-solid fa-rocket"></i> Future Ready</h3>
-                    <p>We equip students with modern skills, strong moral character, and the critical thinking necessary to succeed in a rapidly changing world.</p>
+                    <h3 data-key="card2-title"><i class="fa-solid fa-rocket"></i> Future Ready</h3>
+                    <p data-key="card2-desc">We equip students with modern skills, strong moral character, and the critical thinking necessary to succeed in a rapidly changing world.</p>
                 </div>
             </div>
+            
             <div class="card">
                 <div class="card-img-wrapper"><img src="https://picsum.photos/id/336/800/600" alt="Community" class="card-img"></div>
                 <div class="card-content">
-                    <h3><i class="fa-solid fa-hands-holding-child"></i> Vibrant Community</h3>
-                    <p>A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
+                    <h3 data-key="card3-title"><i class="fa-solid fa-hands-holding-child"></i> Vibrant Community</h3>
+                    <p data-key="card3-desc">A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://picsum.photos/id/119/800/600" alt="Technology" class="card-img"></div>
+                <div class="card-content">
+                    <h3 data-key="card4-title"><i class="fa-solid fa-laptop-code"></i> Technology & Innovation</h3>
+                    <p data-key="card4-desc">State-of-the-art computer labs and coding programs designed to prepare students for the digital careers of tomorrow.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://picsum.photos/id/73/800/600" alt="Athletics" class="card-img"></div>
+                <div class="card-content">
+                    <h3 data-key="card5-title"><i class="fa-solid fa-volleyball"></i> Athletics & Sports</h3>
+                    <p data-key="card5-desc">Develop teamwork and physical fitness through our award-winning varsity programs and intramural sports leagues.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper"><img src="https://picsum.photos/id/103/800/600" alt="Arts" class="card-img"></div>
+                <div class="card-content">
+                    <h3 data-key="card6-title"><i class="fa-solid fa-palette"></i> Arts & Culture</h3>
+                    <p data-key="card6-desc">Express creativity through our comprehensive fine arts, theater, and music programs, showcasing student talent year-round.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="parallax-section reveal">
+        <div class="parallax-content">
+            <h2 data-key="parallax-title">Join the SAAP Family Today</h2>
+            <p data-key="parallax-desc">Experience a transformative education that prepares you for success in college and beyond.</p>
+            <a href="enroll.html" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
         </div>
     </section>
 
@@ -231,17 +365,17 @@
             <div class="stat-item">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <div class="stat-number"><span class="counter" data-target="98">0</span>%</div>
-                <div class="stat-text">Passing Rate</div>
+                <div class="stat-text" data-key="stat1">Passing Rate</div>
             </div>
             <div class="stat-item">
                 <i class="fa-solid fa-chalkboard-user"></i>
                 <div class="stat-number"><span class="counter" data-target="45">0</span>+</div>
-                <div class="stat-text">Expert Teachers</div>
+                <div class="stat-text" data-key="stat2">Expert Teachers</div>
             </div>
             <div class="stat-item">
                 <i class="fa-solid fa-users-rectangle"></i>
                 <div class="stat-number"><span class="counter" data-target="30">0</span>+</div>
-                <div class="stat-text">Student Clubs</div>
+                <div class="stat-text" data-key="stat3">Student Clubs</div>
             </div>
         </div>
     </section>
@@ -250,64 +384,109 @@
 
     <section class="testimonials-section reveal">
         <div class="section-header">
-            <h2>Voices of SAAPI</h2>
+            <h2 data-key="testi-title">What Our Students Say</h2>
         </div>
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <i class="fa-solid fa-quote-left"></i>
-                <p class="testimonial-text">"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success."</p>
+                <p class="testimonial-text" data-key="testi-1">"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">M</div>
-                    <div class="author-info"><h4>Maria Santos</h4><p>Grade 12, STEM Track</p></div>
+                    <div class="author-info">
+                        <h4>Maria Santos</h4>
+                        <p>Grade 12, STEM Track</p>
+                    </div>
                 </div>
             </div>
             <div class="testimonial-card">
                 <i class="fa-solid fa-quote-left"></i>
-                <p class="testimonial-text">"The facilities are amazing, and the sense of community makes every day enjoyable. I made friends for life here."</p>
+                <p class="testimonial-text" data-key="testi-2">"The facilities are amazing, and the sense of community makes every day enjoyable. I made friends for life here."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">J</div>
-                    <div class="author-info"><h4>Juan Dela Cruz</h4><p>Grade 11, HUMSS</p></div>
+                    <div class="author-info">
+                        <h4>Juan Dela Cruz</h4>
+                        <p>Grade 11, HUMSS Track</p>
+                    </div>
                 </div>
             </div>
             <div class="testimonial-card">
                 <i class="fa-solid fa-quote-left"></i>
-                <p class="testimonial-text">"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world."</p>
+                <p class="testimonial-text" data-key="testi-3">"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">L</div>
-                    <div class="author-info"><h4>Liza Reyes</h4><p>Grade 12, ICT Track</p></div>
+                    <div class="author-info">
+                        <h4>Liza Reyes</h4>
+                        <p>Grade 12, ICT Track</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="events-section reveal">
+        <div class="section-header">
+            <h2 data-key="events-title">Upcoming Events</h2>
+        </div>
+        <div class="events-grid">
+            <div class="event-card">
+                <div class="event-date"><div class="month">Mar</div><div class="day">15</div></div>
+                <div class="event-details">
+                    <h4>Spring Enrollment Opens</h4>
+                    <p><i class="fa-regular fa-clock"></i> 8:00 AM - Registration Office</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-date"><div class="month">Apr</div><div class="day">02</div></div>
+                <div class="event-details">
+                    <h4>Campus Open House</h4>
+                    <p><i class="fa-regular fa-clock"></i> 10:00 AM - Main Auditorium</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section reveal">
+        <div class="section-header">
+            <h2 data-key="faq-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq1-q">When does the enrollment period start? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq1-a">Enrollment for the upcoming school year begins on March 15th. You can apply online through our Student Portal.</p></div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq2-q">Are scholarships available? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq2-a">Yes! St. Augustine Academy offers academic, athletic, and needs-based scholarships.</p></div>
         </div>
     </section>
 
     <footer class="mega-footer">
         <div class="footer-grid">
             <div class="footer-col">
-                <div style="color: white; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.4rem; font-weight: 800;">
+                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.4rem;">
                     <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> SAAPI
                 </div>
-                <p>Empowering the next generation of leaders in Pampanga through our commitment to <strong>Faith - Service - Excellence</strong> since our founding.</p>
-                <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
+                <p>Empowering the next generation of leaders in Pampanga since our founding.</p>
+                <p style="font-weight: bold; margin-top: 10px; color: white;">Faith &bull; Service &bull; Excellence</p>
+                <p style="font-style: italic; color: var(--accent-yellow);">"Ad Astra, Per Fidem"</p>
             </div>
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="enroll.html">Admissions Process</a></li>
                     <li><a href="#">Tuition & Scholarships</a></li>
-                    <li><a href="#" onclick="openLoginModal('login')">Student Portal Login</a></li>
+                    <li><a href="#">Student Handbook</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Contact Us</h3>
-                <ul>
-                    <li><a href="#"><i class="fa-solid fa-location-dot"></i> Floridablanca, Pampanga</a></li>
-                    <li><a href="#"><i class="fa-solid fa-phone"></i> +63 (123) 456-7890</a></li>
-                    <li><a href="#"><i class="fa-solid fa-envelope"></i> info@saapi.edu.ph</a></li>
-                </ul>
+                <div class="contact-info">
+                    <p><i class="fa-solid fa-location-dot"></i> St. Augustine Academy, Pampanga</p>
+                    <p><i class="fa-solid fa-phone"></i> +63 (123) 456-7890</p>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 St. Augustine Academy of Pampanga, Inc. Website built by Pure X. All rights reserved.</p>
+            <p>&copy; 2026 St. Augustine Academy of Pampanga. Website built by Pure X. All rights reserved.</p>
         </div>
     </footer>
 
@@ -328,7 +507,7 @@
                 </div>
                 <button type="submit" class="login-submit">Secure Login</button>
                 <div class="auth-switch">
-                    Don't have an account? <span onclick="switchAuthMode('signup')">Create one here</span>
+                    Don't have an account? <span onclick="switchAuthMode('signup')">Create one here</span>.
                 </div>
             </form>
 
@@ -345,16 +524,17 @@
                     <label>Create Password</label>
                     <input type="password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="login-submit">Create Account</button>
+                <button type="submit" class="login-submit" style="background-color: var(--top-bar-bg); color: white;">Create Account</button>
                 <div class="auth-switch">
-                    Already have an account? <span onclick="switchAuthMode('login')">Log in here</span>
+                    Already have an account? <span onclick="switchAuthMode('login')">Log in here</span>.
                 </div>
             </form>
+
         </div>
     </div>
 
     <script>
-        // FIXED LOGIN LOGIC
+        // THIS MAKES THE LOGIN TELEPORT WORK
         function handleLogin(event) {
             event.preventDefault();
             const idInput = document.getElementById('login-id').value;
@@ -384,6 +564,7 @@
             const loginForm = document.getElementById('login-form');
             const signupForm = document.getElementById('signup-form');
             const modalTitle = document.getElementById('modal-title');
+
             if (mode === 'signup') {
                 loginForm.style.display = 'none';
                 signupForm.style.display = 'block';
@@ -397,7 +578,16 @@
 
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const navMenu = document.querySelector('nav ul');
-        mobileBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            if(navMenu.classList.contains('active')) {
+                mobileBtn.classList.remove('fa-bars');
+                mobileBtn.classList.add('fa-xmark');
+            } else {
+                mobileBtn.classList.remove('fa-xmark');
+                mobileBtn.classList.add('fa-bars');
+            }
+        });
 
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -407,7 +597,34 @@
                 if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
             }
         }
-        window.addEventListener("scroll", reveal); reveal(); 
+        window.addEventListener("scroll", reveal);
+        reveal(); 
+
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-toggle');
+            body.classList.toggle('dark-mode');
+            if(body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                question.classList.toggle('active');
+                const answer = question.nextElementSibling;
+                if (question.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = 0;
+                }
+            });
+        });
 
         const counters = document.querySelectorAll('.counter');
         let hasCounted = false;
@@ -423,13 +640,94 @@
                         const target = +counter.getAttribute('data-target');
                         const count = +counter.innerText;
                         const inc = target / 40;
-                        if (count < target) { counter.innerText = Math.ceil(count + inc); setTimeout(updateCount, 40); } 
-                        else { counter.innerText = target; }
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 40);
+                        } else {
+                            counter.innerText = target;
+                        }
                     };
                     updateCount();
                 });
             }
         });
+
+        const translations = {
+            en: {
+                "nav-login": "Login / Sign Up", "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
+                "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
+                "features-title": "Explore Our Programs",
+                "card1-title": "Academic Excellence", "card1-desc": "Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential.",
+                "card2-title": "Future Ready", "card2-desc": "We equip students with modern skills, strong moral character, and critical thinking.",
+                "card3-title": "Vibrant Community", "card3-desc": "A supportive, inclusive environment where every student is valued.",
+                "card4-title": "Technology & Innovation", "card4-desc": "State-of-the-art computer labs and coding programs designed to prepare students.",
+                "card5-title": "Athletics & Sports", "card5-desc": "Develop teamwork and physical fitness through our award-winning varsity programs.",
+                "card6-title": "Arts & Culture", "card6-desc": "Express creativity through our comprehensive fine arts, theater, and music programs.",
+                "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success.", "parallax-btn": "Start Your Application",
+                "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
+                "testi-title": "What Our Students Say",
+                "testi-1": "\"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success.\"",
+                "testi-2": "\"The facilities are amazing, and the sense of community makes every day enjoyable.\"",
+                "testi-3": "\"The robotics and technology clubs helped me discover my passion for coding.\"",
+                "events-title": "Upcoming Events", "faq-title": "Frequently Asked Questions",
+                "faq1-q": "When does the enrollment period start? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Enrollment begins on March 15th.",
+                "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! We offer academic, athletic, and needs-based scholarships."
+            },
+            tl: { 
+                "nav-login": "Mag-login / Mag-sign Up", "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
+                "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
+                "features-title": "Tuklasin ang Aming Programa",
+                "card1-title": "Kahusayan sa Akademya", "card1-desc": "Ang aming mahigpit na kurikulum ay nagbibigay inspirasyon.",
+                "card2-title": "Handa sa Kinabukasan", "card2-desc": "Hinuhubog namin ang mga mag-aaral gamit ang makabagong kasanayan.",
+                "card3-title": "Masiglang Komunidad", "card3-desc": "Isang mapang-unawang kapaligiran kung saan pinahahalagahan ang bawat isa.",
+                "card4-title": "Teknolohiya", "card4-desc": "Mga makabagong computer lab na idinisenyo upang ihanda ang mga mag-aaral.",
+                "card5-title": "Palakasan", "card5-desc": "Paunlarin ang pagkakaisa at kalusugan sa pamamagitan ng aming isports.",
+                "card6-title": "Sining at Kultura", "card6-desc": "Ipamalas ang pagkamalikhain sa pamamagitan ng sining, teatro, at musika.",
+                "parallax-title": "Sumali sa Pamilya ng SAAP", "parallax-desc": "Damhin ang isang edukasyong naghahanda sa iyo para sa tagumpay.", "parallax-btn": "Simulan ang Aplikasyon",
+                "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral",
+                "testi-title": "Sabi ng Aming Mag-aaral",
+                "testi-1": "\"Binigyan ako ng lakas ng loob na abutin ang aking mga pangarap. Totoong nagmamalasakit ang mga guro.\"",
+                "testi-2": "\"Napakaganda ng mga pasilidad at masaya ang komunidad.\"",
+                "testi-3": "\"Nakatulong ang mga club na matuklasan ko ang hilig ko sa pag-code.\"",
+                "events-title": "Paparating na Kaganapan", "faq-title": "Mga Madalas Itanong",
+                "faq1-q": "Kailan magsisimula ang enrollment? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Magsisimula ito sa Marso 15.",
+                "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng iba't ibang scholarships."
+            },
+            es: { 
+                "nav-login": "Iniciar / Regístrate", "nav-enroll": "Inscribirse", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
+                "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
+                "features-title": "Nuestros Programas",
+                "card1-title": "Excelencia Académica", "card1-desc": "Nuestro riguroso plan de estudios inspira a los estudiantes.",
+                "card2-title": "Listos para el Futuro", "card2-desc": "Preparamos a los estudiantes con habilidades y carácter moral.",
+                "card3-title": "Comunidad Vibrante", "card3-desc": "Un entorno de apoyo donde cada estudiante es valorado.",
+                "card4-title": "Tecnología", "card4-desc": "Laboratorios de computación de última generación diseñados para el futuro.",
+                "card5-title": "Deportes", "card5-desc": "Desarrolla el trabajo en equipo a través de nuestros programas universitarios.",
+                "card6-title": "Arte y Cultura", "card6-desc": "Expresa la creatividad a través de nuestros programas de bellas artes y música.",
+                "parallax-title": "Únete a la Familia SAAP", "parallax-desc": "Experimenta una educación que te prepara para el éxito.", "parallax-btn": "Inicia tu Aplicación",
+                "stat1": "Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes",
+                "testi-title": "Lo que Dicen los Estudiantes",
+                "testi-1": "\"Me dio la confianza para seguir mis sueños. Los profesores realmente se preocupan.\"",
+                "testi-2": "\"Las instalaciones son increíbles y la comunidad hace que cada día sea agradable.\"",
+                "testi-3": "\"Los clubes de tecnología me ayudaron a descubrir mi pasión.\"",
+                "events-title": "Próximos Eventos", "faq-title": "Preguntas Frecuentes",
+                "faq1-q": "¿Cuándo comienza la inscripción? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "La inscripción comienza el 15 de marzo.",
+                "faq2-q": "¿Hay becas disponibles? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "¡Sí! Ofrecemos becas académicas y deportivas."
+            }
+        };
+
+        function changeLanguage(langCode) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                element.style.opacity = 0;
+                setTimeout(() => {
+                    const iconHTML = element.querySelector('i') && !key.startsWith('faq') ? element.querySelector('i').outerHTML + " " : "";
+                    element.innerHTML = iconHTML + translations[langCode][key];
+                    element.style.opacity = 1;
+                }, 200); 
+            });
+        }
     </script>
 </body>
 </html>
