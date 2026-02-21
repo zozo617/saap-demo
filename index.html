@@ -543,7 +543,7 @@
             }
         }
 
-        // --- UPDATED LOGIN LOGIC FOR TEMP ID ---
+        // --- UPDATED LOGIN LOGIC TO INCLUDE ADMIN SECRET LOGIN ---
         function handleLogin(event) {
             event.preventDefault();
             const idInput = document.getElementById('login-id').value.trim();
@@ -559,8 +559,12 @@
                 } else {
                     alert('Invalid ID. For this demo, use 2026-0001 (Student) or TEMP-2026-089 (Applicant)');
                 }
+            } else if (idInput === 'admin' && passInput === 'admin123') {
+                // SECRET ADMIN LOGIN
+                localStorage.setItem('userRole', 'admin');
+                window.location.href = 'admin-dashboard.html';
             } else {
-                alert('Invalid Password. For this demo, use: demo123');
+                alert('Invalid Password. For this demo, use: demo123 (or admin123 for Admin)');
             }
         }
 
