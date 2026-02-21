@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAAPI | Admin Admissions Dashboard</title>
+    <title>SAAP | Admin Admissions Dashboard</title>
     
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
@@ -215,8 +215,8 @@
                                     <div class="applicant-course">Grade 11 - STEM</div>
                                 </td>
                                 <td>Oct 24, 2025</td>
-                                <td><span class="badge pending" id="badge-089">Pending Review</span></td>
-                                <td><button class="action-btn" onclick="openReviewModal('TEMP-2026-089', 'Juan Santos Dela Cruz', 'pending', 'badge-089')"><i class="fa-solid fa-pen-to-square"></i> Review</button></td>
+                                <td><span class="badge exam" id="badge-089">Waiting for Exam</span></td>
+                                <td><button class="action-btn" onclick="openReviewModal('TEMP-2026-089', 'Juan Santos Dela Cruz', 'exam', 'badge-089')"><i class="fa-solid fa-pen-to-square"></i> Review</button></td>
                             </tr>
                             
                             <tr>
@@ -293,6 +293,18 @@
                 alert("ACCESS DENIED: Administrator privileges required.");
                 window.location.href = 'index.html'; 
             }
+            
+            // Sync the table badge with whatever is saved in localStorage
+            const savedStatus = localStorage.getItem('demoApplicantStatus');
+            if (savedStatus) {
+                const badge = document.getElementById('badge-089');
+                badge.classList.remove('pending', 'exam', 'passed', 'rejected');
+                badge.classList.add(savedStatus);
+                if(savedStatus === 'pending') badge.innerText = 'Pending Review';
+                if(savedStatus === 'exam') badge.innerText = 'Waiting for Exam';
+                if(savedStatus === 'passed') badge.innerText = 'Passed & Accepted';
+                if(savedStatus === 'rejected') badge.innerText = 'Rejected';
+            }
         };
 
         function adminSignOut() {
@@ -305,10 +317,14 @@
         function openReviewModal(tempId, name, currentStatus, badgeId) {
             document.getElementById('modal-student-name').innerText = name;
             document.getElementById('modal-student-id').innerText = tempId;
-            document.getElementById('status-dropdown').value = currentStatus;
+            
+            // Auto-select dropdown based on what's currently showing
+            const savedStatus = localStorage.getItem('demoApplicantStatus') || currentStatus;
+            document.getElementById('status-dropdown').value = savedStatus;
+            
             currentEditingBadgeId = badgeId;
 
-            if(currentStatus === 'passed' || currentStatus === 'exam') {
+            if(savedStatus === 'passed') {
                 document.getElementById('chk-moral').checked = true;
             } else {
                 document.getElementById('chk-moral').checked = false;
@@ -338,7 +354,7 @@
                 if(newStatus === 'passed') badge.innerText = 'Passed & Accepted';
                 if(newStatus === 'rejected') badge.innerText = 'Rejected';
 
-                // BRIDGES TO THE STUDENT HUB DASHBOARD
+                // THIS SAVES IT TO LOCAL STORAGE SO THE STUDENT HUB CAN READ IT!
                 localStorage.setItem('demoApplicantStatus', newStatus);
             }
 
