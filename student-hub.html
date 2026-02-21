@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- PREMIUM SAAPI COLOR PALETTE --- */
         :root {
             --primary: #047857; 
             --secondary: #064e3b; 
@@ -28,8 +27,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; }
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- SIDEBAR --- */
+        /* SIDEBAR */
         .sidebar { width: 280px; background: linear-gradient(180deg, var(--secondary) 0%, #022c22 100%); color: white; display: flex; flex-direction: column; transition: 0.4s; box-shadow: 4px 0 20px rgba(0,0,0,0.15); z-index: 20; }
         .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .sidebar-header i { font-size: 2.8rem; color: var(--accent); margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.3));}
@@ -38,16 +38,15 @@
         
         .sidebar-menu { list-style: none; padding: 25px 0; flex-grow: 1; }
         .sidebar-menu li { padding: 16px 30px; cursor: pointer; transition: all 0.3s ease; border-left: 4px solid transparent; display: flex; align-items: center; gap: 15px; font-weight: 500; color: #9ca3af; font-size: 0.95rem;}
-        .sidebar-menu li i { font-size: 1.1rem; transition: 0.3s; }
+        .sidebar-menu li i { font-size: 1.1rem; transition: 0.3s; width: 20px; text-align: center;}
         .sidebar-menu li:hover { color: white; background: rgba(255,255,255,0.05); }
         .sidebar-menu li.active { background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%); border-left-color: var(--accent); color: white; }
         .sidebar-menu li.active i { color: var(--accent); }
 
-        /* --- TOP NAV --- */
+        /* TOP NAV */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; scroll-behavior: smooth; }
         .top-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         .top-nav h2 { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
-        
         .nav-right { display: flex; align-items: center; gap: 25px; }
         .notification-icon { font-size: 1.3rem; color: var(--text-muted); position: relative; cursor: pointer; transition: 0.3s; padding: 8px; border-radius: 50%; background: var(--bg-light); }
         .notification-icon:hover { color: var(--primary); background: #eef2ff; }
@@ -70,10 +69,10 @@
         .dropdown-links .sign-out { color: var(--danger); border-top: 1px solid var(--border-light); margin-top: 5px; padding-top: 15px; }
         .dropdown-links .sign-out:hover { background: #fef2f2; color: var(--danger); padding-left: 25px;}
 
-        /* --- DASHBOARD CONTENT --- */
-        .dashboard-container { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
+        /* DASHBOARD CONTENT */
+        .dashboard-container { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; transition: 0.3s;}
         
-        .welcome-banner { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; box-shadow: var(--shadow-lg); display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
+        .welcome-banner { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; box-shadow: var(--shadow-lg); display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; animation: pageFadeIn 0.5s ease;}
         .welcome-banner::after { content: '\f19d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: 5%; top: -20px; font-size: 15rem; color: rgba(255,255,255,0.05); z-index: 0; pointer-events: none; }
         .welcome-text { position: relative; z-index: 1; }
         .welcome-banner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
@@ -82,7 +81,7 @@
         .id-badge p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #a7f3d0; margin-bottom: 5px; font-weight: 600; }
         .id-badge h3 { font-size: 1.6rem; letter-spacing: 2px; font-family: monospace; }
 
-        .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 40px; animation: pageFadeIn 0.6s ease;}
         .stat-card { background: var(--card-bg); padding: 25px; border-radius: 16px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 20px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--border-light); }
         .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
         .stat-icon { width: 55px; height: 55px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 1.6rem; }
@@ -90,8 +89,8 @@
         .stat-info h3 { font-size: 1.6rem; font-weight: 800; color: var(--text-main); display: flex; align-items: baseline; gap: 8px; }
         .stat-info h3 span { font-size: 0.8rem; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
 
-        .grid { display: grid; grid-template-columns: 1.7fr 1.3fr; gap: 35px; padding-bottom: 50px; }
-        .card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); margin-bottom: 35px; border: 1px solid var(--border-light); }
+        .grid { display: grid; grid-template-columns: 1.7fr 1.3fr; gap: 35px; padding-bottom: 50px; animation: pageFadeIn 0.7s ease;}
+        .card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); margin-bottom: 35px; border: 1px solid var(--border-light); transition: 0.3s;}
         .card-header { border-bottom: 1px solid var(--border-light); padding-bottom: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
         .card-header h3 { color: var(--text-main); font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 12px; }
         .card-header h3 i { color: var(--primary); background: #ecfdf5; padding: 10px; border-radius: 10px; font-size: 1.1rem; }
@@ -99,7 +98,7 @@
         .action-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm); }
         .action-btn:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-        /* --- THE UPGRADED TIMETABLE SYSTEM --- */
+        /* TIMETABLE */
         .schedule-controls select { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border-light); font-weight: 600; font-family: 'Inter'; outline: none; cursor: pointer; background: var(--bg-light); color: var(--text-main); }
         table { width: 100%; border-collapse: separate; border-spacing: 0 10px; margin-top: -10px;}
         th { padding: 0 15px 5px 15px; text-align: left; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; border-bottom: 1px solid var(--border-light); }
@@ -115,7 +114,6 @@
         .break-time td { background: #f9fafb !important; text-align: center; color: var(--text-muted); font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; border-left: 1px solid var(--border-light) !important; }
         .empty-state { text-align: center; color: var(--text-muted); font-weight: 600; padding: 30px; font-style: italic; border-left: 1px solid var(--border-light) !important;}
         
-        /* The logic classes to hide/show days */
         .day-tbody { display: none; }
         .day-tbody.active-tbody { display: table-row-group; animation: pageFadeIn 0.3s ease-out; }
 
@@ -126,7 +124,7 @@
         .edit-icon:hover { background: var(--primary); color: white; }
         .delete-icon:hover { background: var(--danger); color: white; }
 
-        /* Tasks */
+        /* TASKS */
         .task-list { display: flex; flex-direction: column; gap: 15px; }
         .task-item { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border: 1px solid var(--border-light); border-radius: 12px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: white; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
         .task-item:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateX(5px); }
@@ -142,7 +140,7 @@
         .task-item:hover .task-delete { right: 0; }
         .task-item:hover .task-due { margin-right: 50px; }
 
-        /* Reviewers */
+        /* REVIEWERS */
         .reviewer-list { display: flex; flex-direction: column; gap: 15px; }
         .reviewer-item { display: flex; align-items: center; gap: 18px; padding: 15px 20px; background: white; border: 1px solid var(--border-light); border-radius: 12px; transition: 0.3s; box-shadow: var(--shadow-sm); }
         .reviewer-item:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px);}
@@ -156,7 +154,7 @@
         .upload-label { cursor: pointer; margin: 0; }
         #file-upload-input { display: none; }
 
-        /* Announcements & Jam Redirect */
+        /* ANNOUNCEMENTS */
         .announcement-feed { display: flex; flex-direction: column; gap: 20px; }
         .announcement { padding: 25px; border-radius: 16px; background: white; border: 1px solid var(--border-light); border-left: 5px solid var(--primary); position: relative; box-shadow: var(--shadow-sm); transition: 0.3s; }
         .announcement:hover { box-shadow: var(--shadow-md); }
@@ -187,6 +185,7 @@
         .btn-save { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
         .btn-save:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
             body { flex-direction: column; overflow-y: auto; height: auto;}
             .sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 25px; position: sticky; top: 0; box-shadow: var(--shadow-sm); }
@@ -216,16 +215,16 @@
             <p>St. Augustine Academy</p>
         </div>
         <ul class="sidebar-menu">
-            <li class="active"><i class="fa-solid fa-table-columns"></i> Dashboard</li>
-            <li><i class="fa-solid fa-calendar-days"></i> My Schedule</li>
-            <li><i class="fa-solid fa-folder-open"></i> Requests</li>
-            <li><i class="fa-solid fa-book-open-reader"></i> Academics</li>
+            <li class="active" onclick="switchView('all', this)"><i class="fa-solid fa-table-columns"></i> Dashboard</li>
+            <li onclick="switchView('schedule-card', this)"><i class="fa-solid fa-calendar-days"></i> My Schedule</li>
+            <li onclick="switchView('requests-card', this)"><i class="fa-solid fa-folder-open"></i> Requests</li>
+            <li onclick="switchView('academics-card', this)"><i class="fa-solid fa-book-open-reader"></i> Academics</li>
         </ul>
     </div>
 
     <div class="main-content">
         <div class="top-nav">
-            <h2>Dashboard Overview</h2>
+            <h2 id="top-nav-title">Dashboard Overview</h2>
             <div class="nav-right">
                 <i class="fa-solid fa-bell notification-icon"><span class="notification-badge">3</span></i>
                 <div class="profile-container">
@@ -240,7 +239,7 @@
                         </div>
                         <ul class="dropdown-links">
                             <li><a href="#"><i class="fa-solid fa-user-pen" style="color: #9ca3af;"></i> Edit Profile</a></li>
-                            <li><a href="#"><i class="fa-solid fa-gear" style="color: #9ca3af;"></i> Settings</a></li>
+                            <li onclick="resetDemoData()"><a href="#" style="color: var(--danger);"><i class="fa-solid fa-rotate-right"></i> Reset Demo Data</a></li>
                             <li><a href="index.html" class="sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Secure Sign Out</a></li>
                         </ul>
                     </div>
@@ -249,7 +248,7 @@
         </div>
 
         <div class="dashboard-container">
-            <div class="welcome-banner">
+            <div class="welcome-banner" id="welcome-banner">
                 <div class="welcome-text">
                     <h2>Welcome back, Demo!</h2>
                     <p>Grade 11 - STEM Block B &nbsp;|&nbsp; S.Y. 2026-2027</p>
@@ -260,7 +259,7 @@
                 </div>
             </div>
 
-            <div class="quick-stats">
+            <div class="quick-stats" id="quick-stats">
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #10b981; background: #ecfdf5;"><i class="fa-solid fa-star"></i></div>
                     <div class="stat-info"><p>Current GPA</p><h3>92.5 <span style="background: #ecfdf5; color: #047857;">Dean's List</span></h3></div>
@@ -275,16 +274,17 @@
                 </div>
             </div>
 
-            <div class="grid">
-                <div class="left-col">
+            <div class="grid" id="main-grid">
+                
+                <div class="left-col" id="left-col">
                     
-                    <div class="card">
+                    <div class="card filterable-card" data-view="schedule-card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-calendar-week"></i> My Timetable</h3>
                             <div style="display: flex; gap: 12px; align-items: center;">
                                 <div class="schedule-controls">
                                     <select id="day-selector" onchange="switchDay()">
-                                        <option value="Monday">Monday</option>
+                                        <option value="Monday">Monday (Today)</option>
                                         <option value="Tuesday">Tuesday</option>
                                         <option value="Wednesday">Wednesday</option>
                                         <option value="Thursday">Thursday</option>
@@ -308,29 +308,20 @@
                             <tbody id="tbody-Monday" class="day-tbody active-tbody">
                                 <tr>
                                     <td class="col-time time-text">7:30 AM - 9:00 AM</td>
-                                    <td>
-                                        <div class="col-subject subject-text">General Mathematics</div>
-                                        <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Mr. D. Santos</div>
-                                    </td>
+                                    <td><div class="col-subject subject-text">General Mathematics</div><div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Mr. D. Santos</div></td>
                                     <td><span class="room-badge col-room">RM 204</span></td>
                                     <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
                                 <tr>
                                     <td class="col-time time-text">9:00 AM - 10:30 AM</td>
-                                    <td>
-                                        <div class="col-subject subject-text">Earth & Life Science</div>
-                                        <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Ms. L. Reyes</div>
-                                    </td>
+                                    <td><div class="col-subject subject-text">Earth & Life Science</div><div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Ms. L. Reyes</div></td>
                                     <td><span class="room-badge col-room">LAB 1</span></td>
                                     <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
                                 <tr class="break-time"><td colspan="4"><i class="fa-solid fa-mug-hot"></i> MORNING BREAK (10:30 AM - 11:00 AM)</td></tr>
                                 <tr>
                                     <td class="col-time time-text">11:00 AM - 12:30 PM</td>
-                                    <td>
-                                        <div class="col-subject subject-text">Oral Communication</div>
-                                        <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Mrs. C. Cruz</div>
-                                    </td>
+                                    <td><div class="col-subject subject-text">Oral Communication</div><div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Mrs. C. Cruz</div></td>
                                     <td><span class="room-badge col-room">RM 205</span></td>
                                     <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
@@ -339,28 +330,19 @@
                             <tbody id="tbody-Tuesday" class="day-tbody">
                                 <tr>
                                     <td class="col-time time-text">8:00 AM - 10:00 AM</td>
-                                    <td>
-                                        <div class="col-subject subject-text">21st Century Literature</div>
-                                        <div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Ms. A. Garcia</div>
-                                    </td>
+                                    <td><div class="col-subject subject-text">21st Century Literature</div><div class="col-instructor" style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;"><i class="fa-solid fa-chalkboard-user"></i> Ms. A. Garcia</div></td>
                                     <td><span class="room-badge col-room">RM 302</span></td>
                                     <td><div class="row-actions"><i class="fa-solid fa-pen edit-icon" onclick="openClassModal(this)"></i><i class="fa-solid fa-trash delete-icon" onclick="deleteClass(this)"></i></div></td>
                                 </tr>
                             </tbody>
 
-                            <tbody id="tbody-Wednesday" class="day-tbody">
-                                <tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Wednesday.</td></tr>
-                            </tbody>
-                            <tbody id="tbody-Thursday" class="day-tbody">
-                                <tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Thursday.</td></tr>
-                            </tbody>
-                            <tbody id="tbody-Friday" class="day-tbody">
-                                <tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Friday.</td></tr>
-                            </tbody>
+                            <tbody id="tbody-Wednesday" class="day-tbody"><tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Wednesday.</td></tr></tbody>
+                            <tbody id="tbody-Thursday" class="day-tbody"><tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Thursday.</td></tr></tbody>
+                            <tbody id="tbody-Friday" class="day-tbody"><tr><td colspan="4" class="empty-state">No classes scheduled yet. Click "Add Class" to update Friday.</td></tr></tbody>
                         </table>
                     </div>
 
-                    <div class="card">
+                    <div class="card filterable-card" data-view="academics-card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-list-check"></i> Assignments & Deadlines</h3>
                             <button class="action-btn" onclick="openTaskModal()"><i class="fa-solid fa-plus"></i> New Task</button>
@@ -372,7 +354,7 @@
                                     <div class="task-details"><h4>Math Problem Set 4</h4><p>General Mathematics</p></div>
                                 </div>
                                 <div class="task-due">Due Tomorrow</div>
-                                <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
+                                <div class="task-delete" onclick="deleteTaskItem(this)"><i class="fa-solid fa-trash"></i></div>
                             </div>
                             <div class="task-item">
                                 <div class="task-left">
@@ -380,34 +362,35 @@
                                     <div class="task-details"><h4>Ecosystems Lab Report</h4><p>Earth & Life Science</p></div>
                                 </div>
                                 <div class="task-due safe">Due in 3 days</div>
-                                <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
+                                <div class="task-delete" onclick="deleteTaskItem(this)"><i class="fa-solid fa-trash"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="right-col">
-                    <div class="card">
+                <div class="right-col" id="right-col">
+                    
+                    <div class="card filterable-card" data-view="academics-card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-book-open-reader"></i> Study Materials</h3>
-                            <label class="action-btn upload-label" for="file-upload-input"><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</label>
+                            <label class="action-btn upload-label" for="file-upload-input"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</label>
                             <input type="file" id="file-upload-input" onchange="uploadReviewer(event)">
                         </div>
                         <div class="reviewer-list" id="reviewer-list-container">
                             <div class="reviewer-item">
                                 <i class="fa-solid fa-file-pdf reviewer-icon"></i>
                                 <div class="reviewer-info"><h4>Gen_Math_Q1_Reviewer.pdf</h4><p>Uploaded 2 days ago</p></div>
-                                <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
+                                <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="deleteReviewerItem(this)"></i>
                             </div>
                             <div class="reviewer-item">
                                 <i class="fa-solid fa-file-word reviewer-icon doc"></i>
                                 <div class="reviewer-info"><h4>EarthScience_Notes.docx</h4><p>Uploaded last week</p></div>
-                                <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
+                                <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="deleteReviewerItem(this)"></i>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card filterable-card" data-view="dashboard-only">
                         <div class="card-header" style="border: none; padding-bottom: 0; margin-bottom: 15px;">
                             <h3><i class="fa-solid fa-bullhorn"></i> Campus Updates</h3>
                         </div>
@@ -426,7 +409,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card filterable-card" data-view="requests-card">
                         <div class="card-header" style="border: none; padding-bottom: 0; margin-bottom: 10px;">
                             <h3 style="font-size: 1.15rem;"><i class="fa-solid fa-folder-open"></i> Service Requests</h3>
                         </div>
@@ -479,6 +462,69 @@
     </div>
 
     <script>
+        // --- LOCAL STORAGE LOGIC ---
+        window.onload = function() {
+            if(localStorage.getItem('saap_tasks')) document.getElementById('task-list-container').innerHTML = localStorage.getItem('saap_tasks');
+            if(localStorage.getItem('saap_reviewers')) document.getElementById('reviewer-list-container').innerHTML = localStorage.getItem('saap_reviewers');
+            if(localStorage.getItem('saap_schedule')) {
+                const scheduleData = JSON.parse(localStorage.getItem('saap_schedule'));
+                ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+                    if(scheduleData[day]) document.getElementById('tbody-' + day).innerHTML = scheduleData[day];
+                });
+            }
+        };
+
+        function saveState() {
+            localStorage.setItem('saap_tasks', document.getElementById('task-list-container').innerHTML);
+            localStorage.setItem('saap_reviewers', document.getElementById('reviewer-list-container').innerHTML);
+            const scheduleData = {};
+            ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+                scheduleData[day] = document.getElementById('tbody-' + day).innerHTML;
+            });
+            localStorage.setItem('saap_schedule', JSON.stringify(scheduleData));
+        }
+
+        function resetDemoData() {
+            if(confirm("Are you sure you want to wipe all edited demo data? This cannot be undone.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // --- SIDEBAR FILTERING LOGIC ---
+        function switchView(viewName, element) {
+            document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
+            element.classList.add('active');
+
+            const allCards = document.querySelectorAll('.filterable-card');
+            const grid = document.getElementById('main-grid');
+            
+            if(viewName === 'all') {
+                document.getElementById('welcome-banner').style.display = 'flex';
+                document.getElementById('quick-stats').style.display = 'grid';
+                document.getElementById('top-nav-title').innerText = 'Dashboard Overview';
+                grid.style.display = 'grid';
+                allCards.forEach(card => card.style.display = 'block');
+            } else {
+                document.getElementById('welcome-banner').style.display = 'none';
+                document.getElementById('quick-stats').style.display = 'none';
+                grid.style.display = 'flex'; 
+                grid.style.flexDirection = 'column';
+                
+                if(viewName === 'schedule-card') document.getElementById('top-nav-title').innerText = 'My Schedule';
+                if(viewName === 'requests-card') document.getElementById('top-nav-title').innerText = 'Service Requests';
+                if(viewName === 'academics-card') document.getElementById('top-nav-title').innerText = 'Academics & Tasks';
+
+                allCards.forEach(card => {
+                    if(card.dataset.view === viewName || card.dataset.view.includes(viewName)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+
         function toggleProfileMenu() { document.getElementById('profileDropdown').classList.toggle('active'); }
         window.onclick = function(event) { if (!event.target.closest('.profile-container')) { Array.from(document.getElementsByClassName("dropdown-menu")).forEach(m => m.classList.remove('active')); } }
         function closeModals() {
@@ -487,15 +533,13 @@
             setTimeout(() => { document.getElementById('class-modal').style.display = 'none'; document.getElementById('task-modal').style.display = 'none'; }, 300);
         }
 
-        // --- NEW: Switch Days Logic ---
+        // --- SCHEDULE LOGIC ---
         function switchDay() {
             const selectedDay = document.getElementById('day-selector').value;
-            // Hide all tbodies
             document.querySelectorAll('.day-tbody').forEach(tbody => {
                 tbody.style.display = 'none';
                 tbody.classList.remove('active-tbody');
             });
-            // Show the selected one
             const activeTbody = document.getElementById('tbody-' + selectedDay);
             activeTbody.style.display = 'table-row-group';
             activeTbody.classList.add('active-tbody');
@@ -537,14 +581,8 @@
                 rowToEdit.querySelector('.col-instructor').innerHTML = `<i class="fa-solid fa-chalkboard-user"></i> ${instructor}`;
                 rowToEdit.querySelector('.col-room').innerText = room;
             } else {
-                // ADD TO THE CURRENTLY SELECTED DAY
                 let tbody = document.querySelector('.active-tbody');
-                
-                // Remove the "Empty State" message if it exists
-                if(tbody.querySelector('.empty-state')) {
-                    tbody.innerHTML = '';
-                }
-
+                if(tbody.querySelector('.empty-state')) { tbody.innerHTML = ''; }
                 let newRow = `
                     <tr style="animation: pageFadeIn 0.3s ease-out;">
                         <td class="col-time time-text">${time}</td>
@@ -562,6 +600,7 @@
                     </tr>`;
                 tbody.insertAdjacentHTML('beforeend', newRow);
             }
+            saveState(); 
             closeModals();
         }
 
@@ -570,13 +609,15 @@
                 let row = deleteBtn.closest('tr');
                 row.style.transform = 'scale(0.9)';
                 row.style.opacity = '0';
-                setTimeout(() => { row.remove(); }, 300);
+                setTimeout(() => { row.remove(); saveState(); }, 300);
             }
         }
 
+        // --- TASKS & REVIEWERS ---
         function toggleTask(checkboxElement) {
             checkboxElement.classList.toggle('checked');
             checkboxElement.closest('.task-item').classList.toggle('completed-task'); 
+            saveState();
         }
 
         function openTaskModal() {
@@ -602,10 +643,18 @@
                         <div class="task-details"><h4>${title}</h4><p>${subject}</p></div>
                     </div>
                     <div class="task-due" style="background: #eef5f6; color: var(--primary);">${deadline}</div>
-                    <div class="task-delete" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></div>
+                    <div class="task-delete" onclick="deleteTaskItem(this)"><i class="fa-solid fa-trash"></i></div>
                 </div>`;
             listContainer.insertAdjacentHTML('afterbegin', newTaskHTML);
+            saveState();
             closeModals();
+        }
+
+        function deleteTaskItem(btn) {
+            let item = btn.parentElement;
+            item.style.transform = 'translateX(50px)';
+            item.style.opacity = '0';
+            setTimeout(() => { item.remove(); saveState(); }, 300);
         }
 
         function uploadReviewer(event) {
@@ -616,11 +665,19 @@
                     <div class="reviewer-item" style="background: #f0fdf4; border-color: #10b981; animation: pageFadeIn 0.4s ease-out;">
                         <i class="fa-solid fa-file-circle-check" style="color: #10b981; font-size: 2rem;"></i>
                         <div class="reviewer-info"><h4>${file.name}</h4><p style="color: #047857; font-weight: 600;">Uploaded successfully!</p></div>
-                        <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="this.parentElement.remove()"></i>
+                        <i class="fa-solid fa-trash reviewer-action" title="Delete" onclick="deleteReviewerItem(this)"></i>
                     </div>`;
                 listContainer.insertAdjacentHTML('afterbegin', newFileHTML);
+                saveState();
                 event.target.value = '';
             }
+        }
+
+        function deleteReviewerItem(btn) {
+            let item = btn.parentElement;
+            item.style.transform = 'scale(0.9)';
+            item.style.opacity = '0';
+            setTimeout(() => { item.remove(); saveState(); }, 300);
         }
     </script>
 </body>
