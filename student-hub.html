@@ -29,10 +29,11 @@
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        .real-logo { width: 70px; height: 70px; border-radius: 50%; object-fit: contain; background: white; padding: 4px; box-shadow: var(--shadow-md); margin-bottom: 15px; }
+
         /* SIDEBAR */
         .sidebar { width: 280px; background: linear-gradient(180deg, var(--secondary) 0%, #022c22 100%); color: white; display: flex; flex-direction: column; transition: 0.4s; box-shadow: 4px 0 20px rgba(0,0,0,0.15); z-index: 20; }
         .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sidebar-header i { font-size: 2.8rem; color: var(--accent); margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.3));}
         .sidebar-header h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
         .sidebar-header p { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
         
@@ -190,8 +191,7 @@
             body { flex-direction: column; overflow-y: auto; height: auto;}
             .sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 25px; position: sticky; top: 0; box-shadow: var(--shadow-sm); }
             .sidebar-header { padding: 0; border: none; background: none; }
-            .sidebar-header h3, .sidebar-header p { display: none; } 
-            .sidebar-header i { font-size: 2rem; margin: 0;}
+            .sidebar-header h3, .sidebar-header p, .sidebar-header img { display: none; } 
             .sidebar-menu { display: none; } 
             .dashboard-container { padding: 20px; }
             .welcome-banner { flex-direction: column; text-align: left; align-items: flex-start; gap: 20px; padding: 25px; }
@@ -210,7 +210,7 @@
 
     <div class="sidebar">
         <div class="sidebar-header">
-            <i class="fa-solid fa-school"></i>
+            <img src="logo.jpg" alt="SAAPI Logo" style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: white; padding: 4px; box-shadow: var(--shadow-md); margin-bottom: 15px;">
             <h3>SAAPI PORTAL</h3>
             <p>St. Augustine Academy</p>
         </div>
@@ -462,7 +462,7 @@
     </div>
 
     <script>
-        // --- LOCAL STORAGE LOGIC ---
+        // LOCAL STORAGE LOGIC
         window.onload = function() {
             if(localStorage.getItem('saap_tasks')) document.getElementById('task-list-container').innerHTML = localStorage.getItem('saap_tasks');
             if(localStorage.getItem('saap_reviewers')) document.getElementById('reviewer-list-container').innerHTML = localStorage.getItem('saap_reviewers');
@@ -491,7 +491,7 @@
             }
         }
 
-        // --- SIDEBAR FILTERING LOGIC ---
+        // SIDEBAR FILTERING LOGIC
         function switchView(viewName, element) {
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             element.classList.add('active');
@@ -533,7 +533,7 @@
             setTimeout(() => { document.getElementById('class-modal').style.display = 'none'; document.getElementById('task-modal').style.display = 'none'; }, 300);
         }
 
-        // --- SCHEDULE LOGIC ---
+        // SCHEDULE LOGIC
         function switchDay() {
             const selectedDay = document.getElementById('day-selector').value;
             document.querySelectorAll('.day-tbody').forEach(tbody => {
@@ -613,7 +613,7 @@
             }
         }
 
-        // --- TASKS & REVIEWERS ---
+        // TASKS & REVIEWERS
         function toggleTask(checkboxElement) {
             checkboxElement.classList.toggle('checked');
             checkboxElement.closest('.task-item').classList.toggle('completed-task'); 
