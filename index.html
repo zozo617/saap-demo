@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St. Augustine Academy of Pampanga, Inc.</title>
+    
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -44,11 +47,30 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- LOGO STYLES (Outlines Removed) --- */
-        .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; }
-        .hero-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: contain; margin-bottom: 20px; }
-        .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; }
-        .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px;}
+        /* --- LOGO STYLES (OUTLINES AND BACKGROUNDS REMOVED) --- */
+        .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
+        .hero-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: contain; margin-bottom: 20px; border: none; background: transparent; }
+        .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
+        .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
+
+        /* --- LOCATION BADGE --- */
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f4f9f5;
+            color: #022c22;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            gap: 10px;
+        }
+        .location-badge i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
 
         /* Top Bars */
         .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
@@ -212,7 +234,7 @@
 
     <div class="gray-bar">
         <div class="gray-bar-left">
-            <a href="#"><i class="fa-solid fa-graduation-cap"></i> SAAP Home</a>
+            <a href="#"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
             <a href="#" onclick="openLoginModal('login')" style="color: var(--accent-yellow); font-weight: 700;"><i class="fa-solid fa-users"></i> Student Portal Login</a>
             <a href="#"><i class="fa-solid fa-book"></i> Library</a>
         </div>
@@ -255,6 +277,12 @@
     </section>
 
     <div class="spacer"></div>
+
+    <div style="text-align: center; padding-bottom: 2rem; display: flex; justify-content: center;" class="reveal">
+        <div class="location-badge">
+            <i class="fa-solid fa-location-dot"></i> Alvendia St., Poblacion, Floridablanca, Pampanga
+        </div>
+    </div>
 
     <section id="prospectus" class="features-section reveal">
         <div class="section-header">
@@ -417,7 +445,8 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
-                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> SAAPI
+                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> 
+                    St. Augustine Academy<br>of Pampanga, Inc.
                 </div>
                 <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding.</p>
                 <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
@@ -477,7 +506,7 @@
                     <label>Create Password</label>
                     <input type="password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="login-submit">Create Account</button>
+                <button type="submit" class="login-submit" style="background-color: var(--top-bar-bg); color: white;">Create Account</button>
                 <div class="auth-switch">
                     Already have an account? <span onclick="switchAuthMode('login')">Log in here</span>.
                 </div>
