@@ -102,24 +102,44 @@
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
 
-        .features-section { padding: 2rem 0 5rem 0; width: 100%; position: relative; overflow: hidden; }
-        .carousel-container { position: relative; display: flex; align-items: center; width: 100%; }
-        .carousel-arrow { position: absolute; top: 45%; transform: translateY(-50%); background-color: var(--primary-color); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-md); z-index: 10; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
-        .carousel-arrow:hover { background-color: var(--accent-yellow); transform: translateY(-50%) scale(1.1); }
-        .carousel-arrow.left { left: 2%; }
-        .carousel-arrow.right { right: 2%; }
-
-        .features-grid { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth; padding: 20px 5% 40px 5%; width: 100%; max-width: max-content; margin: 0 auto; }
-        .features-grid::-webkit-scrollbar { display: none; } 
-        .card { flex: 0 0 350px; max-width: 85vw; scroll-snap-align: start; background-color: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--border-color); border-bottom: 5px solid var(--accent-yellow); display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-12px); box-shadow: var(--shadow-hover); }
-        .card-img-wrapper { width: 100%; height: 240px; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
-        .card:hover .card-img { transform: scale(1.08); }
-        .card-content { padding: 2.5rem; flex-grow: 1; }
-        .card h3 { color: var(--text-dark); margin-bottom: 12px; font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; gap: 12px;}
-        .card h3 i { color: var(--accent-yellow); font-size: 1.2rem; background: rgba(16, 185, 129, 0.1); padding: 10px; border-radius: 10px;}
-        .card p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; font-weight: 400;}
+        /* --- UPDATED ACADEMIC PROGRAMS GRID --- */
+        .programs-section { padding: 4rem 0 5rem 0; width: 100%; position: relative; }
+        .programs-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2.5rem; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 0 5%; 
+        }
+        .program-card { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            padding: 3rem 2rem; 
+            box-shadow: var(--shadow-md); 
+            border: 1px solid var(--border-color); 
+            border-top: 5px solid var(--accent-yellow); 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            text-align: center;
+        }
+        .program-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        .prog-icon {
+            width: 85px; height: 85px; border-radius: 50%; background: #ecfdf5; color: var(--primary-color);
+            font-size: 2.5rem; display: flex; justify-content: center; align-items: center; margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.1);
+        }
+        .program-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; line-height: 1.2;}
+        .grade-badge { display: inline-block; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px;}
+        .program-card p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; font-weight: 500; flex-grow: 1;}
+        
+        .track-section { width: 100%; text-align: left; margin-top: 25px; background: var(--bg-color); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);}
+        .track-section h4 { font-size: 0.85rem; color: var(--text-dark); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid var(--accent-yellow); padding-left: 8px;}
+        .strand-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .strand-tags:last-child { margin-bottom: 0; }
+        .strand-tags span { background: white; color: var(--primary-color); padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; border: 1px solid #d1fae5; box-shadow: var(--shadow-sm);}
 
         .stats-section { background-color: var(--top-bar-bg); color: white; padding: 5rem 5%; text-align: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
@@ -201,7 +221,6 @@
             .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; }
             .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
             
-            /* HAMBURGER PERFECTLY PINNED TO RIGHT CORNER */
             .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
             
             nav { width: 0; } 
@@ -221,8 +240,9 @@
             .action-button { font-size: 1rem; padding: 14px 40px; margin-top: 20px; }
             
             .section-header h2 { font-size: 1.8rem; }
-            .carousel-arrow { width: 35px; height: 35px; font-size: 1rem;}
-            .card { flex: 0 0 280px; }
+            
+            /* ADJUST GRID ON MOBILE */
+            .programs-grid { grid-template-columns: 1fr; }
             
             .floating-waypoint { bottom: 95px; right: 15px; padding: 12px; }
             .floating-waypoint i { font-size: 1.2rem; }
@@ -266,7 +286,7 @@
         <nav>
             <ul>
                 <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
-                <li><a href="#prospectus" data-key="nav-acad">Academics</a></li>
+                <li><a href="#academics" data-key="nav-acad">Academics</a></li>
                 <li><a href="#" data-key="nav-campus">Campus Life</a></li>
                 <li><a href="#" data-key="nav-about">About Us</a></li>
                 <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">Login / Sign Up</a></li>
@@ -286,56 +306,44 @@
 
     <div class="spacer"></div>
 
-    <section id="prospectus" class="features-section reveal">
+    <section id="academics" class="programs-section reveal">
         <div class="section-header">
-            <h2 data-key="features-title">Explore Our Programs</h2>
+            <h2 data-key="prog-title">Our Academic Programs</h2>
         </div>
         
-        <div class="carousel-container">
-            <button class="carousel-arrow left" onclick="scrollCarousel('left')"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="carousel-arrow right" onclick="scrollCarousel('right')"><i class="fa-solid fa-chevron-right"></i></button>
-            
-            <div class="features-grid" id="features-grid">
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/20/800/600" alt="Academic" class="card-img"></div>
-                    <div class="card-content">
-                        <h3 data-key="card1-title"><i class="fa-solid fa-book-open"></i> Academic Excellence</h3>
-                        <p data-key="card1-desc">Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential and prepare for higher education.</p>
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="prog-icon"><i class="fa-solid fa-child-reaching"></i></div>
+                <h3 data-key="prog-psgs-title">Pre-School & Grade School</h3>
+                <span class="grade-badge">K1 – G6</span>
+                <p data-key="prog-psgs-desc">Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.</p>
+            </div>
+
+            <div class="program-card">
+                <div class="prog-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                <h3 data-key="prog-jhs-title">Junior High School</h3>
+                <span class="grade-badge">G7 – G10</span>
+                <p data-key="prog-jhs-desc">Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.</p>
+            </div>
+
+            <div class="program-card">
+                <div class="prog-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h3 data-key="prog-shs-title">Senior High School</h3>
+                <span class="grade-badge">G11 – G12</span>
+                <p data-key="prog-shs-desc">Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training.</p>
+                
+                <div class="track-section">
+                    <h4>Academic Track</h4>
+                    <div class="strand-tags">
+                        <span>STEM</span>
+                        <span>ABM</span>
+                        <span>HUMSS</span>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/3/800/600" alt="Future" class="card-img"></div>
-                    <div class="card-content">
-                        <h3 data-key="card2-title"><i class="fa-solid fa-rocket"></i> Future Ready</h3>
-                        <p data-key="card2-desc">We equip students with modern skills, strong moral character, and the critical thinking necessary to succeed in a rapidly changing world.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/336/800/600" alt="Community" class="card-img"></div>
-                    <div class="card-content">
-                        <h3 data-key="card3-title"><i class="fa-solid fa-hands-holding-child"></i> Vibrant Community</h3>
-                        <p data-key="card3-desc">A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/119/800/600" alt="Technology" class="card-img"></div>
-                    <div class="card-content">
-                        <h3 data-key="card4-title"><i class="fa-solid fa-laptop-code"></i> Technology & Innovation</h3>
-                        <p data-key="card4-desc">State-of-the-art computer labs and coding programs designed to prepare students for the digital careers of tomorrow.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/73/800/600" alt="Athletics" class="card-img"></div>
-                    <div class="card-content">
-                        <h3 data-key="card5-title"><i class="fa-solid fa-volleyball"></i> Athletics & Sports</h3>
-                        <p data-key="card5-desc">Develop teamwork and physical fitness through our award-winning varsity programs and intramural sports leagues.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/103/800/600" alt="Arts" class="card-img"></div>
-                    <div class="card-content">
-                        <h3 data-key="card6-title"><i class="fa-solid fa-palette"></i> Arts & Culture</h3>
-                        <p data-key="card6-desc">Express creativity through our comprehensive fine arts, theater, and music programs, showcasing student talent year-round.</p>
+                    
+                    <h4 style="margin-top: 15px;">TVL Track</h4>
+                    <div class="strand-tags">
+                        <span>ICT</span>
+                        <span>Home Economics</span>
                     </div>
                 </div>
             </div>
@@ -533,17 +541,7 @@
     </div>
 
     <script>
-        function scrollCarousel(direction) {
-            const grid = document.getElementById('features-grid');
-            const scrollAmount = window.innerWidth > 768 ? 380 : 310;
-            if (direction === 'left') {
-                grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        }
-
-        // --- UPDATED LOGIN LOGIC TO INCLUDE ADMIN SECRET LOGIN ---
+        // --- LOGIN LOGIC TO INCLUDE ADMIN SECRET LOGIN ---
         function handleLogin(event) {
             event.preventDefault();
             const idInput = document.getElementById('login-id').value.trim();
@@ -560,7 +558,6 @@
                     alert('Invalid ID. For this demo, use 2026-0001 (Student) or TEMP-2026-089 (Applicant)');
                 }
             } else if (idInput === 'admin' && passInput === 'admin123') {
-                // SECRET ADMIN LOGIN
                 localStorage.setItem('userRole', 'admin');
                 window.location.href = 'admin-dashboard.html';
             } else {
@@ -673,17 +670,18 @@
             }
         });
 
+        // UPDATED TRANSLATIONS DICTIONARY
         const translations = {
             en: {
                 "nav-login": "Login / Sign Up", "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
                 "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
-                "features-title": "Explore Our Programs",
-                "card1-title": "Academic Excellence", "card1-desc": "Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential.",
-                "card2-title": "Future Ready", "card2-desc": "We equip students with modern skills, strong moral character, and critical thinking.",
-                "card3-title": "Vibrant Community", "card3-desc": "A supportive, inclusive environment where every student is valued.",
-                "card4-title": "Technology & Innovation", "card4-desc": "State-of-the-art computer labs and coding programs designed to prepare students.",
-                "card5-title": "Athletics & Sports", "card5-desc": "Develop teamwork and physical fitness through our award-winning varsity programs.",
-                "card6-title": "Arts & Culture", "card6-desc": "Express creativity through our comprehensive fine arts, theater, and music programs.",
+                "prog-title": "Our Academic Programs",
+                "prog-psgs-title": "Pre-School & Grade School",
+                "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.",
+                "prog-jhs-title": "Junior High School",
+                "prog-jhs-desc": "Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.",
+                "prog-shs-title": "Senior High School",
+                "prog-shs-desc": "Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training.",
                 "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success in college and beyond.", "parallax-btn": "Start Your Application",
                 "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
                 "testi-title": "What Our Students Say",
@@ -697,13 +695,13 @@
             tl: { 
                 "nav-login": "Mag-login / Mag-sign Up", "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
                 "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
-                "features-title": "Tuklasin ang Aming Programa",
-                "card1-title": "Kahusayan sa Akademya", "card1-desc": "Ang aming mahigpit na kurikulum ay nagbibigay inspirasyon.",
-                "card2-title": "Handa sa Kinabukasan", "card2-desc": "Hinuhubog namin ang mga mag-aaral gamit ang makabagong kasanayan.",
-                "card3-title": "Masiglang Komunidad", "card3-desc": "Isang mapang-unawang kapaligiran kung saan pinahahalagahan ang bawat isa.",
-                "card4-title": "Teknolohiya", "card4-desc": "Mga makabagong computer lab na idinisenyo upang ihanda ang mga mag-aaral.",
-                "card5-title": "Palakasan", "card5-desc": "Paunlarin ang pagkakaisa at kalusugan sa pamamagitan ng aming isports.",
-                "card6-title": "Sining at Kultura", "card6-desc": "Ipamalas ang pagkamalikhain sa pamamagitan ng sining, teatro, at musika.",
+                "prog-title": "Aming Programang Akademiko",
+                "prog-psgs-title": "Pre-School at Grade School",
+                "prog-psgs-desc": "Pangunahing nagbibigay ng pagbabasa, pagsusulat, matematika, at kasanayang panlipunan habang ipinapakilala ang mabuting asal.",
+                "prog-jhs-title": "Junior High School",
+                "prog-jhs-desc": "Pinapalakas ang mga pangunahing paksa at tinutulungan ang mga mag-aaral na bumuo ng disiplina.",
+                "prog-shs-title": "Senior High School",
+                "prog-shs-desc": "Nag-aalok ng mga paksang nakabatay sa strand na naghahanda sa mga mag-aaral para sa kolehiyo o trabaho.",
                 "parallax-title": "Sumali sa Pamilya ng SAAP", "parallax-desc": "Damhin ang isang edukasyong naghahanda sa iyo para sa tagumpay.", "parallax-btn": "Simulan ang Aplikasyon",
                 "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral",
                 "testi-title": "Sabi ng Aming Mag-aaral",
@@ -717,13 +715,13 @@
             es: { 
                 "nav-login": "Iniciar / Regístrate", "nav-enroll": "Inscribirse", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
                 "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
-                "features-title": "Nuestros Programas",
-                "card1-title": "Excelencia Académica", "card1-desc": "Nuestro riguroso plan de estudios inspira a los estudiantes.",
-                "card2-title": "Listos para el Futuro", "card2-desc": "Preparamos a los estudiantes con habilidades y carácter moral.",
-                "card3-title": "Comunidad Vibrante", "card3-desc": "Un entorno de apoyo donde cada estudiante es valorado.",
-                "card4-title": "Tecnología", "card4-desc": "Laboratorios de computación de última generación diseñados para el futuro.",
-                "card5-title": "Deportes", "card5-desc": "Desarrolla el trabajo en equipo a través de nuestros programas universitarios.",
-                "card6-title": "Arte y Cultura", "card6-desc": "Expresa la creatividad a través de nuestros programas de bellas artes y música.",
+                "prog-title": "Nuestros Programas Académicos",
+                "prog-psgs-title": "Preescolar y Primaria",
+                "prog-psgs-desc": "Proporciona habilidades básicas de lectura, escritura, matemáticas y sociales a jóvenes estudiantes.",
+                "prog-jhs-title": "Escuela Secundaria",
+                "prog-jhs-desc": "Fortalece las materias básicas y ayuda a los estudiantes a desarrollar hábitos de estudio y disciplina.",
+                "prog-shs-title": "Escuela Preparatoria",
+                "prog-shs-desc": "Ofrece materias que preparan a los estudiantes para la universidad o trabajos de nivel de entrada.",
                 "parallax-title": "Únete a la Familia SAAP", "parallax-desc": "Experimenta una educación que te prepara para el éxito.", "parallax-btn": "Inicia tu Aplicación",
                 "stat1": "Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes",
                 "testi-title": "Lo que Dicen los Estudiantes",
