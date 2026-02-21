@@ -47,61 +47,21 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- LOGO STYLES (OUTLINES AND BACKGROUNDS REMOVED) --- */
         .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
         .hero-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: contain; margin-bottom: 20px; border: none; background: transparent; }
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
-        /* --- INTERACTIVE FLOATING WAYPOINT --- */
-        .floating-waypoint {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            background-color: var(--primary-color);
-            color: #ffffff;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            padding: 15px 18px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 9999;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .floating-waypoint i {
-            font-size: 1.4rem;
-            transition: transform 0.3s ease;
-        }
-        .floating-waypoint:hover { 
-            background-color: var(--secondary); 
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-        .waypoint-text {
-            max-width: 0;
-            opacity: 0;
-            margin-left: 0;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .floating-waypoint.active .waypoint-text {
-            max-width: 400px;
-            opacity: 1;
-            margin-left: 12px;
-            padding-right: 5px;
-        }
-        .floating-waypoint.active i {
-            color: var(--accent-yellow);
-        }
+        .floating-waypoint { position: fixed; bottom: 100px; right: 30px; background-color: var(--primary-color); color: #ffffff; border-radius: 50px; display: flex; align-items: center; padding: 15px 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; white-space: nowrap; }
+        .floating-waypoint i { font-size: 1.4rem; transition: transform 0.3s ease; }
+        .floating-waypoint:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .waypoint-text { max-width: 0; opacity: 0; margin-left: 0; font-size: 0.95rem; font-weight: 600; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .floating-waypoint.active .waypoint-text { max-width: 400px; opacity: 1; margin-left: 12px; padding-right: 5px; }
+        .floating-waypoint.active i { color: var(--accent-yellow); }
 
         .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
 
-        /* Top Bars */
         .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
         .lang-btn { cursor: pointer; opacity: 0.7; transition: 0.3s; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; font-weight: 700; color: var(--accent-yellow); }
@@ -109,11 +69,11 @@
         .gray-bar { background-color: var(--gray-bar-bg); color: #d1d1d1; font-size: 0.8rem; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; transition: 0.4s; }
         .gray-bar a { color: #d1d1d1; text-decoration: none; margin-right: 20px; transition: 0.3s; cursor: pointer; font-weight: 500;}
         .gray-bar a:hover { color: white; }
-        .gray-bar-right i { cursor: pointer; transition: 0.3s; margin-left: 10px;}
-        .gray-bar-right i:hover { color: white; transform: scale(1.2); }
+        .gray-bar-right { display: flex; align-items: center; }
+        .gray-bar-right a, .gray-bar-right i { cursor: pointer; transition: 0.3s; }
+        .gray-bar-right a:hover, .gray-bar-right i:hover { color: white; transform: scale(1.1); }
         #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 15px; }
 
-        /* Premium Header */
         header { background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; transition: 0.4s; border-bottom: 1px solid rgba(0,0,0,0.05);}
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; letter-spacing: -0.5px;}
         .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: 0.4s;}
@@ -126,7 +86,6 @@
         .nav-login-btn { background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
         .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
 
-        /* Hero Section */
         .hero-image-container { width: 100%; height: 600px; position: relative; background-color: var(--banner-bg); }
         .hero-image-container img.bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
         .hero-image-container::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(0, 77, 0, 0.6), rgba(0, 77, 0, 0.95)); }
@@ -142,49 +101,51 @@
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
 
-        /* --- UPDATED ACADEMIC PROGRAMS GRID (FORCED ONE LINE ON DESKTOP) --- */
+        /* --- UPDATED & ENHANCED ACADEMIC PROGRAMS GRID --- */
         .programs-section { padding: 4rem 0 5rem 0; width: 100%; position: relative; }
         .programs-grid { 
             display: grid; 
-            /* Fixed: Force exactly 3 columns so they stay on one line on desktop */
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(3, 1fr); /* FORCES 1 LINE ON DESKTOP */
             gap: 2.5rem; 
-            max-width: 1200px; 
+            max-width: 1300px; /* Widened to reduce white space on the sides */
             margin: 0 auto; 
             padding: 0 5%; 
-            align-items: stretch; /* Forces equal heights */
+            align-items: stretch; 
         }
         .program-card { 
             background: var(--card-bg); 
             border-radius: 20px; 
-            padding: 3rem 2rem; 
             box-shadow: var(--shadow-md); 
             border: 1px solid var(--border-color); 
             border-top: 5px solid var(--accent-yellow); 
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
             display: flex; 
             flex-direction: column; 
-            align-items: center;
-            text-align: center;
+            overflow: hidden; /* Keeps the top image rounded inside the card */
             height: 100%;
         }
         .program-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        
+        /* New Image Banners for each card to make them less boring */
+        .prog-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 3px solid var(--accent-yellow); }
+        
+        .prog-content { padding: 0 2rem 3rem; display: flex; flex-direction: column; align-items: center; text-align: center; flex-grow: 1; }
         .prog-icon {
-            width: 85px; height: 85px; border-radius: 50%; background: #ecfdf5; color: var(--primary-color);
-            font-size: 2.5rem; display: flex; justify-content: center; align-items: center; margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.1);
+            width: 80px; height: 80px; border-radius: 50%; background: #ecfdf5; color: var(--primary-color);
+            font-size: 2.2rem; display: flex; justify-content: center; align-items: center; margin: -40px auto 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 4px solid white; position: relative; z-index: 2;
         }
         .program-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; line-height: 1.2;}
         .grade-badge { display: inline-block; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px;}
         .program-card p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; font-weight: 500; margin-bottom: 20px;}
         
-        /* Auto margin pushes the track section cleanly to the bottom, balancing the cards */
         .track-section { width: 100%; text-align: left; margin-top: auto; background: var(--bg-color); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);}
         .track-section h4 { font-size: 0.85rem; color: var(--text-dark); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid var(--accent-yellow); padding-left: 8px;}
         .strand-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
         .strand-tags:last-child { margin-bottom: 0; }
         .strand-tags span { background: white; color: var(--primary-color); padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; border: 1px solid #d1fae5; box-shadow: var(--shadow-sm);}
 
+        /* Stats Section */
         .stats-section { background-color: var(--top-bar-bg); color: white; padding: 5rem 5%; text-align: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
         .stat-item i { font-size: 2.8rem; color: var(--accent-yellow); margin-bottom: 1.5rem; animation: float 4s ease-in-out infinite; }
@@ -197,6 +158,7 @@
         .parallax-btn { background-color: var(--accent-yellow); color: #ffffff; padding: 16px 45px; font-weight: 800; border-radius: 50px; text-decoration: none; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: inline-block;}
         .parallax-btn:hover { background-color: #059669; transform: translateY(-3px);}
 
+        /* Testimonials */
         .testimonials-section { padding: 0 5% 5rem; max-width: 1400px; margin: 0 auto; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         .testimonial-card { background-color: var(--card-bg); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-md); position: relative; border: 1px solid var(--border-color); transition: 0.3s;}
@@ -208,6 +170,7 @@
         .author-info h4 { color: var(--text-dark); margin: 0; font-weight: 700; font-size: 1.1rem;}
         .author-info p { color: var(--text-muted); font-size: 0.85rem; margin: 0; font-weight: 500;}
 
+        /* Events */
         .events-section { padding: 5rem 5%; background-color: var(--card-bg); max-width: 1400px; margin: 0 auto 5rem; border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);}
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .event-card { display: flex; align-items: center; background: var(--bg-color); padding: 1.8rem; border-radius: 12px; transition: 0.3s; border-left: 5px solid var(--primary-color); border: 1px solid var(--border-color); border-left-width: 5px;}
@@ -218,6 +181,7 @@
         .event-details h4 { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
         .event-details p { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 8px; }
 
+        /* FAQ */
         .faq-section { padding: 0 5% 5rem; max-width: 900px; margin: 0 auto; }
         .faq-item { background-color: var(--card-bg); border-radius: 12px; margin-bottom: 1.2rem; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--border-color); transition: 0.3s; }
         .faq-question { width: 100%; text-align: left; padding: 1.5rem 2rem; background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter'; }
@@ -227,6 +191,7 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--bg-color); }
         .faq-answer p { padding: 0 2rem 1.5rem; color: var(--text-muted); font-weight: 500; line-height: 1.6;}
 
+        /* Footer */
         .mega-footer { background-color: #022c22; color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
         .footer-col h3 { color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 1.5rem; font-weight: 800;}
@@ -238,6 +203,7 @@
         .contact-info i { color: var(--accent-yellow); margin-right: 12px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #9ca3af; font-weight: 500;}
 
+        /* Login Modal */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .login-box { background: var(--card-bg); padding: 45px 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; text-align: center; transform: scale(0.95) translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.2);}
@@ -255,9 +221,9 @@
         .auth-switch span { color: var(--primary-color); font-weight: 800; cursor: pointer; transition: 0.3s; }
         .auth-switch span:hover { text-decoration: underline; color: var(--secondary); }
 
-        /* Tablet Fix: If the screen gets smaller than 1024px, nicely stack the cards so they don't squish */
+        /* Tablet Fix */
         @media (max-width: 992px) {
-            .programs-grid { grid-template-columns: 1fr; max-width: 600px; }
+            .programs-grid { grid-template-columns: 1fr; max-width: 550px; }
         }
 
         @media (max-width: 768px) {
@@ -270,7 +236,6 @@
             .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; }
             .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
             
-            /* HAMBURGER PERFECTLY PINNED TO RIGHT CORNER */
             .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
             
             nav { width: 0; } 
@@ -309,15 +274,16 @@
 
     <div class="gray-bar">
         <div class="gray-bar-left">
-            <a href="#"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
+            <a href="#" onclick="window.scrollTo(0,0)"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
             <a href="#" onclick="openLoginModal('login')" style="color: var(--accent-yellow); font-weight: 700;"><i class="fa-solid fa-users"></i> Student Portal Login</a>
-            <a href="#"><i class="fa-solid fa-book"></i> Library</a>
+            <a href="#" onclick="alert('Digital Library access coming soon!')"><i class="fa-solid fa-book"></i> Library</a>
         </div>
         <div class="gray-bar-right">
-            <i class="fa-brands fa-youtube"></i> <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-facebook-f"></i>
-            &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-moon" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode"></i>
+            <a href="https://www.facebook.com/saap.edu.ph" target="_blank" title="Visit SAAP Facebook Page" style="color: inherit; text-decoration: none; margin-right: 15px; font-size: 1.1rem;"><i class="fa-brands fa-facebook-f"></i></a>
+            <span style="color: #6b7280; margin-right: 15px;">|</span>
+            
+            <i class="fa-solid fa-magnifying-glass" style="cursor: pointer; font-size: 1.1rem; transition: 0.3s;" onclick="alert('Search functionality coming soon!')" title="Search"></i>
+            <i class="fa-solid fa-moon" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode" style="cursor: pointer; margin-left: 15px; font-size: 1.1rem; color: var(--accent-yellow); transition: 0.3s;"></i>
         </div>
     </div>
 
@@ -360,37 +326,46 @@
         
         <div class="programs-grid">
             <div class="program-card">
-                <div class="prog-icon"><i class="fa-solid fa-child-reaching"></i></div>
-                <h3 data-key="prog-psgs-title">Pre-School & Grade School</h3>
-                <span class="grade-badge">K1 – G6</span>
-                <p data-key="prog-psgs-desc">Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.</p>
+                <img src="https://picsum.photos/id/336/800/400" alt="Pre-School Students" class="prog-img">
+                <div class="prog-content">
+                    <div class="prog-icon"><i class="fa-solid fa-child-reaching"></i></div>
+                    <h3 data-key="prog-psgs-title">Pre-School & Grade School</h3>
+                    <span class="grade-badge">K1 – G6</span>
+                    <p data-key="prog-psgs-desc">Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation. Our engaging environment fosters curiosity and a love for lifelong learning.</p>
+                </div>
             </div>
 
             <div class="program-card">
-                <div class="prog-icon"><i class="fa-solid fa-book-open-reader"></i></div>
-                <h3 data-key="prog-jhs-title">Junior High School</h3>
-                <span class="grade-badge">G7 – G10</span>
-                <p data-key="prog-jhs-desc">Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.</p>
+                <img src="https://picsum.photos/id/20/800/400" alt="Junior High Students" class="prog-img">
+                <div class="prog-content">
+                    <div class="prog-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                    <h3 data-key="prog-jhs-title">Junior High School</h3>
+                    <span class="grade-badge">G7 – G10</span>
+                    <p data-key="prog-jhs-desc">Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills. We focus on holistic development to prepare students for higher academic challenges.</p>
+                </div>
             </div>
 
             <div class="program-card">
-                <div class="prog-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <h3 data-key="prog-shs-title">Senior High School</h3>
-                <span class="grade-badge">G11 – G12</span>
-                <p data-key="prog-shs-desc">Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training.</p>
-                
-                <div class="track-section">
-                    <h4>Academic Track</h4>
-                    <div class="strand-tags">
-                        <span>STEM</span>
-                        <span>ABM</span>
-                        <span>HUMSS</span>
-                    </div>
+                <img src="https://picsum.photos/id/119/800/400" alt="Senior High Students" class="prog-img">
+                <div class="prog-content">
+                    <div class="prog-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3 data-key="prog-shs-title">Senior High School</h3>
+                    <span class="grade-badge">G11 – G12</span>
+                    <p data-key="prog-shs-desc">Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training. Specialized tracks ensure students are career-ready and equipped with 21st-century skills.</p>
                     
-                    <h4 style="margin-top: 15px;">TVL Track</h4>
-                    <div class="strand-tags">
-                        <span>ICT</span>
-                        <span>Home Economics</span>
+                    <div class="track-section">
+                        <h4>Academic Track</h4>
+                        <div class="strand-tags">
+                            <span>STEM</span>
+                            <span>ABM</span>
+                            <span>HUMSS</span>
+                        </div>
+                        
+                        <h4 style="margin-top: 15px;">TVL Track</h4>
+                        <div class="strand-tags">
+                            <span>ICT</span>
+                            <span>Home Economics</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -588,16 +563,6 @@
     </div>
 
     <script>
-        function scrollCarousel(direction) {
-            const grid = document.getElementById('features-grid');
-            const scrollAmount = window.innerWidth > 768 ? 380 : 310;
-            if (direction === 'left') {
-                grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        }
-
         // --- LOGIN LOGIC TO INCLUDE ADMIN SECRET LOGIN ---
         function handleLogin(event) {
             event.preventDefault();
@@ -727,17 +692,18 @@
             }
         });
 
+        // UPDATED TRANSLATIONS WITH THE NEW EXPANDED TEXT
         const translations = {
             en: {
                 "nav-login": "Login / Sign Up", "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
                 "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
                 "prog-title": "Our Academic Programs",
                 "prog-psgs-title": "Pre-School & Grade School",
-                "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.",
+                "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation. Our engaging environment fosters curiosity and a love for lifelong learning.",
                 "prog-jhs-title": "Junior High School",
-                "prog-jhs-desc": "Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.",
+                "prog-jhs-desc": "Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills. We focus on holistic development to prepare students for higher academic challenges.",
                 "prog-shs-title": "Senior High School",
-                "prog-shs-desc": "Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training.",
+                "prog-shs-desc": "Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training. Specialized tracks ensure students are career-ready and equipped with 21st-century skills.",
                 "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success in college and beyond.", "parallax-btn": "Start Your Application",
                 "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
                 "testi-title": "What Our Students Say",
@@ -753,11 +719,11 @@
                 "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
                 "prog-title": "Aming Programang Akademiko",
                 "prog-psgs-title": "Pre-School at Grade School",
-                "prog-psgs-desc": "Pangunahing nagbibigay ng pagbabasa, pagsusulat, matematika, at kasanayang panlipunan habang ipinapakilala ang mabuting asal.",
+                "prog-psgs-desc": "Pangunahing nagbibigay ng pagbabasa, pagsusulat, matematika, at kasanayang panlipunan habang ipinapakilala ang mabuting asal sa aming mga batang mag-aaral.",
                 "prog-jhs-title": "Junior High School",
-                "prog-jhs-desc": "Pinapalakas ang mga pangunahing paksa at tinutulungan ang mga mag-aaral na bumuo ng disiplina.",
+                "prog-jhs-desc": "Pinapalakas ang mga pangunahing paksa at tinutulungan ang mga mag-aaral na bumuo ng disiplina upang maging handa sa mas mataas na antas ng edukasyon.",
                 "prog-shs-title": "Senior High School",
-                "prog-shs-desc": "Nag-aalok ng mga paksang nakabatay sa strand na naghahanda sa mga mag-aaral para sa kolehiyo o trabaho.",
+                "prog-shs-desc": "Nag-aalok ng mga paksang nakabatay sa strand na naghahanda sa mga mag-aaral para sa kolehiyo o trabaho. Nakakatulong ito sa pagiging handa sa propesyon.",
                 "parallax-title": "Sumali sa Pamilya ng SAAP", "parallax-desc": "Damhin ang isang edukasyong naghahanda sa iyo para sa tagumpay.", "parallax-btn": "Simulan ang Aplikasyon",
                 "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral",
                 "testi-title": "Sabi ng Aming Mag-aaral",
@@ -773,11 +739,11 @@
                 "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
                 "prog-title": "Nuestros Programas Académicos",
                 "prog-psgs-title": "Preescolar y Primaria",
-                "prog-psgs-desc": "Proporciona habilidades básicas de lectura, escritura, matemáticas y sociales a jóvenes estudiantes.",
+                "prog-psgs-desc": "Proporciona habilidades básicas de lectura, escritura, matemáticas y sociales a jóvenes estudiantes mientras introduce valores fundamentales.",
                 "prog-jhs-title": "Escuela Secundaria",
-                "prog-jhs-desc": "Fortalece las materias básicas y ayuda a los estudiantes a desarrollar hábitos de estudio y disciplina.",
+                "prog-jhs-desc": "Fortalece las materias básicas y ayuda a los estudiantes a desarrollar hábitos de estudio y disciplina para los desafíos futuros.",
                 "prog-shs-title": "Escuela Preparatoria",
-                "prog-shs-desc": "Ofrece materias que preparan a los estudiantes para la universidad o trabajos de nivel de entrada.",
+                "prog-shs-desc": "Ofrece materias especializadas que preparan a los estudiantes para la universidad o trabajos, equipándolos con habilidades del siglo XXI.",
                 "parallax-title": "Únete a la Familia SAAP", "parallax-desc": "Experimenta una educación que te prepara para el éxito.", "parallax-btn": "Inicia tu Aplicación",
                 "stat1": "Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes",
                 "testi-title": "Lo que Dicen los Estudiantes",
