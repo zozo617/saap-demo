@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- PREMIUM SAAPI COLOR PALETTE --- */
         :root {
             --top-bar-bg: #004d00; 
             --gray-bar-bg: #022c22; 
@@ -47,45 +46,20 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- LOGO STYLES --- */
         .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
         .hero-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: contain; margin-bottom: 20px; border: none; background: transparent; }
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
-        /* --- LOCATION BADGE --- */
         .location-badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: #f4f9f5;
-            color: #022c22;
-            padding: 12px 24px;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-            font-size: 0.95rem;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            gap: 10px;
+            display: inline-flex; align-items: center; background-color: #f4f9f5; color: #022c22; padding: 12px 24px; border-radius: 8px; border-left: 5px solid var(--primary-color);
+            font-size: 0.95rem; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); gap: 10px;
         }
         .location-badge i { color: var(--primary-color); font-size: 1.1rem; }
 
-        /* --- INTERACTIVE FLOATING WAYPOINT --- */
         .floating-waypoint {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            background-color: var(--primary-color);
-            color: #ffffff;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            padding: 15px 18px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 9999;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            white-space: nowrap;
+            position: fixed; bottom: 100px; right: 30px; background-color: var(--primary-color); color: #ffffff; border-radius: 50px; display: flex; align-items: center;
+            padding: 15px 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; white-space: nowrap;
         }
         .floating-waypoint i { font-size: 1.4rem; transition: transform 0.3s ease; }
         .floating-waypoint:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
@@ -93,11 +67,9 @@
         .floating-waypoint.active .waypoint-text { max-width: 400px; opacity: 1; margin-left: 12px; padding-right: 5px; }
         .floating-waypoint.active i { color: var(--accent-yellow); }
 
-        /* --- Floating Chat Widget --- */
         .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
 
-        /* Top Bars */
         .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
         .lang-btn { cursor: pointer; opacity: 0.7; transition: 0.3s; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; font-weight: 700; color: var(--accent-yellow); }
@@ -109,7 +81,6 @@
         .gray-bar-right i:hover { color: white; transform: scale(1.2); }
         #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 15px; }
 
-        /* Premium Header */
         header { background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; transition: 0.4s; border-bottom: 1px solid rgba(0,0,0,0.05);}
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; letter-spacing: -0.5px;}
         .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: 0.4s;}
@@ -122,24 +93,22 @@
         .nav-login-btn { background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
         .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
 
-        /* Hero Section */
         .hero-image-container { width: 100%; height: 600px; position: relative; background-color: var(--banner-bg); }
         .hero-image-container img.bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
         .hero-image-container::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(0, 77, 0, 0.6), rgba(0, 77, 0, 0.95)); }
 
-        .blue-banner { background-color: transparent; color: #fff; text-align: center; padding: 0 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; z-index: 10; }
+        .blue-banner { background-color: transparent; color: #fff; text-align: center; padding: 0 20px 80px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; z-index: 10; }
         .blue-banner h1 { font-size: 2.8rem; font-weight: 800; max-width: 950px; margin: 0 auto; line-height: 1.2; letter-spacing: -1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .blue-banner p { font-size: 1.15rem; opacity: 0.9; margin-top: 15px; font-weight: 400; max-width: 700px; margin-left: auto; margin-right: auto;}
         
         .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
         .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
+        .spacer { height: 60px; }
 
-        /* Section Headers */
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
 
-        /* --- CAROUSEL STYLES --- */
         .features-section { padding: 2rem 0 5rem 0; width: 100%; position: relative; overflow: hidden; }
         .carousel-container { position: relative; display: flex; align-items: center; width: 100%; }
         .carousel-arrow { position: absolute; top: 45%; transform: translateY(-50%); background-color: var(--primary-color); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-md); z-index: 10; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
@@ -159,21 +128,18 @@
         .card h3 i { color: var(--accent-yellow); font-size: 1.2rem; background: rgba(16, 185, 129, 0.1); padding: 10px; border-radius: 10px;}
         .card p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; font-weight: 400;}
 
-        /* Animated Stats */
         .stats-section { background-color: var(--top-bar-bg); color: white; padding: 5rem 5%; text-align: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
         .stat-item i { font-size: 2.8rem; color: var(--accent-yellow); margin-bottom: 1.5rem; animation: float 4s ease-in-out infinite; }
         .stat-number { font-size: 3.5rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; font-family: monospace; letter-spacing: -2px;}
         .stat-text { font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #d1fae5; }
 
-        /* Parallax Banner */
         .parallax-section { background: linear-gradient(rgba(0, 77, 0, 0.85), rgba(0, 77, 0, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center; background-attachment: fixed; background-size: cover; padding: 120px 5%; text-align: center; color: white; margin-bottom: 5rem; }
         .parallax-content h2 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px;}
         .parallax-content p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.9; font-weight: 300;}
         .parallax-btn { background-color: var(--accent-yellow); color: #ffffff; padding: 16px 45px; font-weight: 800; border-radius: 50px; text-decoration: none; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: inline-block;}
         .parallax-btn:hover { background-color: #059669; transform: translateY(-3px);}
 
-        /* Testimonials */
         .testimonials-section { padding: 0 5% 5rem; max-width: 1400px; margin: 0 auto; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         .testimonial-card { background-color: var(--card-bg); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-md); position: relative; border: 1px solid var(--border-color); transition: 0.3s;}
@@ -185,7 +151,6 @@
         .author-info h4 { color: var(--text-dark); margin: 0; font-weight: 700; font-size: 1.1rem;}
         .author-info p { color: var(--text-muted); font-size: 0.85rem; margin: 0; font-weight: 500;}
 
-        /* Events & FAQ */
         .events-section { padding: 5rem 5%; background-color: var(--card-bg); max-width: 1400px; margin: 0 auto 5rem; border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);}
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .event-card { display: flex; align-items: center; background: var(--bg-color); padding: 1.8rem; border-radius: 12px; transition: 0.3s; border-left: 5px solid var(--primary-color); border: 1px solid var(--border-color); border-left-width: 5px;}
@@ -205,7 +170,6 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--bg-color); }
         .faq-answer p { padding: 0 2rem 1.5rem; color: var(--text-muted); font-weight: 500; line-height: 1.6;}
 
-        /* Footer */
         .mega-footer { background-color: #022c22; color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
         .footer-col h3 { color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 1.5rem; font-weight: 800;}
@@ -217,7 +181,6 @@
         .contact-info i { color: var(--accent-yellow); margin-right: 12px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #9ca3af; font-weight: 500;}
 
-        /* Login Modal */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .login-box { background: var(--card-bg); padding: 45px 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; text-align: center; transform: scale(0.95) translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.2);}
@@ -240,17 +203,15 @@
             .gray-bar { flex-direction: column; gap: 10px; }
             .gray-bar-left { display: none; } 
             
-            /* FIXED HEADER SIZING & TEXT WRAPPING */
-            header { padding: 12px 5%; }
+            header { padding: 12px 5%; position: relative; }
             .real-logo { width: 35px; height: 35px; margin-right: 5px; }
             .logo { gap: 8px; }
             .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; }
             .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
             
-            /* PIN HAMBURGER TO THE FAR RIGHT */
-            .menu-toggle { display: block; font-size: 1.5rem; margin-left: auto; }
+            /* PIN HAMBURGER TO THE FAR RIGHT CORNER (FIX) */
+            .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
             
-            /* FIXED FLEX SQUISH ISSUE */
             nav { width: 0; } 
             nav ul { 
                 display: flex; flex-direction: column; width: 100%; text-align: center; 
@@ -272,7 +233,6 @@
             .carousel-arrow { width: 35px; height: 35px; font-size: 1rem;}
             .card { flex: 0 0 280px; }
             
-            /* FIXED FLOATING BUTTONS OVERLAP */
             .floating-waypoint { bottom: 95px; right: 15px; padding: 12px; }
             .floating-waypoint i { font-size: 1.2rem; }
             .floating-waypoint.active .waypoint-text { max-width: 200px; white-space: normal; font-size: 0.75rem; line-height: 1.3; text-align: left; margin-left: 10px;}
@@ -593,15 +553,26 @@
             }
         }
 
+        // --- UPDATED LOGIN LOGIC TO SUPPORT TEMPORARY APPLICANT ID ---
         function handleLogin(event) {
             event.preventDefault();
-            const idInput = document.getElementById('login-id').value;
+            const idInput = document.getElementById('login-id').value.trim();
             const passInput = document.getElementById('login-pass').value;
 
-            if ((idInput === 'demo@saap.edu.ph' || idInput === '2026-0001') && passInput === 'demo123') {
-                window.location.href = 'student-hub.html';
+            if (passInput === 'demo123') {
+                if (idInput === 'demo@saap.edu.ph' || idInput === '2026-0001') {
+                    // Normal Student Login
+                    localStorage.setItem('userRole', 'student');
+                    window.location.href = 'student-hub.html';
+                } else if (idInput === 'TEMP-2026-089') {
+                    // New Applicant Login
+                    localStorage.setItem('userRole', 'applicant');
+                    window.location.href = 'student-hub.html';
+                } else {
+                    alert('Invalid ID. For this demo, use 2026-0001 (Student) or TEMP-2026-089 (Applicant)');
+                }
             } else {
-                alert('Invalid credentials. For this demo, use Email: demo@saap.edu.ph and Password: demo123');
+                alert('Invalid Password. For this demo, use: demo123');
             }
         }
 
