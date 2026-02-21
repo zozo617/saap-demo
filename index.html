@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* --- PREMIUM SAAPI COLOR PALETTE --- */
         :root {
             --top-bar-bg: #004d00; 
             --gray-bar-bg: #022c22; 
@@ -46,24 +47,61 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* --- LOGO STYLES (OUTLINES AND BACKGROUNDS REMOVED) --- */
         .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
         .hero-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: contain; margin-bottom: 20px; border: none; background: transparent; }
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
+        /* --- INTERACTIVE FLOATING WAYPOINT --- */
         .floating-waypoint {
-            position: fixed; bottom: 100px; right: 30px; background-color: var(--primary-color); color: #ffffff; border-radius: 50px; display: flex; align-items: center;
-            padding: 15px 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; white-space: nowrap;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            padding: 15px 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            white-space: nowrap;
         }
-        .floating-waypoint i { font-size: 1.4rem; transition: transform 0.3s ease; }
-        .floating-waypoint:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
-        .waypoint-text { max-width: 0; opacity: 0; margin-left: 0; font-size: 0.95rem; font-weight: 600; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .floating-waypoint.active .waypoint-text { max-width: 400px; opacity: 1; margin-left: 12px; padding-right: 5px; }
-        .floating-waypoint.active i { color: var(--accent-yellow); }
+        .floating-waypoint i {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+        .floating-waypoint:hover { 
+            background-color: var(--secondary); 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .waypoint-text {
+            max-width: 0;
+            opacity: 0;
+            margin-left: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .floating-waypoint.active .waypoint-text {
+            max-width: 400px;
+            opacity: 1;
+            margin-left: 12px;
+            padding-right: 5px;
+        }
+        .floating-waypoint.active i {
+            color: var(--accent-yellow);
+        }
 
         .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
 
+        /* Top Bars */
         .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
         .lang-btn { cursor: pointer; opacity: 0.7; transition: 0.3s; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; font-weight: 700; color: var(--accent-yellow); }
@@ -75,6 +113,7 @@
         .gray-bar-right i:hover { color: white; transform: scale(1.2); }
         #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 15px; }
 
+        /* Premium Header */
         header { background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; transition: 0.4s; border-bottom: 1px solid rgba(0,0,0,0.05);}
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; letter-spacing: -0.5px;}
         .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: 0.4s;}
@@ -87,6 +126,7 @@
         .nav-login-btn { background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
         .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
 
+        /* Hero Section */
         .hero-image-container { width: 100%; height: 600px; position: relative; background-color: var(--banner-bg); }
         .hero-image-container img.bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
         .hero-image-container::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(0, 77, 0, 0.6), rgba(0, 77, 0, 0.95)); }
@@ -102,15 +142,17 @@
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
 
-        /* --- UPDATED ACADEMIC PROGRAMS GRID --- */
+        /* --- UPDATED ACADEMIC PROGRAMS GRID (FORCED ONE LINE ON DESKTOP) --- */
         .programs-section { padding: 4rem 0 5rem 0; width: 100%; position: relative; }
         .programs-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            /* Fixed: Force exactly 3 columns so they stay on one line on desktop */
+            grid-template-columns: repeat(3, 1fr); 
             gap: 2.5rem; 
-            max-width: 1300px; 
+            max-width: 1200px; 
             margin: 0 auto; 
             padding: 0 5%; 
+            align-items: stretch; /* Forces equal heights */
         }
         .program-card { 
             background: var(--card-bg); 
@@ -124,6 +166,7 @@
             flex-direction: column; 
             align-items: center;
             text-align: center;
+            height: 100%;
         }
         .program-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
         .prog-icon {
@@ -133,9 +176,10 @@
         }
         .program-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; line-height: 1.2;}
         .grade-badge { display: inline-block; background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px;}
-        .program-card p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; font-weight: 500; flex-grow: 1;}
+        .program-card p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; font-weight: 500; margin-bottom: 20px;}
         
-        .track-section { width: 100%; text-align: left; margin-top: 25px; background: var(--bg-color); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);}
+        /* Auto margin pushes the track section cleanly to the bottom, balancing the cards */
+        .track-section { width: 100%; text-align: left; margin-top: auto; background: var(--bg-color); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);}
         .track-section h4 { font-size: 0.85rem; color: var(--text-dark); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid var(--accent-yellow); padding-left: 8px;}
         .strand-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
         .strand-tags:last-child { margin-bottom: 0; }
@@ -211,6 +255,11 @@
         .auth-switch span { color: var(--primary-color); font-weight: 800; cursor: pointer; transition: 0.3s; }
         .auth-switch span:hover { text-decoration: underline; color: var(--secondary); }
 
+        /* Tablet Fix: If the screen gets smaller than 1024px, nicely stack the cards so they don't squish */
+        @media (max-width: 992px) {
+            .programs-grid { grid-template-columns: 1fr; max-width: 600px; }
+        }
+
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; }
             .gray-bar-left { display: none; } 
@@ -221,6 +270,7 @@
             .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; }
             .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
             
+            /* HAMBURGER PERFECTLY PINNED TO RIGHT CORNER */
             .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
             
             nav { width: 0; } 
@@ -240,9 +290,6 @@
             .action-button { font-size: 1rem; padding: 14px 40px; margin-top: 20px; }
             
             .section-header h2 { font-size: 1.8rem; }
-            
-            /* ADJUST GRID ON MOBILE */
-            .programs-grid { grid-template-columns: 1fr; }
             
             .floating-waypoint { bottom: 95px; right: 15px; padding: 12px; }
             .floating-waypoint i { font-size: 1.2rem; }
@@ -541,6 +588,16 @@
     </div>
 
     <script>
+        function scrollCarousel(direction) {
+            const grid = document.getElementById('features-grid');
+            const scrollAmount = window.innerWidth > 768 ? 380 : 310;
+            if (direction === 'left') {
+                grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
         // --- LOGIN LOGIC TO INCLUDE ADMIN SECRET LOGIN ---
         function handleLogin(event) {
             event.preventDefault();
@@ -670,7 +727,6 @@
             }
         });
 
-        // UPDATED TRANSLATIONS DICTIONARY
         const translations = {
             en: {
                 "nav-login": "Login / Sign Up", "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
