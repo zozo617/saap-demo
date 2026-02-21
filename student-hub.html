@@ -132,8 +132,6 @@
         tr:hover .row-actions { opacity: 1; }
         .edit-icon { color: var(--primary); background: #ecfdf5; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
         .delete-icon { color: var(--danger); background: #fef2f2; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
-        .edit-icon:hover { background: var(--primary); color: white; }
-        .delete-icon:hover { background: var(--danger); color: white; }
 
         /* TASKS */
         .task-list { display: flex; flex-direction: column; gap: 15px; }
@@ -192,13 +190,9 @@
         .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 10px; }
         .modal-buttons button { padding: 12px 24px; border-radius: 10px; font-weight: 800; font-size: 0.95rem; cursor: pointer; border: none; transition: 0.2s; font-family: 'Inter'; }
         .btn-cancel { background: white; color: var(--text-muted); border: 2px solid var(--border-light) !important; }
-        .btn-cancel:hover { background: #f8fafc; color: var(--text-main); border-color: #cbd5e1 !important; }
-        .btn-save { background: var(--primary); color: white; }
-        .btn-save:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
 
         @media (max-width: 768px) {
             body { flex-direction: column; overflow-y: auto; height: auto;}
-            
             .sidebar { width: 100%; height: auto; flex-direction: column; padding: 10px; position: sticky; top: 0; box-shadow: var(--shadow-sm); z-index: 1000;}
             .sidebar-header { flex-direction: row; justify-content: space-between; padding: 10px; text-align: left; border-bottom: none;}
             .sidebar-header h3 { display: block; font-size: 1rem; margin:0;}
@@ -308,7 +302,7 @@
             <div class="quick-stats applicant-only" id="quick-stats-applicant" style="display: none;">
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #3b82f6; background: #eff6ff;"><i class="fa-solid fa-file-signature"></i></div>
-                    <div class="stat-info"><p>Application Step</p><h3>4 / 4 <span style="background: #ecfdf5; color: #047857;">Complete</span></h3></div>
+                    <div class="stat-info"><p>Application Step</p><h3 id="stat-step">2 / 4 <span style="background: #eff6ff; color: #2563eb;">Processing</span></h3></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #10b981; background: #ecfdf5;"><i class="fa-solid fa-money-bill-wave"></i></div>
@@ -316,7 +310,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #f59e0b; background: #fffbeb;"><i class="fa-solid fa-clipboard-check"></i></div>
-                    <div class="stat-info"><p>Exam Status</p><h3>Passed <span style="background: #ecfdf5; color: #047857;">Passed</span></h3></div>
+                    <div class="stat-info"><p>Exam Status</p><h3 id="stat-exam">Pending <span style="background: #fef3c7; color: #d97706;">Action Req.</span></h3></div>
                 </div>
             </div>
 
@@ -324,7 +318,52 @@
                 
                 <div class="left-col" id="left-col">
                     
-                    <div class="card filterable-card applicant-only" data-view="admission-card" style="display:none;">
+                    <div class="card filterable-card applicant-only" id="applicant-pending-view" data-view="admission-card" style="display:none;">
+                        <div class="card-header" style="background: #eff6ff; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-bottom: none; display: block; border-left: 5px solid #3b82f6;">
+                            <h3 style="color: #1e3a8a; margin: 0; font-size: 1.15rem;"><i class="fa-solid fa-clock"></i> STATUS: APPLICATION PROCESSED & WAITING FOR EXAM</h3>
+                            <p style="margin: 5px 0 0 0; font-size: 0.95rem; color: #1e3a8a; font-weight: 500;">Please read the examination guidelines carefully and bring your missing documents on exam day.</p>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                            <div>
+                                <h4 style="color: var(--text-main); margin-bottom: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-calendar-check" style="color: var(--accent);"></i> Entrance Exam Schedule</h4>
+                                <div style="background: #f8fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 20px;">
+                                    <p style="margin-bottom: 8px; font-weight: 500;"><strong style="color: var(--text-main);">Date:</strong> Saturday, March 14, 2026</p>
+                                    <p style="margin-bottom: 8px; font-weight: 500;"><strong style="color: var(--text-main);">Time:</strong> 8:00 AM - 12:00 NN</p>
+                                    <p style="margin-bottom: 8px; font-weight: 500;"><strong style="color: var(--text-main);">Venue:</strong> Main Auditorium, St. Augustine Academy</p>
+                                    <hr style="border: none; border-top: 1px solid var(--border-light); margin: 15px 0;">
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;"><strong>Reminders:</strong> Please bring 2 lead pencils, a valid ID, and your physical test permit. Please arrive 30 minutes before the scheduled time.</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: var(--text-main); margin-bottom: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-folder-open" style="color: var(--accent);"></i> Document Checklist</h4>
+                                <div class="task-list">
+                                    <div class="task-item completed-task" style="padding: 12px 20px;">
+                                        <div class="task-left">
+                                            <div class="task-checkbox checked"><i class="fa-solid fa-check"></i></div>
+                                            <div class="task-details"><h4 style="margin:0;">PSA Birth Certificate</h4></div>
+                                        </div>
+                                    </div>
+                                    <div class="task-item completed-task" style="padding: 12px 20px;">
+                                        <div class="task-left">
+                                            <div class="task-checkbox checked"><i class="fa-solid fa-check"></i></div>
+                                            <div class="task-details"><h4 style="margin:0;">2x2 ID Picture</h4></div>
+                                        </div>
+                                    </div>
+                                    <div class="task-item" style="padding: 12px 20px; border-left: 4px solid var(--danger);">
+                                        <div class="task-left">
+                                            <div class="task-checkbox"></div>
+                                            <div class="task-details"><h4 style="margin:0; color: var(--text-main); text-decoration: none;">Certificate of Good Moral</h4></div>
+                                        </div>
+                                        <div class="task-due" style="margin:0;">Missing</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card filterable-card applicant-only" id="applicant-passed-view" data-view="admission-card" style="display:none;">
                         <div class="card-header" style="background: #ecfdf5; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-bottom: none; display: block; border-left: 5px solid var(--success);">
                             <h3 style="color: var(--primary); margin: 0; font-size: 1.15rem;"><i class="fa-solid fa-circle-check"></i> STATUS: ADMISSION GRANTED & ENROLLMENT COMPLETE</h3>
                             <p style="margin: 5px 0 0 0; font-size: 0.95rem; color: var(--primary); font-weight: 500;">Congratulations! You have passed the entrance examinations and all your documents have been verified. Welcome to SAAPI!</p>
@@ -483,20 +522,20 @@
                                     <span class="timeline-date">Oct 26, 2025</span>
                                 </div>
                             </div>
-                            <div class="timeline-item completed">
+                            <div class="timeline-item active" id="track-exam">
                                 <div class="timeline-icon"></div>
                                 <div class="timeline-content">
                                     <h4>Entrance Examination</h4>
-                                    <p>Exam passed and score recorded.</p>
-                                    <span class="timeline-date">Nov 02, 2025</span>
+                                    <p>Schedule generated and pending exam.</p>
+                                    <span class="timeline-date" style="color: var(--primary);" id="track-exam-status">Current Status</span>
                                 </div>
                             </div>
-                            <div class="timeline-item active">
+                            <div class="timeline-item" id="track-grant">
                                 <div class="timeline-icon"></div>
                                 <div class="timeline-content">
                                     <h4>Admission Granted</h4>
                                     <p>SAAP ID and credentials generated.</p>
-                                    <span class="timeline-date" style="color: var(--primary);">Current Status</span>
+                                    <span class="timeline-date" style="color: var(--primary); display:none;" id="track-grant-status">Current Status</span>
                                 </div>
                             </div>
                             <div class="timeline-item">
@@ -614,6 +653,7 @@
             }
         };
 
+        // NEW ROLE LOGIC THAT LISTENS TO ADMIN
         function applyUserRole() {
             const role = localStorage.getItem('userRole') || 'student'; 
             
@@ -643,6 +683,55 @@
                     else el.style.display = 'block';
                 });
                 switchView('all', document.querySelector('.student-only.nav-item'));
+            }
+        }
+
+        // --- NEW LOGIC TO UPDATE LIVE TRACKER BASED ON ADMIN DASHBOARD ---
+        function checkApplicantStatus() {
+            const applicantStatus = localStorage.getItem('demoApplicantStatus') || 'exam';
+            const pendingView = document.getElementById('applicant-pending-view');
+            const passedView = document.getElementById('applicant-passed-view');
+
+            const trExam = document.getElementById('track-exam');
+            const trExamStatus = document.getElementById('track-exam-status');
+            const trGrant = document.getElementById('track-grant');
+            const trGrantStatus = document.getElementById('track-grant-status');
+
+            if(pendingView && passedView) {
+                if (applicantStatus === 'passed') {
+                    pendingView.style.display = 'none';
+                    passedView.style.display = 'block';
+                    
+                    // Update Tracker Graphics
+                    trExam.classList.remove('active');
+                    trExam.classList.add('completed');
+                    trExamStatus.innerText = 'Nov 02, 2025';
+                    trExamStatus.style.color = '#9ca3af';
+
+                    trGrant.classList.add('active');
+                    trGrantStatus.style.display = 'inline-block';
+                    
+                    // Update Quick Stats
+                    document.getElementById('stat-step').innerHTML = '4 / 4 <span style="background: #ecfdf5; color: #047857;">Complete</span>';
+                    document.getElementById('stat-exam').innerHTML = 'Passed <span style="background: #ecfdf5; color: #047857;">Passed</span>';
+
+                } else {
+                    pendingView.style.display = 'block';
+                    passedView.style.display = 'none';
+                    
+                    // Default Pending Tracker Graphics
+                    trExam.classList.add('active');
+                    trExam.classList.remove('completed');
+                    trExamStatus.innerText = 'Current Status';
+                    trExamStatus.style.color = 'var(--primary)';
+
+                    trGrant.classList.remove('active');
+                    trGrantStatus.style.display = 'none';
+
+                    // Update Quick Stats
+                    document.getElementById('stat-step').innerHTML = '2 / 4 <span style="background: #eff6ff; color: #2563eb;">Processing</span>';
+                    document.getElementById('stat-exam').innerHTML = 'Pending <span style="background: #fef3c7; color: #d97706;">Action Req.</span>';
+                }
             }
         }
 
@@ -696,7 +785,10 @@
                 if(viewName === 'schedule-card') document.getElementById('top-nav-title').innerText = 'My Schedule';
                 if(viewName === 'requests-card') document.getElementById('top-nav-title').innerText = 'Service Requests';
                 if(viewName === 'academics-card') document.getElementById('top-nav-title').innerText = 'Academics & Tasks';
-                if(viewName === 'admission-card') document.getElementById('top-nav-title').innerText = 'Admission Status';
+                if(viewName === 'admission-card') {
+                    document.getElementById('top-nav-title').innerText = 'Admission Status';
+                    document.getElementById('quick-stats-applicant').style.display = 'grid'; // Show stats for applicant
+                }
 
                 allCards.forEach(card => {
                     if(card.dataset.view === viewName || card.dataset.view.includes(viewName)) {
@@ -705,6 +797,9 @@
                         card.style.display = 'none';
                     }
                 });
+
+                // ALWAYS RUN TRACKER CHECK WHEN OPENING ADMISSION CARD
+                if(viewName === 'admission-card') checkApplicantStatus();
             }
         }
 
