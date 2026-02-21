@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAAP | Admin Admissions Dashboard</title>
+    <title>SAAPI | Admin Admissions Dashboard</title>
     
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
@@ -13,15 +13,13 @@
         :root {
             --primary: #047857; 
             --secondary: #022c22; 
-            --accent: #fecb2f; 
+            --accent: #10b981; 
             --bg-light: #f3f4f6; 
             --card-bg: #ffffff;
             --text-main: #1f2937;
             --text-muted: #6b7280;
             --danger: #ef4444;
             --success: #10b981;
-            --warning: #f59e0b;
-            --info: #3b82f6;
             --border-light: #e5e7eb;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
@@ -44,7 +42,7 @@
         .sidebar-menu li { padding: 16px 30px; cursor: pointer; transition: all 0.3s ease; border-left: 4px solid transparent; display: flex; align-items: center; gap: 15px; font-weight: 500; color: #9ca3af; font-size: 0.95rem;}
         .sidebar-menu li i { font-size: 1.1rem; transition: 0.3s; width: 20px; text-align: center;}
         .sidebar-menu li:hover { color: white; background: rgba(255,255,255,0.05); }
-        .sidebar-menu li.active { background: linear-gradient(90deg, rgba(254, 203, 47, 0.15) 0%, transparent 100%); border-left-color: var(--accent); color: white; }
+        .sidebar-menu li.active { background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, transparent 100%); border-left-color: var(--accent); color: white; }
         .sidebar-menu li.active i { color: var(--accent); }
 
         /* TOP NAV */
@@ -52,7 +50,8 @@
         .top-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
         .top-nav h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px;}
         
-        .user-profile { display: flex; align-items: center; gap: 12px; padding: 6px 12px; border-radius: 50px; border: 1px solid var(--border-light); background: white;}
+        .user-profile { display: flex; align-items: center; gap: 12px; padding: 6px 12px; border-radius: 50px; border: 1px solid var(--border-light); background: white; cursor: pointer; transition: 0.3s;}
+        .user-profile:hover { border-color: var(--primary); }
         .user-profile span { font-weight: 700; font-size: 0.95rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
         .avatar { width: 34px; height: 34px; background: #111827; color: var(--accent); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 0.95rem; }
 
@@ -96,12 +95,12 @@
         .badge.rejected { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
 
         .action-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm);}
-        .action-btn:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .action-btn:hover { background: #022c22; transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
         /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s ease;}
         .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-box { background: white; padding: 35px; border-radius: 20px; width: 90%; max-width: 550px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: scale(0.95) translateY(20px); transition: 0.3s; }
+        .modal-box { background: white; padding: 35px; border-radius: 20px; width: 90%; max-width: 550px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: scale(0.95) translateY(20px); transition: 0.3s; border: 1px solid rgba(255,255,255,0.2); }
         .modal-overlay.active .modal-box { transform: scale(1) translateY(0); }
         
         .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 15px;}
@@ -164,9 +163,9 @@
         <div class="top-nav">
             <h2>Admissions Control Panel</h2>
             <div class="nav-right">
-                <div class="user-profile">
+                <div class="user-profile" onclick="adminSignOut()">
                     <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
-                    <span>Administrator</span>
+                    <span>Sign Out <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 0.8rem; margin-left: 5px;"></i></span>
                 </div>
             </div>
         </div>
@@ -287,6 +286,20 @@
     </div>
 
     <script>
+        // --- BOUNCER SCRIPT: PREVENTS NON-ADMINS FROM ACCESSING ---
+        window.onload = function() {
+            const role = localStorage.getItem('userRole');
+            if (role !== 'admin') {
+                alert("ACCESS DENIED: Administrator privileges required.");
+                window.location.href = 'index.html'; 
+            }
+        };
+
+        function adminSignOut() {
+            localStorage.removeItem('userRole');
+            window.location.href = 'index.html';
+        }
+
         let currentEditingBadgeId = '';
 
         function openReviewModal(tempId, name, currentStatus, badgeId) {
@@ -295,7 +308,6 @@
             document.getElementById('status-dropdown').value = currentStatus;
             currentEditingBadgeId = badgeId;
 
-            // Mocking checkboxes based on status for realism
             if(currentStatus === 'passed' || currentStatus === 'exam') {
                 document.getElementById('chk-moral').checked = true;
             } else {
@@ -316,31 +328,22 @@
         function saveStatus() {
             const newStatus = document.getElementById('status-dropdown').value;
             
-            // Only update if it's the target demo row
             if (currentEditingBadgeId) {
                 const badge = document.getElementById(currentEditingBadgeId);
-                
-                // Remove old classes
                 badge.classList.remove('pending', 'exam', 'passed', 'rejected');
                 
-                // Add new class and text
                 badge.classList.add(newStatus);
                 if(newStatus === 'pending') badge.innerText = 'Pending Review';
                 if(newStatus === 'exam') badge.innerText = 'Waiting for Exam';
                 if(newStatus === 'passed') badge.innerText = 'Passed & Accepted';
                 if(newStatus === 'rejected') badge.innerText = 'Rejected';
 
-                // NOTE: If we want this to reflect when the user logs into `student-hub.html`, 
-                // we can save it to localStorage here! This bridges the Admin and Student views perfectly.
+                // BRIDGES TO THE STUDENT HUB DASHBOARD
                 localStorage.setItem('demoApplicantStatus', newStatus);
             }
 
             closeModal();
-            
-            // Show a quick browser alert for feedback
-            setTimeout(() => {
-                alert("Status successfully updated in the system!");
-            }, 300);
+            setTimeout(() => { alert("Status successfully updated in the system!"); }, 300);
         }
     </script>
 </body>
