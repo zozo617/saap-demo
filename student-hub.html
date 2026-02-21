@@ -33,7 +33,6 @@
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- PERFECTLY OUTLINED CIRCULAR LOGO --- */
         .sidebar-logo { width: 85px; height: 85px; border-radius: 50%; object-fit: contain; border: none; padding: 0; margin-bottom: 15px; background: transparent; }
 
         /* SIDEBAR */
@@ -76,28 +75,39 @@
         .dashboard-container { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; transition: 0.3s;}
         
         .welcome-banner { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); color: white; padding: 40px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(4, 120, 87, 0.2); display: flex; justify-content: space-between; align-items: center; animation: pageFadeIn 0.5s ease;}
-        .welcome-banner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; color: white; letter-spacing: -0.5px;}
+        .welcome-banner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; color: white;}
         .welcome-banner p { font-size: 1.1rem; color: #d1fae5; font-weight: 500; }
         .id-badge { text-align: right; background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); }
         .id-badge p { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; font-weight: 800; }
         .id-badge h3 { font-size: 1.6rem; letter-spacing: 2px; font-family: monospace; }
 
         .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px; animation: pageFadeIn 0.6s ease;}
-        .stat-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 20px; border: 1px solid var(--border-light); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;}
-        .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: #d1d5db; }
+        .stat-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 20px; border: 1px solid var(--border-light); border-left: 5px solid var(--primary);}
         .stat-icon { width: 55px; height: 55px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 1.6rem; }
         .stat-info p { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
         .stat-info h3 { font-size: 1.6rem; font-weight: 800; color: var(--text-main); display: flex; align-items: baseline; gap: 8px; }
         .stat-info h3 span { font-size: 0.8rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
 
         .grid { display: grid; grid-template-columns: 1.7fr 1.3fr; gap: 30px; padding-bottom: 50px; animation: pageFadeIn 0.7s ease;}
-        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid var(--border-light); margin-bottom: 30px;}
+        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border-light); margin-bottom: 30px;}
         .card-header { border-bottom: 2px solid var(--bg-light); padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .card-header h3 { color: var(--text-main); font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 12px; }
         .card-header h3 i { color: var(--primary); background: #ecfdf5; padding: 10px; border-radius: 10px; font-size: 1.1rem; }
 
         .action-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm);}
         .action-btn:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        /* --- LIVE STATUS TRACKER STYLES --- */
+        .timeline { display: flex; flex-direction: column; gap: 25px; position: relative; padding-left: 10px; margin-top: 15px;}
+        .timeline::before { content: ''; position: absolute; left: 16px; top: 5px; bottom: 5px; width: 2px; background: var(--border-light); z-index: 1;}
+        .timeline-item { position: relative; z-index: 2; display: flex; gap: 20px; align-items: flex-start;}
+        .timeline-icon { width: 14px; height: 14px; border-radius: 50%; background: var(--border-light); margin-top: 4px; box-shadow: 0 0 0 4px white; transition: 0.3s;}
+        .timeline-item.completed .timeline-icon { background: var(--success); box-shadow: 0 0 0 4px #ecfdf5;}
+        .timeline-item.active .timeline-icon { background: var(--accent); box-shadow: 0 0 0 4px #fef3c7; animation: pulse-small 2s infinite;}
+        .timeline-content h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px; line-height: 1.2;}
+        .timeline-content p { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin: 0; line-height: 1.4;}
+        .timeline-date { font-size: 0.75rem; font-weight: 800; color: #9ca3af; margin-top: 5px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px;}
+        @keyframes pulse-small { 0% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0.5); } 70% { box-shadow: 0 0 0 10px rgba(254, 203, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0); } }
 
         /* TIMETABLE */
         .schedule-controls select { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border-light); font-weight: 700; font-family: 'Inter'; outline: none; cursor: pointer; background: var(--bg-light); color: var(--text-main); }
@@ -452,6 +462,53 @@
 
                 <div class="right-col" id="right-col">
                     
+                    <div class="card filterable-card applicant-only" data-view="admission-card" style="display:none;">
+                        <div class="card-header" style="border: none; padding-bottom: 0; margin-bottom: 15px;">
+                            <h3 style="font-size: 1.15rem;"><i class="fa-solid fa-route"></i> Live Status Tracker</h3>
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h4>Application Submitted</h4>
+                                    <p>Online form and basic info received.</p>
+                                    <span class="timeline-date">Oct 24, 2025</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item completed">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h4>Document Verification</h4>
+                                    <p>All submitted requirements validated.</p>
+                                    <span class="timeline-date">Oct 26, 2025</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item completed">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h4>Entrance Examination</h4>
+                                    <p>Exam passed and score recorded.</p>
+                                    <span class="timeline-date">Nov 02, 2025</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item active">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h4>Admission Granted</h4>
+                                    <p>SAAP ID and credentials generated.</p>
+                                    <span class="timeline-date" style="color: var(--primary);">Current Status</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h4>Officially Enrolled</h4>
+                                    <p>Pending your first login to the Student Dashboard.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card filterable-card student-only" data-view="academics-card">
                         <div class="card-header">
                             <h3><i class="fa-solid fa-book-open-reader"></i> Study Materials</h3>
@@ -557,7 +614,6 @@
             }
         };
 
-        // NEW ROLE LOGIC
         function applyUserRole() {
             const role = localStorage.getItem('userRole') || 'student'; 
             
@@ -590,7 +646,6 @@
             }
         }
 
-        // --- INSTANT STUDENT ACCOUNT ACTIVATION ---
         function activateStudentAccount() {
             localStorage.setItem('userRole', 'student');
             window.location.reload();
