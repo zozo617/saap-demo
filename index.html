@@ -95,7 +95,7 @@
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s ease; }
         nav a:hover { color: var(--primary-color); }
         .nav-login-btn { background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
-        .nav-login-btn:hover { background: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
+        .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
 
         /* Hero Section */
         .hero-image-container { width: 100%; height: 600px; position: relative; background-color: var(--banner-bg); }
@@ -116,11 +116,31 @@
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
 
-        /* Features Cards */
-        .features-section { padding: 2rem 5% 5rem; max-width: 1400px; margin: 0 auto; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .card { background-color: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--border-color); border-bottom: 5px solid var(--accent-yellow); display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-12px); box-shadow: var(--shadow-hover); }
+        /* --- NEW CAROUSEL STYLES FOR FEATURES GRID --- */
+        .features-section { padding: 2rem 5% 5rem; max-width: 1400px; margin: 0 auto; position: relative; }
+        
+        .carousel-container { position: relative; display: flex; align-items: center; padding: 0 20px;}
+        
+        .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: var(--primary-color); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-md); z-index: 10; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
+        .carousel-arrow:hover { background-color: var(--accent-yellow); color: var(--text-dark); transform: translateY(-50%) scale(1.1); }
+        .carousel-arrow.left { left: 0; }
+        .carousel-arrow.right { right: 0; }
+
+        .features-grid { 
+            display: flex; 
+            gap: 2.5rem; 
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            scroll-behavior: smooth;
+            padding: 10px 5px 20px 5px; /* Added padding so shadows don't clip */
+        }
+        .features-grid::-webkit-scrollbar { display: none; } /* Chrome, Safari */
+
+        /* Changed card to lock into horizontal row */
+        .card { flex: 0 0 340px; max-width: 85vw; scroll-snap-align: start; background-color: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--border-color); border-bottom: 5px solid var(--accent-yellow); display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
         .card-img-wrapper { width: 100%; height: 240px; overflow: hidden; }
         .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
         .card:hover .card-img { transform: scale(1.08); }
@@ -221,6 +241,12 @@
             .action-button { font-size: 1rem; padding: 14px 40px; margin-top: 20px; }
             .section-header h2 { font-size: 2rem; }
             .blue-banner { padding: 0 15px; }
+            
+            /* Responsive adjustments for carousel arrows */
+            .carousel-arrow { width: 35px; height: 35px; font-size: 1rem; }
+            .carousel-arrow.left { left: 5px; }
+            .carousel-arrow.right { right: 5px; }
+            .card { flex: 0 0 280px; } 
         }
     </style>
 </head>
@@ -234,7 +260,7 @@
 
     <div class="gray-bar">
         <div class="gray-bar-left">
-            <a href="#"><i class="fa-solid fa-graduation-cap"></i> SAAP Home</a>
+            <a href="#"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
             <a href="#" onclick="openLoginModal('login')" style="color: var(--accent-yellow); font-weight: 700;"><i class="fa-solid fa-users"></i> Student Portal Login</a>
             <a href="#"><i class="fa-solid fa-book"></i> Library</a>
         </div>
@@ -276,53 +302,63 @@
         </div>
     </section>
 
-    <div class="spacer"></div>
+    <div style="text-align: center; padding-top: 1rem; display: flex; justify-content: center;" class="reveal">
+        <div class="location-badge">
+            <i class="fa-solid fa-location-dot"></i> Alvendia St., Poblacion, Floridablanca, Pampanga
+        </div>
+    </div>
 
     <section id="prospectus" class="features-section reveal">
         <div class="section-header">
             <h2 data-key="features-title">Explore Our Programs</h2>
         </div>
-        <div class="features-grid">
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/20/800/600" alt="Academic" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card1-title"><i class="fa-solid fa-book-open"></i> Academic Excellence</h3>
-                    <p data-key="card1-desc">Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential and prepare for higher education.</p>
+        
+        <div class="carousel-container">
+            <button class="carousel-arrow left" onclick="scrollCarousel('left')"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carousel-arrow right" onclick="scrollCarousel('right')"><i class="fa-solid fa-chevron-right"></i></button>
+            
+            <div class="features-grid" id="features-grid">
+                <div class="card">
+                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/20/800/600" alt="Academic" class="card-img"></div>
+                    <div class="card-content">
+                        <h3 data-key="card1-title"><i class="fa-solid fa-book-open"></i> Academic Excellence</h3>
+                        <p data-key="card1-desc">Our rigorous curriculum and dedicated faculty inspire students to reach their full intellectual potential and prepare for higher education.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/3/800/600" alt="Future" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card2-title"><i class="fa-solid fa-rocket"></i> Future Ready</h3>
-                    <p data-key="card2-desc">We equip students with modern skills, strong moral character, and the critical thinking necessary to succeed in a rapidly changing world.</p>
+                <div class="card">
+                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/3/800/600" alt="Future" class="card-img"></div>
+                    <div class="card-content">
+                        <h3 data-key="card2-title"><i class="fa-solid fa-rocket"></i> Future Ready</h3>
+                        <p data-key="card2-desc">We equip students with modern skills, strong moral character, and the critical thinking necessary to succeed in a rapidly changing world.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/336/800/600" alt="Community" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card3-title"><i class="fa-solid fa-hands-holding-child"></i> Vibrant Community</h3>
-                    <p data-key="card3-desc">A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
+                <div class="card">
+                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/336/800/600" alt="Community" class="card-img"></div>
+                    <div class="card-content">
+                        <h3 data-key="card3-title"><i class="fa-solid fa-hands-holding-child"></i> Vibrant Community</h3>
+                        <p data-key="card3-desc">A supportive, inclusive environment where every student is valued. Join our diverse clubs, sports teams, and campus events.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/119/800/600" alt="Technology" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card4-title"><i class="fa-solid fa-laptop-code"></i> Technology & Innovation</h3>
-                    <p data-key="card4-desc">State-of-the-art computer labs and coding programs designed to prepare students for the digital careers of tomorrow.</p>
+                <div class="card">
+                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/119/800/600" alt="Technology" class="card-img"></div>
+                    <div class="card-content">
+                        <h3 data-key="card4-title"><i class="fa-solid fa-laptop-code"></i> Technology & Innovation</h3>
+                        <p data-key="card4-desc">State-of-the-art computer labs and coding programs designed to prepare students for the digital careers of tomorrow.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/73/800/600" alt="Athletics" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card5-title"><i class="fa-solid fa-volleyball"></i> Athletics & Sports</h3>
-                    <p data-key="card5-desc">Develop teamwork and physical fitness through our award-winning varsity programs and intramural sports leagues.</p>
+                <div class="card">
+                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/73/800/600" alt="Athletics" class="card-img"></div>
+                    <div class="card-content">
+                        <h3 data-key="card5-title"><i class="fa-solid fa-volleyball"></i> Athletics & Sports</h3>
+                        <p data-key="card5-desc">Develop teamwork and physical fitness through our award-winning varsity programs and intramural sports leagues.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-img-wrapper"><img src="https://picsum.photos/id/103/800/600" alt="Arts" class="card-img"></div>
-                <div class="card-content">
-                    <h3 data-key="card6-title"><i class="fa-solid fa-palette"></i> Arts & Culture</h3>
-                    <p data-key="card6-desc">Express creativity through our comprehensive fine arts, theater, and music programs, showcasing student talent year-round.</p>
+                <div class="card">
+                    <div class="card-img-wrapper"><img src="https://picsum.photos/id/103/800/600" alt="Arts" class="card-img"></div>
+                    <div class="card-content">
+                        <h3 data-key="card6-title"><i class="fa-solid fa-palette"></i> Arts & Culture</h3>
+                        <p data-key="card6-desc">Express creativity through our comprehensive fine arts, theater, and music programs, showcasing student talent year-round.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -333,13 +369,6 @@
             <h2 data-key="parallax-title">Join the SAAP Family Today</h2>
             <p data-key="parallax-desc">Experience a transformative education that prepares you for success in college and beyond.</p>
             <a href="enroll.html" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
-            
-            <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center;">
-                <div class="location-badge">
-                    <i class="fa-solid fa-location-dot"></i> Alvendia St., Poblacion, Floridablanca, Pampanga
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -445,8 +474,9 @@
     <footer class="mega-footer">
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
-                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> SAAPI
+                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.1rem; font-weight: bold; line-height: 1.2;">
+                    <img src="logo.jpg" alt="St. Augustine Academy Logo" class="footer-logo"> 
+                    St. Augustine Academy<br>of Pampanga, Inc.
                 </div>
                 <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding.</p>
                 <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
@@ -516,6 +546,18 @@
     </div>
 
     <script>
+        // THIS IS THE JAVASCRIPT FOR THE ONE-LINE CAROUSEL ARROWS
+        function scrollCarousel(direction) {
+            const grid = document.getElementById('features-grid');
+            // Scrolls roughly the width of one card
+            const scrollAmount = window.innerWidth > 768 ? 380 : 310;
+            if (direction === 'left') {
+                grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
         function handleLogin(event) {
             event.preventDefault();
             const idInput = document.getElementById('login-id').value;
