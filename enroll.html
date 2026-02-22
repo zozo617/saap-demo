@@ -65,7 +65,8 @@
         .step-dot.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 0 0 6px rgba(4, 120, 87, 0.15); transform: scale(1.1);}
         .step-dot.completed { background: var(--accent); color: var(--text-dark); border-color: var(--accent); }
 
-        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; transition: 0.3s; margin-top: 30px;}
+        .form-section-title:first-child { margin-top: 0; }
         .form-section-title i { color: var(--primary); background: #ecfdf5; padding: 10px; border-radius: 10px; font-size: 1rem;}
 
         .form-step { display: none; opacity: 0; transition: opacity 0.4s ease; }
@@ -328,7 +329,7 @@
         <div class="success-box">
             <i class="fa-solid fa-circle-check"></i>
             <h2>Application Submitted!</h2>
-            <p style="color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Please save your Temporary ID below. You will use this to log into the Student Portal to check your Admission Status and Entrance Exam schedule.</p>
+            <p style="color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Please save your Temporary ID below. You will use this to log into your MySAAP account to check your Admission Status and Entrance Exam schedule.</p>
             
             <div class="temp-id-box">
                 <p>Your Temporary ID</p>
@@ -336,7 +337,7 @@
                 <p class="pwd">Default Password: <strong>demo123</strong></p>
             </div>
 
-            <a href="index.html">Proceed to Portal Login</a>
+            <a href="index.html">Proceed to MySAAP Login</a>
         </div>
     </div>
 
