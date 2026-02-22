@@ -121,14 +121,6 @@
         .strand-tags:last-child { margin-bottom: 0; }
         .strand-tags span { background: white; color: var(--primary-color); padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; border: 1px solid #d1fae5; box-shadow: var(--shadow-sm);}
 
-        /* FACULTY SECTION */
-        .faculty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 5% 5rem; }
-        .faculty-card { text-align: center; background: var(--card-bg); padding: 30px 20px; border-radius: 16px; border: 1px solid var(--border-color); transition: 0.3s; box-shadow: var(--shadow-sm);}
-        .faculty-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary-color);}
-        .fac-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 4px solid #ecfdf5; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
-        .faculty-card h4 { font-size: 1.15rem; font-weight: 800; color: var(--text-dark); margin-bottom: 5px;}
-        .faculty-card p { font-size: 0.9rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
-
         .stats-section { background-color: var(--top-bar-bg); color: white; padding: 5rem 5%; text-align: center; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
         .stat-item i { font-size: 2.8rem; color: var(--accent-yellow); margin-bottom: 1.5rem; animation: float 4s ease-in-out infinite; }
@@ -277,7 +269,7 @@
             <ul>
                 <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
                 <li><a href="#academics" data-key="nav-acad">Academics</a></li>
-                <li><a href="#faculty" data-key="nav-campus">Faculty</a></li>
+                <li><a href="#" data-key="nav-campus">Campus Life</a></li>
                 <li><a href="#about" data-key="nav-about">About Us</a></li>
                 <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">Login / Sign Up</a></li>
             </ul>
@@ -347,34 +339,6 @@
                         <div class="strand-tags"><span>ICT</span><span>Home Economics</span></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faculty" class="programs-section reveal">
-        <div class="section-header">
-            <h2>Meet Our School Leadership</h2>
-        </div>
-        <div class="faculty-grid">
-            <div class="faculty-card">
-                <img src="https://picsum.photos/id/64/200/200" alt="Principal" class="fac-avatar">
-                <h4>Dr. Eleanor Santos</h4>
-                <p>School Principal</p>
-            </div>
-            <div class="faculty-card">
-                <img src="https://picsum.photos/id/91/200/200" alt="Coordinator" class="fac-avatar">
-                <h4>Mr. Ricardo Cruz</h4>
-                <p>SHS Coordinator</p>
-            </div>
-            <div class="faculty-card">
-                <img src="https://picsum.photos/id/129/200/200" alt="Head" class="fac-avatar">
-                <h4>Mrs. Maria Reyes</h4>
-                <p>JHS Dept. Head</p>
-            </div>
-            <div class="faculty-card">
-                <img src="https://picsum.photos/id/338/200/200" alt="Counselor" class="fac-avatar">
-                <h4>Mr. Jose Dela Cruz</h4>
-                <p>Guidance Counselor</p>
             </div>
         </div>
     </section>
@@ -747,8 +711,82 @@
             }
         });
 
-        const translations = { /* Same as before, keeping exact text to save space */ };
-        function changeLanguage(langCode) { /* Exact same logic */ }
+        const translations = {
+            en: {
+                "nav-login": "Login / Sign Up", "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
+                "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
+                "prog-title": "Our Academic Programs",
+                "prog-psgs-title": "Pre-School & Grade School",
+                "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation. Our engaging environment fosters curiosity and a love for lifelong learning.",
+                "prog-jhs-title": "Junior High School",
+                "prog-jhs-desc": "Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills. We focus on holistic development to prepare students for higher academic challenges.",
+                "prog-shs-title": "Senior High School",
+                "prog-shs-desc": "Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training. Specialized tracks ensure students are career-ready and equipped with 21st-century skills.",
+                "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success in college and beyond.", "parallax-btn": "Start Your Application",
+                "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
+                "testi-title": "What Our Students Say",
+                "testi-1": "\"St. Augustine Academy gave me the confidence to pursue my dreams. The teachers truly care about your success.\"",
+                "testi-2": "\"The facilities are amazing, and the sense of community makes every day enjoyable. I made friends for life here.\"",
+                "testi-3": "\"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world.\"",
+                "events-title": "Upcoming Events", "faq-title": "Frequently Asked Questions",
+                "faq1-q": "When does the enrollment period start? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Enrollment begins on March 15th.",
+                "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! We offer academic, athletic, and needs-based scholarships."
+            },
+            tl: { 
+                "nav-login": "Mag-login / Mag-sign Up", "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
+                "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
+                "prog-title": "Aming Programang Akademiko",
+                "prog-psgs-title": "Pre-School at Grade School",
+                "prog-psgs-desc": "Pangunahing nagbibigay ng pagbabasa, pagsusulat, matematika, at kasanayang panlipunan habang ipinapakilala ang mabuting asal sa aming mga batang mag-aaral.",
+                "prog-jhs-title": "Junior High School",
+                "prog-jhs-desc": "Pinapalakas ang mga pangunahing paksa at tinutulungan ang mga mag-aaral na bumuo ng disiplina upang maging handa sa mas mataas na antas ng edukasyon.",
+                "prog-shs-title": "Senior High School",
+                "prog-shs-desc": "Nag-aalok ng mga paksang nakabatay sa strand na naghahanda sa mga mag-aaral para sa kolehiyo o trabaho. Nakakatulong ito sa pagiging handa sa propesyon.",
+                "parallax-title": "Sumali sa Pamilya ng SAAP", "parallax-desc": "Damhin ang isang edukasyong naghahanda sa iyo para sa tagumpay.", "parallax-btn": "Simulan ang Aplikasyon",
+                "stat1": "Pumasa", "stat2": "Ekspertong Guro", "stat3": "Samahan ng Mag-aaral",
+                "testi-title": "Sabi ng Aming Mag-aaral",
+                "testi-1": "\"Binigyan ako ng lakas ng loob na abutin ang aking mga pangarap. Totoong nagmamalasakit ang mga guro.\"",
+                "testi-2": "\"Napakaganda ng mga pasilidad at masaya ang komunidad.\"",
+                "testi-3": "\"Nakatulong ang mga club na matuklasan ko ang hilig ko sa pag-code.\"",
+                "events-title": "Paparating na Kaganapan", "faq-title": "Mga Madalas Itanong",
+                "faq1-q": "Kailan magsisimula ang enrollment? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Magsisimula ito sa Marso 15.",
+                "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng iba't ibang scholarships."
+            },
+            es: { 
+                "nav-login": "Iniciar / Regístrate", "nav-enroll": "Inscribirse", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
+                "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
+                "prog-title": "Nuestros Programas Académicos",
+                "prog-psgs-title": "Preescolar y Primaria",
+                "prog-psgs-desc": "Proporciona habilidades básicas de lectura, escritura, matemáticas y sociales a jóvenes estudiantes mientras introduce valores fundamentales.",
+                "prog-jhs-title": "Escuela Secundaria",
+                "prog-jhs-desc": "Fortalece las materias básicas y ayuda a los estudiantes a desarrollar hábitos de estudio y disciplina para los desafíos futuros.",
+                "prog-shs-title": "Escuela Preparatoria",
+                "prog-shs-desc": "Ofrece materias especializadas que preparan a los estudiantes para la universidad o trabajos, equipándolos con habilidades del siglo XXI.",
+                "parallax-title": "Únete a la Familia SAAP", "parallax-desc": "Experimenta una educación que te prepara para el éxito.", "parallax-btn": "Inicia tu Aplicación",
+                "stat1": "Aprobación", "stat2": "Maestros Expertos", "stat3": "Clubes",
+                "testi-title": "Lo que Dicen los Estudiantes",
+                "testi-1": "\"Me dio la confianza para seguir mis sueños. Los profesores realmente se preocupan.\"",
+                "testi-2": "\"Las instalaciones son increíbles y la comunidad hace que cada día sea agradable.\"",
+                "testi-3": "\"Los clubes de tecnología me ayudaron a descubrir mi pasión.\"",
+                "events-title": "Próximos Eventos", "faq-title": "Preguntas Frecuentes",
+                "faq1-q": "¿Cuándo comienza la inscripción? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "La inscripción comienza el 15 de marzo.",
+                "faq2-q": "¿Hay becas disponibles? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "¡Sí! Ofrecemos becas académicas y deportivas."
+            }
+        };
+
+        function changeLanguage(langCode) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                element.style.opacity = 0;
+                setTimeout(() => {
+                    const iconHTML = element.querySelector('i') && !key.startsWith('faq') ? element.querySelector('i').outerHTML + " " : "";
+                    element.innerHTML = iconHTML + translations[langCode][key];
+                    element.style.opacity = 1;
+                }, 200); 
+            });
+        }
     </script>
 </body>
 </html>
