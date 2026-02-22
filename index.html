@@ -16,18 +16,18 @@
 
     <style>
         :root {
-            --top-bar-bg: #004d00; 
-            --gray-bar-bg: #022c22; 
-            --header-bg: rgba(255, 255, 255, 0.85);
-            --banner-bg: #004d00; 
-            --accent-yellow: #10b981; 
+            --top-bar-bg: #022c22; 
+            --gray-bar-bg: #011812; 
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --banner-bg: #022c22; 
+            --accent-yellow: #fecb2f; 
             --primary-color: #047857; 
+            --secondary-color: #022c22;
             --text-dark: #1f2937;
             --text-muted: #6b7280;
-            --bg-color: #f3f4f6; 
+            --bg-color: #f9fafb; 
             --card-bg: #ffffff;
             --border-color: #e5e7eb;
-            --action-red: #10b981; 
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -36,6 +36,7 @@
         body.dark-mode {
             --header-bg: rgba(30, 30, 30, 0.85);
             --primary-color: #4ade80; 
+            --secondary-color: #064e3b;
             --text-dark: #f0f0f0;
             --text-muted: #9ca3af;
             --bg-color: #121212;
@@ -49,9 +50,12 @@
 
         /* CUSTOM LOADING SCREEN */
         #global-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 999999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
-        #global-loader img { width: 90px; border-radius: 50%; animation: pulse 1s infinite; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
+        #global-loader img { width: 90px; border-radius: 50%; animation: loaderPulse 1s infinite; box-shadow: 0 0 20px rgba(4, 120, 87, 0.5); }
 
-        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+        @keyframes loaderPulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(4, 120, 87, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(4, 120, 87, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(4, 120, 87, 0); } }
+        
+        @keyframes pulseYellow { 0% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(254, 203, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(254, 203, 47, 0); } }
+
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -62,13 +66,13 @@
 
         .floating-waypoint { position: fixed; bottom: 100px; left: 30px; background-color: var(--primary-color); color: #ffffff; border-radius: 50px; display: flex; align-items: center; padding: 15px 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; white-space: nowrap; }
         .floating-waypoint i { font-size: 1.4rem; transition: transform 0.3s ease; }
-        .floating-waypoint:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .floating-waypoint:hover { background-color: var(--secondary-color); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
         .waypoint-text { max-width: 0; opacity: 0; margin-left: 0; font-size: 0.95rem; font-weight: 600; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .floating-waypoint.active .waypoint-text { max-width: 400px; opacity: 1; margin-left: 12px; padding-right: 5px; }
         .floating-waypoint.active i { color: var(--accent-yellow); }
 
-        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
-        .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--primary-color); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(4, 120, 87, 0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
+        .floating-chat:hover { transform: scale(1.1); background-color: var(--secondary-color); animation: none; }
 
         /* CHATBOT STYLES */
         .chatbot-container { position: fixed; bottom: 100px; right: 30px; width: 350px; background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-hover); border: 1px solid var(--border-color); z-index: 1000; overflow: hidden; display: flex; flex-direction: column; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -89,7 +93,7 @@
 
         .chat-suggestions { padding: 15px; background: white; border-top: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 8px; }
         .chat-suggestions button { background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-dark); padding: 8px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .chat-suggestions button:hover { background: var(--accent-yellow); color: white; border-color: var(--accent-yellow); }
+        .chat-suggestions button:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
 
         .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
         .lang-btn { cursor: pointer; opacity: 0.7; transition: 0.3s; }
@@ -112,22 +116,30 @@
         nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: 0.3s ease; }
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s ease; }
         nav a:hover { color: var(--primary-color); }
-        .nav-login-btn { background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
-        .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
+        .nav-login-btn { background: var(--primary-color) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
+        .nav-login-btn:hover { background-color: var(--secondary-color) !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(4, 120, 87, 0.4); }
 
         /* HERO SLIDESHOW */
         .hero-image-container { width: 100%; height: 600px; position: relative; background-color: var(--banner-bg); overflow: hidden;}
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
         .hero-slide.active { opacity: 1; }
-        .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(0, 77, 0, 0.7), rgba(0, 77, 0, 0.95)); z-index: 5; }
+        .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(2, 44, 34, 0.8), rgba(2, 44, 34, 0.95)); z-index: 5; }
 
         .blue-banner { background-color: transparent; color: #fff; text-align: center; padding: 0 20px 80px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; z-index: 10; }
-        .est-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: var(--accent-yellow); padding: 6px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 20px; border: 1px solid rgba(16, 185, 129, 0.4); text-transform: uppercase; backdrop-filter: blur(5px); }
+        .est-badge { display: inline-block; background: rgba(254, 203, 47, 0.15); color: var(--accent-yellow); padding: 6px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 20px; border: 1px solid rgba(254, 203, 47, 0.4); text-transform: uppercase; backdrop-filter: blur(5px); }
         .blue-banner h1 { font-size: 2.8rem; font-weight: 800; max-width: 950px; margin: 0 auto; line-height: 1.2; letter-spacing: -1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .blue-banner p { font-size: 1.15rem; opacity: 0.9; margin-top: 15px; font-weight: 400; max-width: 700px; margin-left: auto; margin-right: auto;}
         
-        .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
-        .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
+        .action-button { background-color: var(--accent-yellow); color: #111827; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(254, 203, 47, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulseYellow 2s infinite; letter-spacing: 0.5px;}
+        .action-button:hover { background-color: #e5b62b; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(254, 203, 47, 0.4);}
+
+        /* ABOUT US HIGHLIGHT ANIMATION */
+        #about:target { animation: highlightFooter 2.5s ease-out; }
+        @keyframes highlightFooter {
+            0% { background-color: var(--secondary-color); }
+            30% { background-color: var(--primary-color); box-shadow: inset 0px 10px 50px rgba(254, 203, 47, 0.2); }
+            100% { background-color: var(--secondary-color); }
+        }
 
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
@@ -155,11 +167,11 @@
         .stat-number { font-size: 3.5rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; font-family: monospace; letter-spacing: -2px;}
         .stat-text { font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #d1fae5; }
 
-        .parallax-section { background: linear-gradient(rgba(0, 77, 0, 0.85), rgba(0, 77, 0, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center; background-attachment: fixed; background-size: cover; padding: 120px 5%; text-align: center; color: white; margin-bottom: 5rem; }
+        .parallax-section { background: linear-gradient(rgba(2, 44, 34, 0.85), rgba(2, 44, 34, 0.85)), url('https://picsum.photos/id/180/1920/1080') no-repeat center center; background-attachment: fixed; background-size: cover; padding: 120px 5%; text-align: center; color: white; margin-bottom: 5rem; }
         .parallax-content h2 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px;}
         .parallax-content p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px auto; opacity: 0.9; font-weight: 300;}
-        .parallax-btn { background-color: var(--accent-yellow); color: #ffffff; padding: 16px 45px; font-weight: 800; border-radius: 50px; text-decoration: none; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: inline-block;}
-        .parallax-btn:hover { background-color: #059669; transform: translateY(-3px);}
+        .parallax-btn { background-color: var(--accent-yellow); color: #111827; padding: 16px 45px; font-weight: 800; border-radius: 50px; text-decoration: none; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 10px 20px rgba(254, 203, 47, 0.2); display: inline-block;}
+        .parallax-btn:hover { background-color: #e5b62b; transform: translateY(-3px);}
 
         .testimonials-section { padding: 0 5% 5rem; max-width: 1400px; margin: 0 auto; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
@@ -168,7 +180,7 @@
         .testimonial-card i.fa-quote-left { font-size: 3.5rem; color: rgba(16, 185, 129, 0.1); position: absolute; top: 20px; left: 20px; }
         .testimonial-text { font-size: 1.05rem; font-weight: 500; color: var(--text-dark); margin-bottom: 25px; position: relative; z-index: 1; line-height: 1.7;}
         .testimonial-author { display: flex; align-items: center; gap: 15px; }
-        .author-avatar { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--accent-yellow)); color: white; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 1.4rem; box-shadow: var(--shadow-sm);}
+        .author-avatar { width: 55px; height: 55px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 1.4rem; box-shadow: var(--shadow-sm);}
         .author-info h4 { color: var(--text-dark); margin: 0; font-weight: 700; font-size: 1.1rem;}
         .author-info p { color: var(--text-muted); font-size: 0.85rem; margin: 0; font-weight: 500;}
 
@@ -186,12 +198,12 @@
         .faq-item { background-color: var(--card-bg); border-radius: 12px; margin-bottom: 1.2rem; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--border-color); transition: 0.3s; }
         .faq-question { width: 100%; text-align: left; padding: 1.5rem 2rem; background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter'; }
         .faq-question:focus { outline: none; }
-        .faq-question i { color: var(--accent-yellow); transition: 0.3s; font-size: 1.2rem;}
+        .faq-question i { color: var(--primary-color); transition: 0.3s; font-size: 1.2rem;}
         .faq-question.active i { transform: rotate(180deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: var(--bg-color); }
         .faq-answer p { padding: 0 2rem 1.5rem; color: var(--text-muted); font-weight: 500; line-height: 1.6;}
 
-        .mega-footer { background-color: #022c22; color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
+        .mega-footer { background-color: var(--secondary-color); color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
         .footer-col h3 { color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 1.5rem; font-weight: 800;}
         .footer-col p { font-size: 0.95rem; margin-bottom: 1rem; color: #9ca3af; line-height: 1.6;}
@@ -202,7 +214,7 @@
         .contact-info i { color: var(--accent-yellow); margin-right: 12px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #9ca3af; font-weight: 500;}
 
-        /* Login Modal with Eye Toggle */
+        /* Login Modal */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .login-box { background: var(--card-bg); padding: 45px 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; text-align: center; transform: scale(0.95) translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.2);}
@@ -217,30 +229,7 @@
         .eye-icon { position: absolute; right: 15px; top: 40px; color: #9ca3af; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
         .eye-icon:hover { color: var(--primary-color); }
         .login-submit { width: 100%; padding: 14px; background: var(--primary-color); color: #ffffff; font-weight: 800; border: none; border-radius: 10px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; font-family: 'Inter'; box-shadow: var(--shadow-md);}
-        .login-submit:hover { background: #064e3b; transform: translateY(-2px); box-shadow: var(--shadow-lg);}
-
-        .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 44, 34, 0.95); backdrop-filter: blur(10px); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s ease; }
-        .search-overlay.active { opacity: 1; visibility: visible; }
-        .search-close { position: absolute; top: 30px; right: 40px; color: white; font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
-        .search-close:hover { color: var(--accent-yellow); transform: rotate(90deg); }
-        .search-content { width: 90%; max-width: 700px; text-align: center; }
-        .search-content h2 { color: white; margin-bottom: 20px; font-size: 2rem; font-weight: 800; }
-        .search-input-box { display: flex; background: white; border-radius: 50px; overflow: hidden; padding: 5px 5px 5px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
-        .search-input-box input { border: none; outline: none; width: 100%; font-size: 1.2rem; font-family: 'Inter'; }
-        .search-input-box button { background: var(--primary-color); color: white; border: none; width: 60px; height: 50px; border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
-        .search-input-box button:hover { background: var(--secondary); }
-        .search-results { margin-top: 30px; text-align: left; }
-        .search-result-item { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; margin-bottom: 10px; display: block; text-decoration: none; color: white; transition: 0.3s; border-left: 4px solid transparent; }
-        .search-result-item:hover { background: rgba(255,255,255,0.2); border-left-color: var(--accent-yellow); padding-left: 30px; }
-        .search-result-item h4 { font-size: 1.1rem; margin-bottom: 5px; color: var(--accent-yellow); font-weight: 800;}
-        .search-result-item p { font-size: 0.9rem; opacity: 0.9; margin: 0; }
-
-        .library-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 20px; }
-        .lib-book { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px 10px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .lib-book:hover { border-color: var(--primary-color); transform: translateY(-5px); box-shadow: var(--shadow-md); background: white;}
-        .lib-book i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; transition: 0.3s;}
-        .lib-book:hover i { transform: scale(1.1); color: var(--accent-yellow);}
-        .lib-book h4 { font-size: 0.9rem; color: var(--text-dark); margin: 0; font-weight: 700;}
+        .login-submit:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: var(--shadow-lg);}
 
         @media (max-width: 992px) { .programs-grid { grid-template-columns: 1fr; max-width: 550px; } }
         @media (max-width: 768px) {
@@ -274,12 +263,9 @@
     <div class="gray-bar">
         <div class="gray-bar-left">
             <a href="index.html"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
-            <a href="#" onclick="openLibrary()"><i class="fa-solid fa-book"></i> Library</a>
         </div>
         <div class="gray-bar-right">
             <a href="https://www.facebook.com/saap.edu.ph" target="_blank" title="Visit SAAP Facebook Page" style="color: inherit; text-decoration: none; margin-right: 15px; font-size: 1.1rem;"><i class="fa-brands fa-facebook-f"></i></a>
-            <span style="color: #6b7280; margin-right: 15px;">|</span>
-            <i class="fa-solid fa-magnifying-glass" style="cursor: pointer; font-size: 1.1rem; transition: 0.3s;" onclick="openSearch()" title="Search"></i>
             <i class="fa-solid fa-moon" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode" style="cursor: pointer; margin-left: 15px; font-size: 1.1rem; color: var(--accent-yellow); transition: 0.3s;"></i>
         </div>
     </div>
@@ -295,13 +281,11 @@
         <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
         <nav>
             <ul>
-                <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
                 <li><a href="#faq" data-key="nav-faq">FAQ</a></li>
                 <li><a href="admission-procedure.html" data-key="nav-procedure">Admission Procedure</a></li>
                 <li><a href="#academics" data-key="nav-acad">Academics</a></li>
-                <li><a href="#" data-key="nav-campus">Campus Life</a></li>
                 <li><a href="about.html" data-key="nav-about">About Us</a></li>
-                <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">Login</a></li>
+                <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal()">MySAAP</a></li>
             </ul>
         </nav>
     </header>
@@ -317,7 +301,7 @@
             <div class="est-badge">Est. 1946</div>
             <h1 data-key="banner-title">St. Augustine Academy is where students can achieve everything they want to be.</h1>
             <p><strong>"Ad Astra, Per Fidem"</strong> — To the stars, through faith.<br>Guided by our core values: Faith &bull; Service &bull; Excellence.</p>
-            <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll Now!</a>
+            <a href="about.html" class="action-button" data-key="banner-btn">About Us</a>
         </div>
     </section>
 
@@ -408,7 +392,7 @@
         <div class="parallax-content">
             <h2 data-key="parallax-title">Join the SAAP Family Today</h2>
             <p data-key="parallax-desc">Experience a transformative education that prepares you for success in college and beyond.</p>
-            <a href="enroll.html" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
+            <a href="admission-procedure.html" class="parallax-btn" data-key="parallax-btn">Start Your Application</a>
         </div>
     </section>
 
@@ -509,9 +493,8 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="enroll.html">Admissions Process</a></li>
+                    <li><a href="admission-procedure.html">Admissions Process</a></li>
                     <li><a href="#">Tuition & Scholarships</a></li>
-                    <li><a href="#">Student Handbook</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -563,32 +546,6 @@
                 <button type="submit" class="login-submit">Secure Login</button>
             </form>
 
-        </div>
-    </div>
-
-    <div class="search-overlay" id="search-overlay">
-        <div class="search-close" onclick="closeSearch()"><i class="fa-solid fa-xmark"></i></div>
-        <div class="search-content">
-            <h2>What are you looking for?</h2>
-            <div class="search-input-box">
-                <input type="text" id="search-input" placeholder="Try typing 'enroll', 'academics', or 'login'..." onkeyup="performSearch()">
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-            <div class="search-results" id="search-results"></div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="library-modal">
-        <div class="login-box" style="max-width: 650px; width: 95%;">
-            <i class="fa-solid fa-xmark close-btn" onclick="closeLibrary()"></i>
-            <h2 style="color: var(--primary-color); margin-bottom: 5px;"><i class="fa-solid fa-book-open-reader"></i> Digital Library</h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Access our collection of open educational resources, modules, and research materials.</p>
-            <div class="library-grid">
-                <div class="lib-book" onclick="window.open('https://scholar.google.com/', '_blank')"><i class="fa-solid fa-book-journal-whills"></i><h4>Google Scholar</h4></div>
-                <div class="lib-book" onclick="window.open('https://web.nlp.gov.ph/', '_blank')"><i class="fa-solid fa-swatchbook"></i><h4>National Library</h4></div>
-                <div class="lib-book" onclick="window.open('https://www.gutenberg.org/', '_blank')"><i class="fa-solid fa-book-atlas"></i><h4>Project Gutenberg</h4></div>
-                <div class="lib-book" onclick="alert('Specific SAAP Modules require MySAAP Account Login.')"><i class="fa-solid fa-laptop-file"></i><h4>SAAP Modules</h4></div>
-            </div>
         </div>
     </div>
 
@@ -646,52 +603,6 @@
                 body.innerHTML += `<div class="msg bot">${reply}</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 1200); 
-        }
-
-        function scrollCarousel(direction) {
-            const grid = document.getElementById('features-grid');
-            const scrollAmount = window.innerWidth > 768 ? 380 : 310;
-            if (direction === 'left') { grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else { grid.scrollBy({ left: scrollAmount, behavior: 'smooth' }); }
-        }
-
-        function openSearch() {
-            document.getElementById('search-overlay').classList.add('active');
-            document.getElementById('search-input').value = '';
-            document.getElementById('search-results').innerHTML = '';
-            setTimeout(() => document.getElementById('search-input').focus(), 100);
-        }
-        function closeSearch() { document.getElementById('search-overlay').classList.remove('active'); }
-        function performSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const results = document.getElementById('search-results');
-            if(query.length < 2) { results.innerHTML = ''; return; }
-            let html = '';
-            if('enrollment admission apply requirements test entrance'.includes(query)) {
-                html += '<a href="enroll.html" class="search-result-item"><h4>Online Enrollment</h4><p>Apply for admission, submit requirements, and get your Temp ID.</p></a>';
-            }
-            if('academics programs courses preschool grade school jhs junior shs senior stem abm humss ict home economics'.includes(query)) {
-                html += '<a href="#academics" onclick="closeSearch()" class="search-result-item"><h4>Academic Programs</h4><p>Explore our PSGS, JHS, and SHS tracks including STEM, ABM, HUMSS, and ICT.</p></a>';
-            }
-            if('portal login student admin dashboard hub'.includes(query)) {
-                html += '<a href="#" onclick="closeSearch(); openLoginModal(\'login\')" class="search-result-item"><h4>Student & Admin Portal</h4><p>Log into your SAAPI dashboard to view schedules and status.</p></a>';
-            }
-            if('facebook social media contact'.includes(query)) {
-                html += '<a href="https://www.facebook.com/saap.edu.ph" target="_blank" class="search-result-item"><h4>Facebook Page</h4><p>Visit our official social media page.</p></a>';
-            }
-            if(html === '') { html = '<p style="color: rgba(255,255,255,0.7); font-style: italic; text-align: center; margin-top: 20px;">No exact matches found. Try typing "enroll", "academics", or "login".</p>'; }
-            results.innerHTML = html;
-        }
-
-        function openLibrary() {
-            const modal = document.getElementById('library-modal');
-            modal.style.display = 'flex';
-            setTimeout(() => { modal.classList.add('active'); }, 10);
-        }
-        function closeLibrary() {
-            const modal = document.getElementById('library-modal');
-            modal.classList.remove('active');
-            setTimeout(() => { modal.style.display = 'none'; }, 300); 
         }
 
         function handleLogin(event) {
@@ -788,8 +699,8 @@
 
         const translations = {
             en: {
-                "nav-login": "Login", "nav-enroll": "Enroll", "nav-faq": "FAQ", "nav-procedure": "Admission Procedure", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
-                "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
+                "nav-login": "MySAAP", "nav-faq": "FAQ", "nav-procedure": "Admission Procedure", "nav-acad": "Academics", "nav-about": "About Us",
+                "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "About Us",
                 "prog-title": "Our Academic Programs",
                 "prog-psgs-title": "Pre-School & Grade School",
                 "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.",
@@ -813,8 +724,8 @@
                 "faq7-q": "How can a student apply for admission? <i class='fa-solid fa-chevron-down'></i>", "faq7-a": "Click <a href='admission-procedure.html' style='color: var(--primary-color); font-weight: 700; text-decoration: underline;'>here</a> to view the full admission procedure."
             },
             tl: { 
-                "nav-login": "Mag-login", "nav-enroll": "Mag-enroll", "nav-faq": "Mga Tanong", "nav-procedure": "Proseso ng Admisyon", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
-                "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
+                "nav-login": "MySAAP", "nav-faq": "Mga Tanong", "nav-procedure": "Proseso ng Admisyon", "nav-acad": "Akademiko", "nav-about": "Tungkol sa Amin",
+                "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Tungkol sa Amin",
                 "prog-title": "Aming Programang Akademiko",
                 "prog-psgs-title": "Pre-School at Grade School",
                 "prog-psgs-desc": "Pangunahing nagbibigay ng pagbabasa, pagsusulat, matematika, at kasanayang panlipunan habang ipinapakilala ang mabuting asal sa aming mga batang mag-aaral.",
@@ -838,8 +749,8 @@
                 "faq7-q": "Paano makakapag-apply ang isang mag-aaral para sa admission? <i class='fa-solid fa-chevron-down'></i>", "faq7-a": "I-click <a href='admission-procedure.html' style='color: var(--primary-color); font-weight: 700; text-decoration: underline;'>dito</a> para makita ang buong proseso ng admission."
             },
             es: { 
-                "nav-login": "Iniciar Sesión", "nav-enroll": "Inscribirse", "nav-faq": "FAQ", "nav-procedure": "Procedimiento de Admisión", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
-                "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
+                "nav-login": "MySAAP", "nav-faq": "FAQ", "nav-procedure": "Procedimiento de Admisión", "nav-acad": "Académica", "nav-about": "Nosotros",
+                "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "Nosotros",
                 "prog-title": "Nuestros Programas Académicos",
                 "prog-psgs-title": "Preescolar y Primaria",
                 "prog-psgs-desc": "Proporciona habilidades básicas de lectura, escritura, matemáticas y sociales a jóvenes estudiantes mientras introduce valores fundamentales.",
