@@ -129,6 +129,14 @@
         .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
         .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
 
+        /* ABOUT US HIGHLIGHT ANIMATION */
+        #about:target { animation: highlightFooter 2.5s ease-out; }
+        @keyframes highlightFooter {
+            0% { background-color: #022c22; }
+            30% { background-color: #064e3b; box-shadow: inset 0px 10px 50px rgba(16, 185, 129, 0.4); }
+            100% { background-color: #022c22; }
+        }
+
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
@@ -296,6 +304,7 @@
         <nav>
             <ul>
                 <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
+                <li><a href="admission-procedure.html" data-key="nav-procedure">Admission Procedure</a></li>
                 <li><a href="#academics" data-key="nav-acad">Academics</a></li>
                 <li><a href="#" data-key="nav-campus">Campus Life</a></li>
                 <li><a href="about.html" data-key="nav-about">About Us</a></li>
@@ -681,7 +690,7 @@
             } else { alert('Invalid Password. For this demo, use: demo123 (or admin123 for Admin)'); }
         }
 
-        function openLoginModal(mode = 'login') {
+        function openLoginModal() {
             const modal = document.getElementById('login-modal');
             modal.style.display = 'flex';
             setTimeout(() => { modal.classList.add('active'); }, 10);
@@ -759,7 +768,7 @@
 
         const translations = {
             en: {
-                "nav-login": "Login", "nav-enroll": "Enroll", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
+                "nav-login": "Login", "nav-enroll": "Enroll", "nav-procedure": "Admission Procedure", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
                 "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
                 "prog-title": "Our Academic Programs",
                 "prog-psgs-title": "Pre-School & Grade School",
@@ -779,7 +788,7 @@
                 "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! We offer academic, athletic, and needs-based scholarships."
             },
             tl: { 
-                "nav-login": "Mag-login", "nav-enroll": "Mag-enroll", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
+                "nav-login": "Mag-login", "nav-enroll": "Mag-enroll", "nav-procedure": "Proseso ng Admisyon", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
                 "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
                 "prog-title": "Aming Programang Akademiko",
                 "prog-psgs-title": "Pre-School at Grade School",
@@ -799,7 +808,7 @@
                 "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng iba't ibang scholarships."
             },
             es: { 
-                "nav-login": "Iniciar Sesión", "nav-enroll": "Inscribirse", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
+                "nav-login": "Iniciar Sesión", "nav-enroll": "Inscribirse", "nav-procedure": "Procedimiento de Admisión", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
                 "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
                 "prog-title": "Nuestros Programas Académicos",
                 "prog-psgs-title": "Preescolar y Primaria",
