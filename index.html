@@ -129,14 +129,6 @@
         .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
         .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
 
-        /* ABOUT US HIGHLIGHT ANIMATION */
-        #about:target { animation: highlightFooter 2.5s ease-out; }
-        @keyframes highlightFooter {
-            0% { background-color: #022c22; }
-            30% { background-color: #064e3b; box-shadow: inset 0px 10px 50px rgba(16, 185, 129, 0.4); }
-            100% { background-color: #022c22; }
-        }
-
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
@@ -304,6 +296,7 @@
         <nav>
             <ul>
                 <li><a href="enroll.html" data-key="nav-enroll">Enroll</a></li>
+                <li><a href="#faq" data-key="nav-faq">FAQ</a></li>
                 <li><a href="admission-procedure.html" data-key="nav-procedure">Admission Procedure</a></li>
                 <li><a href="#academics" data-key="nav-acad">Academics</a></li>
                 <li><a href="#" data-key="nav-campus">Campus Life</a></li>
@@ -464,15 +457,42 @@
         </div>
     </section>
 
-    <section class="faq-section reveal">
+    <section id="faq" class="faq-section reveal">
         <div class="section-header"><h2 data-key="faq-title">Frequently Asked Questions</h2></div>
+        
         <div class="faq-item">
-            <button class="faq-question" data-key="faq1-q">When does the enrollment period start? <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-answer"><p data-key="faq1-a">Enrollment for the upcoming school year begins on March 15th. You can apply online through our Student Portal.</p></div>
+            <button class="faq-question" data-key="faq1-q">Where is SAAP located? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq1-a">SAAP is located along the Angeles-Porac-Floridablanca-Dinalupihan Road, in Poblacion, Floridablanca, Pampanga, 2006, situated right beside the St. Joseph the Worker Parish Church.</p></div>
         </div>
+        
         <div class="faq-item">
-            <button class="faq-question" data-key="faq2-q">Are scholarships available? <i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-answer"><p data-key="faq2-a">Yes! St. Augustine Academy offers academic, athletic, and needs-based scholarships.</p></div>
+            <button class="faq-question" data-key="faq2-q">Is SAAP a private school? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq2-a">Yes, St. Augustine Academy of Pampanga, Inc. (SAAPI) is a private Catholic school owned and operated by the Archdiocese of San Fernando.</p></div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq3-q">Can non-Catholics study and work at SAAP? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq3-a">Yes, SAAP does not discriminate against the admission and employment of non-Catholics, provided they are willing to follow the school's rules and regulations, Catholic teachings, and practices.</p></div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq4-q">Are accessories and makeup allowed at SAAP? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq4-a">Jewelry is not allowed for either boys or girls, except for a wristwatch. Nail polish and make-up are strictly prohibited; however, light make-up is permitted for female Senior High School (SHS) students only.</p></div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq5-q">Are gadgets allowed at SAAP? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq5-a">Cellphones/gadgets are allowed if they will be officially used for emergency or academic purposes WITH a permit signed by the parent/guardian. The permit signed by the guardian will be presented to the adviser, subject teacher, grade level coordinator, POD, and the principal for approval.</p></div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq6-q">What scholarships and grants are available to students? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq6-a">Various scholarships and service grants are available to deserving students. Please inquire at the Lingap Center or contact wecare@saap.edu.ph for details.</p></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" data-key="faq7-q">How can a student apply for admission? <i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-answer"><p data-key="faq7-a">Click <a href="admission-procedure.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">here</a> to view the full admission procedure.</p></div>
         </div>
     </section>
 
@@ -768,7 +788,7 @@
 
         const translations = {
             en: {
-                "nav-login": "Login", "nav-enroll": "Enroll", "nav-procedure": "Admission Procedure", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
+                "nav-login": "Login", "nav-enroll": "Enroll", "nav-faq": "FAQ", "nav-procedure": "Admission Procedure", "nav-acad": "Academics", "nav-campus": "Campus Life", "nav-about": "About Us",
                 "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
                 "prog-title": "Our Academic Programs",
                 "prog-psgs-title": "Pre-School & Grade School",
@@ -784,11 +804,16 @@
                 "testi-2": "\"The facilities are amazing, and the sense of community makes every day enjoyable. I made friends for life here.\"",
                 "testi-3": "\"The robotics and technology clubs helped me discover my passion for coding. SAAP prepares you for the real world.\"",
                 "events-title": "Upcoming Events", "faq-title": "Frequently Asked Questions",
-                "faq1-q": "When does the enrollment period start? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Enrollment begins on March 15th.",
-                "faq2-q": "Are scholarships available? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes! We offer academic, athletic, and needs-based scholarships."
+                "faq1-q": "Where is SAAP located? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "SAAP is located along the Angeles-Porac-Floridablanca-Dinalupihan Road, in Poblacion, Floridablanca, Pampanga, 2006, situated right beside the St. Joseph the Worker Parish Church.",
+                "faq2-q": "Is SAAP a private school? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Yes, St. Augustine Academy of Pampanga, Inc. (SAAPI) is a private Catholic school owned and operated by the Archdiocese of San Fernando.",
+                "faq3-q": "Can non-Catholics study and work at SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Yes, SAAP does not discriminate against the admission and employment of non-Catholics, provided they are willing to follow the school's rules and regulations, Catholic teachings, and practices.",
+                "faq4-q": "Are accessories and makeup allowed at SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq4-a": "Jewelry is not allowed for either boys or girls, except for a wristwatch. Nail polish and make-up are strictly prohibited; however, light make-up is permitted for female Senior High School (SHS) students only.",
+                "faq5-q": "Are gadgets allowed at SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq5-a": "Cellphones/gadgets are allowed if they will be officially used for emergency or academic purposes WITH a permit signed by the parent/guardian. The permit signed by the guardian will be presented to the adviser, subject teacher, grade level coordinator, POD, and the principal for approval.",
+                "faq6-q": "What scholarships and grants are available to students? <i class='fa-solid fa-chevron-down'></i>", "faq6-a": "Various scholarships and service grants are available to deserving students. Please inquire at the Lingap Center or contact wecare@saap.edu.ph for details.",
+                "faq7-q": "How can a student apply for admission? <i class='fa-solid fa-chevron-down'></i>", "faq7-a": "Click <a href='admission-procedure.html' style='color: var(--primary-color); font-weight: 700; text-decoration: underline;'>here</a> to view the full admission procedure."
             },
             tl: { 
-                "nav-login": "Mag-login", "nav-enroll": "Mag-enroll", "nav-procedure": "Proseso ng Admisyon", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
+                "nav-login": "Mag-login", "nav-enroll": "Mag-enroll", "nav-faq": "Mga Tanong", "nav-procedure": "Proseso ng Admisyon", "nav-acad": "Akademiko", "nav-campus": "Kampus", "nav-about": "Tungkol sa Amin",
                 "banner-title": "Sa St. Augustine Academy, makakamit ng mga mag-aaral ang pangarap nila.", "banner-btn": "Mag-enroll Ngayon!",
                 "prog-title": "Aming Programang Akademiko",
                 "prog-psgs-title": "Pre-School at Grade School",
@@ -804,11 +829,16 @@
                 "testi-2": "\"Napakaganda ng mga pasilidad at masaya ang komunidad.\"",
                 "testi-3": "\"Nakatulong ang mga club na matuklasan ko ang hilig ko sa pag-code.\"",
                 "events-title": "Paparating na Kaganapan", "faq-title": "Mga Madalas Itanong",
-                "faq1-q": "Kailan magsisimula ang enrollment? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Magsisimula ito sa Marso 15.",
-                "faq2-q": "Mayroon bang mga scholarship? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo! Nag-aalok kami ng iba't ibang scholarships."
+                "faq1-q": "Saan matatagpuan ang SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "Ang SAAP ay matatagpuan sa kahabaan ng Angeles-Porac-Floridablanca-Dinalupihan Road, sa Poblacion, Floridablanca, Pampanga, 2006, sa tabi mismo ng St. Joseph the Worker Parish Church.",
+                "faq2-q": "Pribadong paaralan ba ang SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Oo, ang St. Augustine Academy of Pampanga, Inc. (SAAPI) ay isang pribadong Katolikong paaralan na pagmamay-ari at pinapatakbo ng Archdiocese ng San Fernando.",
+                "faq3-q": "Maaari bang mag-aral at magtrabaho sa SAAP ang mga hindi Katoliko? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Oo, hindi nagdidiskrimina ang SAAP pagdating sa pagtanggap at pag-eempleyo ng mga hindi Katoliko, basta't handa silang sumunod sa mga patakaran, regulasyon, at turo ng Katoliko.",
+                "faq4-q": "Pinapayagan ba ang mga alahas at makeup sa SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq4-a": "Mahigpit na ipinagbabawal ang mga alahas para sa mga lalaki at babae, maliban sa relo. Ang nail polish at makeup ay mahigpit na ipinagbabawal; subalit, pinapayagan ang light makeup para lamang sa mga babaeng mag-aaral ng Senior High School (SHS).",
+                "faq5-q": "Pinapayagan ba ang mga gadget sa SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq5-a": "Pinapayagan ang mga cellphone/gadget kung gagamitin ito para sa emergency o akademiko MAY KASAMANG permit na nilagdaan ng magulang/guardian. Ang permit ay dapat ipakita sa adviser, guro, grade level coordinator, POD, at principal para maaprubahan.",
+                "faq6-q": "Anong mga scholarship at grant ang maaari para sa mga mag-aaral? <i class='fa-solid fa-chevron-down'></i>", "faq6-a": "May iba't ibang scholarship at service grants na available. Mangyaring magtanong sa Lingap Center o makipag-ugnayan sa wecare@saap.edu.ph para sa detalye.",
+                "faq7-q": "Paano makakapag-apply ang isang mag-aaral para sa admission? <i class='fa-solid fa-chevron-down'></i>", "faq7-a": "I-click <a href='admission-procedure.html' style='color: var(--primary-color); font-weight: 700; text-decoration: underline;'>dito</a> para makita ang buong proseso ng admission."
             },
             es: { 
-                "nav-login": "Iniciar Sesión", "nav-enroll": "Inscribirse", "nav-procedure": "Procedimiento de Admisión", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
+                "nav-login": "Iniciar Sesión", "nav-enroll": "Inscribirse", "nav-faq": "FAQ", "nav-procedure": "Procedimiento de Admisión", "nav-acad": "Académica", "nav-campus": "Vida Escolar", "nav-about": "Nosotros",
                 "banner-title": "St. Augustine Academy es donde los estudiantes logran sus sueños.", "banner-btn": "¡Inscríbete Ahora!",
                 "prog-title": "Nuestros Programas Académicos",
                 "prog-psgs-title": "Preescolar y Primaria",
@@ -824,8 +854,13 @@
                 "testi-2": "\"Las instalaciones son increíbles y la comunidad hace que cada día sea agradable.\"",
                 "testi-3": "\"Los clubes de tecnología me ayudaron a descubrir mi pasión.\"",
                 "events-title": "Próximos Eventos", "faq-title": "Preguntas Frecuentes",
-                "faq1-q": "¿Cuándo comienza la inscripción? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "La inscripción comienza el 15 de marzo.",
-                "faq2-q": "¿Hay becas disponibles? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "¡Sí! Ofrecemos becas académicas y deportivas."
+                "faq1-q": "¿Dónde está ubicado SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq1-a": "SAAP está ubicado a lo largo de Angeles-Porac-Floridablanca-Dinalupihan Road, en Poblacion, Floridablanca, Pampanga, 2006, situado justo al lado de la Iglesia Parroquial St. Joseph the Worker.",
+                "faq2-q": "¿Es SAAP una escuela privada? <i class='fa-solid fa-chevron-down'></i>", "faq2-a": "Sí, St. Augustine Academy of Pampanga, Inc. (SAAPI) es una escuela católica privada propiedad y operada por la Arquidiócesis de San Fernando.",
+                "faq3-q": "¿Pueden los no católicos estudiar y trabajar en SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq3-a": "Sí, SAAP no discrimina en la admisión y empleo de no católicos, siempre que estén dispuestos a seguir las reglas y regulaciones de la escuela, las enseñanzas católicas y las prácticas.",
+                "faq4-q": "¿Se permiten accesorios y maquillaje en SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq4-a": "No se permiten joyas ni para niños ni para niñas, excepto un reloj de pulsera. El esmalte de uñas y el maquillaje están estrictamente prohibidos; sin embargo, se permite un maquillaje ligero solo para estudiantes femeninas de Senior High School (SHS).",
+                "faq5-q": "¿Se permiten dispositivos electrónicos en SAAP? <i class='fa-solid fa-chevron-down'></i>", "faq5-a": "Los celulares/gadgets están permitidos si se usan oficialmente para emergencias o fines académicos CON un permiso firmado por el padre/tutor. El permiso será presentado al asesor, profesor, coordinador de nivel, POD y el director para su aprobación.",
+                "faq6-q": "¿Qué becas y ayudas están disponibles para los estudiantes? <i class='fa-solid fa-chevron-down'></i>", "faq6-a": "Varias becas y ayudas de servicio están disponibles para estudiantes merecedores. Consulte en el Centro Lingap o contacte wecare@saap.edu.ph para más detalles.",
+                "faq7-q": "¿Cómo puede un estudiante solicitar la admisión? <i class='fa-solid fa-chevron-down'></i>", "faq7-a": "Haga clic <a href='admission-procedure.html' style='color: var(--primary-color); font-weight: 700; text-decoration: underline;'>aquí</a> para ver el procedimiento completo de admisión."
             }
         };
 
@@ -834,12 +869,14 @@
             event.target.classList.add('active');
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
-                element.style.opacity = 0;
-                setTimeout(() => {
-                    const iconHTML = element.querySelector('i') && !key.startsWith('faq') ? element.querySelector('i').outerHTML + " " : "";
-                    element.innerHTML = iconHTML + translations[langCode][key];
-                    element.style.opacity = 1;
-                }, 200); 
+                if(translations[langCode][key]) {
+                    element.style.opacity = 0;
+                    setTimeout(() => {
+                        const iconHTML = element.querySelector('i') && !key.startsWith('faq') ? element.querySelector('i').outerHTML + " " : "";
+                        element.innerHTML = iconHTML + translations[langCode][key];
+                        element.style.opacity = 1;
+                    }, 200); 
+                }
             });
         }
     </script>
