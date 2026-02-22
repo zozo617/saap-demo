@@ -16,15 +16,16 @@
 
     <style>
         :root {
-            --top-bar-bg: #004d00; 
-            --gray-bar-bg: #022c22; 
-            --header-bg: rgba(255, 255, 255, 0.85);
-            --banner-bg: #004d00; 
-            --accent-yellow: #10b981; 
+            --top-bar-bg: #022c22; 
+            --gray-bar-bg: #011812; 
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --banner-bg: #022c22; 
+            --accent-yellow: #fecb2f; 
             --primary-color: #047857; 
+            --secondary-color: #022c22;
             --text-dark: #1f2937;
             --text-muted: #6b7280;
-            --bg-color: #f3f4f6; 
+            --bg-color: #f9fafb; 
             --card-bg: #ffffff;
             --border-color: #e5e7eb;
             --action-red: #10b981; 
@@ -37,6 +38,7 @@
         body.dark-mode {
             --header-bg: rgba(30, 30, 30, 0.85);
             --primary-color: #4ade80; 
+            --secondary-color: #064e3b;
             --text-dark: #f0f0f0;
             --text-muted: #9ca3af;
             --bg-color: #121212;
@@ -77,11 +79,11 @@
         nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: 0.3s ease; }
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s ease; }
         nav a:hover, nav a.active { color: var(--primary-color); }
-        .nav-login-btn { white-space: nowrap; background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
-        .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
+        .nav-login-btn { white-space: nowrap; background: var(--primary-color) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
+        .nav-login-btn:hover { background-color: var(--secondary-color) !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(4, 120, 87, 0.4); }
 
         /* ABOUT PAGE SPECIFIC STYLES */
-        .about-hero { width: 100%; height: 350px; position: relative; background: linear-gradient(rgba(0, 77, 0, 0.85), rgba(0, 77, 0, 0.95)), url('campus-photo.jpg') center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; margin-bottom: 4rem; overflow: hidden;}
+        .about-hero { width: 100%; height: 350px; position: relative; background: linear-gradient(rgba(2, 44, 34, 0.8), rgba(2, 44, 34, 0.95)), url('campus-photo.jpg') center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; margin-bottom: 4rem; overflow: hidden;}
         .about-hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; z-index: 2; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: pageFadeIn 0.8s ease;}
         .about-hero p { font-size: 1.1rem; color: var(--accent-yellow); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; z-index: 2; animation: pageFadeIn 1s ease;}
         
@@ -143,7 +145,7 @@
         .program-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
 
         /* FOOTER */
-        .mega-footer { background-color: #022c22; color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
+        .mega-footer { background-color: var(--secondary-color); color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
         .footer-col h3 { color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 1.5rem; font-weight: 800;}
         .footer-col p { font-size: 0.95rem; margin-bottom: 1rem; color: #9ca3af; line-height: 1.6;}
@@ -186,7 +188,6 @@
     <div class="gray-bar">
         <div class="gray-bar-left">
             <a href="index.html"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
-            <a href="#"><i class="fa-solid fa-book"></i> Library</a>
         </div>
         <div class="gray-bar-right">
             <a href="https://www.facebook.com/saap.edu.ph" target="_blank" title="Visit SAAP Facebook Page" style="color: inherit; text-decoration: none; margin-right: 15px; font-size: 1.1rem;"><i class="fa-brands fa-facebook-f"></i></a>
@@ -207,11 +208,11 @@
         <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
         <nav>
             <ul>
-                <li><a href="enroll.html">Enroll</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="index.html#academics">Academics</a></li>
-                <li><a href="#">Campus Life</a></li>
                 <li><a href="about.html" class="active">About Us</a></li>
-                <li><a href="#" class="nav-login-btn">Login / Sign Up</a></li>
+                <li><a href="index.html" class="nav-login-btn">MySAAP</a></li>
             </ul>
         </nav>
     </header>
@@ -363,9 +364,8 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="enroll.html">Admissions Process</a></li>
+                    <li><a href="admission-procedure.html">Admissions Process</a></li>
                     <li><a href="#">Tuition & Scholarships</a></li>
-                    <li><a href="#">Student Handbook</a></li>
                 </ul>
             </div>
             <div class="footer-col">
