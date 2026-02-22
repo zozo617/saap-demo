@@ -231,6 +231,22 @@
         .login-submit { width: 100%; padding: 14px; background: var(--primary-color); color: #ffffff; font-weight: 800; border: none; border-radius: 10px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; font-family: 'Inter'; box-shadow: var(--shadow-md);}
         .login-submit:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: var(--shadow-lg);}
 
+        .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 44, 34, 0.95); backdrop-filter: blur(10px); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s ease; }
+        .search-overlay.active { opacity: 1; visibility: visible; }
+        .search-close { position: absolute; top: 30px; right: 40px; color: white; font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
+        .search-close:hover { color: var(--accent-yellow); transform: rotate(90deg); }
+        .search-content { width: 90%; max-width: 700px; text-align: center; }
+        .search-content h2 { color: white; margin-bottom: 20px; font-size: 2rem; font-weight: 800; }
+        .search-input-box { display: flex; background: white; border-radius: 50px; overflow: hidden; padding: 5px 5px 5px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
+        .search-input-box input { border: none; outline: none; width: 100%; font-size: 1.2rem; font-family: 'Inter'; }
+        .search-input-box button { background: var(--primary-color); color: white; border: none; width: 60px; height: 50px; border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .search-input-box button:hover { background: var(--secondary-color); }
+        .search-results { margin-top: 30px; text-align: left; }
+        .search-result-item { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; margin-bottom: 10px; display: block; text-decoration: none; color: white; transition: 0.3s; border-left: 4px solid transparent; }
+        .search-result-item:hover { background: rgba(255,255,255,0.2); border-left-color: var(--accent-yellow); padding-left: 30px; }
+        .search-result-item h4 { font-size: 1.1rem; margin-bottom: 5px; color: var(--accent-yellow); font-weight: 800;}
+        .search-result-item p { font-size: 0.9rem; opacity: 0.9; margin: 0; }
+
         @media (max-width: 992px) { .programs-grid { grid-template-columns: 1fr; max-width: 550px; } }
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; } .gray-bar-left { display: none; } 
@@ -266,6 +282,8 @@
         </div>
         <div class="gray-bar-right">
             <a href="https://www.facebook.com/saap.edu.ph" target="_blank" title="Visit SAAP Facebook Page" style="color: inherit; text-decoration: none; margin-right: 15px; font-size: 1.1rem;"><i class="fa-brands fa-facebook-f"></i></a>
+            <span style="color: #6b7280; margin-right: 15px;">|</span>
+            <i class="fa-solid fa-magnifying-glass" style="cursor: pointer; font-size: 1.1rem; transition: 0.3s;" onclick="openSearch()" title="Search"></i>
             <i class="fa-solid fa-moon" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode" style="cursor: pointer; margin-left: 15px; font-size: 1.1rem; color: var(--accent-yellow); transition: 0.3s;"></i>
         </div>
     </div>
@@ -281,11 +299,11 @@
         <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
         <nav>
             <ul>
+                <li><a href="about.html" data-key="nav-about">About Us</a></li>
                 <li><a href="#faq" data-key="nav-faq">FAQ</a></li>
                 <li><a href="admission-procedure.html" data-key="nav-procedure">Admission Procedure</a></li>
                 <li><a href="#academics" data-key="nav-acad">Academics</a></li>
-                <li><a href="about.html" data-key="nav-about">About Us</a></li>
-                <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal()">MySAAP</a></li>
+                <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">MySAAP</a></li>
             </ul>
         </nav>
     </header>
@@ -549,6 +567,18 @@
         </div>
     </div>
 
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-close" onclick="closeSearch()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="search-content">
+            <h2>What are you looking for?</h2>
+            <div class="search-input-box">
+                <input type="text" id="search-input" placeholder="Try typing 'enroll', 'academics', or 'login'..." onkeyup="performSearch()">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
     <script>
         // REMOVE LOADER
         window.addEventListener('load', () => {
@@ -603,6 +633,41 @@
                 body.innerHTML += `<div class="msg bot">${reply}</div>`;
                 body.scrollTop = body.scrollHeight;
             }, 1200); 
+        }
+
+        function scrollCarousel(direction) {
+            const grid = document.getElementById('features-grid');
+            const scrollAmount = window.innerWidth > 768 ? 380 : 310;
+            if (direction === 'left') { grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else { grid.scrollBy({ left: scrollAmount, behavior: 'smooth' }); }
+        }
+
+        function openSearch() {
+            document.getElementById('search-overlay').classList.add('active');
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-results').innerHTML = '';
+            setTimeout(() => document.getElementById('search-input').focus(), 100);
+        }
+        function closeSearch() { document.getElementById('search-overlay').classList.remove('active'); }
+        function performSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const results = document.getElementById('search-results');
+            if(query.length < 2) { results.innerHTML = ''; return; }
+            let html = '';
+            if('enrollment admission apply requirements test entrance'.includes(query)) {
+                html += '<a href="enroll.html" class="search-result-item"><h4>Online Enrollment</h4><p>Apply for admission, submit requirements, and get your Temp ID.</p></a>';
+            }
+            if('academics programs courses preschool grade school jhs junior shs senior stem abm humss ict home economics'.includes(query)) {
+                html += '<a href="#academics" onclick="closeSearch()" class="search-result-item"><h4>Academic Programs</h4><p>Explore our PSGS, JHS, and SHS tracks including STEM, ABM, HUMSS, and ICT.</p></a>';
+            }
+            if('portal login student admin dashboard hub'.includes(query)) {
+                html += '<a href="#" onclick="closeSearch(); openLoginModal()" class="search-result-item"><h4>Student & Admin Portal</h4><p>Log into your SAAPI dashboard to view schedules and status.</p></a>';
+            }
+            if('facebook social media contact'.includes(query)) {
+                html += '<a href="https://www.facebook.com/saap.edu.ph" target="_blank" class="search-result-item"><h4>Facebook Page</h4><p>Visit our official social media page.</p></a>';
+            }
+            if(html === '') { html = '<p style="color: rgba(255,255,255,0.7); font-style: italic; text-align: center; margin-top: 20px;">No exact matches found. Try typing "enroll", "academics", or "login".</p>'; }
+            results.innerHTML = html;
         }
 
         function handleLogin(event) {
