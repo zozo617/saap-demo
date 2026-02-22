@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | St. Augustine Academy of Pampanga</title>
+    
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        if(localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark-mode'); }
+    </script>
+
+    <style>
+        :root {
+            --top-bar-bg: #004d00; 
+            --gray-bar-bg: #022c22; 
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --banner-bg: #004d00; 
+            --accent-yellow: #10b981; 
+            --primary-color: #047857; 
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --bg-color: #f3f4f6; 
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --action-red: #10b981; 
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode {
+            --header-bg: rgba(30, 30, 30, 0.85);
+            --primary-color: #4ade80; 
+            --text-dark: #f0f0f0;
+            --text-muted: #9ca3af;
+            --bg-color: #121212;
+            --card-bg: #1f2937;
+            --border-color: #374151;
+            --gray-bar-bg: #000000;
+        }
+
+        /* BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; transition: background-color 0.4s ease, color 0.4s ease; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+        ::selection { background: var(--accent-yellow); color: white; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* NAVIGATION STYLES (MATCHES INDEX) */
+        .top-bar { background-color: var(--top-bar-bg); color: #fff; font-size: 0.85rem; padding: 8px 5%; display: flex; gap: 15px; font-weight: 500; }
+        .gray-bar { background-color: var(--gray-bar-bg); color: #d1d1d1; font-size: 0.8rem; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; transition: 0.4s; }
+        .gray-bar a { color: #d1d1d1; text-decoration: none; margin-right: 20px; transition: 0.3s; cursor: pointer; font-weight: 500;}
+        .gray-bar a:hover { color: white; }
+        .gray-bar-right { display: flex; align-items: center; }
+        .gray-bar-right a, .gray-bar-right i { cursor: pointer; transition: 0.3s; }
+        .gray-bar-right a:hover, .gray-bar-right i:hover { color: white; transform: scale(1.1); }
+        #theme-toggle { font-size: 1.1rem; color: var(--accent-yellow); margin-left: 15px; }
+
+        header { background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 1000; transition: 0.4s; border-bottom: 1px solid rgba(0,0,0,0.05);}
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; letter-spacing: -0.5px;}
+        .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
+        .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: 0.4s;}
+        .logo-subtext { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
+        .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
+        
+        nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: 0.3s ease; }
+        nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s ease; }
+        nav a:hover, nav a.active { color: var(--primary-color); }
+        .nav-login-btn { white-space: nowrap; background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
+        .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
+
+        /* ABOUT PAGE SPECIFIC STYLES */
+        .about-hero { width: 100%; height: 350px; position: relative; background: linear-gradient(rgba(0, 77, 0, 0.85), rgba(0, 77, 0, 0.95)), url('campus-photo.jpg') center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; margin-bottom: 4rem; overflow: hidden;}
+        .about-hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; z-index: 2; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: pageFadeIn 0.8s ease;}
+        .about-hero p { font-size: 1.1rem; color: var(--accent-yellow); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; z-index: 2; animation: pageFadeIn 1s ease;}
+        
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
+
+        /* MVP CARDS (Mission, Vision, Philosophy) */
+        .mvp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 5rem; }
+        .mvp-card { background: var(--card-bg); border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); border-top: 5px solid var(--accent-yellow); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .mvp-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        .mvp-icon { width: 70px; height: 70px; margin: 0 auto 20px; background: #ecfdf5; color: var(--primary-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; border: 3px solid white; box-shadow: var(--shadow-sm);}
+        .mvp-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 15px; }
+        .mvp-card p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; font-weight: 500; }
+
+        /* CORE VALUES RIBBON */
+        .core-values { background: linear-gradient(135deg, var(--primary-color) 0%, var(--gray-bar-bg) 100%); color: white; padding: 50px 20px; border-radius: 20px; text-align: center; margin-bottom: 6rem; box-shadow: var(--shadow-lg); border-bottom: 5px solid var(--accent-yellow);}
+        .core-values h3 { font-size: 1.1rem; color: var(--accent-yellow); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-weight: 800;}
+        .values-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; font-size: 2rem; font-weight: 800; }
+        .values-list span { display: flex; align-items: center; gap: 12px; }
+        .values-list span i { color: var(--accent-yellow); font-size: 1.5rem;}
+
+        /* SPLIT SCREEN SECTIONS (History & Founder) */
+        .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 6rem; }
+        .split-section.reverse { direction: rtl; }
+        .split-section.reverse .split-content { direction: ltr; }
+        .split-section.reverse .img-placeholder { direction: ltr; }
+
+        .split-content { text-align: left; }
+        .split-content h2 { font-size: 2.2rem; font-weight: 800; color: var(--primary-color); margin-bottom: 20px; letter-spacing: -0.5px;}
+        .split-content h2::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; margin-top: 12px;}
+        .split-content p { font-size: 1.05rem; color: var(--text-dark); line-height: 1.8; margin-bottom: 18px; font-weight: 400;}
+        
+        .img-placeholder { background: var(--bg-color); border: 2px dashed var(--border-color); border-radius: 20px; height: 100%; min-height: 450px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--text-muted); transition: 0.3s; position: relative; overflow: hidden;}
+        .img-placeholder:hover { border-color: var(--primary-color); background: var(--card-bg); box-shadow: var(--shadow-md);}
+        .img-placeholder i { font-size: 3rem; color: #cbd5e1; margin-bottom: 15px; transition: 0.3s;}
+        .img-placeholder:hover i { color: var(--primary-color); transform: scale(1.1);}
+        .img-placeholder span { font-weight: 700; font-size: 1.1rem; color: var(--text-dark);}
+        .img-placeholder small { font-weight: 500; font-size: 0.85rem; margin-top: 5px;}
+
+        /* FOOTER (MATCHES INDEX) */
+        .mega-footer { background-color: #022c22; color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .footer-col h3 { color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 1.5rem; font-weight: 800;}
+        .footer-col p { font-size: 0.95rem; margin-bottom: 1rem; color: #9ca3af; line-height: 1.6;}
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 1rem; }
+        .footer-col ul li a { color: #d1fae5; text-decoration: none; transition: 0.3s; font-weight: 500;}
+        .footer-col ul li a:hover { color: white; padding-left: 8px; }
+        .contact-info i { color: var(--accent-yellow); margin-right: 12px; width: 15px;}
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #9ca3af; font-weight: 500;}
+
+        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 992px) {
+            .split-section { grid-template-columns: 1fr; gap: 40px; }
+            .split-section.reverse { direction: ltr; }
+            .img-placeholder { min-height: 350px; }
+        }
+        @media (max-width: 768px) {
+            .gray-bar { flex-direction: column; gap: 10px; } .gray-bar-left { display: none; } 
+            header { padding: 12px 5%; position: relative; } .real-logo { width: 35px; height: 35px; margin-right: 5px; } .logo { gap: 8px; }
+            .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; } .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
+            .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
+            nav { width: 0; } nav ul { display: flex; flex-direction: column; width: 100%; text-align: center; padding: 20px; gap: 15px; position: absolute; top: 100%; left: 0; background: var(--header-bg); box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); } nav ul.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            .about-hero { height: 250px; }
+            .about-hero h1 { font-size: 2.2rem; }
+            .values-list { font-size: 1.4rem; gap: 20px; flex-direction: column; align-items: center;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span class="lang-btn active">English</span> | 
+        <span class="lang-btn">Tagalog</span> | 
+        <span class="lang-btn">Español</span>
+    </div>
+
+    <div class="gray-bar">
+        <div class="gray-bar-left">
+            <a href="index.html"><i class="fa-solid fa-graduation-cap"></i> Academy Home</a>
+            <a href="#"><i class="fa-solid fa-book"></i> Library</a>
+        </div>
+        <div class="gray-bar-right">
+            <a href="https://www.facebook.com/saap.edu.ph" target="_blank" title="Visit SAAP Facebook Page" style="color: inherit; text-decoration: none; margin-right: 15px; font-size: 1.1rem;"><i class="fa-brands fa-facebook-f"></i></a>
+            <span style="color: #6b7280; margin-right: 15px;">|</span>
+            <i class="fa-solid fa-magnifying-glass" style="cursor: pointer; font-size: 1.1rem; transition: 0.3s;" title="Search"></i>
+            <i class="fa-solid fa-moon" id="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode" style="cursor: pointer; margin-left: 15px; font-size: 1.1rem; color: var(--accent-yellow); transition: 0.3s;"></i>
+        </div>
+    </div>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="logo.jpg" alt="SAAPI Logo" class="real-logo">
+            <div class="logo-text">
+                <span>ST. AUGUSTINE ACADEMY</span>
+                <span class="logo-subtext">OF PAMPANGA, INC.</span>
+            </div>
+        </a>
+        <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
+        <nav>
+            <ul>
+                <li><a href="enroll.html">Enroll</a></li>
+                <li><a href="index.html#academics">Academics</a></li>
+                <li><a href="#">Campus Life</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="#" class="nav-login-btn">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <h1>Our Heritage & Identity</h1>
+        <p>Est. 1946</p>
+    </section>
+
+    <div class="container">
+        
+        <div class="mvp-grid reveal">
+            <div class="mvp-card">
+                <div class="mvp-icon"><i class="fa-solid fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p>St. Augustine Academy of Pampanga, Inc. is a Catholic Archdiocesan Educational Community, centered in the person and message of Jesus Christ, animated by Gospel values and guided by church teachings and practices.</p>
+            </div>
+            <div class="mvp-card">
+                <div class="mvp-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p>To adopt and implement the Philippine Catholic Schools Standards, ensuring a holistic, faith-driven, and high-quality education for every student who walks through our doors.</p>
+            </div>
+            <div class="mvp-card">
+                <div class="mvp-icon"><i class="fa-solid fa-book-journal-whills"></i></div>
+                <h3>Our Philosophy</h3>
+                <p>Catholic education is <strong>formation, mediation, and transformation</strong>. We aim to nurture students academically, morally, spiritually, socially, and emotionally.</p>
+            </div>
+        </div>
+
+        <div class="core-values reveal">
+            <h3>Our Core Values</h3>
+            <div class="values-list">
+                <span><i class="fa-solid fa-cross"></i> Faith</span>
+                <span><i class="fa-solid fa-hands-holding-child"></i> Service</span>
+                <span><i class="fa-solid fa-medal"></i> Excellence</span>
+            </div>
+        </div>
+
+        <div class="split-section reveal">
+            <div class="split-content">
+                <h2>Our History</h2>
+                <p>After three years of Japanese occupation and the devastation of World War II, Floridablanca was left in poverty, with most buildings destroyed except the church. In 1946, there was a strong need for education and moral rebuilding in the community.</p>
+                <p>Father Joseph A. Devlin, a chaplain in the Army Air Corps assigned at Palacol Airbase, saw this need and proposed the establishment of a Catholic high school. With the support of Reverend Father Lucinio Valles, OSA, and the townspeople, St. Augustine Academy (SAA) was founded in July 1946 as a non-stock Catholic school under the Parish of Saint Joseph.</p>
+                <p>The school started with 135 students, holding classes in the church and sacristy due to limited facilities. Its first graduating class had only five students. Over time, more classrooms were built, and the school became the center of community life. The curriculum followed the U.S. education system, emphasizing English and literature.</p>
+                <p>In 1948, SAA was officially incorporated and recognized by the government. From its humble beginnings in a sacristy, St. Augustine Academy of Pampanga grew into a well-established institution with multiple buildings and modern facilities. Now in its 80th year of existence, it remains committed to developing its students through holistic formation.</p>
+            </div>
+            <div class="split-image">
+                <div class="img-placeholder">
+                    <i class="fa-regular fa-image"></i>
+                    <span>Historical Campus Photo</span>
+                    <small>(Insert Old Image Here)</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="split-section reverse reveal">
+            <div class="split-content">
+                <h2>The Founder</h2>
+                <p>In 1946, the first secondary school in Floridablanca, Saint Augustine Academy, was founded by Fr. Joseph A. Devlin, an American chaplain of the U.S. Air Force assigned at the Floridablanca Air Field, in collaboration with Fr. Lucinio Valles, OSA, the parish priest at that time. Established in response to the community's strong desire for education after the war, the school opened with more than a hundred eager enrollees.</p>
+                <p>Fr. Devlin served not only as founder and director but also as teacher, coach, and even janitor. Before leaving in 1948, he reminded the community, <em>"This is your school. Take care of it."</em> True to his vision, the school produced thousands of professionals and scholars.</p>
+                <p>Born on April 15, 1914, in West Des Moines, Iowa, Fr. Devlin studied Philosophy and Theology in the United States and Rome, served in World War II, and spent many years in parish work before his death in 1996. He later returned to Floridablanca in 1987, where he was honored as a "Son of Floridablanca."</p>
+                <p>The school was named after Saint Augustine, honoring both the great Doctor of the Church and Fr. Valles' Augustinian roots. Its seal features an eagle perched on a diploma, symbolizing its American foundation and educational mission. The original motto, "Ad Astra Per Fidem" (To the stars in faith), was later changed to "Unum in Sapientia et Caritate" (One in knowledge and love).</p>
+            </div>
+            <div class="split-image">
+                <div class="img-placeholder">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Fr. Joseph A. Devlin</span>
+                    <small>(Insert Founder Portrait Here)</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="about" class="mega-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
+                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> 
+                    St. Augustine Academy<br>of Pampanga, Inc.
+                </div>
+                <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding in 1946.</p>
+                <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="enroll.html">Admissions Process</a></li>
+                    <li><a href="#">Tuition & Scholarships</a></li>
+                    <li><a href="#">Student Handbook</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <p><i class="fa-solid fa-location-dot"></i> St. Augustine Academy, Pampanga</p>
+                    <p><i class="fa-solid fa-phone"></i> (04597) 01061</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 St. Augustine Academy of Pampanga, Inc. Website built by Pure X. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            if(navMenu.classList.contains('active')) { mobileBtn.classList.remove('fa-bars'); mobileBtn.classList.add('fa-xmark');
+            } else { mobileBtn.classList.remove('fa-xmark'); mobileBtn.classList.add('fa-bars'); }
+        });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal); reveal(); 
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');
+            const icon = document.getElementById('theme-toggle');
+            if(document.documentElement.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
+            }
+        }
+
+        if(document.documentElement.classList.contains('dark-mode')) {
+            document.getElementById('theme-toggle').classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
+</body>
+</html>
