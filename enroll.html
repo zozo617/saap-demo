@@ -65,7 +65,8 @@
         .step-dot.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 0 0 6px rgba(4, 120, 87, 0.15); transform: scale(1.1);}
         .step-dot.completed { background: var(--accent); color: var(--text-dark); border-color: var(--accent); }
 
-        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; transition: 0.3s; margin-top: 30px;}
+        .form-section-title:first-child { margin-top: 0; }
         .form-section-title i { color: var(--primary); background: #ecfdf5; padding: 10px; border-radius: 10px; font-size: 1rem;}
 
         .form-step { display: none; opacity: 0; transition: opacity 0.4s ease; }
@@ -159,12 +160,25 @@
                 </div>
 
                 <div class="form-step active" id="step-0">
-                    <div class="form-section-title"><i class="fa-solid fa-user"></i> Student Information</div>
+                    <div class="form-section-title"><i class="fa-solid fa-layer-group"></i> Program Application</div>
                     <div class="form-grid">
+                        <div class="form-group">
+                            <label>Level Applying For</label>
+                            <select id="level-applying" required onchange="toggleLevelFields()">
+                                <option value="" disabled selected>Select Level</option>
+                                <option value="PSGS">Pre-School & Grade School (PSGS)</option>
+                                <option value="JHS">Junior High School (JHS)</option>
+                                <option value="SHS">Senior High School (SHS)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Learner Reference Number (LRN)</label><input type="text" placeholder="12-digit LRN" required></div>
+                    </div>
+
+                    <div class="form-section-title"><i class="fa-solid fa-user"></i> I - Personal Data</div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Last Name</label><input type="text" placeholder="e.g. Dela Cruz" required></div>
                         <div class="form-group"><label>First Name</label><input type="text" placeholder="e.g. Juan" required></div>
                         <div class="form-group"><label>Middle Name</label><input type="text" placeholder="e.g. Santos"></div>
-                        <div class="form-group"><label>Last Name</label><input type="text" placeholder="e.g. Dela Cruz" required></div>
-                        <div class="form-group"><label>Date of Birth</label><input type="date" required></div>
                         <div class="form-group"><label>Gender</label>
                             <select required>
                                 <option value="" disabled selected>Select Gender</option>
@@ -172,15 +186,13 @@
                                 <option value="Female">Female</option>
                             </select>
                         </div>
-                        <div class="form-group full-width"><label>Complete Address</label><input type="text" placeholder="House No., Street, Barangay, City, Province" required></div>
-                    </div>
-
-                    <div class="form-section-title"><i class="fa-solid fa-address-book"></i> Contact Details</div>
-                    <div class="form-grid">
-                        <div class="form-group"><label>Student Email</label><input type="email" placeholder="juan@example.com" required></div>
-                        <div class="form-group"><label>Mobile Number</label><input type="tel" placeholder="09XX XXX XXXX" required></div>
-                        <div class="form-group"><label>Parent/Guardian Name</label><input type="text" placeholder="Full Name" required></div>
-                        <div class="form-group"><label>Guardian Number</label><input type="tel" placeholder="09XX XXX XXXX" required></div>
+                        <div class="form-group"><label>Date of Birth (mm/dd/yyyy)</label><input type="date" required></div>
+                        <div class="form-group"><label>Age</label><input type="number" placeholder="e.g. 16" required></div>
+                        <div class="form-group"><label>Civil Status</label><input type="text" placeholder="e.g. Single" required></div>
+                        <div class="form-group"><label>Religion</label><input type="text" placeholder="e.g. Catholic" required></div>
+                        <div class="form-group full-width"><label>Place of Birth</label><input type="text" placeholder="City, Province" required></div>
+                        <div class="form-group"><label>Contact Mobile Number</label><input type="tel" placeholder="09XX XXX XXXX" required></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" placeholder="juan@example.com" required></div>
                     </div>
                     
                     <div class="btn-group" style="justify-content: flex-end;">
@@ -189,32 +201,43 @@
                 </div>
 
                 <div class="form-step" id="step-1">
-                    <div class="form-section-title"><i class="fa-solid fa-graduation-cap"></i> Academic Background</div>
+                    <div class="form-section-title"><i class="fa-solid fa-envelope"></i> II - Data for Recommendation Form</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -15px; margin-bottom: 15px;">Note: We will send the form directly to them.</p>
                     <div class="form-grid">
-                        <div class="form-group full-width"><label>Previous School Attended</label><input type="text" placeholder="Name of last school attended" required></div>
-                        <div class="form-group"><label>General Average (GPA)</label><input type="number" placeholder="e.g. 90.5" step="0.1" required></div>
-                        <div class="form-group">
-                            <label>Incoming Grade Level</label>
-                            <select id="grade-level" required onchange="toggleStrand()">
-                                <option value="" disabled selected>Select Grade Level</option>
-                                <option value="7">Grade 7 (JHS)</option>
-                                <option value="8">Grade 8 (JHS)</option>
-                                <option value="9">Grade 9 (JHS)</option>
-                                <option value="10">Grade 10 (JHS)</option>
-                                <option value="11">Grade 11 (SHS)</option>
-                                <option value="12">Grade 12 (SHS)</option>
-                            </select>
-                        </div>
-                        <div class="form-group full-width" id="strand-group" style="opacity: 0; height: 0; overflow: hidden; margin-bottom: 0; transition: all 0.4s ease;">
-                            <label>Desired SHS Strand</label>
-                            <select id="strand-select">
-                                <option value="" disabled selected>Select your preferred track</option>
-                                <option value="stem">Science, Technology, Engineering, and Mathematics (STEM)</option>
-                                <option value="humss">Humanities and Social Sciences (HUMSS)</option>
-                                <option value="abm">Accountancy, Business, and Management (ABM)</option>
-                                <option value="gas">General Academic Strand (GAS)</option>
-                            </select>
-                        </div>
+                        <div class="form-group"><label>Name of Class Adviser</label><input type="text" required></div>
+                        <div class="form-group"><label>Email of Class Adviser</label><input type="email" required></div>
+                    </div>
+
+                    <div class="form-section-title"><i class="fa-solid fa-house"></i> III - Residence Data</div>
+                    <div class="form-grid">
+                        <div class="form-group full-width"><label>Apartment Name / House No. / Street</label><input type="text" required></div>
+                        <div class="form-group"><label>District</label><input type="text"></div>
+                        <div class="form-group"><label>Barangay</label><input type="text" required></div>
+                        <div class="form-group"><label>City / Municipality</label><input type="text" required></div>
+                        <div class="form-group"><label>Province / State</label><input type="text" required></div>
+                        <div class="form-group"><label>Country</label><input type="text" required></div>
+                        <div class="form-group"><label>Zipcode</label><input type="text" required></div>
+                        <div class="form-group"><label>Telephone Nos.</label><input type="text"></div>
+                        <div class="form-group full-width"><label>Current Contact Address</label><input type="text" placeholder="Copy Home Address if same" required></div>
+                    </div>
+                    
+                    <div class="form-section-title"><i class="fa-solid fa-users"></i> IV - Family Data</div>
+                    <div class="form-grid">
+                        <div class="form-group full-width"><label style="color: var(--primary); font-size: 1rem;">Father's Information</label></div>
+                        <div class="form-group"><label>Name of Father</label><input type="text" required></div>
+                        <div class="form-group"><label>Occupation</label><input type="text"></div>
+                        <div class="form-group"><label>Email Address</label><input type="email"></div>
+                        <div class="form-group"><label>Contact Mobile Number</label><input type="tel" required></div>
+
+                        <div class="form-group full-width"><label style="color: var(--primary); font-size: 1rem; margin-top: 15px;">Mother's Information</label></div>
+                        <div class="form-group"><label>Name of Mother</label><input type="text" required></div>
+                        <div class="form-group"><label>Occupation</label><input type="text"></div>
+                        <div class="form-group"><label>Email Address</label><input type="email"></div>
+                        <div class="form-group"><label>Contact Mobile Number</label><input type="tel" required></div>
+                        
+                        <div class="form-group full-width"><label style="color: var(--primary); font-size: 1rem; margin-top: 15px;">Guardian's Information (If applicable)</label></div>
+                        <div class="form-group"><label>Contact Person / Guardian Name</label><input type="text" required></div>
+                        <div class="form-group"><label>Guardian Mobile Number</label><input type="tel" required></div>
                     </div>
 
                     <div class="btn-group">
@@ -224,22 +247,24 @@
                 </div>
 
                 <div class="form-step" id="step-2">
-                    <div class="form-section-title"><i class="fa-solid fa-pen-nib"></i> Student Questionnaire</div>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px; font-weight: 500;">Help us get to know you better! Please answer the following questions briefly.</p>
-                    
-                    <div class="form-group full-width">
-                        <label>Why do you want to apply to St. Augustine Academy of Pampanga, Inc.?</label>
-                        <textarea placeholder="Tell us why you chose our institution..." required></textarea>
-                    </div>
-                    
-                    <div class="form-group full-width">
-                        <label>What are your favorite subjects and why?</label>
-                        <textarea placeholder="e.g. Mathematics because I love problem solving..." required></textarea>
+                    <div class="form-section-title"><i class="fa-solid fa-graduation-cap"></i> VI - Educational Background</div>
+                    <div class="form-grid">
+                        <div class="form-group full-width"><label>Name and Address of School Last Attended</label><input type="text" required></div>
+                        <div class="form-group"><label>Year Graduated</label><input type="text" required></div>
+                        <div class="form-group"><label>Awards Received</label><input type="text"></div>
+                        <div class="form-group full-width"><label>Organization / Club Joined</label><input type="text"></div>
                     </div>
 
-                    <div class="form-group full-width">
-                        <label>List any extracurricular activities, clubs, hobbies, or sports you participate in:</label>
-                        <textarea placeholder="e.g. Basketball varsity, Science Club, reading, playing guitar..." required></textarea>
+                    <div id="shs-strand-section" style="display: none; animation: pageFadeIn 0.4s ease;">
+                        <div class="form-section-title"><i class="fa-solid fa-list-ol"></i> VII - Rank Your Preferred Strand</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -15px; margin-bottom: 15px;">Rank from 1 (First Choice) to 5 (Last Choice)</p>
+                        <div class="form-grid">
+                            <div class="form-group"><label>Science, Technology, Engineering and Mathematics (STEM)</label><input type="number" min="1" max="5" class="strand-rank"></div>
+                            <div class="form-group"><label>Humanities and Social Sciences (HUMSS)</label><input type="number" min="1" max="5" class="strand-rank"></div>
+                            <div class="form-group"><label>Accountancy, Business and Management (ABM)</label><input type="number" min="1" max="5" class="strand-rank"></div>
+                            <div class="form-group"><label>Information, Communication and Technology (ICT)</label><input type="number" min="1" max="5" class="strand-rank"></div>
+                            <div class="form-group"><label>Home Economics (HE)</label><input type="number" min="1" max="5" class="strand-rank"></div>
+                        </div>
                     </div>
 
                     <div class="btn-group">
@@ -250,12 +275,45 @@
 
                 <div class="form-step" id="step-3">
                     <div class="form-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> Requirement Uploads</div>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;">Please upload clear, scanned copies or photos of your requirements. Accepted formats: JPG, PNG, PDF.</p>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;">LIST OF DOCUMENTS FOR UPLOADING ACCORDING TO PROGRAM</p>
+                    
+                    <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Basic Requirements (PSGS/JHS/SHS):</h4>
                     <div class="file-upload-grid">
-                        <div class="file-upload-box"><i class="fa-solid fa-file-contract"></i><span>PSA Birth Certificate</span><small>Click to upload</small><input type="file" required></div>
-                        <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Form 138 (Report Card)</span><small>Click to upload</small><input type="file" required></div>
-                        <div class="file-upload-box"><i class="fa-solid fa-file-shield"></i><span>Good Moral Certificate</span><small>Click to upload</small><input type="file" required></div>
-                        <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 ID Picture</span><small>White Background</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 Photo with Name Tag</span><small>Click to upload</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-file-shield"></i><span>GMRC Certificate (Original)</span><small>Click to upload</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Recent Report Card (F138)</span><small>Photocopy</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-receipt"></i><span>Copy of Application Fee Receipt</span><small>Click to upload</small><input type="file" required></div>
+                    </div>
+
+                    <div id="shs-requirements" style="display:none; margin-top: 25px;">
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements (SHS):</h4>
+                        <div class="file-upload-grid">
+                            <div class="file-upload-box"><i class="fa-solid fa-file-lines"></i><span>Copy of Learner's Ref No.</span><small>Click to upload</small><input type="file" class="shs-file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-certificate"></i><span>ESC / QVR Certificate</span><small>Click to upload</small><input type="file" class="shs-file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-pdf"></i><span>NCAE COR (Photocopy)</span><small>Click to upload</small><input type="file" class="shs-file"></div>
+                        </div>
+                    </div>
+
+                    <div id="grant-requirements" style="display:none; margin-top: 25px;">
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements for Grants / ESC / Financial Assistance (Gr7):</h4>
+                        <div class="file-upload-grid">
+                            <div class="file-upload-box"><i class="fa-solid fa-award"></i><span>Certificate of Ranking</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-contract"></i><span>PSA Birth Certificate</span><small>Photocopy</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice-dollar"></i><span>Latest ITR / Tax Exemption</span><small>or Unemployment Cert</small><input type="file"></div>
+                        </div>
+                    </div>
+
+                    <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 20px; margin-top: 30px; border-radius: 8px;">
+                        <h4 style="color: #1e3a8a; font-size: 0.95rem; margin-bottom: 10px; text-transform: uppercase;"><i class="fa-solid fa-circle-info"></i> Important Reminders</h4>
+                        <ul style="font-size: 0.85rem; color: #1e3a8a; margin-left: 20px; line-height: 1.6;">
+                            <li>After paying for the application fee, present your official receipt at the LINGAP CENTER and secure your SAAPET schedule.</li>
+                            <li>No Retake Policy.</li>
+                            <li>No Refund on Testing Fee.</li>
+                            <li>Take the test on the given schedule. Latecomers will be rescheduled.</li>
+                            <li>Bring pencil No.2 and ballpen.</li>
+                            <li>Report for Interview.</li>
+                            <li>Claim your enrollment permit and proceed to the registrar's office for the pre-enrollment/enrollment procedures.</li>
+                        </ul>
                     </div>
 
                     <div class="btn-group">
@@ -335,24 +393,35 @@
             updateProgressBar();
         }
 
-        function toggleStrand() {
-            const grade = document.getElementById('grade-level').value;
-            const strandGroup = document.getElementById('strand-group');
-            const strandSelect = document.getElementById('strand-select');
+        function toggleLevelFields() {
+            const level = document.getElementById('level-applying').value;
+            const shsSection = document.getElementById('shs-strand-section');
+            const shsReqs = document.getElementById('shs-requirements');
+            const grantReqs = document.getElementById('grant-requirements');
             
-            if(grade === '11' || grade === '12') {
-                strandGroup.style.height = 'auto';
-                strandGroup.style.opacity = '1';
-                strandGroup.style.marginBottom = '20px';
-                strandGroup.style.paddingTop = '5px';
-                strandSelect.setAttribute('required', 'true');
+            const rankInputs = shsSection.querySelectorAll('.strand-rank');
+            
+            if(level === 'SHS') {
+                shsSection.style.display = 'block';
+                shsReqs.style.display = 'block';
+                grantReqs.style.display = 'none';
+                rankInputs.forEach(input => input.setAttribute('required', 'true'));
+            } else if (level === 'JHS') {
+                shsSection.style.display = 'none';
+                shsReqs.style.display = 'none';
+                grantReqs.style.display = 'block';
+                rankInputs.forEach(input => {
+                    input.removeAttribute('required');
+                    input.value = '';
+                });
             } else {
-                strandGroup.style.height = '0';
-                strandGroup.style.opacity = '0';
-                strandGroup.style.marginBottom = '0';
-                strandGroup.style.paddingTop = '0';
-                strandSelect.removeAttribute('required');
-                strandSelect.value = ''; 
+                shsSection.style.display = 'none';
+                shsReqs.style.display = 'none';
+                grantReqs.style.display = 'none';
+                rankInputs.forEach(input => {
+                    input.removeAttribute('required');
+                    input.value = '';
+                });
             }
         }
 
