@@ -112,7 +112,7 @@
         nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: 0.3s ease; }
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s ease; }
         nav a:hover { color: var(--primary-color); }
-        .nav-login-btn { white-space: nowrap; background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
+        .nav-login-btn { background: var(--action-red) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
         .nav-login-btn:hover { background-color: #059669 !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4); }
 
         /* HERO SLIDESHOW */
@@ -128,12 +128,17 @@
         .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
         .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
 
+        /* SCROLL DOWN ARROW */
+        .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.8); font-size: 2rem; animation: bounce 2s infinite; z-index: 15; cursor: pointer; transition: 0.3s; text-decoration: none; }
+        .scroll-down:hover { color: var(--accent-yellow); }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } 60% { transform: translateY(-7px) translateX(-50%); } }
+
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
         .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--accent-yellow); border-radius: 4px; }
 
         .programs-section { padding: 4rem 0 5rem 0; width: 100%; position: relative; }
-        .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 1300px; margin: 0 auto; padding: 0 5%; align-items: stretch; }
+        .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1300px; margin: 0 auto; padding: 0 5%; align-items: stretch; }
         .program-card { background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); border-top: 5px solid var(--accent-yellow); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; overflow: hidden; height: 100%; }
         .program-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
         .prog-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 3px solid var(--accent-yellow); }
@@ -201,7 +206,7 @@
         .contact-info i { color: var(--accent-yellow); margin-right: 12px; width: 15px;}
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #9ca3af; font-weight: 500;}
 
-        /* Login Modal */
+        /* Login Modal with Eye Toggle */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .login-box { background: var(--card-bg); padding: 45px 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; text-align: center; transform: scale(0.95) translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.2);}
@@ -244,7 +249,7 @@
         .lib-book:hover i { transform: scale(1.1); color: var(--accent-yellow);}
         .lib-book h4 { font-size: 0.9rem; color: var(--text-dark); margin: 0; font-weight: 700;}
 
-        @media (max-width: 992px) { .programs-grid { max-width: 550px; } }
+        @media (max-width: 992px) { .programs-grid { grid-template-columns: 1fr; max-width: 550px; } }
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; } .gray-bar-left { display: none; } 
             header { padding: 12px 5%; position: relative; } .real-logo { width: 35px; height: 35px; margin-right: 5px; } .logo { gap: 8px; }
@@ -314,9 +319,10 @@
         <div class="blue-banner">
             <img src="logo.jpg" alt="SAAPI Logo" class="hero-logo">
             <h1 data-key="banner-title">St. Augustine Academy is where students can achieve everything they want to be.</h1>
-            <p><strong>"Ad Astra, Per Fidem"</strong> — To the stars, through faith.<br>Guided by our core values: Faith &bull; Service &bull; Excellence.</p>
+            <p><strong>"Ad Astra, Per Fidem"</strong> — To the stars, through faith.<br>Est. 1946 &bull; Guided by our core values: Faith &bull; Service &bull; Excellence.</p>
             <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll Now!</a>
         </div>
+        <a href="#academics" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
     </section>
 
     <div class="spacer"></div>
@@ -336,18 +342,7 @@
                     <p data-key="prog-psgs-desc">Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.</p>
                     <div class="track-section">
                         <h4>Core Focus Areas</h4>
-                        <div class="strand-tags">
-                            <span>Basic Literacy</span>
-                            <span>Numeracy</span>
-                            <span>Values Formation</span>
-                            <span>Social Skills</span>
-                        </div>
-                        <h4 style="margin-top: 15px;">Enrichment Activities</h4>
-                        <div class="strand-tags">
-                            <span>Arts & Crafts</span>
-                            <span>Music & Movement</span>
-                            <span>Play-Based Learning</span>
-                        </div>
+                        <div class="strand-tags"><span>Basic Literacy</span><span>Numeracy</span><span>Values Formation</span><span>Social Skills</span></div>
                     </div>
                 </div>
             </div>
@@ -361,18 +356,7 @@
                     <p data-key="prog-jhs-desc">Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.</p>
                     <div class="track-section">
                         <h4>Key Developments</h4>
-                        <div class="strand-tags">
-                            <span>Advanced Sciences</span>
-                            <span>Critical Thinking</span>
-                            <span>Leadership</span>
-                            <span>Character Building</span>
-                        </div>
-                        <h4 style="margin-top: 15px;">Core Subjects Focus</h4>
-                        <div class="strand-tags">
-                            <span>Mathematics</span>
-                            <span>English & Literature</span>
-                            <span>Araling Panlipunan</span>
-                        </div>
+                        <div class="strand-tags"><span>Advanced Sciences</span><span>Critical Thinking</span><span>Leadership</span><span>Character Building</span></div>
                     </div>
                 </div>
             </div>
