@@ -27,6 +27,13 @@
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
+        /* --- NEW: CUSTOM SCROLLBARS & HIGHLIGHT --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light); }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+        ::selection { background: var(--accent); color: var(--text-main); }
+
         /* STRICT DASHBOARD LOCK */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; }
@@ -54,13 +61,28 @@
         .top-nav h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px;}
         .nav-right { display: flex; align-items: center; gap: 25px; }
 
+        /* --- NEW: CLOCK STYLES --- */
+        .clock-container { font-family: monospace; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-align: right; margin-right: 15px; border-right: 2px solid var(--border-light); padding-right: 20px; display: flex; flex-direction: column; justify-content: center;}
+        .clock-container span { font-size: 1.15rem; color: var(--primary); display: block;}
+
+        /* --- NEW: NOTIFICATION DROPDOWN STYLES --- */
+        .notification-icon { cursor: pointer; font-size: 1.25rem; position: relative; color: var(--text-main); transition: 0.3s; }
+        .notification-icon:hover { color: var(--primary); }
+        .notif-dropdown { position: absolute; top: 115%; right: 180px; background: var(--card-bg); width: 320px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; border: 1px solid var(--border-light); overflow: hidden; z-index: 1000;}
+        .notif-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .notif-header { padding: 15px 20px; background: var(--bg-light); border-bottom: 1px solid var(--border-light); font-weight: 800; font-size: 0.95rem; color: var(--text-main); display: flex; justify-content: space-between; align-items: center;}
+        .notif-item { padding: 15px 20px; border-bottom: 1px solid var(--border-light); transition: 0.2s; cursor: pointer; }
+        .notif-item:hover { background: #f8fafc; border-left: 3px solid var(--primary); padding-left: 17px; }
+        .notif-item h4 { margin: 0 0 5px; color: var(--text-main); font-size: 0.9rem; font-weight: 700;}
+        .notif-item p { margin: 0; color: var(--text-muted); font-size: 0.8rem; line-height: 1.4;}
+
         .profile-container { position: relative; }
         .user-profile { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 6px 12px; border-radius: 50px; border: 1px solid var(--border-light); background: white; transition: 0.3s;}
         .user-profile:hover { border-color: var(--primary); }
         .user-profile span { font-weight: 700; font-size: 0.95rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
         .avatar { width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 0.95rem; }
         
-        .dropdown-menu { position: absolute; top: 115%; right: 0; background: white; width: 240px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; border: 1px solid var(--border-light); overflow: hidden;}
+        .dropdown-menu { position: absolute; top: 115%; right: 0; background: white; width: 240px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; border: 1px solid var(--border-light); overflow: hidden; z-index: 1000;}
         .dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .dropdown-header { padding: 20px; background: #f8fafc; border-bottom: 1px solid var(--border-light); text-align: center; }
         .dropdown-header h4 { margin: 0 0 5px 0; font-size: 1.05rem; color: var(--text-main); font-weight: 800;}
@@ -207,6 +229,9 @@
             
             .top-nav { padding: 15px 20px; }
             .top-nav h2 { font-size: 1.1rem; }
+            .clock-container { display: none; }
+            .notif-dropdown { right: 20px; width: 280px; }
+
             .dashboard-container { padding: 15px; }
             .welcome-banner { flex-direction: column; text-align: left; align-items: flex-start; gap: 20px; padding: 25px; }
             
@@ -225,6 +250,16 @@
             .task-item:hover .task-delete { right: auto; }
             
             .reviewer-action { opacity: 1; color: var(--danger); background: #fef2f2;}
+        }
+
+        /* --- NEW: PRINT MEDIA STYLES FOR PRINTING ID --- */
+        @media print {
+            .sidebar, .top-nav, .right-col, button, .action-btn { display: none !important; }
+            .main-content { overflow: visible !important; width: 100% !important; }
+            .dashboard-container { padding: 0 !important; }
+            body { background: white !important; color: black !important; }
+            .card { border: 2px solid #000 !important; box-shadow: none !important; margin: 0; }
+            #applicant-passed-view { display: block !important; page-break-inside: avoid; border: 2px solid #000; padding: 40px; margin: 0;}
         }
     </style>
 </head>
@@ -251,7 +286,25 @@
         <div class="top-nav">
             <h2 id="top-nav-title">Dashboard Overview</h2>
             <div class="nav-right">
-                <i class="fa-solid fa-bell notification-icon"><span class="notification-badge">3</span></i>
+                
+                <div class="clock-container" id="live-clock">
+                    <div id="clock-date">Jan 1, 2026</div>
+                    <span id="clock-time">12:00:00 AM</span>
+                </div>
+
+                <div style="position: relative;">
+                    <div class="notification-icon" onclick="toggleNotif()">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notification-badge" style="position: absolute; top: -8px; right: -8px; background: var(--danger); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 50%; font-family: 'Inter'; font-weight: bold; border: 2px solid var(--card-bg);">3</span>
+                    </div>
+                    <div class="notif-dropdown" id="notifDropdown">
+                        <div class="notif-header">Notifications <span style="font-size: 0.75rem; color: var(--primary); cursor: pointer;">Mark all read</span></div>
+                        <div class="notif-item"><h4>Welcome to SAAPI</h4><p>Your portal account has been created successfully.</p></div>
+                        <div class="notif-item"><h4>Missing Document</h4><p>Please upload your Good Moral certificate.</p></div>
+                        <div class="notif-item"><h4>System Update</h4><p>The library portal will undergo maintenance this weekend.</p></div>
+                    </div>
+                </div>
+
                 <div class="profile-container">
                     <div class="user-profile" onclick="toggleProfileMenu()">
                         <div class="avatar" id="nav-avatar">D</div>
@@ -380,7 +433,10 @@
                                     <p style="margin-bottom: 8px; font-weight: 500;"><strong style="color: var(--text-main);">SAAP Email:</strong> demo@saap.edu.ph</p>
                                     <p style="margin-bottom: 8px; font-weight: 500;"><strong style="color: var(--text-main);">Password:</strong> demo123</p>
                                     
-                                    <button class="action-btn" style="width: 100%; justify-content: center; margin-top: 20px; padding: 12px; font-size: 0.95rem;" onclick="activateStudentAccount()">Login to Student Dashboard <i class="fa-solid fa-arrow-right"></i></button>
+                                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                        <button class="action-btn" id="app-login-btn" style="flex:2; justify-content:center; padding: 12px; font-size: 0.95rem;" onclick="activateStudentAccount()">Login to Dashboard <i class="fa-solid fa-arrow-right"></i></button>
+                                        <button class="action-btn" id="app-print-btn" style="flex:1; background:white; color:var(--text-main); border:2px solid var(--border-light); justify-content:center; padding: 12px; font-size: 0.95rem;" onclick="window.print()"><i class="fa-solid fa-print"></i> Print ID</button>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -616,7 +672,7 @@
                 <input type="text" id="class-room" placeholder="e.g. Gymnasium" required>
                 <div class="modal-buttons">
                     <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
-                    <button type="submit" class="btn-save">Save Class</button>
+                    <button type="submit" class="btn-save" style="background: var(--primary); color: white;">Save Class</button>
                 </div>
             </form>
         </div>
@@ -634,7 +690,7 @@
                 <input type="text" id="task-deadline" placeholder="e.g. Due Tomorrow" required>
                 <div class="modal-buttons">
                     <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
-                    <button type="submit" class="btn-save">Save Assignment</button>
+                    <button type="submit" class="btn-save" style="background: var(--primary); color: white;">Save Assignment</button>
                 </div>
             </form>
         </div>
@@ -643,6 +699,7 @@
     <script>
         window.onload = function() {
             applyUserRole();
+            startClock();
             
             if(localStorage.getItem('saap_tasks')) document.getElementById('task-list-container').innerHTML = localStorage.getItem('saap_tasks');
             if(localStorage.getItem('saap_reviewers')) document.getElementById('reviewer-list-container').innerHTML = localStorage.getItem('saap_reviewers');
@@ -654,7 +711,34 @@
             }
         };
 
-        // NEW ROLE LOGIC THAT LISTENS TO ADMIN
+        // --- NEW: LIVE PORTAL CLOCK FUNCTION ---
+        function startClock() {
+            const timeEl = document.getElementById('clock-time');
+            const dateEl = document.getElementById('clock-date');
+            if(!timeEl || !dateEl) return;
+            setInterval(() => {
+                const now = new Date();
+                timeEl.innerText = now.toLocaleTimeString('en-US');
+                dateEl.innerText = now.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+            }, 1000);
+        }
+
+        // --- NEW: NOTIFICATION DROPDOWN FUNCTION ---
+        function toggleNotif() { 
+            document.getElementById('notifDropdown').classList.toggle('active');
+            document.getElementById('profileDropdown').classList.remove('active');
+        }
+        function toggleProfileMenu() { 
+            document.getElementById('profileDropdown').classList.toggle('active'); 
+            document.getElementById('notifDropdown').classList.remove('active');
+        }
+        window.onclick = function(event) { 
+            if (!event.target.closest('.profile-container') && !event.target.closest('.notification-icon') && !event.target.closest('.notif-dropdown')) { 
+                document.getElementById('profileDropdown').classList.remove('active');
+                document.getElementById('notifDropdown').classList.remove('active');
+            } 
+        }
+
         function applyUserRole() {
             const role = localStorage.getItem('userRole') || 'student'; 
             
@@ -687,7 +771,6 @@
             }
         }
 
-        // --- DYNAMICALLY UPDATES TRACKER BASED ON ADMIN DASHBOARD ---
         function checkApplicantStatus() {
             const applicantStatus = localStorage.getItem('demoApplicantStatus') || 'pending';
             
@@ -747,7 +830,7 @@
 
                     statStep.innerHTML = '3 / 4 <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 20px;">Ready</span>';
                     statExam.innerHTML = 'Pending <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 20px;">Scheduled</span>';
-                } else { // pending or rejected
+                } else { 
                     pendingView.style.display = 'block';
                     passedView.style.display = 'none';
 
@@ -836,13 +919,10 @@
                     }
                 });
 
-                // RUN TRACKER CHECK WHEN OPENING ADMISSION CARD
                 if(viewName === 'admission-card') checkApplicantStatus();
             }
         }
 
-        function toggleProfileMenu() { document.getElementById('profileDropdown').classList.toggle('active'); }
-        window.onclick = function(event) { if (!event.target.closest('.profile-container')) { Array.from(document.getElementsByClassName("dropdown-menu")).forEach(m => m.classList.remove('active')); } }
         function closeModals() {
             document.getElementById('class-modal').classList.remove('active');
             document.getElementById('task-modal').classList.remove('active');
