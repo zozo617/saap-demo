@@ -70,7 +70,7 @@
         .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
 
-        /* CHATBOT STYLES */
+        /* CHATBOT STYLES & TYPING ANIMATION */
         .chatbot-container { position: fixed; bottom: 100px; right: 30px; width: 350px; background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-hover); border: 1px solid var(--border-color); z-index: 1000; overflow: hidden; display: flex; flex-direction: column; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .chatbot-container.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .chat-header { background: var(--primary-color); color: white; padding: 20px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
@@ -80,6 +80,13 @@
         .msg { padding: 12px 18px; border-radius: 15px; font-size: 0.9rem; font-weight: 500; max-width: 85%; animation: pageFadeIn 0.3s ease; }
         .msg.bot { background: white; color: var(--text-dark); align-self: flex-start; border: 1px solid var(--border-color); border-bottom-left-radius: 2px;}
         .msg.user { background: var(--primary-color); color: white; align-self: flex-end; border-bottom-right-radius: 2px;}
+        
+        .typing-indicator { display: flex; padding: 12px 18px; border-radius: 15px; background: white; align-self: flex-start; border: 1px solid var(--border-color); border-bottom-left-radius: 2px; gap: 4px; align-items: center; height: 42px; animation: pageFadeIn 0.3s ease; }
+        .typing-indicator span { display: block; width: 6px; height: 6px; background: var(--primary-color); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
         .chat-suggestions { padding: 15px; background: white; border-top: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 8px; }
         .chat-suggestions button { background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-dark); padding: 8px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
         .chat-suggestions button:hover { background: var(--accent-yellow); color: white; border-color: var(--accent-yellow); }
@@ -570,24 +577,29 @@
             }
         }
 
-        // CHATBOT LOGIC
+        // CHATBOT LOGIC WITH TYPING ANIMATION
         function toggleChat() {
             document.getElementById('chatbot').classList.toggle('active');
         }
         function sendChat(msg) {
             const body = document.getElementById('chat-body');
             body.innerHTML += `<div class="msg user">${msg}</div>`;
+            
+            const typingId = 'typing-' + Date.now();
+            body.innerHTML += `<div class="typing-indicator" id="${typingId}"><span></span><span></span><span></span></div>`;
             body.scrollTop = body.scrollHeight;
             
             setTimeout(() => {
+                document.getElementById(typingId).remove();
+                
                 let reply = "I am an automated assistant. Please contact the admissions office for more specific details.";
-                if(msg.includes("tuition")) reply = "Tuition fees vary depending on the grade level and strand. It typically ranges from ₱15,000 to ₱25,000 per semester.";
-                if(msg.includes("deadline")) reply = "The regular enrollment period ends on May 30th. Late enrollment is subject to availability.";
-                if(msg.includes("requirements")) reply = "You will need your PSA Birth Certificate, Form 138 (Report Card), 2x2 ID Pictures, and a Certificate of Good Moral Character.";
+                if(msg.toLowerCase().includes("tuition")) reply = "Tuition fees vary depending on the grade level and strand. It typically ranges from ₱15,000 to ₱25,000 per semester.";
+                if(msg.toLowerCase().includes("deadline")) reply = "The regular enrollment period ends on May 30th. Late enrollment is subject to availability.";
+                if(msg.toLowerCase().includes("requirements")) reply = "You will need your PSA Birth Certificate, Form 138 (Report Card), 2x2 ID Pictures, and a Certificate of Good Moral Character.";
                 
                 body.innerHTML += `<div class="msg bot">${reply}</div>`;
                 body.scrollTop = body.scrollHeight;
-            }, 600);
+            }, 1200); 
         }
 
         function scrollCarousel(direction) {
@@ -682,7 +694,7 @@
             } else { mobileBtn.classList.remove('fa-xmark'); mobileBtn.classList.add('fa-bars'); }
         });
 
-        // SMOOTH SCROLL REVEAL (AOS Style)
+        // SMOOTH SCROLL REVEAL
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
