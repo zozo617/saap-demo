@@ -6,6 +6,7 @@
     <title>St. Augustine Academy of Pampanga, Inc.</title>
     
     <link rel="icon" type="image/jpeg" href="logo.jpg">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -15,19 +16,32 @@
 
     <style>
         :root {
-            --top-bar-bg: #004d00; --gray-bar-bg: #022c22; --header-bg: rgba(255, 255, 255, 0.85);
-            --banner-bg: #004d00; --accent-yellow: #10b981; --primary-color: #047857; 
-            --text-dark: #1f2937; --text-muted: #6b7280; --bg-color: #f3f4f6; 
-            --card-bg: #ffffff; --border-color: #e5e7eb; --action-red: #10b981; 
+            --top-bar-bg: #004d00; 
+            --gray-bar-bg: #022c22; 
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --banner-bg: #004d00; 
+            --accent-yellow: #10b981; 
+            --primary-color: #047857; 
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --bg-color: #f3f4f6; 
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --action-red: #10b981; 
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        html.dark-mode body {
-            --header-bg: rgba(30, 30, 30, 0.85); --primary-color: #4ade80; 
-            --text-dark: #f0f0f0; --text-muted: #9ca3af; --bg-color: #121212;
-            --card-bg: #1f2937; --border-color: #374151; --gray-bar-bg: #000000;
+        body.dark-mode {
+            --header-bg: rgba(30, 30, 30, 0.85);
+            --primary-color: #4ade80; 
+            --text-dark: #f0f0f0;
+            --text-muted: #9ca3af;
+            --bg-color: #121212;
+            --card-bg: #1f2937;
+            --border-color: #374151;
+            --gray-bar-bg: #000000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -46,9 +60,15 @@
         .modal-real-logo { width: 75px; height: 75px; border-radius: 50%; object-fit: contain; margin-bottom: 15px; border: none; background: transparent; }
         .footer-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; vertical-align: middle; margin-right: 10px; border: none; background: transparent; }
 
-        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: 0.3s; animation: float 3s ease-in-out infinite; }
+        .floating-waypoint { position: fixed; bottom: 100px; right: 30px; background-color: var(--primary-color); color: #ffffff; border-radius: 50px; display: flex; align-items: center; padding: 15px 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; z-index: 9999; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; white-space: nowrap; }
+        .floating-waypoint i { font-size: 1.4rem; transition: transform 0.3s ease; }
+        .floating-waypoint:hover { background-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .waypoint-text { max-width: 0; opacity: 0; margin-left: 0; font-size: 0.95rem; font-weight: 600; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .floating-waypoint.active .waypoint-text { max-width: 400px; opacity: 1; margin-left: 12px; padding-right: 5px; }
+        .floating-waypoint.active i { color: var(--accent-yellow); }
+
+        .floating-chat { position: fixed; bottom: 30px; right: 30px; background-color: var(--accent-yellow); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 999; transition: transform 0.3s, background-color 0.3s; animation: float 3s ease-in-out infinite; }
         .floating-chat:hover { transform: scale(1.1); background-color: #059669; animation: none; }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
         /* CHATBOT STYLES */
         .chatbot-container { position: fixed; bottom: 100px; right: 30px; width: 350px; background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow-hover); border: 1px solid var(--border-color); z-index: 1000; overflow: hidden; display: flex; flex-direction: column; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -228,6 +248,9 @@
             .section-header h2 { font-size: 1.8rem; } .programs-grid { grid-template-columns: 1fr; }
             .floating-chat { bottom: 20px; right: 15px; width: 55px; height: 55px; font-size: 1.5rem;}
             .chatbot-container { right: 15px; bottom: 85px; width: calc(100% - 30px); }
+            .floating-waypoint { bottom: 95px; right: 15px; padding: 12px; }
+            .floating-waypoint i { font-size: 1.2rem; }
+            .floating-waypoint.active .waypoint-text { max-width: 200px; white-space: normal; font-size: 0.75rem; line-height: 1.3; text-align: left; margin-left: 10px;}
         }
     </style>
 </head>
@@ -436,6 +459,11 @@
         </div>
         <div class="footer-bottom"><p>&copy; 2026 St. Augustine Academy of Pampanga, Inc. Website built by Pure X. All rights reserved.</p></div>
     </footer>
+
+    <div class="floating-waypoint" onclick="this.classList.toggle('active')" title="Click to view our location!">
+        <i class="fa-solid fa-location-dot"></i>
+        <span class="waypoint-text">Alvendia St., Poblacion, Floridablanca, Pampanga</span>
+    </div>
 
     <div class="floating-chat" title="Chat with Admissions" onclick="toggleChat()"><i class="fa-solid fa-message"></i></div>
     
@@ -717,11 +745,11 @@
                 "banner-title": "St. Augustine Academy is where students can achieve everything they want to be.", "banner-btn": "Enroll Now!",
                 "prog-title": "Our Academic Programs",
                 "prog-psgs-title": "Pre-School & Grade School",
-                "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation. Our engaging environment fosters curiosity and a love for lifelong learning.",
+                "prog-psgs-desc": "Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.",
                 "prog-jhs-title": "Junior High School",
-                "prog-jhs-desc": "Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills. We focus on holistic development to prepare students for higher academic challenges.",
+                "prog-jhs-desc": "Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.",
                 "prog-shs-title": "Senior High School",
-                "prog-shs-desc": "Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training. Specialized tracks ensure students are career-ready and equipped with 21st-century skills.",
+                "prog-shs-desc": "Offers strand-based subjects that prepare students for college courses, entry-level jobs, or further skills training.",
                 "parallax-title": "Join the SAAP Family Today", "parallax-desc": "Experience a transformative education that prepares you for success in college and beyond.", "parallax-btn": "Start Your Application",
                 "stat1": "Passing Rate", "stat2": "Expert Teachers", "stat3": "Student Clubs",
                 "testi-title": "What Our Students Say",
