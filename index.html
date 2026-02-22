@@ -122,16 +122,12 @@
         .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(0, 77, 0, 0.7), rgba(0, 77, 0, 0.95)); z-index: 5; }
 
         .blue-banner { background-color: transparent; color: #fff; text-align: center; padding: 0 20px 80px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; z-index: 10; }
+        .est-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: var(--accent-yellow); padding: 6px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 20px; border: 1px solid rgba(16, 185, 129, 0.4); text-transform: uppercase; backdrop-filter: blur(5px); }
         .blue-banner h1 { font-size: 2.8rem; font-weight: 800; max-width: 950px; margin: 0 auto; line-height: 1.2; letter-spacing: -1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .blue-banner p { font-size: 1.15rem; opacity: 0.9; margin-top: 15px; font-weight: 400; max-width: 700px; margin-left: auto; margin-right: auto;}
         
         .action-button { background-color: var(--accent-yellow); color: #ffffff; text-decoration: none; padding: 18px 55px; font-size: 1.15rem; font-weight: 800; border-radius: 50px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); transition: 0.3s; display: inline-block; margin-top: 30px; animation: pulse 2s infinite; letter-spacing: 0.5px;}
         .action-button:hover { background-color: #059669; transform: translateY(-5px); animation: none; box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);}
-
-        /* SCROLL DOWN ARROW */
-        .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.8); font-size: 2rem; animation: bounce 2s infinite; z-index: 15; cursor: pointer; transition: 0.3s; text-decoration: none; }
-        .scroll-down:hover { color: var(--accent-yellow); }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } 60% { transform: translateY(-7px) translateX(-50%); } }
 
         .section-header { text-align: center; margin-bottom: 4rem; margin-top: 2rem;}
         .section-header h2 { font-size: 2.4rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; letter-spacing: -0.5px;}
@@ -318,11 +314,12 @@
         <div class="hero-overlay"></div>
         <div class="blue-banner">
             <img src="logo.jpg" alt="SAAPI Logo" class="hero-logo">
+            <br>
+            <div class="est-badge">Est. 1946</div>
             <h1 data-key="banner-title">St. Augustine Academy is where students can achieve everything they want to be.</h1>
-            <p><strong>"Ad Astra, Per Fidem"</strong> — To the stars, through faith.<br>Est. 1946 &bull; Guided by our core values: Faith &bull; Service &bull; Excellence.</p>
+            <p><strong>"Ad Astra, Per Fidem"</strong> — To the stars, through faith.<br>Guided by our core values: Faith &bull; Service &bull; Excellence.</p>
             <a href="enroll.html" class="action-button" data-key="banner-btn">Enroll Now!</a>
         </div>
-        <a href="#academics" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
     </section>
 
     <div class="spacer"></div>
@@ -342,7 +339,18 @@
                     <p data-key="prog-psgs-desc">Primarily provides basic reading, writing, math, and social skills to young learners while introducing values and faith formation.</p>
                     <div class="track-section">
                         <h4>Core Focus Areas</h4>
-                        <div class="strand-tags"><span>Basic Literacy</span><span>Numeracy</span><span>Values Formation</span><span>Social Skills</span></div>
+                        <div class="strand-tags">
+                            <span>Basic Literacy</span>
+                            <span>Numeracy</span>
+                            <span>Values Formation</span>
+                            <span>Social Skills</span>
+                        </div>
+                        <h4 style="margin-top: 15px;">Enrichment Activities</h4>
+                        <div class="strand-tags">
+                            <span>Arts & Crafts</span>
+                            <span>Music & Movement</span>
+                            <span>Play-Based Learning</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,7 +364,18 @@
                     <p data-key="prog-jhs-desc">Strengthens core academic subjects and helps students develop study habits, discipline, and decision-making skills.</p>
                     <div class="track-section">
                         <h4>Key Developments</h4>
-                        <div class="strand-tags"><span>Advanced Sciences</span><span>Critical Thinking</span><span>Leadership</span><span>Character Building</span></div>
+                        <div class="strand-tags">
+                            <span>Advanced Sciences</span>
+                            <span>Critical Thinking</span>
+                            <span>Leadership</span>
+                            <span>Character Building</span>
+                        </div>
+                        <h4 style="margin-top: 15px;">Core Subjects Focus</h4>
+                        <div class="strand-tags">
+                            <span>Mathematics</span>
+                            <span>English & Literature</span>
+                            <span>Araling Panlipunan</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -458,7 +477,7 @@
                     <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> 
                     St. Augustine Academy<br>of Pampanga, Inc.
                 </div>
-                <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding in <strong>1946</strong>.</p>
+                <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding.</p>
                 <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
             </div>
             <div class="footer-col">
