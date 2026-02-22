@@ -65,8 +65,7 @@
         .step-dot.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 0 0 6px rgba(4, 120, 87, 0.15); transform: scale(1.1);}
         .step-dot.completed { background: var(--accent); color: var(--text-dark); border-color: var(--accent); }
 
-        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; transition: 0.3s; margin-top: 30px;}
-        .form-section-title:first-child { margin-top: 0; }
+        .form-section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
         .form-section-title i { color: var(--primary); background: #ecfdf5; padding: 10px; border-radius: 10px; font-size: 1rem;}
 
         .form-step { display: none; opacity: 0; transition: opacity 0.4s ease; }
@@ -277,29 +276,27 @@
                     <div class="form-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> Requirement Uploads</div>
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 500;">LIST OF DOCUMENTS FOR UPLOADING ACCORDING TO PROGRAM</p>
                     
-                    <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Basic Requirements (PSGS/JHS/SHS):</h4>
+                    <h4 id="dynamic-req-title" style="font-size: 0.9rem; margin-bottom: 10px;">Requirements for Admission (PSGS/JHS):</h4>
                     <div class="file-upload-grid">
-                        <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 Photo with Name Tag</span><small>Click to upload</small><input type="file" required></div>
-                        <div class="file-upload-box"><i class="fa-solid fa-file-shield"></i><span>GMRC Certificate (Original)</span><small>Click to upload</small><input type="file" required></div>
-                        <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Recent Report Card (F138)</span><small>Photocopy</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 photo with name tag</span><small>Click to upload</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-file-shield"></i><span>GMRC Certificate (original)</span><small>Click to upload</small><input type="file" required></div>
+                        <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Recent Report Card (F138) photocopy</span><small>Click to upload</small><input type="file" required></div>
+                        
+                        <div class="file-upload-box shs-req" style="display:none;"><i class="fa-solid fa-file-lines"></i><span>Copy of Learner's Reference Number</span><small>Click to upload</small><input type="file" class="shs-file"></div>
+                        <div class="file-upload-box shs-req" style="display:none;"><i class="fa-solid fa-certificate"></i><span>ESC Certificate / QVR Certificate</span><small>Click to upload</small><input type="file" class="shs-file"></div>
+                        <div class="file-upload-box shs-req" style="display:none;"><i class="fa-solid fa-file-pdf"></i><span>NCAE COR (photocopy)</span><small>Click to upload</small><input type="file" class="shs-file"></div>
+
                         <div class="file-upload-box"><i class="fa-solid fa-receipt"></i><span>Copy of Application Fee Receipt</span><small>Click to upload</small><input type="file" required></div>
                     </div>
 
-                    <div id="shs-requirements" style="display:none; margin-top: 25px;">
-                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements (SHS):</h4>
-                        <div class="file-upload-grid">
-                            <div class="file-upload-box"><i class="fa-solid fa-file-lines"></i><span>Copy of Learner's Ref No.</span><small>Click to upload</small><input type="file" class="shs-file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-certificate"></i><span>ESC / QVR Certificate</span><small>Click to upload</small><input type="file" class="shs-file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-file-pdf"></i><span>NCAE COR (Photocopy)</span><small>Click to upload</small><input type="file" class="shs-file"></div>
-                        </div>
-                    </div>
-
                     <div id="grant-requirements" style="display:none; margin-top: 25px;">
-                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements for Grants / ESC / Financial Assistance (Gr7):</h4>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements for Application of Grants / ESC/ Financial Assistance (Gr7):</h4>
                         <div class="file-upload-grid">
+                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Photocopy of Grade 6 Report Card</span><small>Click to upload</small><input type="file"></div>
                             <div class="file-upload-box"><i class="fa-solid fa-award"></i><span>Certificate of Ranking</span><small>Click to upload</small><input type="file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-file-contract"></i><span>PSA Birth Certificate</span><small>Photocopy</small><input type="file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice-dollar"></i><span>Latest ITR / Tax Exemption</span><small>or Unemployment Cert</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 pictures with name tag</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-contract"></i><span>Photocopy PSA Birth Certificate</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice-dollar"></i><span>Latest ITR / Tax Exemption or<br>Employment Cert / Municipal Cert</span><small>For both parents/guardians</small><input type="file"></div>
                         </div>
                     </div>
 
@@ -307,11 +304,12 @@
                         <h4 style="color: #1e3a8a; font-size: 0.95rem; margin-bottom: 10px; text-transform: uppercase;"><i class="fa-solid fa-circle-info"></i> Important Reminders</h4>
                         <ul style="font-size: 0.85rem; color: #1e3a8a; margin-left: 20px; line-height: 1.6;">
                             <li>After paying for the application fee, present your official receipt at the LINGAP CENTER and secure your SAAPET schedule.</li>
-                            <li>No Retake Policy.</li>
-                            <li>No Refund on Testing Fee.</li>
-                            <li>Take the test on the given schedule. Latecomers will be rescheduled.</li>
-                            <li>Bring pencil No.2 and ballpen.</li>
-                            <li>Report for Interview.</li>
+                            <li>No Retake Policy</li>
+                            <li>No Refund on Testing Fee</li>
+                            <li>Take the test on the given schedule</li>
+                            <li>Latecomers will be rescheduled</li>
+                            <li>Bring pencil No.2 and ballpen</li>
+                            <li>Report for Interview</li>
                             <li>Claim your enrollment permit and proceed to the registrar's office for the pre-enrollment/enrollment procedures.</li>
                         </ul>
                     </div>
@@ -396,29 +394,43 @@
         function toggleLevelFields() {
             const level = document.getElementById('level-applying').value;
             const shsSection = document.getElementById('shs-strand-section');
-            const shsReqs = document.getElementById('shs-requirements');
+            const shsReqs = document.querySelectorAll('.shs-req');
+            const shsFiles = document.querySelectorAll('.shs-file');
             const grantReqs = document.getElementById('grant-requirements');
+            const reqTitle = document.getElementById('dynamic-req-title');
             
             const rankInputs = shsSection.querySelectorAll('.strand-rank');
             
             if(level === 'SHS') {
                 shsSection.style.display = 'block';
-                shsReqs.style.display = 'block';
+                shsReqs.forEach(el => el.style.display = 'block');
                 grantReqs.style.display = 'none';
+                reqTitle.innerText = 'Requirements for Admission (SHS):';
                 rankInputs.forEach(input => input.setAttribute('required', 'true'));
+                shsFiles.forEach(input => input.setAttribute('required', 'true'));
             } else if (level === 'JHS') {
                 shsSection.style.display = 'none';
-                shsReqs.style.display = 'none';
+                shsReqs.forEach(el => el.style.display = 'none');
                 grantReqs.style.display = 'block';
+                reqTitle.innerText = 'Requirements for Admission (PSGS/JHS):';
                 rankInputs.forEach(input => {
+                    input.removeAttribute('required');
+                    input.value = '';
+                });
+                shsFiles.forEach(input => {
                     input.removeAttribute('required');
                     input.value = '';
                 });
             } else {
                 shsSection.style.display = 'none';
-                shsReqs.style.display = 'none';
+                shsReqs.forEach(el => el.style.display = 'none');
                 grantReqs.style.display = 'none';
+                reqTitle.innerText = 'Requirements for Admission (PSGS/JHS):';
                 rankInputs.forEach(input => {
+                    input.removeAttribute('required');
+                    input.value = '';
+                });
+                shsFiles.forEach(input => {
                     input.removeAttribute('required');
                     input.value = '';
                 });
