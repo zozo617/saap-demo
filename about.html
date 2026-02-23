@@ -33,9 +33,11 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-            --admin-sidebar-bg: #111827; /* Dark background from screenshot */
-            --admin-sidebar-hover: #1f2937;
-            --admin-sidebar-active: #064e3b; /* Dark green active state */
+            
+            /* SAAP Dark Emerald Admin Theme Variables */
+            --admin-sidebar-bg: #011812; /* Deepest Green */
+            --admin-sidebar-hover: #022c22; /* Secondary Green */
+            --admin-sidebar-active: #047857; /* Primary Emerald Green */
             --admin-text: #e5e7eb;
         }
 
@@ -93,70 +95,112 @@
         
         .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
 
-        /* --- NEW HIDDEN SIDEBAR LAYOUT --- */
+        /* --- STABLE HOVER SIDEBAR LAYOUT --- */
         .page-layout {
             display: flex;
+            align-items: flex-start;
             position: relative;
             min-height: 800px;
+            margin-bottom: 6rem;
         }
 
-        /* The invisible hover trigger area on the left edge */
-        .sidebar-hover-area {
+        /* Hover wrapper for desktop (Sticks to screen, provides hit area) */
+        .tabs-sidebar-wrapper {
+            position: sticky;
+            top: 120px; 
+            width: 15px; 
+            height: 500px; 
+            flex-shrink: 0;
+            z-index: 100;
+        }
+        
+        /* The small tab that hints to the user to hover */
+        .sidebar-hint {
             position: absolute;
-            left: 0;
             top: 0;
-            bottom: 0;
-            width: 40px;
-            z-index: 50;
+            left: 0;
+            width: 50px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 0 12px 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
         }
 
-        /* The actual dark sidebar */
+        /* The Dark Theme Sidebar */
         .admin-sidebar {
             position: absolute;
-            left: -320px; /* Hidden by default */
             top: 0;
-            width: 300px;
+            left: 0; 
+            width: 290px;
             background-color: var(--admin-sidebar-bg);
-            border-radius: 0 16px 16px 0;
-            box-shadow: 10px 0 25px rgba(0,0,0,0.2);
-            padding: 20px 0;
-            z-index: 60;
-            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px; 
+            box-shadow: 15px 0 30px rgba(0,0,0,0.25);
+            padding: 0 0 20px 0;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            
+            /* Hide off-screen leftwards to prevent glitching */
+            transform: translateX(-150%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
         }
 
-        /* Show sidebar on hover (Desktop) */
-        .sidebar-hover-area:hover + .admin-sidebar,
-        .admin-sidebar:hover {
-            left: 0;
+        /* Hovering the wrapper OR the sidebar keeps it open securely */
+        .tabs-sidebar-wrapper:hover .admin-sidebar {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Sidebar Header (like the screenshot) */
+        .tabs-sidebar-wrapper:hover .sidebar-hint {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Sidebar Header */
         .admin-sidebar-header {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px 20px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .admin-sidebar-header img {
             width: 60px;
-            margin-bottom: 10px;
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: white;
+            padding: 2px;
         }
         .admin-sidebar-header h3 {
-            color: white;
+            color: #ffffff;
             font-size: 1.2rem;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-bottom: 5px;
+            font-weight: 800;
         }
         .admin-sidebar-header p {
             color: #10b981;
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 1px;
+            margin: 0;
         }
 
-        /* Tab Buttons styled like Admin Links */
+        /* Tab Buttons */
         .tab-btn {
             display: flex;
             align-items: center;
@@ -164,7 +208,7 @@
             padding: 16px 25px;
             background: none;
             border: none;
-            border-left: 5px solid transparent;
+            border-left: 4px solid transparent;
             font-size: 1.05rem;
             font-weight: 500;
             color: var(--admin-text);
@@ -175,8 +219,8 @@
         }
 
         .tab-btn i {
-            width: 30px;
-            font-size: 1.2rem;
+            width: 25px;
+            font-size: 1.1rem;
             margin-right: 15px;
             text-align: center;
             color: #9ca3af;
@@ -200,8 +244,8 @@
         /* Tab Content Area */
         .tab-content-area {
             flex-grow: 1;
-            width: 100%;
-            padding-left: 60px; /* Leave space for the hover area */
+            min-width: 0;
+            padding-left: 60px; /* Space for the hint tab */
             transition: opacity 0.3s ease;
         }
 
@@ -354,7 +398,7 @@
             
             /* Responsive Tabs */
             .page-layout { flex-direction: column; }
-            .sidebar-hover-area { display: none; } /* Disable hover area on mobile */
+            .sidebar-hover-wrapper { display: none; } /* Disable hover area on mobile */
             .tab-content-area { padding-left: 0; }
             
             .mobile-tab-toggle { display: flex; }
@@ -364,9 +408,13 @@
                 top: 0;
                 left: -100%; /* Fully hidden */
                 height: 100vh;
+                width: 280px;
                 border-radius: 0;
                 z-index: 3000;
-                padding-top: 20px;
+                transform: none;
+                transition: left 0.3s ease;
+                opacity: 1;
+                visibility: visible;
             }
             .admin-sidebar.show-mobile { 
                 left: 0; 
@@ -426,8 +474,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About Us</a></li>
                 <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
                 <li><a href="admission-procedure.html">Admission Procedure</a></li>
                 <li><a href="index.html#academics">Academics</a></li>
                 <li><a href="index.html" class="nav-login-btn">MySAAP</a></li>
@@ -443,39 +491,43 @@
     <div class="container">
         
         <button class="mobile-tab-toggle" onclick="toggleMobileTabs()" title="Menu">
-            <i class="fa-solid fa-bars"></i> <span>Menu</span>
+            <i class="fa-solid fa-bars"></i> <span>Information Menu</span>
         </button>
 
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileTabs()"></div>
 
         <div class="page-layout">
-            <div class="sidebar-hover-area"></div>
-
-            <div class="admin-sidebar" id="tabsSidebar">
-                <div class="admin-sidebar-header">
-                    <img src="logo.jpg" alt="SAAPI Logo" style="border-radius: 50%;">
-                    <h3>SAAP PORTAL</h3>
-                    <p>INFORMATION</p>
+            <div class="tabs-sidebar-wrapper">
+                <div class="sidebar-hint">
+                    <i class="fa-solid fa-bars"></i>
                 </div>
                 
-                <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">
-                    <i class="fa-solid fa-eye"></i> Overview & Philosophy
-                </button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-history')">
-                    <i class="fa-solid fa-clock-rotate-left"></i> Our History
-                </button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-founder')">
-                    <i class="fa-solid fa-user-tie"></i> The Founder
-                </button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">
-                    <i class="fa-solid fa-building"></i> Services & Facilities
-                </button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">
-                    <i class="fa-solid fa-users"></i> Student Organizations
-                </button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-policy')">
-                    <i class="fa-solid fa-shield-halved"></i> Privacy Policy
-                </button>
+                <div class="admin-sidebar" id="tabsSidebar">
+                    <div class="admin-sidebar-header">
+                        <img src="logo.jpg" alt="SAAPI Logo">
+                        <h3>SAAP PORTAL</h3>
+                        <p>INFORMATION</p>
+                    </div>
+                    
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">
+                        <i class="fa-solid fa-eye"></i> Overview & Philosophy
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-history')">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Our History
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-founder')">
+                        <i class="fa-solid fa-user-tie"></i> The Founder
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">
+                        <i class="fa-solid fa-building"></i> Services & Facilities
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">
+                        <i class="fa-solid fa-users"></i> Student Organizations
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-policy')">
+                        <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                    </button>
+                </div>
             </div>
 
             <div class="tab-content-area">
@@ -663,7 +715,7 @@
         // Tab Switching Logic
         function openTab(evt, tabName) {
             // Prevent redundant triggers if tab is already active
-            if (evt.currentTarget.classList.contains("active")) return;
+            if (evt.currentTarget.classList.contains("active") && window.innerWidth > 768) return;
 
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-pane");
@@ -685,8 +737,8 @@
             
             evt.currentTarget.className += " active";
 
-            // If on mobile, hide the menu after selection
-            if(window.innerWidth <= 768) {
+            // If on mobile and triggered by click, hide the menu after selection
+            if(window.innerWidth <= 768 && evt.type === 'click') {
                 document.getElementById('tabsSidebar').classList.remove('show-mobile');
                 document.getElementById('sidebarOverlay').classList.remove('active');
             }
