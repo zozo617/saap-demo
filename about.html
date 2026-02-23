@@ -35,7 +35,7 @@
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
         }
 
-        body.dark-mode {
+        html.dark-mode {
             --header-bg: rgba(30, 30, 30, 0.85);
             --primary-color: #4ade80; 
             --secondary-color: #064e3b;
@@ -73,7 +73,6 @@
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 12px; line-height: 1.1; letter-spacing: -0.5px;}
         .real-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: contain; border: none; background: transparent; }
         .logo-text { display: flex; flex-direction: column; color: var(--text-dark); transition: 0.4s;}
-        .logo-subtext { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
         .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
         
         nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: 0.3s ease; }
@@ -89,7 +88,7 @@
         
         .container { max-width: 1600px; margin: 0 auto; padding: 0 5%; }
 
-        /* ORIGINAL STATIC TABS LAYOUT */
+        /* TABS LAYOUT */
         .tabs-container {
             display: flex;
             align-items: flex-start;
@@ -242,51 +241,20 @@
             margin-bottom: 15px;
         }
 
-        /* NEW: Image Placeholder inside tabs */
-        .tab-img-placeholder {
-            background: var(--bg-color);
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
+        /* UPDATED: Standardized Image Styling for Tabs */
+        .content-img {
             width: 100%;
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-muted);
-            transition: 0.3s;
+            height: auto; /* Let height define itself based on the image aspectRatio */
+            max-height: 600px; /* Cap height so tall images don't take over */
+            object-fit: contain; /* Ensure the whole image is shown without cropping */
+            border-radius: 12px;
             margin-bottom: 20px;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-        }
-        .tab-img-placeholder:hover {
-            border-color: var(--primary-color);
-            background: var(--card-bg);
-            box-shadow: var(--shadow-md);
-        }
-        .tab-img-placeholder i {
-            font-size: 3rem;
-            color: #cbd5e1;
-            margin-bottom: 15px;
-            transition: 0.3s;
-        }
-        .tab-img-placeholder:hover i {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-        .tab-img-placeholder span {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-        }
-        .tab-img-placeholder small {
-            font-weight: 500;
-            font-size: 0.85rem;
-            margin-top: 5px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            background-color: var(--bg-color); /* Subtle background for transparent images */
         }
 
-        /* NEW: Interactive Facilities Layout */
+        /* Interactive Facilities Layout */
         .facilities-layout {
             display: grid;
             grid-template-columns: 300px 1fr;
@@ -352,22 +320,13 @@
             animation: pageFadeIn 0.5s ease;
         }
         
-        .facility-display-img {
+        /* UPDATED: Facility Image Container (uses content-img style) */
+        .facility-display-img-container {
             width: 100%;
-            height: 350px;
-            background: var(--card-bg);
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            color: var(--text-muted);
             margin-bottom: 20px;
-            background-size: cover;
-            background-position: center;
         }
-        .facility-display-img i { font-size: 3rem; color: #cbd5e1; margin-bottom: 10px;}
         
         .facility-display h3 {
             font-size: 1.5rem;
@@ -431,7 +390,9 @@
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; } .gray-bar-left { display: none; } 
             header { padding: 12px 5%; position: relative; } .real-logo { width: 35px; height: 35px; margin-right: 5px; } .logo { gap: 8px; }
-            .logo-text span:first-child { font-size: 0.85rem; line-height: 1.2; white-space: nowrap; } .logo-subtext { font-size: 0.55rem; margin-top: 2px; white-space: nowrap;}
+            
+            .logo-text span { font-size: 0.8rem !important; line-height: 1.2 !important; white-space: normal; }
+            
             .menu-toggle { display: block; font-size: 1.5rem; position: absolute; right: 5%; top: 50%; transform: translateY(-50%); margin: 0; }
             nav { width: 0; } nav ul { display: flex; flex-direction: column; width: 100%; text-align: center; padding: 20px; gap: 15px; position: absolute; top: 100%; left: 0; background: var(--header-bg); box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(-15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); } nav ul.active { opacity: 1; visibility: visible; transform: translateY(0); }
             .about-hero { height: 250px; }
@@ -453,7 +414,6 @@
                 animation: pageFadeIn 0.3s ease;
             }
             .content-card { padding: 25px; }
-            .facility-display-img { height: 200px; }
         }
     </style>
 </head>
@@ -481,18 +441,17 @@
         <a href="index.html" class="logo">
             <img src="logo.jpg" alt="SAAPI Logo" class="real-logo">
             <div class="logo-text">
-                <span>ST. AUGUSTINE ACADEMY</span>
-                <span class="logo-subtext">OF PAMPANGA, INC.</span>
+                <span style="font-size: 1.05rem; font-weight: 800; letter-spacing: -0.5px;">ST. AUGUSTINE ACADEMY OF PAMPANGA, INC.</span>
             </div>
         </a>
         <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="about.html" class="active">About Us</a></li>
-                <li><a href="admission-procedure.html">Admission Procedure</a></li>
                 <li><a href="index.html#academics">Academics</a></li>
+                <li><a href="admission-procedure.html">Admission Procedure</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="index.html" class="nav-login-btn">MySAAP</a></li>
             </ul>
         </nav>
@@ -559,11 +518,9 @@
                 <div id="tab-history" class="tab-pane">
                     <div class="content-card">
                         <h2>Our History</h2>
-                        <div class="tab-img-placeholder">
-                            <i class="fa-regular fa-image"></i>
-                            <span>Historical Campus Photo</span>
-                            <small>(Insert Old Image Here)</small>
-                        </div>
+                        
+                        <img src="history.jpg" alt="Historical Campus Photo" class="content-img">
+                        
                         <p>After three years of Japanese occupation and the devastation of World War II, Floridablanca was left in poverty, with most buildings destroyed except the church. In 1946, there was a strong need for education and moral rebuilding in the community.</p>
                         <p>Father Joseph A. Devlin, a chaplain in the Army Air Corps assigned at Palacol Airbase, saw this need and proposed the establishment of a Catholic high school. With the support of Reverend Father Lucinio Valles, OSA, and the townspeople, St. Augustine Academy (SAA) was founded in July 1946 as a non-stock Catholic school under the Parish of Saint Joseph.</p>
                         <p>The school started with 135 students, holding classes in the church and sacristy due to limited facilities. Its first graduating class had only five students. Over time, more classrooms were built, and the school became the center of community life. The curriculum followed the U.S. education system, emphasizing English and literature.</p>
@@ -575,11 +532,9 @@
                 <div id="tab-founder" class="tab-pane">
                     <div class="content-card">
                         <h2>The Founder</h2>
-                        <div class="tab-img-placeholder">
-                            <i class="fa-solid fa-user-tie"></i>
-                            <span>Fr. Joseph A. Devlin</span>
-                            <small>(Insert Founder Portrait Here)</small>
-                        </div>
+                        
+                        <img src="founder.jpg" alt="Fr. Joseph A. Devlin" class="content-img">
+                        
                         <p>In 1946, the first secondary school in Floridablanca, Saint Augustine Academy, was founded by Fr. Joseph A. Devlin, an American chaplain of the U.S. Air Force assigned at the Floridablanca Air Field, in collaboration with Fr. Lucinio Valles, OSA, the parish priest at that time. Established in response to the community's strong desire for education after the war, the school opened with more than a hundred eager enrollees.</p>
                         <p>Fr. Devlin served not only as founder and director but also as teacher, coach, and even janitor. Before leaving in 1948, he reminded the community, <em>"This is your school. Take care of it."</em> True to his vision, the school produced thousands of professionals and scholars. Born on April 15, 1914, in West Des Moines, Iowa, Fr. Devlin studied Philosophy and Theology in the United States and Rome, served in World War II, and spent many years in parish work before his death in 1996.</p>
                         <p>The school was named after Saint Augustine, honoring both the great Doctor of the Church and Fr. Valles' Augustinian roots. Its seal features an eagle perched on a diploma, symbolizing its American foundation and educational mission. The original motto, "Ad Astra Per Fidem" (To the stars in faith), was later changed to "Unum in Sapientia et Caritate" (One in knowledge and love). Now known as St. Augustine Academy of Pampanga Inc., under the Archdiocese of San Fernando Educational System, the school serves around 1,700 students from Preschool to Senior High School and continues its mission of providing quality Catholic education.</p>
@@ -644,9 +599,8 @@
                             </div>
 
                             <div class="facility-display" id="facilityDisplay">
-                                <div class="facility-display-img" id="facImg">
-                                    <i class="fa-regular fa-image" id="facIconFallback"></i>
-                                    <span id="facImgText">Image Placeholder</span>
+                                <div class="facility-display-img-container">
+                                    <img src="lingap-center.jpg" id="facImg" alt="Lingap Center" class="content-img">
                                 </div>
                                 <h3 id="facTitle">Lingap Center</h3>
                                 <p id="facDesc">This center serves as the heart of the school's developmental guidance program, collaborating with learners to ensure success in their academic, career, and personal-social lives. The team focuses on nurturing a resilient Augustinian attitude through a wide range of services including coaching, counseling, testing, and needs assessment.</p>
@@ -700,9 +654,9 @@
     <footer id="about-footer" class="mega-footer">
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
-                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> 
-                    St. Augustine Academy<br>of Pampanga, Inc.
+                <div class="logo" style="color: white; margin-bottom: 1rem; display: flex; flex-direction: column; align-items: flex-start;">
+                    <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo" style="width: 60px; height: 60px; margin-bottom: 15px; margin-right: 0;"> 
+                    <span style="font-size: 1.15rem; line-height: 1.4; font-weight: 800;">ST. AUGUSTINE ACADEMY OF PAMPANGA, INC.</span>
                 </div>
                 <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding in 1946.</p>
                 <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
@@ -711,7 +665,7 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="admission-procedure.html">Admissions Process</a></li>
-                    <li><a href="#">Tuition & Scholarships</a></li>
+                    <li><a href="tuition.html">Tuition & Scholarships</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -719,6 +673,7 @@
                 <div class="contact-info">
                     <p><i class="fa-solid fa-location-dot"></i> St. Augustine Academy, Pampanga</p>
                     <p><i class="fa-solid fa-phone"></i> (04597) 01061</p>
+                    <p><i class="fa-solid fa-envelope"></i> wecare@saap.edu.ph</p>
                 </div>
             </div>
         </div>
@@ -736,7 +691,7 @@
 
         // Tab Switching Logic
         function openTab(evt, tabName) {
-            if (evt.currentTarget.classList.contains("active")) return;
+            if (evt.currentTarget.classList.contains("active") && window.innerWidth > 768) return;
 
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-pane");
@@ -757,7 +712,6 @@
             
             evt.currentTarget.className += " active";
 
-            // If on mobile and triggered by click, hide the menu after selection
             if(window.innerWidth <= 768 && evt.type === 'click') {
                 document.getElementById('tabsSidebar').classList.remove('show-mobile');
             }
@@ -773,82 +727,82 @@
             lingap: {
                 title: "Lingap Center",
                 desc: "This center serves as the heart of the school's developmental guidance program, collaborating with learners to ensure success in their academic, career, and personal-social lives. The team focuses on nurturing a resilient Augustinian attitude through a wide range of services including coaching, counseling, testing, and needs assessment.",
-                imgUrl: "" /* HOW TO ADD PICTURE: Put your image link here, e.g., "images/lingap.jpg" */
+                imgUrl: "lingap-center.jpg" 
             },
             osa: {
                 title: "Office of Student Affairs (OSA)",
                 desc: "The OSA is responsible for planning and coordinating a comprehensive student life experience by advising various clubs and cultural programs. It aims to help students find the activities best suited for their interests both inside and outside the campus environment.",
-                imgUrl: "" /* HOW TO ADD PICTURE: Put your image link here, e.g., "images/osa.jpg" */
+                imgUrl: "osa.jpg" 
             },
             discipline: {
                 title: "Prefect of Discipline",
                 desc: "This office provides essential assistance to students regarding their daily discipline and conduct to maintain a harmonious school atmosphere. The staff manages investigations and student conferences to ensure that all Augustinians uphold the school's behavioral standards.",
-                imgUrl: "" 
+                imgUrl: "discipline.jpg" 
             },
             registrar: {
                 title: "Registrar",
                 desc: "The Registrar’s Office acts as the primary hub for managing enrollment credentials and verifying the academic status of both current and prospective learners. They are responsible for the issuance of vital records, including diplomas, SF10/F137 forms, and various certifications related to graduation and enrollment.",
-                imgUrl: "" 
+                imgUrl: "registrar.jpg" 
             },
             library: {
                 title: "Library",
                 desc: "The school library provides a quiet space for research and study, offering a wide array of supplemental and instructional materials. It operates from 7:30 a.m. to 4:30 p.m. on weekdays, ensuring students have access to informational and reference services throughout the entire school day.",
-                imgUrl: "" 
+                imgUrl: "library.jpg" 
             },
             ministry: {
                 title: "Campus Ministry",
                 desc: "Aiming to practice the values taught by Jesus Christ, the Campus Ministry guides students and staff through regular Holy Mass and sacramental needs. They organize annual retreats, recollections, and faith-sharing sessions to nourish the spiritual growth of the entire Augustinian community.",
-                imgUrl: "" 
+                imgUrl: "ministry.jpg" 
             },
             clinic: {
                 title: "Clinic",
                 desc: "The school health services promote optimum wellness by providing prompt medical and dental consultations to all students. A school physician is available for weekly consultations, and the clinic staff regularly conducts health advisories and periodic medical exams for student-athletes.",
-                imgUrl: "" 
+                imgUrl: "clinic.jpg" 
             },
             canteen: {
                 title: "Canteen",
                 desc: "The SAAP canteen offers a variety of nutritious and affordable meals while maintaining strict safety and health protocols. It follows a specific 'Lunch-In' policy and encourages a 'Clean As You Go' (CLAYGO) culture to ensure a pleasant dining environment for everyone.",
-                imgUrl: "" 
+                imgUrl: "canteen.jpg" 
             },
             alumni: {
                 title: "Alumni Affairs",
                 desc: "This service focuses on establishing lifelong linkages and bonds between the school and its graduates for continued self-development. The office coordinates socialization events, civic awareness programs, and manages potential scholarship grants provided by the alumni network.",
-                imgUrl: "" 
+                imgUrl: "alumni.jpg" 
             },
             maintenance: {
                 title: "Maintenance and Housekeeping",
                 desc: "This team is dedicated to ensuring the safety, cleanliness, and orderliness of all structures within the school campus. Their services include routine janitorial work, gardening, and immediate repairs to keep the facilities in top condition for students.",
-                imgUrl: "" 
+                imgUrl: "maintenance.jpg" 
             },
             security: {
                 title: "Security",
                 desc: "The security force maintains constant peace and order within the school campus and its surrounding perimeter. Their primary task is to secure the school’s valuable resources and, most importantly, protect the safety of every student and staff member.",
-                imgUrl: "" 
+                imgUrl: "security.jpg" 
             },
             avr: {
                 title: "Audio-Visual Room (AVR)",
                 desc: "The AVR houses a modern collection of materials and equipment designed to make teaching and learning more interactive and effective. It assists faculty members in integrating various media aids into their curriculum to better engage students in the classroom.",
-                imgUrl: "" 
+                imgUrl: "avr.jpg" 
             },
             computer: {
                 title: "Computer Laboratories",
                 desc: "SAAP features two specialized laboratories equipped with modern technology to help students gain essential IT and communication skills. These labs provide a structured environment where each student is assigned a computer to practice their digital literacy and technical workbooks.",
-                imgUrl: "" 
+                imgUrl: "computer-lab.jpg" 
             },
             gym: {
                 title: "St. Ambrose Gym",
                 desc: "This facility is designed for diverse school functions, ranging from athletic competitions and sports training to academic meetings. It also serves as a primary venue for large-scale liturgical celebrations and social events approved by the School Director.",
-                imgUrl: "" 
+                imgUrl: "gym.jpg" 
             },
             theater: {
                 title: "St. Monica Theater",
                 desc: "The theater provides a professional-grade space dedicated to the performing arts and significant formal gatherings. It serves as a platform for Augustinians to showcase their talents in music, drama, and other cultural presentations.",
-                imgUrl: "" 
+                imgUrl: "theater.jpg" 
             },
             chapel: {
                 title: "Chapel",
                 desc: "The school chapel is a sacred space intended for quiet reflection, individual prayer, and the spiritual nourishment of the community. It is the center of the school's religious life, where students can participate in regular devotions and find a peaceful sanctuary on campus.",
-                imgUrl: "" 
+                imgUrl: "chapel.jpg" 
             }
         };
 
@@ -865,26 +819,16 @@
             document.getElementById('facTitle').innerText = data.title;
             document.getElementById('facDesc').innerText = data.desc;
             
-            const imgContainer = document.getElementById('facImg');
-            const iconFallback = document.getElementById('facIconFallback');
-            const textFallback = document.getElementById('facImgText');
+            // UPDATED: Simplified Image switching logic (no placeholders)
+            const imgTag = document.getElementById('facImg');
+            imgTag.src = data.imgUrl;
+            imgTag.alt = data.title;
 
             // Quick re-trigger animation for visual feedback
             const displayArea = document.getElementById('facilityDisplay');
             displayArea.style.animation = 'none';
             displayArea.offsetHeight; /* trigger reflow */
             displayArea.style.animation = 'pageFadeIn 0.4s ease';
-
-            if (data.imgUrl && data.imgUrl !== "") {
-                imgContainer.style.backgroundImage = `url('${data.imgUrl}')`;
-                iconFallback.style.display = 'none';
-                textFallback.style.display = 'none';
-            } else {
-                imgContainer.style.backgroundImage = 'none';
-                iconFallback.style.display = 'block';
-                textFallback.style.display = 'block';
-                textFallback.innerText = data.title + " Image Placeholder";
-            }
         }
 
         // --- GENERAL SCRIPTS ---
