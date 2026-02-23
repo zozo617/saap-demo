@@ -209,6 +209,48 @@
             margin-bottom: 15px;
         }
 
+        /* NEW: Image Placeholder inside tabs */
+        .tab-img-placeholder {
+            background: var(--bg-color);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            transition: 0.3s;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .tab-img-placeholder:hover {
+            border-color: var(--primary-color);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-md);
+        }
+        .tab-img-placeholder i {
+            font-size: 3rem;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .tab-img-placeholder:hover i {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        .tab-img-placeholder span {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        .tab-img-placeholder small {
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
         /* MVP CARDS */
         .mvp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 2rem; }
         .mvp-card { background: var(--bg-color); border-radius: 16px; padding: 30px 20px; text-align: center; border: 1px solid var(--border-color); border-top: 4px solid var(--accent-yellow); transition: 0.3s; }
@@ -381,6 +423,11 @@
                 <div id="tab-history" class="tab-pane">
                     <div class="content-card">
                         <h2>Our History</h2>
+                        <div class="tab-img-placeholder">
+                            <i class="fa-regular fa-image"></i>
+                            <span>Historical Campus Photo</span>
+                            <small>(Insert Old Image Here)</small>
+                        </div>
                         <p>After three years of Japanese occupation and the devastation of World War II, Floridablanca was left in poverty, with most buildings destroyed except the church. In 1946, there was a strong need for education and moral rebuilding in the community.</p>
                         <p>Father Joseph A. Devlin, a chaplain in the Army Air Corps assigned at Palacol Airbase, saw this need and proposed the establishment of a Catholic high school. With the support of Reverend Father Lucinio Valles, OSA, and the townspeople, St. Augustine Academy (SAA) was founded in July 1946 as a non-stock Catholic school under the Parish of Saint Joseph.</p>
                         <p>The school started with 135 students, holding classes in the church and sacristy due to limited facilities. Its first graduating class had only five students. Over time, more classrooms were built, and the school became the center of community life. The curriculum followed the U.S. education system, emphasizing English and literature.</p>
@@ -392,6 +439,11 @@
                 <div id="tab-founder" class="tab-pane">
                     <div class="content-card">
                         <h2>The Founder</h2>
+                        <div class="tab-img-placeholder">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span>Fr. Joseph A. Devlin</span>
+                            <small>(Insert Founder Portrait Here)</small>
+                        </div>
                         <p>In 1946, the first secondary school in Floridablanca, Saint Augustine Academy, was founded by Fr. Joseph A. Devlin, an American chaplain of the U.S. Air Force assigned at the Floridablanca Air Field, in collaboration with Fr. Lucinio Valles, OSA, the parish priest at that time. Established in response to the community's strong desire for education after the war, the school opened with more than a hundred eager enrollees.</p>
                         <p>Fr. Devlin served not only as founder and director but also as teacher, coach, and even janitor. Before leaving in 1948, he reminded the community, <em>"This is your school. Take care of it."</em> True to his vision, the school produced thousands of professionals and scholars. Born on April 15, 1914, in West Des Moines, Iowa, Fr. Devlin studied Philosophy and Theology in the United States and Rome, served in World War II, and spent many years in parish work before his death in 1996.</p>
                         <p>The school was named after Saint Augustine, honoring both the great Doctor of the Church and Fr. Valles' Augustinian roots. Its seal features an eagle perched on a diploma, symbolizing its American foundation and educational mission. The original motto, "Ad Astra Per Fidem" (To the stars in faith), was later changed to "Unum in Sapientia et Caritate" (One in knowledge and love). Now known as St. Augustine Academy of Pampanga Inc., under the Archdiocese of San Fernando Educational System, the school serves around 1,700 students from Preschool to Senior High School and continues its mission of providing quality Catholic education.</p>
@@ -401,6 +453,11 @@
                 <div id="tab-facilities" class="tab-pane">
                     <div class="content-card">
                         <h2>Services & Facilities</h2>
+                        <div class="tab-img-placeholder">
+                            <i class="fa-solid fa-school"></i>
+                            <span>Campus Facilities</span>
+                            <small>(Insert Campus Image Here)</small>
+                        </div>
                         <div class="req-grid">
                             <div class="req-box">
                                 <h3><i class="fa-solid fa-bell-concierge"></i> Student Services</h3>
