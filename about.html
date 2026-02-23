@@ -33,6 +33,10 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --admin-sidebar-bg: #111827; /* Dark background from screenshot */
+            --admin-sidebar-hover: #1f2937;
+            --admin-sidebar-active: #064e3b; /* Dark green active state */
+            --admin-text: #e5e7eb;
         }
 
         body.dark-mode {
@@ -89,103 +93,116 @@
         
         .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
 
-        /* TABS LAYOUT */
-        .tabs-container {
+        /* --- NEW HIDDEN SIDEBAR LAYOUT --- */
+        .page-layout {
             display: flex;
-            align-items: flex-start;
-            gap: 40px;
-            margin-bottom: 6rem;
             position: relative;
+            min-height: 800px;
         }
 
-        /* Hover wrapper for desktop */
-        .tabs-sidebar-wrapper {
-            position: sticky;
-            top: 100px; /* Adjust based on header height */
-            width: 250px;
-            flex-shrink: 0;
-            z-index: 50; /* Ensure it stays above other content */
-        }
-        
-        /* The trigger area that activates the menu on hover */
-        .tabs-hover-trigger {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .tabs-hover-trigger:hover {
-             background-color: var(--secondary-color);
-        }
-
-        .tabs-sidebar {
-            width: 100%;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
+        /* The invisible hover trigger area on the left edge */
+        .sidebar-hover-area {
             position: absolute;
-            top: 100%;
             left: 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            margin-top: 10px;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            z-index: 50;
         }
 
-        /* Show the sidebar when hovering over the wrapper */
-        .tabs-sidebar-wrapper:hover .tabs-sidebar {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        /* The actual dark sidebar */
+        .admin-sidebar {
+            position: absolute;
+            left: -320px; /* Hidden by default */
+            top: 0;
+            width: 300px;
+            background-color: var(--admin-sidebar-bg);
+            border-radius: 0 16px 16px 0;
+            box-shadow: 10px 0 25px rgba(0,0,0,0.2);
+            padding: 20px 0;
+            z-index: 60;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Show sidebar on hover (Desktop) */
+        .sidebar-hover-area:hover + .admin-sidebar,
+        .admin-sidebar:hover {
+            left: 0;
+        }
+
+        /* Sidebar Header (like the screenshot) */
+        .admin-sidebar-header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 20px;
+        }
+        .admin-sidebar-header img {
+            width: 60px;
+            margin-bottom: 10px;
+        }
+        .admin-sidebar-header h3 {
+            color: white;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .admin-sidebar-header p {
+            color: #10b981;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Tab Buttons styled like Admin Links */
         .tab-btn {
-            display: block;
+            display: flex;
+            align-items: center;
             width: 100%;
-            padding: 15px 20px;
-            text-align: left;
+            padding: 16px 25px;
             background: none;
             border: none;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-dark);
+            border-left: 5px solid transparent;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--admin-text);
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
+            text-align: left;
         }
 
-        .tab-btn:last-child {
-            border-bottom: none;
+        .tab-btn i {
+            width: 30px;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            text-align: center;
+            color: #9ca3af;
+            transition: color 0.3s ease;
         }
 
         .tab-btn:hover {
-            background-color: var(--bg-color);
-            color: var(--primary-color);
+            background-color: var(--admin-sidebar-hover);
         }
 
         .tab-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-            border-left: 4px solid var(--accent-yellow);
+            background-color: var(--admin-sidebar-active);
+            border-left-color: #10b981;
+            font-weight: 700;
         }
 
+        .tab-btn.active i {
+            color: #10b981;
+        }
+
+        /* Tab Content Area */
         .tab-content-area {
             flex-grow: 1;
-            min-width: 0; /* Prevent flex overflow */
+            width: 100%;
+            padding-left: 60px; /* Leave space for the hover area */
+            transition: opacity 0.3s ease;
         }
 
         .tab-pane {
@@ -195,6 +212,24 @@
 
         .tab-pane.active {
             display: block;
+        }
+
+        /* Mobile Tab Menu Toggle */
+        .mobile-tab-toggle {
+            display: none;
+            width: max-content;
+            padding: 12px 18px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
         }
 
         /* Content inside tabs styling */
@@ -223,7 +258,7 @@
             margin-bottom: 15px;
         }
 
-        /* NEW: Image Placeholder inside tabs */
+        /* Image Placeholder inside tabs */
         .tab-img-placeholder {
             background: var(--bg-color);
             border: 2px dashed var(--border-color);
@@ -318,21 +353,41 @@
             .values-list { font-size: 1.4rem; gap: 20px; flex-direction: column; align-items: center;}
             
             /* Responsive Tabs */
-            .tabs-container { flex-direction: column; gap: 20px; }
-            .tabs-sidebar-wrapper { width: 100%; position: static; }
+            .page-layout { flex-direction: column; }
+            .sidebar-hover-area { display: none; } /* Disable hover area on mobile */
+            .tab-content-area { padding-left: 0; }
             
-            /* On mobile, use click instead of hover */
-            .tabs-sidebar-wrapper:hover .tabs-sidebar {
-                /* Reset hover effect on mobile */
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(10px);
+            .mobile-tab-toggle { display: flex; }
+            
+            .admin-sidebar { 
+                position: fixed;
+                top: 0;
+                left: -100%; /* Fully hidden */
+                height: 100vh;
+                border-radius: 0;
+                z-index: 3000;
+                padding-top: 20px;
+            }
+            .admin-sidebar.show-mobile { 
+                left: 0; 
             }
             
-            .tabs-sidebar.show-mobile { 
-                opacity: 1 !important;
-                visibility: visible !important;
-                transform: translateY(0) !important;
+            /* Overlay for mobile sidebar */
+            .sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 2999;
+                display: none;
+                opacity: 0;
+                transition: 0.3s;
+            }
+            .sidebar-overlay.active {
+                display: block;
+                opacity: 1;
             }
 
             .content-card { padding: 25px; }
@@ -371,8 +426,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="admission-procedure.html">Admission Procedure</a></li>
                 <li><a href="index.html#academics">Academics</a></li>
                 <li><a href="index.html" class="nav-login-btn">MySAAP</a></li>
@@ -387,20 +442,40 @@
 
     <div class="container">
         
-        <div class="tabs-container">
-            <div class="tabs-sidebar-wrapper">
-                <div class="tabs-hover-trigger" onclick="toggleMobileTabs()">
-                    <span>Select Information</span>
-                    <i class="fa-solid fa-bars"></i>
+        <button class="mobile-tab-toggle" onclick="toggleMobileTabs()" title="Menu">
+            <i class="fa-solid fa-bars"></i> <span>Menu</span>
+        </button>
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileTabs()"></div>
+
+        <div class="page-layout">
+            <div class="sidebar-hover-area"></div>
+
+            <div class="admin-sidebar" id="tabsSidebar">
+                <div class="admin-sidebar-header">
+                    <img src="logo.jpg" alt="SAAPI Logo" style="border-radius: 50%;">
+                    <h3>SAAP PORTAL</h3>
+                    <p>INFORMATION</p>
                 </div>
-                <div class="tabs-sidebar" id="tabsSidebar">
-                    <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">Overview & Philosophy</button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-history')">Our History</button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-founder')">The Founder</button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">Services & Facilities</button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">Student Organizations</button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-policy')">Privacy Policy</button>
-                </div>
+                
+                <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">
+                    <i class="fa-solid fa-eye"></i> Overview & Philosophy
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-history')">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Our History
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-founder')">
+                    <i class="fa-solid fa-user-tie"></i> The Founder
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">
+                    <i class="fa-solid fa-building"></i> Services & Facilities
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">
+                    <i class="fa-solid fa-users"></i> Student Organizations
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-policy')">
+                    <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                </button>
             </div>
 
             <div class="tab-content-area">
@@ -588,7 +663,7 @@
         // Tab Switching Logic
         function openTab(evt, tabName) {
             // Prevent redundant triggers if tab is already active
-            if (evt.currentTarget.classList.contains("active") && window.innerWidth > 768) return;
+            if (evt.currentTarget.classList.contains("active")) return;
 
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-pane");
@@ -610,15 +685,20 @@
             
             evt.currentTarget.className += " active";
 
-            // If on mobile and triggered by click, hide the menu after selection
-            if(window.innerWidth <= 768 && evt.type === 'click') {
+            // If on mobile, hide the menu after selection
+            if(window.innerWidth <= 768) {
                 document.getElementById('tabsSidebar').classList.remove('show-mobile');
+                document.getElementById('sidebarOverlay').classList.remove('active');
             }
         }
 
         // Toggle Mobile Tab Menu
         function toggleMobileTabs() {
-            document.getElementById('tabsSidebar').classList.toggle('show-mobile');
+            const sidebar = document.getElementById('tabsSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('show-mobile');
+            overlay.classList.toggle('active');
         }
 
         function reveal() {
