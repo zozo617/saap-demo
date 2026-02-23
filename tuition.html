@@ -92,7 +92,8 @@
         /* TUITION GRIDS & CARDS */
         .department-title { font-size: 2rem; color: var(--primary-color); border-bottom: 3px solid var(--accent-yellow); padding-bottom: 10px; margin-bottom: 30px; font-weight: 800; display: inline-block; margin-top: 40px; }
         
-        .tuition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 20px;}
+        /* ADDED align-items: start; to prevent stretching bug */
+        .tuition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 20px; align-items: start;}
         
         .tuition-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); transition: 0.3s; display: flex; flex-direction: column;}
         .tuition-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
@@ -109,7 +110,7 @@
         .breakdown-toggle i { margin-left: 8px; transition: transform 0.3s; }
         .breakdown-toggle.active i { transform: rotate(180deg); }
 
-        .fee-breakdown { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: #f8fafc; }
+        .fee-breakdown { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: #f8fafc; }
         .sub-fee-row { display: flex; justify-content: space-between; padding: 10px 20px 10px 40px; font-size: 0.9rem; color: var(--text-muted); border-bottom: 1px dashed var(--border-color); }
         .sub-fee-row:last-child { border-bottom: 1px solid var(--border-color); }
         .sub-fee-row span:last-child { font-family: monospace; }
@@ -435,7 +436,7 @@
                     <img src="logo.jpg" alt="SAAPI Logo" class="footer-logo"> 
                     St. Augustine Academy<br>of Pampanga, Inc.
                 </div>
-                <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding.</p>
+                <p>Empowering the next generation of leaders in Pampanga through our core values of <strong>Faith - Service - Excellence</strong> since our founding in 1946.</p>
                 <p style="font-style: italic; color: var(--accent-yellow); margin-top: 10px;">"Ad Astra, Per Fidem"</p>
             </div>
             <div class="footer-col">
@@ -465,14 +466,22 @@
             } else { mobileBtn.classList.remove('fa-xmark'); mobileBtn.classList.add('fa-bars'); }
         });
 
-        // Toggle Breakdown function for the tuition cards
+        // Toggle Breakdown function (Only one open at a time)
         function toggleBreakdown(element) {
-            element.classList.toggle('active');
-            const breakdown = element.nextElementSibling;
-            if (element.classList.contains('active')) {
+            const allToggles = document.querySelectorAll('.breakdown-toggle');
+            const allBreakdowns = document.querySelectorAll('.fee-breakdown');
+            
+            const isActive = element.classList.contains('active');
+            
+            // Close all
+            allToggles.forEach(t => t.classList.remove('active'));
+            allBreakdowns.forEach(b => b.style.maxHeight = null); // Reset max-height
+            
+            // If the clicked one wasn't active, open it
+            if (!isActive) {
+                element.classList.add('active');
+                const breakdown = element.nextElementSibling;
                 breakdown.style.maxHeight = breakdown.scrollHeight + "px";
-            } else {
-                breakdown.style.maxHeight = 0;
             }
         }
 
