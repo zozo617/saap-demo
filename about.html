@@ -33,6 +33,12 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            
+            /* SAAP Dark Emerald Admin Theme Variables */
+            --admin-sidebar-bg: #011812; 
+            --admin-sidebar-hover: #022c22; 
+            --admin-sidebar-active: #047857; 
+            --admin-text: #e5e7eb;
         }
 
         body.dark-mode {
@@ -87,91 +93,160 @@
         .about-hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; z-index: 2; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: pageFadeIn 0.8s ease;}
         .about-hero p { font-size: 1.1rem; color: var(--accent-yellow); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; z-index: 2; animation: pageFadeIn 1s ease;}
         
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
 
-        /* TABS LAYOUT */
-        .tabs-container {
+        /* --- STABLE HOVER SIDEBAR LAYOUT --- */
+        .page-layout {
             display: flex;
             align-items: flex-start;
-            gap: 40px;
-            margin-bottom: 6rem;
             position: relative;
+            min-height: 800px;
+            margin-bottom: 6rem;
         }
 
-        /* Responsive Hamburger Menu for Tabs */
-        .tabs-mobile-header {
-            display: none;
-            width: 100%;
+        /* Hover wrapper for desktop */
+        .tabs-sidebar-wrapper {
+            position: sticky;
+            top: 120px; 
+            width: 15px; 
+            height: 500px; 
+            flex-shrink: 0;
+            z-index: 100;
+        }
+        
+        /* The small tab that hints to the user to hover */
+        .sidebar-hint {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 0 12px 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* The Dark Theme Sidebar */
+        .admin-sidebar {
+            position: absolute;
+            top: 0;
+            left: 0; 
+            width: 290px;
+            background-color: var(--admin-sidebar-bg);
+            border-radius: 16px; 
+            box-shadow: 15px 0 30px rgba(0,0,0,0.25);
+            padding: 0 0 20px 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            
+            /* Hide off-screen leftwards */
+            transform: translateX(-150%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+        }
+
+        /* Hovering the wrapper OR the sidebar keeps it open securely */
+        .tabs-sidebar-wrapper:hover .admin-sidebar {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tabs-sidebar-wrapper:hover .sidebar-hint {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Sidebar Header */
+        .admin-sidebar-header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             margin-bottom: 15px;
         }
-
-        .tab-hamburger {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.3s;
-            box-shadow: var(--shadow-sm);
+        .admin-sidebar-header img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: white;
+            padding: 2px;
+        }
+        .admin-sidebar-header h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+        .admin-sidebar-header p {
+            color: #10b981;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
         }
 
-        .tab-hamburger:active {
-            transform: scale(0.95);
-        }
-
-        .tabs-sidebar {
-            width: 250px;
-            flex-shrink: 0;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            position: sticky;
-            top: 100px; /* Adjust based on header height */
-            transition: all 0.3s ease;
-        }
-
+        /* Tab Buttons */
         .tab-btn {
-            display: block;
+            display: flex;
+            align-items: center;
             width: 100%;
-            padding: 15px 20px;
-            text-align: left;
+            padding: 16px 25px;
             background: none;
             border: none;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-dark);
+            border-left: 4px solid transparent;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--admin-text);
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
+            text-align: left;
         }
 
-        .tab-btn:last-child {
-            border-bottom: none;
+        .tab-btn i {
+            width: 25px;
+            font-size: 1.1rem;
+            margin-right: 15px;
+            text-align: center;
+            color: #9ca3af;
+            transition: color 0.3s ease;
         }
 
         .tab-btn:hover {
-            background-color: var(--bg-color);
-            color: var(--primary-color);
+            background-color: var(--admin-sidebar-hover);
         }
 
         .tab-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-            border-left: 4px solid var(--accent-yellow);
+            background-color: var(--admin-sidebar-active);
+            border-left-color: #10b981;
+            font-weight: 700;
         }
 
+        .tab-btn.active i {
+            color: #10b981;
+        }
+
+        /* Tab Content Area */
         .tab-content-area {
             flex-grow: 1;
-            min-width: 0; /* Prevent flex overflow */
+            min-width: 0;
+            padding-left: 60px; /* Space for the hint tab */
+            transition: opacity 0.3s ease;
         }
 
         .tab-pane {
@@ -183,7 +258,48 @@
             display: block;
         }
 
-        /* Content inside tabs styling */
+        /* Mobile Tab Menu Toggle */
+        .mobile-tab-toggle {
+            display: none;
+            width: max-content;
+            padding: 12px 18px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Centered Content for Overview Tab */
+        #tab-overview .content-card {
+            max-width: 1000px;
+            margin: 0 auto 30px; /* Center the card */
+            text-align: center;
+        }
+        
+        #tab-overview h2 {
+            display: inline-block;
+            border-bottom: none;
+            position: relative;
+        }
+        #tab-overview h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-yellow);
+            border-radius: 4px;
+        }
+
         .content-card {
             background: var(--card-bg);
             border-radius: 16px;
@@ -209,7 +325,7 @@
             margin-bottom: 15px;
         }
 
-        /* NEW: Image Placeholder inside tabs */
+        /* General Image Placeholder inside tabs */
         .tab-img-placeholder {
             background: var(--bg-color);
             border: 2px dashed var(--border-color);
@@ -224,10 +340,12 @@
             transition: 0.3s;
             margin-bottom: 20px;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
         .tab-img-placeholder:hover {
             border-color: var(--primary-color);
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             box-shadow: var(--shadow-md);
         }
         .tab-img-placeholder i {
@@ -240,15 +358,101 @@
             color: var(--primary-color);
             transform: scale(1.1);
         }
-        .tab-img-placeholder span {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-dark);
+
+        /* NEW: Interactive Facilities Layout */
+        .facilities-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            align-items: start;
         }
-        .tab-img-placeholder small {
-            font-weight: 500;
-            font-size: 0.85rem;
-            margin-top: 5px;
+
+        .facilities-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Custom Scrollbar for Facilities List */
+        .facilities-list::-webkit-scrollbar { width: 6px; }
+        .facilities-list::-webkit-scrollbar-track { background: var(--bg-color); border-radius: 10px;}
+        .facilities-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .facilities-list::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
+        .facility-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .facility-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+        .facility-item:hover {
+            background: var(--card-bg);
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
+        }
+        .facility-item.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+        .facility-item.active i {
+            color: var(--accent-yellow);
+        }
+
+        .facility-display {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            animation: pageFadeIn 0.5s ease;
+        }
+        
+        .facility-display-img {
+            width: 100%;
+            height: 350px;
+            background: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        .facility-display-img i { font-size: 3rem; color: #cbd5e1; margin-bottom: 10px;}
+        
+        .facility-display h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .facility-display p {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin: 0;
         }
 
         /* MVP CARDS */
@@ -265,16 +469,11 @@
         .values-list span { display: flex; align-items: center; gap: 10px; }
         .values-list span i { color: var(--accent-yellow); font-size: 1.2rem;}
 
-        .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 2rem; align-items: start;}
-        .req-box { background: var(--bg-color); border-radius: 16px; padding: 25px; border: 1px solid var(--border-color); }
-        .req-box h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid var(--border-color); display: flex; align-items: center; gap: 10px;}
-        .req-box h3 i { color: var(--primary-color); }
+        .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .program-card { background: var(--bg-color); border-radius: 16px; border: 1px solid var(--border-color); border-left: 4px solid var(--accent-yellow); padding: 25px; }
         .req-list { list-style: none; }
         .req-list li { margin-bottom: 10px; display: flex; gap: 10px; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; line-height: 1.4; align-items: flex-start;}
         .req-list li i { color: var(--accent-yellow); margin-top: 3px;}
-
-        .programs-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .program-card { background: var(--bg-color); border-radius: 16px; border: 1px solid var(--border-color); border-left: 4px solid var(--accent-yellow); padding: 25px; }
 
         /* FOOTER */
         .mega-footer { background-color: var(--secondary-color); color: #ecf0f1; padding: 5rem 5% 2rem; margin-top: auto; }
@@ -291,7 +490,9 @@
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 992px) {
-            .req-grid { grid-template-columns: 1fr; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .facilities-layout { grid-template-columns: 1fr; }
+            .facilities-list { max-height: 300px; }
         }
         @media (max-width: 768px) {
             .gray-bar { flex-direction: column; gap: 10px; } .gray-bar-left { display: none; } 
@@ -304,20 +505,49 @@
             .values-list { font-size: 1.4rem; gap: 20px; flex-direction: column; align-items: center;}
             
             /* Responsive Tabs */
-            .tabs-container { flex-direction: column; gap: 20px; }
-            .tabs-mobile-header { display: flex; justify-content: flex-start; }
+            .page-layout { flex-direction: column; }
+            .sidebar-hover-wrapper { display: none; } /* Disable hover area on mobile */
+            .tab-content-area { padding-left: 0; }
             
-            .tabs-sidebar { 
-                width: 100%; 
-                position: static; 
-                display: none; /* Hidden by default on mobile */
-                margin-bottom: 20px;
+            .mobile-tab-toggle { display: flex; }
+            
+            .admin-sidebar { 
+                position: fixed;
+                top: 0;
+                left: -100%; /* Fully hidden */
+                height: 100vh;
+                width: 280px;
+                border-radius: 0;
+                z-index: 3000;
+                transform: none;
+                transition: left 0.3s ease;
+                opacity: 1;
+                visibility: visible;
             }
-            .tabs-sidebar.show-mobile { 
-                display: block; 
-                animation: pageFadeIn 0.3s ease;
+            .admin-sidebar.show-mobile { 
+                left: 0; 
             }
+            
+            /* Overlay for mobile sidebar */
+            .sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 2999;
+                display: none;
+                opacity: 0;
+                transition: 0.3s;
+            }
+            .sidebar-overlay.active {
+                display: block;
+                opacity: 1;
+            }
+
             .content-card { padding: 25px; }
+            .facility-display-img { height: 200px; }
         }
     </style>
 </head>
@@ -353,8 +583,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="admission-procedure.html">Admission Procedure</a></li>
                 <li><a href="index.html#academics">Academics</a></li>
                 <li><a href="index.html" class="nav-login-btn">MySAAP</a></li>
@@ -369,20 +599,44 @@
 
     <div class="container">
         
-        <div class="tabs-mobile-header">
-            <button class="tab-hamburger" onclick="toggleMobileTabs()" title="Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
+        <button class="mobile-tab-toggle" onclick="toggleMobileTabs()" title="Menu">
+            <i class="fa-solid fa-bars"></i> <span>Information Menu</span>
+        </button>
 
-        <div class="tabs-container">
-            <div class="tabs-sidebar" id="tabsSidebar">
-                <button class="tab-btn active" onmouseover="openTab(event, 'tab-overview')" onclick="openTab(event, 'tab-overview')">Overview & Philosophy</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-history')" onclick="openTab(event, 'tab-history')">Our History</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-founder')" onclick="openTab(event, 'tab-founder')">The Founder</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-facilities')" onclick="openTab(event, 'tab-facilities')">Services & Facilities</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-organizations')" onclick="openTab(event, 'tab-organizations')">Student Organizations</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-policy')" onclick="openTab(event, 'tab-policy')">Privacy Policy</button>
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileTabs()"></div>
+
+        <div class="page-layout">
+            <div class="tabs-sidebar-wrapper">
+                <div class="sidebar-hint">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                
+                <div class="admin-sidebar" id="tabsSidebar">
+                    <div class="admin-sidebar-header">
+                        <img src="logo.jpg" alt="SAAPI Logo">
+                        <h3>SAAP PORTAL</h3>
+                        <p>INFORMATION</p>
+                    </div>
+                    
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">
+                        <i class="fa-solid fa-eye"></i> Overview & Philosophy
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-history')">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Our History
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-founder')">
+                        <i class="fa-solid fa-user-tie"></i> The Founder
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">
+                        <i class="fa-solid fa-building"></i> Services & Facilities
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">
+                        <i class="fa-solid fa-users"></i> Student Organizations
+                    </button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-policy')">
+                        <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                    </button>
+                </div>
             </div>
 
             <div class="tab-content-area">
@@ -453,39 +707,70 @@
                 <div id="tab-facilities" class="tab-pane">
                     <div class="content-card">
                         <h2>Services & Facilities</h2>
-                        <div class="tab-img-placeholder">
-                            <i class="fa-solid fa-school"></i>
-                            <span>Campus Facilities</span>
-                            <small>(Insert Campus Image Here)</small>
-                        </div>
-                        <div class="req-grid">
-                            <div class="req-box">
-                                <h3><i class="fa-solid fa-bell-concierge"></i> Student Services</h3>
-                                <ul class="req-list">
-                                    <li><i class="fa-solid fa-check"></i> Lingap Center</li>
-                                    <li><i class="fa-solid fa-check"></i> Office of Student Affairs (OSA)</li>
-                                    <li><i class="fa-solid fa-check"></i> Prefect of Discipline</li>
-                                    <li><i class="fa-solid fa-check"></i> Registrar</li>
-                                    <li><i class="fa-solid fa-check"></i> Campus Ministry</li>
-                                    <li><i class="fa-solid fa-check"></i> Clinic</li>
-                                    <li><i class="fa-solid fa-check"></i> Alumni Affairs</li>
-                                    <li><i class="fa-solid fa-check"></i> Security</li>
-                                    <li><i class="fa-solid fa-check"></i> Maintenance and Housekeeping</li>
-                                </ul>
+                        <p style="margin-bottom: 25px; text-align: center;">Click on a service or facility below to learn more about what St. Augustine Academy offers to our students.</p>
+                        
+                        <div class="facilities-layout">
+                            <div class="facilities-list">
+                                <div class="facility-item active" onclick="changeFacility('lingap')">
+                                    <i class="fa-solid fa-hand-holding-heart"></i> Lingap Center
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('osa')">
+                                    <i class="fa-solid fa-users-viewfinder"></i> Office of Student Affairs
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('discipline')">
+                                    <i class="fa-solid fa-scale-balanced"></i> Prefect of Discipline
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('registrar')">
+                                    <i class="fa-solid fa-file-signature"></i> Registrar
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('library')">
+                                    <i class="fa-solid fa-book-open"></i> Library
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('ministry')">
+                                    <i class="fa-solid fa-church"></i> Campus Ministry
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('clinic')">
+                                    <i class="fa-solid fa-house-medical"></i> Clinic
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('canteen')">
+                                    <i class="fa-solid fa-utensils"></i> Canteen
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('alumni')">
+                                    <i class="fa-solid fa-user-graduate"></i> Alumni Affairs
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('maintenance')">
+                                    <i class="fa-solid fa-broom"></i> Maintenance & Housekeeping
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('security')">
+                                    <i class="fa-solid fa-shield-halved"></i> Security
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('avr')">
+                                    <i class="fa-solid fa-video"></i> Audio-Visual Room (AVR)
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('computer')">
+                                    <i class="fa-solid fa-computer"></i> Computer Laboratories
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('gym')">
+                                    <i class="fa-solid fa-basketball"></i> St. Ambrose Gym
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('theater')">
+                                    <i class="fa-solid fa-masks-theater"></i> St. Monica Theater
+                                </div>
+                                <div class="facility-item" onclick="changeFacility('chapel')">
+                                    <i class="fa-solid fa-place-of-worship"></i> Chapel
+                                </div>
                             </div>
-                            <div class="req-box">
-                                <h3><i class="fa-solid fa-building"></i> Campus Facilities</h3>
-                                <ul class="req-list">
-                                    <li><i class="fa-solid fa-building-columns"></i> Library</li>
-                                    <li><i class="fa-solid fa-utensils"></i> Canteen</li>
-                                    <li><i class="fa-solid fa-video"></i> Audio-Visual Room (AVR)</li>
-                                    <li><i class="fa-solid fa-computer"></i> Computer Laboratories</li>
-                                    <li><i class="fa-solid fa-basketball"></i> St. Ambrose Gym</li>
-                                    <li><i class="fa-solid fa-masks-theater"></i> St. Monica Theater</li>
-                                    <li><i class="fa-solid fa-church"></i> Chapel</li>
-                                </ul>
+
+                            <div class="facility-display" id="facilityDisplay">
+                                <div class="facility-display-img" id="facImg">
+                                    <i class="fa-regular fa-image" id="facIconFallback"></i>
+                                    <span id="facImgText">Image Placeholder</span>
+                                </div>
+                                <h3 id="facTitle">Lingap Center</h3>
+                                <p id="facDesc">This center serves as the heart of the school's developmental guidance program, collaborating with learners to ensure success in their academic, career, and personal-social lives. The team focuses on nurturing a resilient Augustinian attitude through a wide range of services including coaching, counseling, testing, and needs assessment.</p>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -569,8 +854,7 @@
 
         // Tab Switching Logic
         function openTab(evt, tabName) {
-            // Prevent redundant triggers if tab is already active
-            if (evt.currentTarget.classList.contains("active") && window.innerWidth > 768) return;
+            if (evt.currentTarget.classList.contains("active")) return;
 
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-pane");
@@ -585,7 +869,6 @@
             }
 
             document.getElementById(tabName).style.display = "block";
-            // slight delay to allow display:block to apply before adding class for animation
             setTimeout(() => {
                 document.getElementById(tabName).classList.add("active");
             }, 10);
@@ -595,14 +878,139 @@
             // If on mobile and triggered by click, hide the menu after selection
             if(window.innerWidth <= 768 && evt.type === 'click') {
                 document.getElementById('tabsSidebar').classList.remove('show-mobile');
+                document.getElementById('sidebarOverlay').classList.remove('active');
             }
         }
 
         // Toggle Mobile Tab Menu
         function toggleMobileTabs() {
-            document.getElementById('tabsSidebar').classList.toggle('show-mobile');
+            const sidebar = document.getElementById('tabsSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('show-mobile');
+            overlay.classList.toggle('active');
         }
 
+        // --- NEW: Interactive Facilities Logic ---
+        const facilitiesData = {
+            lingap: {
+                title: "Lingap Center",
+                desc: "This center serves as the heart of the school's developmental guidance program, collaborating with learners to ensure success in their academic, career, and personal-social lives. The team focuses on nurturing a resilient Augustinian attitude through a wide range of services including coaching, counseling, testing, and needs assessment.",
+                imgUrl: "" /* HOW TO ADD PICTURE: Put your image link here, e.g., "images/lingap.jpg" */
+            },
+            osa: {
+                title: "Office of Student Affairs (OSA)",
+                desc: "The OSA is responsible for planning and coordinating a comprehensive student life experience by advising various clubs and cultural programs. It aims to help students find the activities best suited for their interests both inside and outside the campus environment.",
+                imgUrl: "" /* HOW TO ADD PICTURE: Put your image link here, e.g., "images/osa.jpg" */
+            },
+            discipline: {
+                title: "Prefect of Discipline",
+                desc: "This office provides essential assistance to students regarding their daily discipline and conduct to maintain a harmonious school atmosphere. The staff manages investigations and student conferences to ensure that all Augustinians uphold the school's behavioral standards.",
+                imgUrl: "" 
+            },
+            registrar: {
+                title: "Registrar",
+                desc: "The Registrar’s Office acts as the primary hub for managing enrollment credentials and verifying the academic status of both current and prospective learners. They are responsible for the issuance of vital records, including diplomas, SF10/F137 forms, and various certifications related to graduation and enrollment.",
+                imgUrl: "" 
+            },
+            library: {
+                title: "Library",
+                desc: "The school library provides a quiet space for research and study, offering a wide array of supplemental and instructional materials. It operates from 7:30 a.m. to 4:30 p.m. on weekdays, ensuring students have access to informational and reference services throughout the entire school day.",
+                imgUrl: "" 
+            },
+            ministry: {
+                title: "Campus Ministry",
+                desc: "Aiming to practice the values taught by Jesus Christ, the Campus Ministry guides students and staff through regular Holy Mass and sacramental needs. They organize annual retreats, recollections, and faith-sharing sessions to nourish the spiritual growth of the entire Augustinian community.",
+                imgUrl: "" 
+            },
+            clinic: {
+                title: "Clinic",
+                desc: "The school health services promote optimum wellness by providing prompt medical and dental consultations to all students. A school physician is available for weekly consultations, and the clinic staff regularly conducts health advisories and periodic medical exams for student-athletes.",
+                imgUrl: "" 
+            },
+            canteen: {
+                title: "Canteen",
+                desc: "The SAAP canteen offers a variety of nutritious and affordable meals while maintaining strict safety and health protocols. It follows a specific 'Lunch-In' policy and encourages a 'Clean As You Go' (CLAYGO) culture to ensure a pleasant dining environment for everyone.",
+                imgUrl: "" 
+            },
+            alumni: {
+                title: "Alumni Affairs",
+                desc: "This service focuses on establishing lifelong linkages and bonds between the school and its graduates for continued self-development. The office coordinates socialization events, civic awareness programs, and manages potential scholarship grants provided by the alumni network.",
+                imgUrl: "" 
+            },
+            maintenance: {
+                title: "Maintenance and Housekeeping",
+                desc: "This team is dedicated to ensuring the safety, cleanliness, and orderliness of all structures within the school campus. Their services include routine janitorial work, gardening, and immediate repairs to keep the facilities in top condition for students.",
+                imgUrl: "" 
+            },
+            security: {
+                title: "Security",
+                desc: "The security force maintains constant peace and order within the school campus and its surrounding perimeter. Their primary task is to secure the school’s valuable resources and, most importantly, protect the safety of every student and staff member.",
+                imgUrl: "" 
+            },
+            avr: {
+                title: "Audio-Visual Room (AVR)",
+                desc: "The AVR houses a modern collection of materials and equipment designed to make teaching and learning more interactive and effective. It assists faculty members in integrating various media aids into their curriculum to better engage students in the classroom.",
+                imgUrl: "" 
+            },
+            computer: {
+                title: "Computer Laboratories",
+                desc: "SAAP features two specialized laboratories equipped with modern technology to help students gain essential IT and communication skills. These labs provide a structured environment where each student is assigned a computer to practice their digital literacy and technical workbooks.",
+                imgUrl: "" 
+            },
+            gym: {
+                title: "St. Ambrose Gym",
+                desc: "This facility is designed for diverse school functions, ranging from athletic competitions and sports training to academic meetings. It also serves as a primary venue for large-scale liturgical celebrations and social events approved by the School Director.",
+                imgUrl: "" 
+            },
+            theater: {
+                title: "St. Monica Theater",
+                desc: "The theater provides a professional-grade space dedicated to the performing arts and significant formal gatherings. It serves as a platform for Augustinians to showcase their talents in music, drama, and other cultural presentations.",
+                imgUrl: "" 
+            },
+            chapel: {
+                title: "Chapel",
+                desc: "The school chapel is a sacred space intended for quiet reflection, individual prayer, and the spiritual nourishment of the community. It is the center of the school's religious life, where students can participate in regular devotions and find a peaceful sanctuary on campus.",
+                imgUrl: "" 
+            }
+        };
+
+        function changeFacility(key) {
+            // Update active state in list
+            const items = document.querySelectorAll('.facility-item');
+            items.forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Get Data
+            const data = facilitiesData[key];
+            
+            // Update DOM Elements
+            document.getElementById('facTitle').innerText = data.title;
+            document.getElementById('facDesc').innerText = data.desc;
+            
+            const imgContainer = document.getElementById('facImg');
+            const iconFallback = document.getElementById('facIconFallback');
+            const textFallback = document.getElementById('facImgText');
+
+            // Quick re-trigger animation for visual feedback
+            const displayArea = document.getElementById('facilityDisplay');
+            displayArea.style.animation = 'none';
+            displayArea.offsetHeight; /* trigger reflow */
+            displayArea.style.animation = 'pageFadeIn 0.4s ease';
+
+            if (data.imgUrl && data.imgUrl !== "") {
+                imgContainer.style.backgroundImage = `url('${data.imgUrl}')`;
+                iconFallback.style.display = 'none';
+                textFallback.style.display = 'none';
+            } else {
+                imgContainer.style.backgroundImage = 'none';
+                iconFallback.style.display = 'block';
+                textFallback.style.display = 'block';
+                textFallback.innerText = data.title + " Image Placeholder";
+            }
+        }
+
+        // --- GENERAL SCRIPTS ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
