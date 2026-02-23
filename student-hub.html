@@ -93,7 +93,7 @@
         .user-profile { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 6px 12px; border-radius: 50px; border: 1px solid var(--border-light); background: var(--card-bg); transition: 0.3s;}
         .user-profile:hover { border-color: var(--primary); }
         .user-profile span { font-weight: 700; font-size: 0.95rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
-        .avatar { width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 0.95rem; }
+        .avatar { width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; }
         
         .dropdown-menu { position: absolute; top: 115%; right: 0; background: var(--card-bg); width: 240px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; border: 1px solid var(--border-light); overflow: hidden; z-index: 1000;}
         .dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -101,7 +101,7 @@
         .dropdown-header h4 { margin: 0 0 5px 0; font-size: 1.05rem; color: var(--text-main); font-weight: 800;}
         .dropdown-header p { margin: 0; font-size: 0.8rem; color: var(--text-muted); font-weight: 500;}
         .dropdown-links { list-style: none; padding: 10px 0; margin: 0; }
-        .dropdown-links li a { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+        .dropdown-links li a { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; cursor: pointer; }
         .dropdown-links li a:hover { background: rgba(16, 185, 129, 0.1); color: var(--primary); padding-left: 25px; }
         .dropdown-links .sign-out { color: var(--danger); border-top: 1px solid var(--border-light); margin-top: 5px; padding-top: 15px; }
         .dropdown-links .sign-out:hover { background: rgba(239, 68, 68, 0.1); color: var(--danger); padding-left: 25px;}
@@ -322,7 +322,7 @@
                 <div class="profile-container">
                     <div class="user-profile" onclick="toggleProfileMenu()">
                         <div class="avatar" id="nav-avatar">D</div>
-                        <span id="nav-name">Demo Student <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: #9ca3af;"></i></span>
+                        <span id="nav-name">Demo Student <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: var(--text-muted);"></i></span>
                     </div>
                     <div class="dropdown-menu" id="profileDropdown">
                         <div class="dropdown-header">
@@ -330,8 +330,8 @@
                             <p id="dropdown-email">demo@saap.edu.ph</p>
                         </div>
                         <ul class="dropdown-links">
-                            <li><a href="#"><i class="fa-solid fa-user-pen" style="color: #9ca3af;"></i> Edit Profile</a></li>
-                            <li onclick="resetDemoData()"><a href="#" style="color: var(--danger);"><i class="fa-solid fa-rotate-right"></i> Reset Demo Data</a></li>
+                            <li><a onclick="openProfileModal()"><i class="fa-solid fa-user-pen" style="color: #9ca3af;"></i> Edit Profile</a></li>
+                            <li onclick="resetDemoData()"><a style="color: var(--danger);"><i class="fa-solid fa-rotate-right"></i> Reset Demo Data</a></li>
                             <li><a href="index.html" class="sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Secure Sign Out</a></li>
                         </ul>
                     </div>
@@ -738,12 +738,27 @@
         </div>
     </div>
 
+    <div class="custom-modal" id="profile-modal">
+        <div class="modal-box">
+            <h3 id="profile-modal-title"><i class="fa-solid fa-user-pen"></i> Edit Profile</h3>
+            <form onsubmit="saveProfile(event)">
+                <label>Display Name</label>
+                <input type="text" id="edit-profile-name" required>
+                <label>Email Address</label>
+                <input type="email" id="edit-profile-email" required>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
+                    <button type="submit" class="btn-save" style="background: var(--primary); color: white;">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         window.onload = function() {
             applyUserRole();
             startClock();
             
-            // Set correct dark mode icon on load if active
             if(document.documentElement.classList.contains('dark-mode')) {
                 const icon = document.getElementById('theme-toggle');
                 if (icon) icon.classList.replace('fa-moon', 'fa-sun');
@@ -759,7 +774,60 @@
             }
         };
 
-        // --- NEW: DARK MODE TOGGLE FUNCTION ---
+        // --- NEW: PROFILE EDITING LOGIC ---
+        function openProfileModal() {
+            const modal = document.getElementById('profile-modal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            
+            // Populate current values
+            const role = localStorage.getItem('userRole') || 'student';
+            const defaultName = role === 'applicant' ? 'New Applicant' : 'Demo Student';
+            const defaultEmail = role === 'applicant' ? 'pending@saap.edu.ph' : 'demo@saap.edu.ph';
+
+            document.getElementById('edit-profile-name').value = localStorage.getItem('saap_user_name') || defaultName;
+            document.getElementById('edit-profile-email').value = localStorage.getItem('saap_user_email') || defaultEmail;
+
+            // Close the dropdown menu
+            document.getElementById('profileDropdown').classList.remove('active');
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+            const newName = document.getElementById('edit-profile-name').value;
+            const newEmail = document.getElementById('edit-profile-email').value;
+
+            localStorage.setItem('saap_user_name', newName);
+            localStorage.setItem('saap_user_email', newEmail);
+
+            updateProfileDisplay();
+            closeModals();
+        }
+
+        function updateProfileDisplay() {
+            const role = localStorage.getItem('userRole') || 'student';
+            const defaultName = role === 'applicant' ? 'New Applicant' : 'Demo Student';
+            const defaultEmail = role === 'applicant' ? 'pending@saap.edu.ph' : 'demo@saap.edu.ph';
+
+            const name = localStorage.getItem('saap_user_name') || defaultName;
+            const email = localStorage.getItem('saap_user_email') || defaultEmail;
+
+            // Update Dropdown text
+            document.getElementById('dropdown-name').innerText = name;
+            document.getElementById('dropdown-email').innerText = email;
+
+            // Update Nav Top Right
+            const firstName = name.split(' ')[0];
+            document.getElementById('nav-name').innerHTML = `${firstName} <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: var(--text-muted);"></i>`;
+            document.getElementById('nav-avatar').innerText = firstName.charAt(0).toUpperCase();
+
+            // Update Main Greeting Banner
+            const bannerGreeting = document.getElementById('banner-greeting');
+            if(bannerGreeting) {
+                bannerGreeting.innerText = role === 'applicant' ? `Welcome, ${firstName}!` : `Welcome back, ${firstName}!`;
+            }
+        }
+
         function toggleTheme() {
             document.documentElement.classList.toggle('dark-mode');
             localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');
@@ -810,15 +878,9 @@
                     else el.style.display = 'block';
                 });
                 
-                document.getElementById('banner-greeting').innerText = 'Welcome, Applicant!';
                 document.getElementById('banner-subtext').innerText = 'Track your enrollment progress here.';
                 document.getElementById('badge-title').innerText = 'Temporary ID';
                 document.getElementById('badge-id').innerText = 'TEMP-2026-089';
-                
-                document.getElementById('nav-name').innerHTML = 'Applicant <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: var(--text-muted);"></i>';
-                document.getElementById('dropdown-name').innerText = 'New Applicant';
-                document.getElementById('dropdown-email').innerText = 'pending@saap.edu.ph';
-                document.getElementById('nav-avatar').innerText = 'A';
                 
                 switchView('admission-card', document.querySelector('.applicant-only.nav-item'));
             } else {
@@ -828,8 +890,16 @@
                     else if(el.classList.contains('quick-stats')) el.style.display = 'grid';
                     else el.style.display = 'block';
                 });
+                
+                document.getElementById('banner-subtext').innerText = 'Grade 11 - STEM  |  S.Y. 2026-2027';
+                document.getElementById('badge-title').innerText = 'Student ID Number';
+                document.getElementById('badge-id').innerText = '2026-0001';
+
                 switchView('all', document.querySelector('.student-only.nav-item'));
             }
+
+            // Updates the names on the page (reads from localStorage or sets default)
+            updateProfileDisplay();
         }
 
         function checkApplicantStatus() {
@@ -987,7 +1057,12 @@
         function closeModals() {
             document.getElementById('class-modal').classList.remove('active');
             document.getElementById('task-modal').classList.remove('active');
-            setTimeout(() => { document.getElementById('class-modal').style.display = 'none'; document.getElementById('task-modal').style.display = 'none'; }, 300);
+            document.getElementById('profile-modal').classList.remove('active');
+            setTimeout(() => { 
+                document.getElementById('class-modal').style.display = 'none'; 
+                document.getElementById('task-modal').style.display = 'none'; 
+                document.getElementById('profile-modal').style.display = 'none'; 
+            }, 300);
         }
 
         function switchDay() {
