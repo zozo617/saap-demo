@@ -35,9 +35,9 @@
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
             
             /* SAAP Dark Emerald Admin Theme Variables */
-            --admin-sidebar-bg: #011812; 
-            --admin-sidebar-hover: #022c22; 
-            --admin-sidebar-active: #047857; 
+            --admin-sidebar-bg: #011812; /* Deepest Green */
+            --admin-sidebar-hover: #022c22; /* Secondary Green */
+            --admin-sidebar-active: #047857; /* Primary Emerald Green */
             --admin-text: #e5e7eb;
         }
 
@@ -95,78 +95,31 @@
         
         .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
 
-        /* --- STABLE HOVER SIDEBAR LAYOUT --- */
+        /* --- STATIC SIDEBAR LAYOUT --- */
         .page-layout {
             display: flex;
             align-items: flex-start;
+            gap: 40px; /* Space between sidebar and content */
             position: relative;
             min-height: 800px;
             margin-bottom: 6rem;
         }
 
-        /* Hover wrapper for desktop */
-        .tabs-sidebar-wrapper {
-            position: sticky;
-            top: 120px; 
-            width: 15px; 
-            height: 500px; 
-            flex-shrink: 0;
-            z-index: 100;
-        }
-        
-        /* The small tab that hints to the user to hover */
-        .sidebar-hint {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50px;
-            height: 60px;
-            background: var(--primary-color);
-            border-radius: 0 12px 12px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-md);
-            transition: 0.3s ease;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        /* The Dark Theme Sidebar */
+        /* The Dark Theme Sidebar (Always visible on desktop) */
         .admin-sidebar {
-            position: absolute;
-            top: 0;
-            left: 0; 
+            position: sticky;
+            top: 100px; /* Stays in place when scrolling */
             width: 290px;
+            flex-shrink: 0;
             background-color: var(--admin-sidebar-bg);
             border-radius: 16px; 
-            box-shadow: 15px 0 30px rgba(0,0,0,0.25);
+            box-shadow: var(--shadow-md);
             padding: 0 0 20px 0;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
-            
-            /* Hide off-screen leftwards */
-            transform: translateX(-150%);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 20;
-        }
-
-        /* Hovering the wrapper OR the sidebar keeps it open securely */
-        .tabs-sidebar-wrapper:hover .admin-sidebar {
-            transform: translateX(0);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .tabs-sidebar-wrapper:hover .sidebar-hint {
-            opacity: 0;
-            visibility: hidden;
         }
 
         /* Sidebar Header */
@@ -245,7 +198,6 @@
         .tab-content-area {
             flex-grow: 1;
             min-width: 0;
-            padding-left: 60px; /* Space for the hint tab */
             transition: opacity 0.3s ease;
         }
 
@@ -504,25 +456,20 @@
             .about-hero h1 { font-size: 2.2rem; }
             .values-list { font-size: 1.4rem; gap: 20px; flex-direction: column; align-items: center;}
             
-            /* Responsive Tabs */
-            .page-layout { flex-direction: column; }
-            .sidebar-hover-wrapper { display: none; } /* Disable hover area on mobile */
-            .tab-content-area { padding-left: 0; }
+            /* Responsive Tabs - Mobile Overlay */
+            .page-layout { flex-direction: column; gap: 20px; }
             
             .mobile-tab-toggle { display: flex; }
             
             .admin-sidebar { 
                 position: fixed;
                 top: 0;
-                left: -100%; /* Fully hidden */
+                left: -100%; /* Fully hidden off screen */
                 height: 100vh;
                 width: 280px;
                 border-radius: 0;
                 z-index: 3000;
-                transform: none;
                 transition: left 0.3s ease;
-                opacity: 1;
-                visibility: visible;
             }
             .admin-sidebar.show-mobile { 
                 left: 0; 
@@ -606,37 +553,32 @@
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileTabs()"></div>
 
         <div class="page-layout">
-            <div class="tabs-sidebar-wrapper">
-                <div class="sidebar-hint">
-                    <i class="fa-solid fa-bars"></i>
+            
+            <div class="admin-sidebar" id="tabsSidebar">
+                <div class="admin-sidebar-header">
+                    <img src="logo.jpg" alt="SAAPI Logo">
+                    <h3>SAAP PORTAL</h3>
+                    <p>INFORMATION</p>
                 </div>
                 
-                <div class="admin-sidebar" id="tabsSidebar">
-                    <div class="admin-sidebar-header">
-                        <img src="logo.jpg" alt="SAAPI Logo">
-                        <h3>SAAP PORTAL</h3>
-                        <p>INFORMATION</p>
-                    </div>
-                    
-                    <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">
-                        <i class="fa-solid fa-eye"></i> Overview & Philosophy
-                    </button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-history')">
-                        <i class="fa-solid fa-clock-rotate-left"></i> Our History
-                    </button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-founder')">
-                        <i class="fa-solid fa-user-tie"></i> The Founder
-                    </button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">
-                        <i class="fa-solid fa-building"></i> Services & Facilities
-                    </button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">
-                        <i class="fa-solid fa-users"></i> Student Organizations
-                    </button>
-                    <button class="tab-btn" onclick="openTab(event, 'tab-policy')">
-                        <i class="fa-solid fa-shield-halved"></i> Privacy Policy
-                    </button>
-                </div>
+                <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">
+                    <i class="fa-solid fa-eye"></i> Overview & Philosophy
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-history')">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Our History
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-founder')">
+                    <i class="fa-solid fa-user-tie"></i> The Founder
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">
+                    <i class="fa-solid fa-building"></i> Services & Facilities
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">
+                    <i class="fa-solid fa-users"></i> Student Organizations
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-policy')">
+                    <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                </button>
             </div>
 
             <div class="tab-content-area">
@@ -891,7 +833,7 @@
             overlay.classList.toggle('active');
         }
 
-        // --- NEW: Interactive Facilities Logic ---
+        // --- Interactive Facilities Logic ---
         const facilitiesData = {
             lingap: {
                 title: "Lingap Center",
