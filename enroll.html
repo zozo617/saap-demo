@@ -322,14 +322,21 @@
                         <div class="file-upload-box"><i class="fa-solid fa-receipt"></i><span>Copy of Application Fee Receipt</span><small>Click to upload</small><input type="file" required></div>
                     </div>
 
-                    <div id="grant-requirements" style="display:none; margin-top: 25px;">
-                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements for Application of Grants / ESC/ Financial Assistance (Gr7): <span style="color: var(--text-muted); font-weight: normal; font-size: 0.8rem;">(Optional)</span></h4>
+                    <div id="grant-toggle-container" style="display:none; margin-top: 30px; padding-top: 25px; border-top: 1px dashed var(--border-color);">
+                        <div class="checkbox-group" style="margin-bottom: 5px;">
+                            <input type="checkbox" id="applyGrant" onchange="toggleGrantRequirements()">
+                            <label for="applyGrant" style="font-size: 1.05rem; color: var(--text-dark);">I want to apply for Educational Grants / ESC / Financial Assistance <span style="color: var(--primary); font-weight: 500;">(Optional)</span></label>
+                        </div>
+                    </div>
+
+                    <div id="grant-requirements" style="display:none; margin-top: 20px;">
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Additional Requirements for Application of Grants / ESC/ Financial Assistance (Gr7):</h4>
                         <div class="file-upload-grid">
-                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Photocopy of Grade 6 Report Card</span><small>Click to upload (Optional)</small><input type="file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-award"></i><span>Certificate of Ranking</span><small>Click to upload (Optional)</small><input type="file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 pictures with name tag</span><small>Click to upload (Optional)</small><input type="file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-file-contract"></i><span>Photocopy PSA Birth Certificate</span><small>Click to upload (Optional)</small><input type="file"></div>
-                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice-dollar"></i><span>Latest ITR / Tax Exemption or<br>Employment Cert / Municipal Cert</span><small>For both parents/guardians (Optional)</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice"></i><span>Photocopy of Grade 6 Report Card</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-award"></i><span>Certificate of Ranking</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-id-badge"></i><span>2x2 pictures with name tag</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-contract"></i><span>Photocopy PSA Birth Certificate</span><small>Click to upload</small><input type="file"></div>
+                            <div class="file-upload-box"><i class="fa-solid fa-file-invoice-dollar"></i><span>Latest ITR / Tax Exemption or<br>Employment Cert / Municipal Cert</span><small>For both parents/guardians</small><input type="file"></div>
                         </div>
                     </div>
 
@@ -469,28 +476,54 @@
             updateProgressBar();
         }
 
+        // TOGGLE VISIBILITY OF GRANT REQUIREMENTS BASED ON CHECKBOX
+        function toggleGrantRequirements() {
+            const isChecked = document.getElementById('applyGrant').checked;
+            const grantReqs = document.getElementById('grant-requirements');
+            if (isChecked) {
+                grantReqs.style.display = 'block';
+                grantReqs.style.animation = 'pageFadeIn 0.4s ease';
+            } else {
+                grantReqs.style.display = 'none';
+            }
+        }
+
         function toggleLevelFields() {
             const level = document.getElementById('level-applying').value;
             const shsSection = document.getElementById('shs-strand-section');
             const shsReqs = document.querySelectorAll('.shs-req');
             const shsFiles = document.querySelectorAll('.shs-file');
-            const grantReqs = document.getElementById('grant-requirements');
+            const grantToggle = document.getElementById('grant-toggle-container');
             const reqTitle = document.getElementById('dynamic-req-title');
             
             const rankInputs = shsSection.querySelectorAll('.strand-rank');
             
             if(level === 'SHS') {
+                // Show SHS inputs
                 shsSection.style.display = 'block';
                 shsReqs.forEach(el => el.style.display = 'block');
-                grantReqs.style.display = 'none';
+                
+                // Hide Grant inputs completely
+                if(grantToggle) grantToggle.style.display = 'none';
+                document.getElementById('grant-requirements').style.display = 'none';
+                document.getElementById('applyGrant').checked = false; // Reset checkbox
+                
                 reqTitle.innerText = 'Requirements for Admission (SHS):';
                 rankInputs.forEach(input => input.setAttribute('required', 'true'));
                 shsFiles.forEach(input => input.setAttribute('required', 'true'));
-            } else if (level === 'JHS') {
+
+            } else if (level === 'JHS' || level === 'PSGS') {
+                // Hide SHS inputs
                 shsSection.style.display = 'none';
                 shsReqs.forEach(el => el.style.display = 'none');
-                grantReqs.style.display = 'block';
+                
+                // Show Grant Optional Toggle
+                if(grantToggle) grantToggle.style.display = 'block';
+                toggleGrantRequirements(); // Call this to check the current state of the checkbox
+                
                 reqTitle.innerText = 'Requirements for Admission (PSGS/JHS):';
+                
+                // Remove SHS requirements
                 rankInputs.forEach(input => {
                     input.removeAttribute('required');
                     input.value = '';
@@ -500,10 +533,14 @@
                     input.value = '';
                 });
             } else {
+                // If nothing selected, hide everything conditional
                 shsSection.style.display = 'none';
                 shsReqs.forEach(el => el.style.display = 'none');
-                grantReqs.style.display = 'none';
+                if(grantToggle) grantToggle.style.display = 'none';
+                document.getElementById('grant-requirements').style.display = 'none';
+                
                 reqTitle.innerText = 'Requirements for Admission (PSGS/JHS):';
+                
                 rankInputs.forEach(input => {
                     input.removeAttribute('required');
                     input.value = '';
