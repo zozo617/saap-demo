@@ -98,44 +98,58 @@
             position: relative;
         }
 
-        /* Responsive Hamburger Menu for Tabs */
-        .tabs-mobile-header {
-            display: none;
-            width: 100%;
-            margin-bottom: 15px;
+        /* Hover wrapper for desktop */
+        .tabs-sidebar-wrapper {
+            position: sticky;
+            top: 100px; /* Adjust based on header height */
+            width: 250px;
+            flex-shrink: 0;
+            z-index: 50; /* Ensure it stays above other content */
         }
-
-        .tab-hamburger {
-            background: var(--primary-color);
+        
+        /* The trigger area that activates the menu on hover */
+        .tabs-hover-trigger {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
             color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            font-size: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
             cursor: pointer;
+            box-shadow: var(--shadow-sm);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             transition: 0.3s;
-            box-shadow: var(--shadow-sm);
         }
 
-        .tab-hamburger:active {
-            transform: scale(0.95);
+        .tabs-hover-trigger:hover {
+             background-color: var(--secondary-color);
         }
 
         .tabs-sidebar {
-            width: 250px;
-            flex-shrink: 0;
+            width: 100%;
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
             overflow: hidden;
-            position: sticky;
-            top: 100px; /* Adjust based on header height */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
             transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        /* Show the sidebar when hovering over the wrapper */
+        .tabs-sidebar-wrapper:hover .tabs-sidebar {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         .tab-btn {
@@ -305,18 +319,22 @@
             
             /* Responsive Tabs */
             .tabs-container { flex-direction: column; gap: 20px; }
-            .tabs-mobile-header { display: flex; justify-content: flex-start; }
+            .tabs-sidebar-wrapper { width: 100%; position: static; }
             
-            .tabs-sidebar { 
-                width: 100%; 
-                position: static; 
-                display: none; /* Hidden by default on mobile */
-                margin-bottom: 20px;
+            /* On mobile, use click instead of hover */
+            .tabs-sidebar-wrapper:hover .tabs-sidebar {
+                /* Reset hover effect on mobile */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(10px);
             }
+            
             .tabs-sidebar.show-mobile { 
-                display: block; 
-                animation: pageFadeIn 0.3s ease;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: translateY(0) !important;
             }
+
             .content-card { padding: 25px; }
         }
     </style>
@@ -369,20 +387,20 @@
 
     <div class="container">
         
-        <div class="tabs-mobile-header">
-            <button class="tab-hamburger" onclick="toggleMobileTabs()" title="Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-
         <div class="tabs-container">
-            <div class="tabs-sidebar" id="tabsSidebar">
-                <button class="tab-btn active" onmouseover="openTab(event, 'tab-overview')" onclick="openTab(event, 'tab-overview')">Overview & Philosophy</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-history')" onclick="openTab(event, 'tab-history')">Our History</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-founder')" onclick="openTab(event, 'tab-founder')">The Founder</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-facilities')" onclick="openTab(event, 'tab-facilities')">Services & Facilities</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-organizations')" onclick="openTab(event, 'tab-organizations')">Student Organizations</button>
-                <button class="tab-btn" onmouseover="openTab(event, 'tab-policy')" onclick="openTab(event, 'tab-policy')">Privacy Policy</button>
+            <div class="tabs-sidebar-wrapper">
+                <div class="tabs-hover-trigger" onclick="toggleMobileTabs()">
+                    <span>Select Information</span>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="tabs-sidebar" id="tabsSidebar">
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-overview')">Overview & Philosophy</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-history')">Our History</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-founder')">The Founder</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-facilities')">Services & Facilities</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-organizations')">Student Organizations</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-policy')">Privacy Policy</button>
+                </div>
             </div>
 
             <div class="tab-content-area">
