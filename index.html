@@ -113,11 +113,16 @@
         .logo-subtext { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
         .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
         
-        nav ul { list-style: none; display: flex; align-items: center; gap: 25px; transition: 0.3s ease; }
+        nav ul { list-style: none; display: flex; align-items: center; gap: 20px; transition: 0.3s ease; margin-bottom: 0; }
         nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s ease; }
-        nav a:hover { color: var(--primary-color); }
-        .nav-login-btn { background: var(--primary-color) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
+        nav a:hover, nav a.active { color: var(--primary-color); }
+        
+        .nav-buttons { display: flex; gap: 10px; }
+        .nav-login-btn { white-space: nowrap; background: var(--primary-color) !important; color: white !important; padding: 10px 24px !important; border-radius: 50px; box-shadow: 0 4px 10px rgba(4, 120, 87, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
         .nav-login-btn:hover { background-color: var(--secondary-color) !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(4, 120, 87, 0.4); }
+        
+        .nav-signup-btn { white-space: nowrap; background: white !important; color: var(--primary-color) !important; border: 2px solid var(--primary-color) !important; padding: 8px 22px !important; border-radius: 50px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;}
+        .nav-signup-btn:hover { background-color: var(--bg-color) !important; transform: translateY(-2px); }
 
         /* HERO SLIDESHOW */
         .hero-image-container { width: 100%; height: 600px; position: relative; background-color: var(--banner-bg); overflow: hidden;}
@@ -230,6 +235,9 @@
         .eye-icon:hover { color: var(--primary-color); }
         .login-submit { width: 100%; padding: 14px; background: var(--primary-color); color: #ffffff; font-weight: 800; border: none; border-radius: 10px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px; font-family: 'Inter'; box-shadow: var(--shadow-md);}
         .login-submit:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: var(--shadow-lg);}
+        
+        .signup-toggle-btn { margin-top: 15px; background: none; border: none; color: var(--primary-color); font-weight: 700; cursor: pointer; font-family: 'Inter'; font-size: 0.95rem; text-decoration: underline; transition: 0.3s; }
+        .signup-toggle-btn:hover { color: var(--secondary-color); }
 
         .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 44, 34, 0.95); backdrop-filter: blur(10px); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s ease; }
         .search-overlay.active { opacity: 1; visibility: visible; }
@@ -261,6 +269,7 @@
             .floating-waypoint { bottom: 20px; left: 15px; padding: 12px; }
             .floating-waypoint i { font-size: 1.2rem; }
             .floating-waypoint.active .waypoint-text { max-width: 200px; white-space: normal; font-size: 0.75rem; line-height: 1.3; text-align: left; margin-left: 10px;}
+            .nav-buttons { flex-direction: column; width: 100%; gap: 10px; align-items: center;}
         }
     </style>
 </head>
@@ -303,7 +312,12 @@
                 <li><a href="#faq" data-key="nav-faq">FAQ</a></li>
                 <li><a href="admission-procedure.html" data-key="nav-procedure">Admission Procedure</a></li>
                 <li><a href="#academics" data-key="nav-acad">Academics</a></li>
-                <li><a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">MySAAP</a></li>
+                <li>
+                    <div class="nav-buttons">
+                        <a href="#" class="nav-login-btn" data-key="nav-login" onclick="openLoginModal('login')">MySAAP</a>
+                        <a href="enroll.html" class="nav-signup-btn">Create an Account</a>
+                    </div>
+                </li>
             </ul>
         </nav>
     </header>
@@ -563,6 +577,8 @@
                 </div>
                 <button type="submit" class="login-submit">Secure Login</button>
             </form>
+            
+            <button class="signup-toggle-btn" onclick="window.location.href='enroll.html'">Don't have an account? Sign Up Here</button>
 
         </div>
     </div>
