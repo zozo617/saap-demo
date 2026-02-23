@@ -81,6 +81,11 @@
         textarea { resize: vertical; min-height: 120px; }
         input:focus, select:focus, textarea:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.1); transform: translateY(-2px); }
 
+        /* CHECKBOX STYLING */
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; cursor: pointer; }
+        .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; margin: 0; accent-color: var(--primary); }
+        .checkbox-group label { margin: 0; text-transform: none; font-size: 0.95rem; color: var(--primary); font-weight: 700; cursor: pointer; }
+
         .file-upload-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .file-upload-box { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 25px 20px; text-align: center; background: #f9fafb; position: relative; transition: 0.3s; cursor: pointer; }
         .file-upload-box:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-md); background: white;}
@@ -218,15 +223,34 @@
 
                     <div class="form-section-title"><i class="fa-solid fa-house"></i> III - Residence Data</div>
                     <div class="form-grid">
-                        <div class="form-group full-width"><label>Apartment Name / House No. / Street</label><input type="text" required></div>
-                        <div class="form-group"><label>District</label><input type="text"></div>
-                        <div class="form-group"><label>Barangay</label><input type="text" required></div>
-                        <div class="form-group"><label>City / Municipality</label><input type="text" required></div>
-                        <div class="form-group"><label>Province / State</label><input type="text" required></div>
-                        <div class="form-group"><label>Country</label><input type="text" required></div>
-                        <div class="form-group"><label>Zipcode</label><input type="text" required></div>
-                        <div class="form-group"><label>Telephone Nos.</label><input type="text"></div>
-                        <div class="form-group full-width"><label>Current Contact Address</label><input type="text" placeholder="Copy Home Address if same" required></div>
+                        <div class="form-group full-width"><label style="color: var(--primary); font-size: 1rem;">Home Address</label></div>
+                        <div class="form-group full-width"><label>Apartment Name / House No. / Street</label><input type="text" id="home-street" required></div>
+                        <div class="form-group"><label>District</label><input type="text" id="home-district"></div>
+                        <div class="form-group"><label>Barangay</label><input type="text" id="home-barangay" required></div>
+                        <div class="form-group"><label>City / Municipality</label><input type="text" id="home-city" required></div>
+                        <div class="form-group"><label>Province / State</label><input type="text" id="home-province" required></div>
+                        <div class="form-group"><label>Country</label><input type="text" id="home-country" required></div>
+                        <div class="form-group"><label>Zipcode</label><input type="text" id="home-zip" required></div>
+                        <div class="form-group"><label>Telephone Nos.</label><input type="text" id="home-tel"></div>
+                        
+                        <div class="form-group full-width" style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
+                            <label style="color: var(--primary); font-size: 1rem; display: inline-block;">Current Contact Address</label>
+                            
+                            <div class="checkbox-group" style="float: right; margin-top: 5px;">
+                                <input type="checkbox" id="copyAddress" onclick="copyHomeAddress()">
+                                <label for="copyAddress">Copy Home Address if same</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width"><label>Apartment Name / House No. / Street</label><input type="text" id="contact-street" required></div>
+                        <div class="form-group"><label>District</label><input type="text" id="contact-district"></div>
+                        <div class="form-group"><label>Barangay</label><input type="text" id="contact-barangay" required></div>
+                        <div class="form-group"><label>City / Municipality</label><input type="text" id="contact-city" required></div>
+                        <div class="form-group"><label>Province / State</label><input type="text" id="contact-province" required></div>
+                        <div class="form-group"><label>Country</label><input type="text" id="contact-country" required></div>
+                        <div class="form-group"><label>Zipcode</label><input type="text" id="contact-zip" required></div>
+                        <div class="form-group"><label>Telephone Nos.</label><input type="text" id="contact-tel"></div>
+
                     </div>
                     
                     <div class="form-section-title"><i class="fa-solid fa-users"></i> IV - Family Data</div>
@@ -352,6 +376,51 @@
     <script>
         let currentStep = 0;
         const totalSteps = 4;
+
+        // COPY ADDRESS LOGIC
+        function copyHomeAddress() {
+            const isChecked = document.getElementById('copyAddress').checked;
+            
+            // Home Inputs
+            const homeStreet = document.getElementById('home-street').value;
+            const homeDistrict = document.getElementById('home-district').value;
+            const homeBarangay = document.getElementById('home-barangay').value;
+            const homeCity = document.getElementById('home-city').value;
+            const homeProvince = document.getElementById('home-province').value;
+            const homeCountry = document.getElementById('home-country').value;
+            const homeZip = document.getElementById('home-zip').value;
+            const homeTel = document.getElementById('home-tel').value;
+
+            // Contact Inputs
+            const contactStreet = document.getElementById('contact-street');
+            const contactDistrict = document.getElementById('contact-district');
+            const contactBarangay = document.getElementById('contact-barangay');
+            const contactCity = document.getElementById('contact-city');
+            const contactProvince = document.getElementById('contact-province');
+            const contactCountry = document.getElementById('contact-country');
+            const contactZip = document.getElementById('contact-zip');
+            const contactTel = document.getElementById('contact-tel');
+
+            if (isChecked) {
+                contactStreet.value = homeStreet;
+                contactDistrict.value = homeDistrict;
+                contactBarangay.value = homeBarangay;
+                contactCity.value = homeCity;
+                contactProvince.value = homeProvince;
+                contactCountry.value = homeCountry;
+                contactZip.value = homeZip;
+                contactTel.value = homeTel;
+            } else {
+                contactStreet.value = '';
+                contactDistrict.value = '';
+                contactBarangay.value = '';
+                contactCity.value = '';
+                contactProvince.value = '';
+                contactCountry.value = '';
+                contactZip.value = '';
+                contactTel.value = '';
+            }
+        }
 
         function updateProgressBar() {
             const progress = (currentStep / (totalSteps - 1)) * 100;
