@@ -178,10 +178,27 @@
                         <div class="form-group">
                             <label>Level Applying For</label>
                             <select id="level-applying" required onchange="toggleLevelFields()">
-                                <option value="" disabled selected>Select Level</option>
-                                <option value="PSGS">Pre-School & Grade School (PSGS)</option>
-                                <option value="JHS">Junior High School (JHS)</option>
-                                <option value="SHS">Senior High School (SHS)</option>
+                                <option value="" disabled selected>Select Grade Level</option>
+                                <optgroup label="Pre-School & Grade School (PSGS)">
+                                    <option value="Nursery" data-category="PSGS">Nursery</option>
+                                    <option value="Kinder" data-category="PSGS">Kinder</option>
+                                    <option value="Grade 1" data-category="PSGS">Grade 1</option>
+                                    <option value="Grade 2" data-category="PSGS">Grade 2</option>
+                                    <option value="Grade 3" data-category="PSGS">Grade 3</option>
+                                    <option value="Grade 4" data-category="PSGS">Grade 4</option>
+                                    <option value="Grade 5" data-category="PSGS">Grade 5</option>
+                                    <option value="Grade 6" data-category="PSGS">Grade 6</option>
+                                </optgroup>
+                                <optgroup label="Junior High School (JHS)">
+                                    <option value="Grade 7" data-category="JHS">Grade 7</option>
+                                    <option value="Grade 8" data-category="JHS">Grade 8</option>
+                                    <option value="Grade 9" data-category="JHS">Grade 9</option>
+                                    <option value="Grade 10" data-category="JHS">Grade 10</option>
+                                </optgroup>
+                                <optgroup label="Senior High School (SHS)">
+                                    <option value="Grade 11" data-category="SHS">Grade 11</option>
+                                    <option value="Grade 12" data-category="SHS">Grade 12</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div class="form-group"><label>Learner Reference Number (LRN)</label><input type="text" placeholder="12-digit LRN" required></div>
@@ -489,7 +506,12 @@
         }
 
         function toggleLevelFields() {
-            const level = document.getElementById('level-applying').value;
+            const selectEl = document.getElementById('level-applying');
+            const selectedOption = selectEl.options[selectEl.selectedIndex];
+            
+            // Get the specific category (SHS, JHS, or PSGS) from the selected option
+            const levelCategory = selectedOption ? selectedOption.getAttribute('data-category') : null;
+            
             const shsSection = document.getElementById('shs-strand-section');
             const shsReqs = document.querySelectorAll('.shs-req');
             const shsFiles = document.querySelectorAll('.shs-file');
@@ -498,7 +520,7 @@
             
             const rankInputs = shsSection.querySelectorAll('.strand-rank');
             
-            if(level === 'SHS') {
+            if(levelCategory === 'SHS') {
                 // Show SHS inputs
                 shsSection.style.display = 'block';
                 shsReqs.forEach(el => el.style.display = 'block');
@@ -512,7 +534,7 @@
                 rankInputs.forEach(input => input.setAttribute('required', 'true'));
                 shsFiles.forEach(input => input.setAttribute('required', 'true'));
 
-            } else if (level === 'JHS' || level === 'PSGS') {
+            } else if (levelCategory === 'JHS' || levelCategory === 'PSGS') {
                 // Hide SHS inputs
                 shsSection.style.display = 'none';
                 shsReqs.forEach(el => el.style.display = 'none');
